@@ -1,7 +1,7 @@
 {
   "body": [
     {
-      "added": "2026-11-12T14:20:29Z",
+      "added": "2026-11-23T17:45:33Z",
       "customFormatScore": 0,
       "customFormats": [],
       "downloadClient": "Mock Transmission",
@@ -135,7 +135,7 @@
           "winter",
           "winter break"
         ],
-        "lastSearchTime": "2026-11-12T14:20:27Z",
+        "lastSearchTime": "2026-11-23T17:45:31Z",
         "minimumAvailability": "released",
         "monitored": true,
         "movieFileId": 0,
@@ -193,7 +193,7 @@
         "youTubeTrailerId": "AhKLpJmHhIg"
       },
       "movieId": 116,
-      "outputPath": "/downloads/movies/d94f74e9588477404bd8d34ffc605870",
+      "outputPath": "/downloads/d94f74e9588477404bd8d34ffc605870",
       "protocol": "torrent",
       "quality": {
         "quality": {
@@ -225,13 +225,13 @@
       "trackedDownloadStatus": "warning"
     },
     {
-      "added": "2026-11-12T14:19:49Z",
+      "added": "2026-11-23T17:44:53Z",
       "customFormatScore": 0,
       "customFormats": [],
       "downloadClient": "Mock qBittorrent",
       "downloadClientHasPostImportCategory": false,
       "downloadId": "13706ED57ADBE030F510BEDCD37595376901117C",
-      "estimatedCompletionTime": "2026-11-12T14:21:42Z",
+      "estimatedCompletionTime": "2026-11-23T17:46:46Z",
       "id": 1132538262,
       "indexer": "Mock Torznab (Prowlarr)",
       "languages": [
@@ -464,7 +464,7 @@
       "trackedDownloadStatus": "warning"
     },
     {
-      "added": "2026-11-12T14:20:49Z",
+      "added": "2026-11-23T17:45:53Z",
       "customFormatScore": -10000,
       "customFormats": [
         {
@@ -483,7 +483,7 @@
       "downloadClient": "Mock SABnzbd",
       "downloadClientHasPostImportCategory": false,
       "downloadId": "SABnzbd_nzo_mock5",
-      "estimatedCompletionTime": "2026-11-12T14:31:42Z",
+      "estimatedCompletionTime": "2026-11-23T17:56:46Z",
       "id": 2039898284,
       "indexer": "Mock Newznab (Prowlarr)",
       "languages": [
@@ -681,7 +681,7 @@
       "trackedDownloadStatus": "ok"
     },
     {
-      "added": "2026-11-12T14:19:35Z",
+      "added": "2026-11-23T17:44:39Z",
       "customFormatScore": 0,
       "customFormats": [
         {
@@ -692,7 +692,7 @@
       "downloadClient": "Mock Transmission",
       "downloadClientHasPostImportCategory": false,
       "downloadId": "5AE419C220561D2F40DDBB4026B5D0121DCC040E",
-      "estimatedCompletionTime": "2026-11-12T14:31:42Z",
+      "estimatedCompletionTime": "2026-11-23T17:56:46Z",
       "id": 936833475,
       "indexer": "Mock Torznab (Prowlarr)",
       "languages": [
@@ -810,7 +810,7 @@
           "tarot cards",
           "violence"
         ],
-        "lastSearchTime": "2026-11-12T14:20:13Z",
+        "lastSearchTime": "2026-11-23T17:45:17Z",
         "minimumAvailability": "released",
         "monitored": true,
         "movieFileId": 0,
@@ -866,7 +866,7 @@
         "youTubeTrailerId": "Q81Yf46Oj3s"
       },
       "movieId": 70,
-      "outputPath": "/downloads/movies/bc295ecb0fb56b9e5df74be19469cef4",
+      "outputPath": "/downloads/bc295ecb0fb56b9e5df74be19469cef4",
       "protocol": "torrent",
       "quality": {
         "quality": {
@@ -892,7 +892,7 @@
       "trackedDownloadStatus": "ok"
     }
   ],
-  "recordedAt": "2026-11-12T14:21:54Z",
+  "recordedAt": "2026-11-23T17:46:58Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/queue/details?includeMovie=true"

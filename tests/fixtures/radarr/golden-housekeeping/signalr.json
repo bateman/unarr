@@ -4,7 +4,7 @@
     "messages": [
       {
         "body": {
-          "version": "6.4.4.10685"
+          "version": "7.0.3.10918"
         },
         "name": "version"
       }
@@ -32,11 +32,11 @@
             "id": 472955,
             "name": "Housekeeping",
             "priority": "normal",
-            "queued": "2026-11-19T21:54:43Z",
+            "queued": "2026-11-23T17:51:26Z",
             "result": "unknown",
             "sendUpdatesToClient": true,
-            "started": "2026-11-19T21:54:43Z",
-            "stateChangeTime": "2026-11-19T21:54:43Z",
+            "started": "2026-11-23T17:51:26Z",
+            "stateChangeTime": "2026-11-23T17:51:26Z",
             "status": "started",
             "trigger": "manual",
             "updateScheduledTask": true
@@ -66,16 +66,16 @@
               "updateScheduledTask": true
             },
             "commandName": "Housekeeping",
-            "duration": "00:00:00.1829407",
-            "ended": "2026-11-19T21:54:43Z",
+            "duration": "00:00:00.2955361",
+            "ended": "2026-11-23T17:51:26Z",
             "id": 472955,
             "name": "Housekeeping",
             "priority": "normal",
-            "queued": "2026-11-19T21:54:43Z",
+            "queued": "2026-11-23T17:51:26Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-19T21:54:43Z",
-            "stateChangeTime": "2026-11-19T21:54:43Z",
+            "started": "2026-11-23T17:51:26Z",
+            "stateChangeTime": "2026-11-23T17:51:26Z",
             "status": "completed",
             "trigger": "manual",
             "updateScheduledTask": true

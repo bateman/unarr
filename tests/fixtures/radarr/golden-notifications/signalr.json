@@ -4,7 +4,7 @@
     "messages": [
       {
         "body": {
-          "version": "6.4.4.10685"
+          "version": "7.0.3.10918"
         },
         "name": "version"
       }
@@ -721,43 +721,6 @@
         "body": {
           "action": "updated",
           "resource": {
-            "body": {
-              "completionMessage": "Completed",
-              "isExclusive": false,
-              "isLongRunning": true,
-              "isNewMovie": true,
-              "isTypeExclusive": false,
-              "movieIds": [
-                328
-              ],
-              "name": "RefreshMovie",
-              "requiresDiskAccess": false,
-              "sendUpdatesToClient": true,
-              "suppressMessages": false,
-              "trigger": "unspecified",
-              "updateScheduledTask": false
-            },
-            "commandName": "Refresh Movie",
-            "id": 472955,
-            "message": "Updating info for Dune",
-            "name": "RefreshMovie",
-            "priority": "normal",
-            "queued": "2026-11-21T16:24:46Z",
-            "result": "unknown",
-            "sendUpdatesToClient": true,
-            "started": "2026-11-21T16:24:47Z",
-            "stateChangeTime": "2026-11-21T16:24:47Z",
-            "status": "started",
-            "trigger": "unspecified",
-            "updateScheduledTask": false
-          }
-        },
-        "name": "command"
-      },
-      {
-        "body": {
-          "action": "updated",
-          "resource": {
             "addOptions": {
               "addMethod": "manual",
               "ignoreEpisodesWithFiles": false,
@@ -765,7 +728,7 @@
               "monitor": "movieOnly",
               "searchForMovie": false
             },
-            "added": "2026-11-21T16:24:46Z",
+            "added": "2026-11-23T17:58:30Z",
             "alternateTitles": [
               {
                 "id": 2804,
@@ -894,12 +857,12 @@
               {
                 "coverType": "poster",
                 "remoteUrl": "https://image.tmdb.org/t/p/original/v1tRXZ4JtD2Iv6fjkPvT4GiwslV.jpg",
-                "url": "/MediaCover/328/poster.jpg?h=bd15f9a27331fc78d4df"
+                "url": "/MediaCover/328/poster.jpg"
               },
               {
                 "coverType": "fanart",
                 "remoteUrl": "https://image.tmdb.org/t/p/original/qVgZu5BTx6pu4owCvVOm4zjTfOi.jpg",
-                "url": "/MediaCover/328/fanart.jpg?h=251f444906d2ce7ea00b"
+                "url": "/MediaCover/328/fanart.jpg"
               }
             ],
             "imdbId": "tt1160419",
@@ -1005,6 +968,43 @@
       },
       {
         "body": {
+          "action": "updated",
+          "resource": {
+            "body": {
+              "completionMessage": "Completed",
+              "isExclusive": false,
+              "isLongRunning": true,
+              "isNewMovie": true,
+              "isTypeExclusive": false,
+              "movieIds": [
+                328
+              ],
+              "name": "RefreshMovie",
+              "requiresDiskAccess": false,
+              "sendUpdatesToClient": true,
+              "suppressMessages": false,
+              "trigger": "unspecified",
+              "updateScheduledTask": false
+            },
+            "commandName": "Refresh Movie",
+            "id": 472955,
+            "message": "Scanning disk for Dune",
+            "name": "RefreshMovie",
+            "priority": "normal",
+            "queued": "2026-11-23T17:58:30Z",
+            "result": "unknown",
+            "sendUpdatesToClient": true,
+            "started": "2026-11-23T17:58:30Z",
+            "stateChangeTime": "2026-11-23T17:58:30Z",
+            "status": "started",
+            "trigger": "unspecified",
+            "updateScheduledTask": false
+          }
+        },
+        "name": "command"
+      },
+      {
+        "body": {
           "action": "sync"
         },
         "name": "system/task"
@@ -1030,17 +1030,17 @@
               "updateScheduledTask": false
             },
             "commandName": "Refresh Movie",
-            "duration": "00:00:00.2207786",
-            "ended": "2026-11-21T16:24:47Z",
+            "duration": "00:00:00.1222372",
+            "ended": "2026-11-23T17:58:30Z",
             "id": 472955,
             "message": "Completed",
             "name": "RefreshMovie",
             "priority": "normal",
-            "queued": "2026-11-21T16:24:46Z",
+            "queued": "2026-11-23T17:58:30Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-21T16:24:47Z",
-            "stateChangeTime": "2026-11-21T16:24:47Z",
+            "started": "2026-11-23T17:58:30Z",
+            "stateChangeTime": "2026-11-23T17:58:30Z",
             "status": "completed",
             "trigger": "unspecified",
             "updateScheduledTask": false
@@ -1052,7 +1052,7 @@
         "body": {
           "action": "updated",
           "resource": {
-            "added": "2026-11-21T16:24:46Z",
+            "added": "2026-11-23T17:58:30Z",
             "alternateTitles": [
               {
                 "id": 2804,
@@ -1386,156 +1386,7 @@
         "body": {
           "action": "updated",
           "resource": {
-            "id": 77,
-            "images": [
-              {
-                "coverType": "poster",
-                "remoteUrl": "https://image.tmdb.org/t/p/original/qTcATCpiFDcgY8snQIfS2j0bFP7.jpg"
-              },
-              {
-                "coverType": "fanart",
-                "remoteUrl": "https://image.tmdb.org/t/p/original/li3buIx57ph3RX5XlbpMzJPewZ0.jpg"
-              }
-            ],
-            "minimumAvailability": "released",
-            "missingMovies": 1,
-            "monitored": false,
-            "movies": [
-              {
-                "cleanTitle": "bladerunner2049",
-                "folder": "Blade Runner 2049 (2017) {tmdb-335984}",
-                "genres": [
-                  "Science Fiction",
-                  "Drama"
-                ],
-                "images": [
-                  {
-                    "coverType": "poster",
-                    "remoteUrl": "https://image.tmdb.org/t/p/original/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg"
-                  },
-                  {
-                    "coverType": "fanart",
-                    "remoteUrl": "https://image.tmdb.org/t/p/original/gNdLJU9TxrpGx4dkZidjys3fyy0.jpg"
-                  }
-                ],
-                "imdbId": "tt1856101",
-                "isExcluded": false,
-                "isExisting": true,
-                "overview": "Thirty years after the events of the first film, a new blade runner, LAPD Officer K, unearths a long-buried secret that has the potential to plunge what's left of society into chaos. K's discovery leads him on a quest to find Rick Deckard, a former LAPD blade runner who has been missing for 30 years.",
-                "ratings": {
-                  "imdb": {
-                    "type": "user",
-                    "value": 8,
-                    "votes": 774962
-                  },
-                  "metacritic": {
-                    "type": "user",
-                    "value": 81,
-                    "votes": 0
-                  },
-                  "rottenTomatoes": {
-                    "type": "user",
-                    "value": 88,
-                    "votes": 0
-                  },
-                  "tmdb": {
-                    "type": "user",
-                    "value": 7.613,
-                    "votes": 15957
-                  },
-                  "trakt": {
-                    "type": "user",
-                    "value": 7.89062,
-                    "votes": 33371
-                  }
-                },
-                "runtime": 164,
-                "sortTitle": "blade runner 2049",
-                "status": "released",
-                "title": "Blade Runner 2049",
-                "tmdbId": 335984,
-                "year": 2017
-              },
-              {
-                "cleanTitle": "bladerunner",
-                "folder": "Blade Runner (1982) {tmdb-78}",
-                "genres": [
-                  "Science Fiction",
-                  "Drama",
-                  "Thriller"
-                ],
-                "images": [
-                  {
-                    "coverType": "poster",
-                    "remoteUrl": "https://image.tmdb.org/t/p/original/63N9uy8nd9j7Eog2axPQ8lbr3Wj.jpg"
-                  },
-                  {
-                    "coverType": "fanart",
-                    "remoteUrl": "https://image.tmdb.org/t/p/original/2spEHYDcyE9r9mS7AFEscfKVDzO.jpg"
-                  }
-                ],
-                "imdbId": "tt0083658",
-                "isExcluded": false,
-                "isExisting": false,
-                "overview": "In the smog-choked dystopian Los Angeles of 2019, blade runner Rick Deckard is called out of retirement to terminate a quartet of replicants who have escaped to Earth seeking their creator for a way to extend their short life spans.",
-                "ratings": {
-                  "imdb": {
-                    "type": "user",
-                    "value": 8.1,
-                    "votes": 895937
-                  },
-                  "metacritic": {
-                    "type": "user",
-                    "value": 84,
-                    "votes": 0
-                  },
-                  "rottenTomatoes": {
-                    "type": "user",
-                    "value": 89,
-                    "votes": 0
-                  },
-                  "tmdb": {
-                    "type": "user",
-                    "value": 7.9,
-                    "votes": 15590
-                  },
-                  "trakt": {
-                    "type": "user",
-                    "value": 7.97593,
-                    "votes": 25757
-                  }
-                },
-                "runtime": 118,
-                "sortTitle": "blade runner",
-                "status": "released",
-                "title": "Blade Runner",
-                "tmdbId": 78,
-                "year": 1982
-              }
-            ],
-            "overview": "An American neo-noir science-fiction film series set in a dystopian Los Angeles, depicting a future in which synthetic humans known as \"replicants\" are bio-engineered by the powerful Tyrell Corporation, to work on off-world colonies. Based on the novel ‘Do Androids Dream of Electric Sheep?’",
-            "qualityProfileId": 4,
-            "rootFolderPath": "/movies",
-            "searchOnAdd": false,
-            "sortTitle": "blade runner collection",
-            "tags": [],
-            "title": "Blade Runner Collection",
-            "tmdbId": 422837
-          }
-        },
-        "name": "collection"
-      },
-      {
-        "body": {
-          "action": "sync"
-        },
-        "name": "system/task"
-      },
-      {
-        "body": {
-          "action": "updated",
-          "resource": {
-            "added": "2026-11-21T16:24:50Z",
+            "added": "2026-11-23T17:58:33Z",
             "alternateTitles": [
               {
                 "id": 2822,
@@ -1616,12 +1467,12 @@
               {
                 "coverType": "poster",
                 "remoteUrl": "https://image.tmdb.org/t/p/original/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg",
-                "url": "/MediaCover/329/poster.jpg?h=ad244719f1b6472728d2"
+                "url": "/MediaCover/329/poster.jpg"
               },
               {
                 "coverType": "fanart",
                 "remoteUrl": "https://image.tmdb.org/t/p/original/gNdLJU9TxrpGx4dkZidjys3fyy0.jpg",
-                "url": "/MediaCover/329/fanart.jpg?h=d6597a53a04564e4d049"
+                "url": "/MediaCover/329/fanart.jpg"
               }
             ],
             "imdbId": "tt1856101",
@@ -1712,6 +1563,228 @@
       },
       {
         "body": {
+          "action": "updated",
+          "resource": {
+            "id": 77,
+            "images": [
+              {
+                "coverType": "poster",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/qTcATCpiFDcgY8snQIfS2j0bFP7.jpg"
+              },
+              {
+                "coverType": "fanart",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/li3buIx57ph3RX5XlbpMzJPewZ0.jpg"
+              }
+            ],
+            "minimumAvailability": "released",
+            "missingMovies": 1,
+            "monitored": false,
+            "movies": [
+              {
+                "cleanTitle": "bladerunner2049",
+                "folder": "Blade Runner 2049 (2017) {tmdb-335984}",
+                "genres": [
+                  "Science Fiction",
+                  "Drama"
+                ],
+                "images": [
+                  {
+                    "coverType": "poster",
+                    "remoteUrl": "https://image.tmdb.org/t/p/original/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg"
+                  },
+                  {
+                    "coverType": "fanart",
+                    "remoteUrl": "https://image.tmdb.org/t/p/original/gNdLJU9TxrpGx4dkZidjys3fyy0.jpg"
+                  }
+                ],
+                "imdbId": "tt1856101",
+                "isExcluded": false,
+                "isExisting": true,
+                "overview": "Thirty years after the events of the first film, a new blade runner, LAPD Officer K, unearths a long-buried secret that has the potential to plunge what's left of society into chaos. K's discovery leads him on a quest to find Rick Deckard, a former LAPD blade runner who has been missing for 30 years.",
+                "ratings": {
+                  "imdb": {
+                    "type": "user",
+                    "value": 8,
+                    "votes": 775743
+                  },
+                  "metacritic": {
+                    "type": "user",
+                    "value": 81,
+                    "votes": 0
+                  },
+                  "rottenTomatoes": {
+                    "type": "user",
+                    "value": 88,
+                    "votes": 0
+                  },
+                  "tmdb": {
+                    "type": "user",
+                    "value": 7.614,
+                    "votes": 16009
+                  },
+                  "trakt": {
+                    "type": "user",
+                    "value": 7.89062,
+                    "votes": 33371
+                  }
+                },
+                "runtime": 164,
+                "sortTitle": "blade runner 2049",
+                "status": "released",
+                "title": "Blade Runner 2049",
+                "tmdbId": 335984,
+                "year": 2017
+              },
+              {
+                "cleanTitle": "bladerunner",
+                "folder": "Blade Runner (1982) {tmdb-78}",
+                "genres": [
+                  "Science Fiction",
+                  "Drama",
+                  "Thriller"
+                ],
+                "images": [
+                  {
+                    "coverType": "poster",
+                    "remoteUrl": "https://image.tmdb.org/t/p/original/63N9uy8nd9j7Eog2axPQ8lbr3Wj.jpg"
+                  },
+                  {
+                    "coverType": "fanart",
+                    "remoteUrl": "https://image.tmdb.org/t/p/original/2spEHYDcyE9r9mS7AFEscfKVDzO.jpg"
+                  }
+                ],
+                "imdbId": "tt0083658",
+                "isExcluded": false,
+                "isExisting": false,
+                "overview": "In the smog-choked dystopian Los Angeles of 2019, blade runner Rick Deckard is called out of retirement to terminate a quartet of replicants who have escaped to Earth seeking their creator for a way to extend their short life spans.",
+                "ratings": {
+                  "imdb": {
+                    "type": "user",
+                    "value": 8.1,
+                    "votes": 895937
+                  },
+                  "metacritic": {
+                    "type": "user",
+                    "value": 84,
+                    "votes": 0
+                  },
+                  "rottenTomatoes": {
+                    "type": "user",
+                    "value": 89,
+                    "votes": 0
+                  },
+                  "tmdb": {
+                    "type": "user",
+                    "value": 7.9,
+                    "votes": 15590
+                  },
+                  "trakt": {
+                    "type": "user",
+                    "value": 7.97593,
+                    "votes": 25757
+                  }
+                },
+                "runtime": 118,
+                "sortTitle": "blade runner",
+                "status": "released",
+                "title": "Blade Runner",
+                "tmdbId": 78,
+                "year": 1982
+              }
+            ],
+            "overview": "An American neo-noir science-fiction film series set in a dystopian Los Angeles, depicting a future in which synthetic humans known as \"replicants\" are bio-engineered by the powerful Tyrell Corporation, to work on off-world colonies. Based on the novel ‘Do Androids Dream of Electric Sheep?’",
+            "qualityProfileId": 4,
+            "rootFolderPath": "/movies",
+            "searchOnAdd": false,
+            "sortTitle": "blade runner collection",
+            "tags": [],
+            "title": "Blade Runner Collection",
+            "tmdbId": 422837
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "body": {
+              "completionMessage": "Completed",
+              "isExclusive": false,
+              "isLongRunning": true,
+              "isNewMovie": true,
+              "isTypeExclusive": false,
+              "movieIds": [
+                329
+              ],
+              "name": "RefreshMovie",
+              "requiresDiskAccess": false,
+              "sendUpdatesToClient": true,
+              "suppressMessages": false,
+              "trigger": "unspecified",
+              "updateScheduledTask": false
+            },
+            "commandName": "Refresh Movie",
+            "id": 472956,
+            "message": "Scanning disk for Blade Runner 2049",
+            "name": "RefreshMovie",
+            "priority": "normal",
+            "queued": "2026-11-23T17:58:33Z",
+            "result": "unknown",
+            "sendUpdatesToClient": true,
+            "started": "2026-11-23T17:58:33Z",
+            "stateChangeTime": "2026-11-23T17:58:33Z",
+            "status": "started",
+            "trigger": "unspecified",
+            "updateScheduledTask": false
+          }
+        },
+        "name": "command"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "body": {
+              "collectionIds": [
+                77
+              ],
+              "completionMessage": "Completed",
+              "isExclusive": false,
+              "isLongRunning": true,
+              "isTypeExclusive": false,
+              "name": "RefreshCollections",
+              "requiresDiskAccess": false,
+              "sendUpdatesToClient": true,
+              "suppressMessages": false,
+              "trigger": "unspecified",
+              "updateScheduledTask": false
+            },
+            "commandName": "Refresh Collections",
+            "id": 472957,
+            "message": "Updating info for Blade Runner Collection",
+            "name": "RefreshCollections",
+            "priority": "normal",
+            "queued": "2026-11-23T17:58:33Z",
+            "result": "unknown",
+            "sendUpdatesToClient": true,
+            "started": "2026-11-23T17:58:33Z",
+            "stateChangeTime": "2026-11-23T17:58:33Z",
+            "status": "started",
+            "trigger": "unspecified",
+            "updateScheduledTask": false
+          }
+        },
+        "name": "command"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "system/task"
+      },
+      {
+        "body": {
           "action": "sync"
         },
         "name": "system/task"
@@ -1737,17 +1810,17 @@
               "updateScheduledTask": false
             },
             "commandName": "Refresh Movie",
-            "duration": "00:00:00.0825149",
-            "ended": "2026-11-21T16:24:50Z",
+            "duration": "00:00:00.0976765",
+            "ended": "2026-11-23T17:58:33Z",
             "id": 472956,
             "message": "Completed",
             "name": "RefreshMovie",
             "priority": "normal",
-            "queued": "2026-11-21T16:24:50Z",
+            "queued": "2026-11-23T17:58:33Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-21T16:24:50Z",
-            "stateChangeTime": "2026-11-21T16:24:50Z",
+            "started": "2026-11-23T17:58:33Z",
+            "stateChangeTime": "2026-11-23T17:58:33Z",
             "status": "completed",
             "trigger": "unspecified",
             "updateScheduledTask": false
@@ -1775,17 +1848,17 @@
               "updateScheduledTask": false
             },
             "commandName": "Refresh Collections",
-            "duration": "00:00:00.0323558",
-            "ended": "2026-11-21T16:24:50Z",
+            "duration": "00:00:00.0560580",
+            "ended": "2026-11-23T17:58:33Z",
             "id": 472957,
             "message": "Completed",
             "name": "RefreshCollections",
             "priority": "normal",
-            "queued": "2026-11-21T16:24:50Z",
+            "queued": "2026-11-23T17:58:33Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-21T16:24:50Z",
-            "stateChangeTime": "2026-11-21T16:24:50Z",
+            "started": "2026-11-23T17:58:33Z",
+            "stateChangeTime": "2026-11-23T17:58:33Z",
             "status": "completed",
             "trigger": "unspecified",
             "updateScheduledTask": false
@@ -1797,7 +1870,7 @@
         "body": {
           "action": "updated",
           "resource": {
-            "added": "2026-11-21T16:24:50Z",
+            "added": "2026-11-23T17:58:33Z",
             "alternateTitles": [
               {
                 "id": 2822,

@@ -1,11 +1,6 @@
 {
-  "body": {
-    "status": 404,
-    "title": "Not Found",
-    "traceId": "00-d6d76f82173ad91173fa7d83ca12f79c-dfb556c06500b218-00",
-    "type": "https://tools.ietf.org/html/rfc9110#section-15.5.5"
-  },
-  "recordedAt": "2026-11-12T14:19:23Z",
+  "body": null,
+  "recordedAt": "2026-11-23T17:44:27Z",
   "request": {
     "body": "bodies/downloadclient-update-999.json",
     "method": "PUT",

@@ -19,7 +19,7 @@
         "releaseGroup": "MIRCrew",
         "size": "1106640"
       },
-      "date": "2026-11-12T14:22:07Z",
+      "date": "2026-11-23T17:47:10Z",
       "downloadId": "SABnzbd_nzo_mock8",
       "eventType": "downloadFolderImported",
       "id": 1025,
@@ -65,7 +65,7 @@
         "releaseGroup": "MeM",
         "size": "119980"
       },
-      "date": "2026-11-12T14:22:06Z",
+      "date": "2026-11-23T17:47:10Z",
       "eventType": "movieFileDeleted",
       "id": 1024,
       "languages": [
@@ -96,9 +96,9 @@
       "customFormatScore": 0,
       "customFormats": [],
       "data": {
-        "age": "2",
-        "ageHours": "51.365218908138885",
-        "ageMinutes": "3081.91313457",
+        "age": "13",
+        "ageHours": "318.78289478730557",
+        "ageMinutes": "19126.973687328333",
         "customFormatScore": "0",
         "downloadClient": "SABnzbd",
         "downloadClientName": "Mock SABnzbd",
@@ -117,7 +117,7 @@
         "size": "7979321856",
         "tmdbId": "0"
       },
-      "date": "2026-11-12T14:21:54Z",
+      "date": "2026-11-23T17:46:58Z",
       "downloadId": "SABnzbd_nzo_mock8",
       "eventType": "grabbed",
       "id": 1023,
@@ -172,7 +172,7 @@
         "releaseGroup": "MeM",
         "size": "119980"
       },
-      "date": "2026-11-12T14:21:06Z",
+      "date": "2026-11-23T17:46:10Z",
       "downloadId": "SABnzbd_nzo_mock7",
       "eventType": "downloadFolderImported",
       "id": 1021,
@@ -209,9 +209,9 @@
         }
       ],
       "data": {
-        "age": "2",
-        "ageHours": "52.34825040361111",
-        "ageMinutes": "3140.8950243066665",
+        "age": "13",
+        "ageHours": "319.7660948087778",
+        "ageMinutes": "19185.965688661665",
         "customFormatScore": "0",
         "downloadClient": "SABnzbd",
         "downloadClientName": "Mock SABnzbd",
@@ -230,7 +230,7 @@
         "size": "6979321856",
         "tmdbId": "0"
       },
-      "date": "2026-11-12T14:20:53Z",
+      "date": "2026-11-23T17:45:57Z",
       "downloadId": "SABnzbd_nzo_mock7",
       "eventType": "grabbed",
       "id": 1020,
@@ -304,7 +304,7 @@
       "sourceTitle": "/movies/Candyman (1992)/Candyman (1992) Bluray-1080p.mkv"
     }
   ],
-  "recordedAt": "2026-11-12T14:22:18Z",
+  "recordedAt": "2026-11-23T17:47:22Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/history/movie?movieId=20"

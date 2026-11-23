@@ -4,7 +4,7 @@
     "messages": [
       {
         "body": {
-          "version": "6.4.4.10685"
+          "version": "7.0.3.10918"
         },
         "name": "version"
       }
@@ -96,23 +96,17 @@
             "message": "Starting Import List Refresh for List IMDb Watchlist",
             "name": "ImportListSync",
             "priority": "normal",
-            "queued": "2026-11-13T13:34:06Z",
+            "queued": "2026-11-23T17:57:10Z",
             "result": "unknown",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T13:34:06Z",
-            "stateChangeTime": "2026-11-13T13:34:06Z",
+            "started": "2026-11-23T17:57:10Z",
+            "stateChangeTime": "2026-11-23T17:57:10Z",
             "status": "started",
             "trigger": "unspecified",
             "updateScheduledTask": false
           }
         },
         "name": "command"
-      },
-      {
-        "body": {
-          "action": "sync"
-        },
-        "name": "system/task"
       },
       {
         "body": {
@@ -131,17 +125,17 @@
               "updateScheduledTask": false
             },
             "commandName": "Import List Sync",
-            "duration": "00:00:02.3001414",
-            "ended": "2026-11-13T13:34:08Z",
+            "duration": "00:00:02.2756421",
+            "ended": "2026-11-23T17:57:13Z",
             "id": 472955,
             "message": "Adding 2 movies from your auto enabled lists to library",
             "name": "ImportListSync",
             "priority": "normal",
-            "queued": "2026-11-13T13:34:06Z",
+            "queued": "2026-11-23T17:57:10Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T13:34:06Z",
-            "stateChangeTime": "2026-11-13T13:34:06Z",
+            "started": "2026-11-23T17:57:10Z",
+            "stateChangeTime": "2026-11-23T17:57:10Z",
             "status": "completed",
             "trigger": "unspecified",
             "updateScheduledTask": false
@@ -151,476 +145,9 @@
       },
       {
         "body": {
-          "action": "updated",
-          "resource": {
-            "body": {
-              "completionMessage": "Completed",
-              "isExclusive": false,
-              "isLongRunning": true,
-              "isNewMovie": true,
-              "isTypeExclusive": false,
-              "movieIds": [
-                328
-              ],
-              "name": "RefreshMovie",
-              "requiresDiskAccess": false,
-              "sendUpdatesToClient": true,
-              "suppressMessages": false,
-              "trigger": "unspecified",
-              "updateScheduledTask": false
-            },
-            "commandName": "Refresh Movie",
-            "id": 472956,
-            "name": "RefreshMovie",
-            "priority": "normal",
-            "queued": "2026-11-13T13:34:08Z",
-            "result": "unknown",
-            "sendUpdatesToClient": true,
-            "started": "2026-11-13T13:34:08Z",
-            "stateChangeTime": "2026-11-13T13:34:08Z",
-            "status": "started",
-            "trigger": "unspecified",
-            "updateScheduledTask": false
-          }
+          "action": "sync"
         },
-        "name": "command"
-      },
-      {
-        "body": {
-          "action": "updated",
-          "resource": {
-            "body": {
-              "completionMessage": "Completed",
-              "isExclusive": false,
-              "isLongRunning": true,
-              "isNewMovie": true,
-              "isTypeExclusive": false,
-              "movieIds": [
-                329
-              ],
-              "name": "RefreshMovie",
-              "requiresDiskAccess": false,
-              "sendUpdatesToClient": true,
-              "suppressMessages": false,
-              "trigger": "unspecified",
-              "updateScheduledTask": false
-            },
-            "commandName": "Refresh Movie",
-            "id": 472957,
-            "name": "RefreshMovie",
-            "priority": "normal",
-            "queued": "2026-11-13T13:34:08Z",
-            "result": "unknown",
-            "sendUpdatesToClient": true,
-            "started": "2026-11-13T13:34:08Z",
-            "stateChangeTime": "2026-11-13T13:34:08Z",
-            "status": "started",
-            "trigger": "unspecified",
-            "updateScheduledTask": false
-          }
-        },
-        "name": "command"
-      },
-      {
-        "body": {
-          "action": "updated",
-          "resource": {
-            "addOptions": {
-              "addMethod": "list",
-              "ignoreEpisodesWithFiles": false,
-              "ignoreEpisodesWithoutFiles": false,
-              "monitor": "movieOnly",
-              "searchForMovie": true
-            },
-            "added": "2026-11-13T13:34:08Z",
-            "alternateTitles": [
-              {
-                "id": 2804,
-                "movieMetadataId": 521,
-                "sourceType": "tmdb",
-                "title": "Gravitatsioon"
-              },
-              {
-                "id": 2805,
-                "movieMetadataId": 521,
-                "sourceType": "tmdb",
-                "title": "Ko'akh Meshikha"
-              },
-              {
-                "id": 2806,
-                "movieMetadataId": 521,
-                "sourceType": "tmdb",
-                "title": "Gravity: Misiune in spatiu"
-              },
-              {
-                "id": 2807,
-                "movieMetadataId": 521,
-                "sourceType": "tmdb",
-                "title": "Гравiтацiя"
-              },
-              {
-                "id": 2808,
-                "movieMetadataId": 521,
-                "sourceType": "tmdb",
-                "title": "כוח משיכה"
-              },
-              {
-                "id": 2809,
-                "movieMetadataId": 521,
-                "sourceType": "tmdb",
-                "title": "גרביטי"
-              },
-              {
-                "id": 2810,
-                "movieMetadataId": 521,
-                "sourceType": "tmdb",
-                "title": "גראביטי"
-              },
-              {
-                "id": 2811,
-                "movieMetadataId": 521,
-                "sourceType": "tmdb",
-                "title": "Gravity 3D"
-              },
-              {
-                "id": 2812,
-                "movieMetadataId": 521,
-                "sourceType": "tmdb",
-                "title": "그래비티"
-              },
-              {
-                "id": 2813,
-                "movieMetadataId": 521,
-                "sourceType": "tmdb",
-                "title": "Gravity 2013"
-              },
-              {
-                "id": 2814,
-                "movieMetadataId": 521,
-                "sourceType": "tmdb",
-                "title": "Cuộc Chiến Không Trọng Lực"
-              },
-              {
-                "id": 2815,
-                "movieMetadataId": 521,
-                "sourceType": "tmdb",
-                "title": "Yerçəkimi"
-              }
-            ],
-            "certification": "PG-13",
-            "cleanTitle": "gravity",
-            "digitalRelease": "2018-03-04T00:00:00Z",
-            "folderName": "/movies/Gravity (2013) {tmdb-49047}",
-            "genres": [
-              "Science Fiction",
-              "Thriller",
-              "Drama"
-            ],
-            "hasFile": false,
-            "id": 329,
-            "images": [
-              {
-                "coverType": "poster",
-                "remoteUrl": "https://image.tmdb.org/t/p/original/kZ2nZw8D681aphje8NJi8EfbL1U.jpg",
-                "url": "/MediaCover/329/poster.jpg?h=4bec224bff500bb8e466"
-              },
-              {
-                "coverType": "fanart",
-                "remoteUrl": "https://image.tmdb.org/t/p/original/a2n6bKD7qhCPCAEALgsAhWOAQcc.jpg",
-                "url": "/MediaCover/329/fanart.jpg?h=b5ed21e051629541b0fd"
-              }
-            ],
-            "imdbId": "tt1454468",
-            "inCinemas": "2013-10-03T00:00:00Z",
-            "isAvailable": true,
-            "keywords": [
-              "astronaut",
-              "loss",
-              "space",
-              "space mission",
-              "space station",
-              "trapped in space"
-            ],
-            "minimumAvailability": "released",
-            "monitored": true,
-            "movieFileId": 0,
-            "originalLanguage": {
-              "id": 1,
-              "name": "English"
-            },
-            "originalTitle": "Gravity",
-            "overview": "Dr Ryan Stone, an engineer on her first space mission, and Matt Kowalski, an astronaut on his final expedition, have to survive in space after they are hit by debris while spacewalking.",
-            "path": "/movies/Gravity (2013) {tmdb-49047}",
-            "physicalRelease": "2014-01-29T00:00:00Z",
-            "popularity": 9.6727,
-            "qualityProfileId": 11,
-            "ratings": {
-              "imdb": {
-                "type": "user",
-                "value": 7.7,
-                "votes": 909284
-              },
-              "metacritic": {
-                "type": "user",
-                "value": 96,
-                "votes": 0
-              },
-              "rottenTomatoes": {
-                "type": "user",
-                "value": 96,
-                "votes": 0
-              },
-              "tmdb": {
-                "type": "user",
-                "value": 7.172,
-                "votes": 16869
-              },
-              "trakt": {
-                "type": "user",
-                "value": 7.50158,
-                "votes": 25001
-              }
-            },
-            "releaseDate": "2014-01-29T00:00:00Z",
-            "rootFolderPath": "/movies",
-            "runtime": 91,
-            "secondaryYearSourceId": 0,
-            "sizeOnDisk": 0,
-            "sortTitle": "gravity",
-            "statistics": {
-              "movieFileCount": 0,
-              "movieFileQualities": [],
-              "releaseGroups": [],
-              "sizeOnDisk": 0
-            },
-            "status": "released",
-            "studio": "Esperanto Filmoj",
-            "tags": [
-              1
-            ],
-            "title": "Gravity",
-            "titleSlug": "49047",
-            "tmdbId": 49047,
-            "website": "http://gravitymovie.warnerbros.com",
-            "year": 2013,
-            "youTubeTrailerId": "OiTiKOy59o4"
-          }
-        },
-        "name": "movie"
-      },
-      {
-        "body": {
-          "action": "updated",
-          "resource": {
-            "addOptions": {
-              "addMethod": "list",
-              "ignoreEpisodesWithFiles": false,
-              "ignoreEpisodesWithoutFiles": false,
-              "monitor": "movieOnly",
-              "searchForMovie": true
-            },
-            "added": "2026-11-13T13:34:08Z",
-            "alternateTitles": [
-              {
-                "id": 2816,
-                "movieMetadataId": 520,
-                "sourceType": "tmdb",
-                "title": "致命魔术"
-              },
-              {
-                "id": 2817,
-                "movieMetadataId": 520,
-                "sourceType": "tmdb",
-                "title": "Престиж"
-              },
-              {
-                "id": 2818,
-                "movieMetadataId": 520,
-                "sourceType": "tmdb",
-                "title": "El Truco Final (El Prestigio)"
-              },
-              {
-                "id": 2819,
-                "movieMetadataId": 520,
-                "sourceType": "tmdb",
-                "title": "Prestiż"
-              },
-              {
-                "id": 2820,
-                "movieMetadataId": 520,
-                "sourceType": "tmdb",
-                "title": "El Truco Final"
-              },
-              {
-                "id": 2821,
-                "movieMetadataId": 520,
-                "sourceType": "tmdb",
-                "title": "프레스티지"
-              },
-              {
-                "id": 2822,
-                "movieMetadataId": 520,
-                "sourceType": "tmdb",
-                "title": "プレステージ"
-              },
-              {
-                "id": 2823,
-                "movieMetadataId": 520,
-                "sourceType": "tmdb",
-                "title": "حیثیت"
-              },
-              {
-                "id": 2824,
-                "movieMetadataId": 520,
-                "sourceType": "tmdb",
-                "title": "O Grande Truque"
-              },
-              {
-                "id": 2825,
-                "movieMetadataId": 520,
-                "sourceType": "tmdb",
-                "title": "O Terceiro Passo"
-              },
-              {
-                "id": 2826,
-                "movieMetadataId": 520,
-                "sourceType": "tmdb",
-                "title": "Prestij"
-              },
-              {
-                "id": 2827,
-                "movieMetadataId": 520,
-                "sourceType": "tmdb",
-                "title": "A tökéletes trükk"
-              },
-              {
-                "id": 2828,
-                "movieMetadataId": 520,
-                "sourceType": "tmdb",
-                "title": "Ảo Thuật Gia Đấu Trí"
-              }
-            ],
-            "certification": "PG-13",
-            "cleanTitle": "theprestige",
-            "digitalRelease": "2009-09-01T00:00:00Z",
-            "folderName": "/movies/The Prestige (2006) {tmdb-1124}",
-            "genres": [
-              "Drama",
-              "Mystery",
-              "Science Fiction"
-            ],
-            "hasFile": false,
-            "id": 328,
-            "images": [
-              {
-                "coverType": "poster",
-                "remoteUrl": "https://image.tmdb.org/t/p/original/Ag2B2KHKQPukjH7WutmgnnSNurZ.jpg",
-                "url": "/MediaCover/328/poster.jpg?h=cb6c8ba0aeaf56c924d7"
-              },
-              {
-                "coverType": "fanart",
-                "remoteUrl": "https://image.tmdb.org/t/p/original/yaExZh6qE2cfyK3o4kAMEq0mkgy.jpg",
-                "url": "/MediaCover/328/fanart.jpg?h=598403f8ae73bb3898bf"
-              }
-            ],
-            "imdbId": "tt0482571",
-            "inCinemas": "2006-10-19T00:00:00Z",
-            "isAvailable": true,
-            "keywords": [
-              "19th century",
-              "based on novel or book",
-              "bittersweet",
-              "class",
-              "class society",
-              "competition",
-              "cruelty",
-              "diary",
-              "dying and death",
-              "hanging",
-              "hostility",
-              "illusion",
-              "jail cell",
-              "london, england",
-              "magic",
-              "magician",
-              "mind-blowing",
-              "nikola tesla",
-              "obsession",
-              "partner",
-              "rivalry",
-              "secret",
-              "steampunk",
-              "suicide",
-              "tesla coil",
-              "tricks",
-              "twist"
-            ],
-            "minimumAvailability": "released",
-            "monitored": true,
-            "movieFileId": 0,
-            "originalLanguage": {
-              "id": 1,
-              "name": "English"
-            },
-            "originalTitle": "The Prestige",
-            "overview": "A mysterious story of two magicians whose intense rivalry leads them on a life-long battle for supremacy -- full of obsession, deceit and jealousy with dangerous and deadly consequences.",
-            "path": "/movies/The Prestige (2006) {tmdb-1124}",
-            "physicalRelease": "2007-06-06T00:00:00Z",
-            "popularity": 18.951,
-            "qualityProfileId": 11,
-            "ratings": {
-              "imdb": {
-                "type": "user",
-                "value": 8.5,
-                "votes": 1640237
-              },
-              "metacritic": {
-                "type": "user",
-                "value": 66,
-                "votes": 0
-              },
-              "rottenTomatoes": {
-                "type": "user",
-                "value": 77,
-                "votes": 0
-              },
-              "tmdb": {
-                "type": "user",
-                "value": 8.212,
-                "votes": 18448
-              },
-              "trakt": {
-                "type": "user",
-                "value": 8.46334,
-                "votes": 30755
-              }
-            },
-            "releaseDate": "2007-06-06T00:00:00Z",
-            "rootFolderPath": "/movies",
-            "runtime": 131,
-            "secondaryYearSourceId": 0,
-            "sizeOnDisk": 0,
-            "sortTitle": "prestige",
-            "statistics": {
-              "movieFileCount": 0,
-              "movieFileQualities": [],
-              "releaseGroups": [],
-              "sizeOnDisk": 0
-            },
-            "status": "released",
-            "studio": "Warner Bros. Pictures",
-            "tags": [
-              1
-            ],
-            "title": "The Prestige",
-            "titleSlug": "1124",
-            "tmdbId": 1124,
-            "website": "https://www.warnerbros.co.uk/movies/prestige",
-            "year": 2006,
-            "youTubeTrailerId": "ObGVA1WOqyE"
-          }
-        },
-        "name": "movie"
+        "name": "system/task"
       },
       {
         "body": {
@@ -647,11 +174,11 @@
             "message": "Updating info for Gravity",
             "name": "RefreshMovie",
             "priority": "normal",
-            "queued": "2026-11-13T13:34:08Z",
+            "queued": "2026-11-23T17:57:13Z",
             "result": "unknown",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T13:34:08Z",
-            "stateChangeTime": "2026-11-13T13:34:08Z",
+            "started": "2026-11-23T17:57:13Z",
+            "stateChangeTime": "2026-11-23T17:57:13Z",
             "status": "started",
             "trigger": "unspecified",
             "updateScheduledTask": false
@@ -681,14 +208,14 @@
             },
             "commandName": "Refresh Movie",
             "id": 472956,
-            "message": "Scanning disk for The Prestige",
+            "message": "Updating info for The Prestige",
             "name": "RefreshMovie",
             "priority": "normal",
-            "queued": "2026-11-13T13:34:08Z",
+            "queued": "2026-11-23T17:57:13Z",
             "result": "unknown",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T13:34:08Z",
-            "stateChangeTime": "2026-11-13T13:34:08Z",
+            "started": "2026-11-23T17:57:13Z",
+            "stateChangeTime": "2026-11-23T17:57:13Z",
             "status": "started",
             "trigger": "unspecified",
             "updateScheduledTask": false
@@ -700,36 +227,402 @@
         "body": {
           "action": "updated",
           "resource": {
-            "body": {
-              "isExclusive": false,
-              "isLongRunning": false,
-              "isTypeExclusive": false,
-              "movieIds": [
-                328
-              ],
-              "name": "MoviesSearch",
-              "requiresDiskAccess": false,
-              "sendUpdatesToClient": true,
-              "suppressMessages": false,
-              "trigger": "unspecified",
-              "updateScheduledTask": true
+            "addOptions": {
+              "addMethod": "list",
+              "ignoreEpisodesWithFiles": false,
+              "ignoreEpisodesWithoutFiles": false,
+              "monitor": "movieOnly",
+              "searchForMovie": true
             },
-            "commandName": "Movies Search",
-            "id": 472958,
-            "message": "Performing search for 1 movies",
-            "name": "MoviesSearch",
-            "priority": "normal",
-            "queued": "2026-11-13T13:34:08Z",
-            "result": "unknown",
-            "sendUpdatesToClient": true,
-            "started": "2026-11-13T13:34:08Z",
-            "stateChangeTime": "2026-11-13T13:34:08Z",
-            "status": "started",
-            "trigger": "unspecified",
-            "updateScheduledTask": true
+            "added": "2026-11-23T17:57:13Z",
+            "alternateTitles": [
+              {
+                "id": 2816,
+                "movieMetadataId": 520,
+                "sourceType": "tmdb",
+                "title": "致命魔术"
+              },
+              {
+                "id": 2817,
+                "movieMetadataId": 520,
+                "sourceType": "tmdb",
+                "title": "Престиж"
+              },
+              {
+                "id": 2818,
+                "movieMetadataId": 520,
+                "sourceType": "tmdb",
+                "title": "El Truco Final (El Prestigio)"
+              },
+              {
+                "id": 2819,
+                "movieMetadataId": 520,
+                "sourceType": "tmdb",
+                "title": "Prestiż"
+              },
+              {
+                "id": 2820,
+                "movieMetadataId": 520,
+                "sourceType": "tmdb",
+                "title": "El Truco Final"
+              },
+              {
+                "id": 2821,
+                "movieMetadataId": 520,
+                "sourceType": "tmdb",
+                "title": "프레스티지"
+              },
+              {
+                "id": 2822,
+                "movieMetadataId": 520,
+                "sourceType": "tmdb",
+                "title": "プレステージ"
+              },
+              {
+                "id": 2823,
+                "movieMetadataId": 520,
+                "sourceType": "tmdb",
+                "title": "حیثیت"
+              },
+              {
+                "id": 2824,
+                "movieMetadataId": 520,
+                "sourceType": "tmdb",
+                "title": "O Grande Truque"
+              },
+              {
+                "id": 2825,
+                "movieMetadataId": 520,
+                "sourceType": "tmdb",
+                "title": "O Terceiro Passo"
+              },
+              {
+                "id": 2826,
+                "movieMetadataId": 520,
+                "sourceType": "tmdb",
+                "title": "Prestij"
+              },
+              {
+                "id": 2827,
+                "movieMetadataId": 520,
+                "sourceType": "tmdb",
+                "title": "A tökéletes trükk"
+              },
+              {
+                "id": 2828,
+                "movieMetadataId": 520,
+                "sourceType": "tmdb",
+                "title": "Ảo Thuật Gia Đấu Trí"
+              }
+            ],
+            "certification": "PG-13",
+            "cleanTitle": "theprestige",
+            "digitalRelease": "2009-09-01T00:00:00Z",
+            "folderName": "/movies/The Prestige (2006) {tmdb-1124}",
+            "genres": [
+              "Drama",
+              "Mystery",
+              "Science Fiction"
+            ],
+            "hasFile": false,
+            "id": 328,
+            "images": [
+              {
+                "coverType": "poster",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/Ag2B2KHKQPukjH7WutmgnnSNurZ.jpg",
+                "url": "/MediaCover/328/poster.jpg"
+              },
+              {
+                "coverType": "fanart",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/yaExZh6qE2cfyK3o4kAMEq0mkgy.jpg",
+                "url": "/MediaCover/328/fanart.jpg"
+              }
+            ],
+            "imdbId": "tt0482571",
+            "inCinemas": "2006-10-19T00:00:00Z",
+            "isAvailable": true,
+            "keywords": [
+              "19th century",
+              "based on novel or book",
+              "bittersweet",
+              "class",
+              "class society",
+              "competition",
+              "cruelty",
+              "diary",
+              "dying and death",
+              "hanging",
+              "hostility",
+              "illusion",
+              "jail cell",
+              "london, england",
+              "magic",
+              "magician",
+              "mind-blowing",
+              "nikola tesla",
+              "obsession",
+              "partner",
+              "rivalry",
+              "secret",
+              "steampunk",
+              "suicide",
+              "tesla coil",
+              "tricks",
+              "twist"
+            ],
+            "minimumAvailability": "released",
+            "monitored": true,
+            "movieFileId": 0,
+            "originalLanguage": {
+              "id": 1,
+              "name": "English"
+            },
+            "originalTitle": "The Prestige",
+            "overview": "A mysterious story of two magicians whose intense rivalry leads them on a life-long battle for supremacy -- full of obsession, deceit and jealousy with dangerous and deadly consequences.",
+            "path": "/movies/The Prestige (2006) {tmdb-1124}",
+            "physicalRelease": "2007-06-06T00:00:00Z",
+            "popularity": 18.951,
+            "qualityProfileId": 11,
+            "ratings": {
+              "imdb": {
+                "type": "user",
+                "value": 8.5,
+                "votes": 1640237
+              },
+              "metacritic": {
+                "type": "user",
+                "value": 66,
+                "votes": 0
+              },
+              "rottenTomatoes": {
+                "type": "user",
+                "value": 77,
+                "votes": 0
+              },
+              "tmdb": {
+                "type": "user",
+                "value": 8.212,
+                "votes": 18448
+              },
+              "trakt": {
+                "type": "user",
+                "value": 8.46334,
+                "votes": 30755
+              }
+            },
+            "releaseDate": "2007-06-06T00:00:00Z",
+            "rootFolderPath": "/movies",
+            "runtime": 131,
+            "secondaryYearSourceId": 0,
+            "sizeOnDisk": 0,
+            "sortTitle": "prestige",
+            "statistics": {
+              "movieFileCount": 0,
+              "movieFileQualities": [],
+              "releaseGroups": [],
+              "sizeOnDisk": 0
+            },
+            "status": "released",
+            "studio": "Warner Bros. Pictures",
+            "tags": [
+              1
+            ],
+            "title": "The Prestige",
+            "titleSlug": "1124",
+            "tmdbId": 1124,
+            "website": "https://www.warnerbros.co.uk/movies/prestige",
+            "year": 2006,
+            "youTubeTrailerId": "ObGVA1WOqyE"
           }
         },
-        "name": "command"
+        "name": "movie"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "addOptions": {
+              "addMethod": "list",
+              "ignoreEpisodesWithFiles": false,
+              "ignoreEpisodesWithoutFiles": false,
+              "monitor": "movieOnly",
+              "searchForMovie": true
+            },
+            "added": "2026-11-23T17:57:13Z",
+            "alternateTitles": [
+              {
+                "id": 2804,
+                "movieMetadataId": 521,
+                "sourceType": "tmdb",
+                "title": "Gravitatsioon"
+              },
+              {
+                "id": 2805,
+                "movieMetadataId": 521,
+                "sourceType": "tmdb",
+                "title": "Ko'akh Meshikha"
+              },
+              {
+                "id": 2806,
+                "movieMetadataId": 521,
+                "sourceType": "tmdb",
+                "title": "Gravity: Misiune in spatiu"
+              },
+              {
+                "id": 2807,
+                "movieMetadataId": 521,
+                "sourceType": "tmdb",
+                "title": "Гравiтацiя"
+              },
+              {
+                "id": 2808,
+                "movieMetadataId": 521,
+                "sourceType": "tmdb",
+                "title": "כוח משיכה"
+              },
+              {
+                "id": 2809,
+                "movieMetadataId": 521,
+                "sourceType": "tmdb",
+                "title": "גרביטי"
+              },
+              {
+                "id": 2810,
+                "movieMetadataId": 521,
+                "sourceType": "tmdb",
+                "title": "גראביטי"
+              },
+              {
+                "id": 2811,
+                "movieMetadataId": 521,
+                "sourceType": "tmdb",
+                "title": "Gravity 3D"
+              },
+              {
+                "id": 2812,
+                "movieMetadataId": 521,
+                "sourceType": "tmdb",
+                "title": "그래비티"
+              },
+              {
+                "id": 2813,
+                "movieMetadataId": 521,
+                "sourceType": "tmdb",
+                "title": "Gravity 2013"
+              },
+              {
+                "id": 2814,
+                "movieMetadataId": 521,
+                "sourceType": "tmdb",
+                "title": "Cuộc Chiến Không Trọng Lực"
+              },
+              {
+                "id": 2815,
+                "movieMetadataId": 521,
+                "sourceType": "tmdb",
+                "title": "Yerçəkimi"
+              }
+            ],
+            "certification": "PG-13",
+            "cleanTitle": "gravity",
+            "digitalRelease": "2018-03-04T00:00:00Z",
+            "folderName": "/movies/Gravity (2013) {tmdb-49047}",
+            "genres": [
+              "Science Fiction",
+              "Thriller",
+              "Drama"
+            ],
+            "hasFile": false,
+            "id": 329,
+            "images": [
+              {
+                "coverType": "poster",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/kZ2nZw8D681aphje8NJi8EfbL1U.jpg",
+                "url": "/MediaCover/329/poster.jpg"
+              },
+              {
+                "coverType": "fanart",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/a2n6bKD7qhCPCAEALgsAhWOAQcc.jpg",
+                "url": "/MediaCover/329/fanart.jpg"
+              }
+            ],
+            "imdbId": "tt1454468",
+            "inCinemas": "2013-10-03T00:00:00Z",
+            "isAvailable": true,
+            "keywords": [
+              "astronaut",
+              "loss",
+              "space",
+              "space mission",
+              "space station",
+              "trapped in space"
+            ],
+            "minimumAvailability": "released",
+            "monitored": true,
+            "movieFileId": 0,
+            "originalLanguage": {
+              "id": 1,
+              "name": "English"
+            },
+            "originalTitle": "Gravity",
+            "overview": "Dr Ryan Stone, an engineer on her first space mission, and Matt Kowalski, an astronaut on his final expedition, have to survive in space after they are hit by debris while spacewalking.",
+            "path": "/movies/Gravity (2013) {tmdb-49047}",
+            "physicalRelease": "2014-01-29T00:00:00Z",
+            "popularity": 9.6727,
+            "qualityProfileId": 11,
+            "ratings": {
+              "imdb": {
+                "type": "user",
+                "value": 7.7,
+                "votes": 909284
+              },
+              "metacritic": {
+                "type": "user",
+                "value": 96,
+                "votes": 0
+              },
+              "rottenTomatoes": {
+                "type": "user",
+                "value": 96,
+                "votes": 0
+              },
+              "tmdb": {
+                "type": "user",
+                "value": 7.172,
+                "votes": 16869
+              },
+              "trakt": {
+                "type": "user",
+                "value": 7.50158,
+                "votes": 25001
+              }
+            },
+            "releaseDate": "2014-01-29T00:00:00Z",
+            "rootFolderPath": "/movies",
+            "runtime": 91,
+            "secondaryYearSourceId": 0,
+            "sizeOnDisk": 0,
+            "sortTitle": "gravity",
+            "statistics": {
+              "movieFileCount": 0,
+              "movieFileQualities": [],
+              "releaseGroups": [],
+              "sizeOnDisk": 0
+            },
+            "status": "released",
+            "studio": "Esperanto Filmoj",
+            "tags": [
+              1
+            ],
+            "title": "Gravity",
+            "titleSlug": "49047",
+            "tmdbId": 49047,
+            "website": "http://gravitymovie.warnerbros.com",
+            "year": 2013,
+            "youTubeTrailerId": "OiTiKOy59o4"
+          }
+        },
+        "name": "movie"
       },
       {
         "body": {
@@ -742,80 +635,6 @@
           "action": "sync"
         },
         "name": "system/task"
-      },
-      {
-        "body": {
-          "action": "updated",
-          "resource": {
-            "body": {
-              "completionMessage": "Completed",
-              "isExclusive": false,
-              "isLongRunning": true,
-              "isNewMovie": true,
-              "isTypeExclusive": false,
-              "movieIds": [
-                328
-              ],
-              "name": "RefreshMovie",
-              "requiresDiskAccess": false,
-              "sendUpdatesToClient": true,
-              "suppressMessages": false,
-              "trigger": "unspecified",
-              "updateScheduledTask": false
-            },
-            "commandName": "Refresh Movie",
-            "duration": "00:00:00.1404209",
-            "ended": "2026-11-13T13:34:08Z",
-            "id": 472956,
-            "message": "Completed",
-            "name": "RefreshMovie",
-            "priority": "normal",
-            "queued": "2026-11-13T13:34:08Z",
-            "result": "successful",
-            "sendUpdatesToClient": true,
-            "started": "2026-11-13T13:34:08Z",
-            "stateChangeTime": "2026-11-13T13:34:08Z",
-            "status": "completed",
-            "trigger": "unspecified",
-            "updateScheduledTask": false
-          }
-        },
-        "name": "command"
-      },
-      {
-        "body": {
-          "action": "updated",
-          "resource": {
-            "body": {
-              "isExclusive": false,
-              "isLongRunning": false,
-              "isTypeExclusive": false,
-              "movieIds": [
-                328
-              ],
-              "name": "MoviesSearch",
-              "requiresDiskAccess": false,
-              "sendUpdatesToClient": true,
-              "suppressMessages": false,
-              "trigger": "unspecified",
-              "updateScheduledTask": true
-            },
-            "commandName": "Movies Search",
-            "id": 472958,
-            "message": "Searching indexers for [The Prestige]. 12 active indexers",
-            "name": "MoviesSearch",
-            "priority": "normal",
-            "queued": "2026-11-13T13:34:08Z",
-            "result": "unknown",
-            "sendUpdatesToClient": true,
-            "started": "2026-11-13T13:34:08Z",
-            "stateChangeTime": "2026-11-13T13:34:08Z",
-            "status": "started",
-            "trigger": "unspecified",
-            "updateScheduledTask": true
-          }
-        },
-        "name": "command"
       },
       {
         "body": {
@@ -838,17 +657,17 @@
               "updateScheduledTask": false
             },
             "commandName": "Refresh Movie",
-            "duration": "00:00:00.1537521",
-            "ended": "2026-11-13T13:34:08Z",
+            "duration": "00:00:00.1801861",
+            "ended": "2026-11-23T17:57:13Z",
             "id": 472957,
             "message": "Completed",
             "name": "RefreshMovie",
             "priority": "normal",
-            "queued": "2026-11-13T13:34:08Z",
+            "queued": "2026-11-23T17:57:13Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T13:34:08Z",
-            "stateChangeTime": "2026-11-13T13:34:08Z",
+            "started": "2026-11-23T17:57:13Z",
+            "stateChangeTime": "2026-11-23T17:57:13Z",
             "status": "completed",
             "trigger": "unspecified",
             "updateScheduledTask": false
@@ -866,6 +685,80 @@
               "isTypeExclusive": false,
               "movieIds": [
                 329
+              ],
+              "name": "MoviesSearch",
+              "requiresDiskAccess": false,
+              "sendUpdatesToClient": true,
+              "suppressMessages": false,
+              "trigger": "unspecified",
+              "updateScheduledTask": true
+            },
+            "commandName": "Movies Search",
+            "id": 472958,
+            "message": "Searching indexers for [Gravity]. 12 active indexers",
+            "name": "MoviesSearch",
+            "priority": "normal",
+            "queued": "2026-11-23T17:57:13Z",
+            "result": "unknown",
+            "sendUpdatesToClient": true,
+            "started": "2026-11-23T17:57:13Z",
+            "stateChangeTime": "2026-11-23T17:57:13Z",
+            "status": "started",
+            "trigger": "unspecified",
+            "updateScheduledTask": true
+          }
+        },
+        "name": "command"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "body": {
+              "completionMessage": "Completed",
+              "isExclusive": false,
+              "isLongRunning": true,
+              "isNewMovie": true,
+              "isTypeExclusive": false,
+              "movieIds": [
+                328
+              ],
+              "name": "RefreshMovie",
+              "requiresDiskAccess": false,
+              "sendUpdatesToClient": true,
+              "suppressMessages": false,
+              "trigger": "unspecified",
+              "updateScheduledTask": false
+            },
+            "commandName": "Refresh Movie",
+            "duration": "00:00:00.1803864",
+            "ended": "2026-11-23T17:57:13Z",
+            "id": 472956,
+            "message": "Completed",
+            "name": "RefreshMovie",
+            "priority": "normal",
+            "queued": "2026-11-23T17:57:13Z",
+            "result": "successful",
+            "sendUpdatesToClient": true,
+            "started": "2026-11-23T17:57:13Z",
+            "stateChangeTime": "2026-11-23T17:57:13Z",
+            "status": "completed",
+            "trigger": "unspecified",
+            "updateScheduledTask": false
+          }
+        },
+        "name": "command"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "body": {
+              "isExclusive": false,
+              "isLongRunning": false,
+              "isTypeExclusive": false,
+              "movieIds": [
+                328
               ],
               "name": "MoviesSearch",
               "requiresDiskAccess": false,
@@ -876,14 +769,14 @@
             },
             "commandName": "Movies Search",
             "id": 472959,
-            "message": "Searching indexers for [Gravity]. 12 active indexers",
+            "message": "Searching indexers for [The Prestige]. 12 active indexers",
             "name": "MoviesSearch",
             "priority": "normal",
-            "queued": "2026-11-13T13:34:08Z",
+            "queued": "2026-11-23T17:57:13Z",
             "result": "unknown",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T13:34:08Z",
-            "stateChangeTime": "2026-11-13T13:34:08Z",
+            "started": "2026-11-23T17:57:13Z",
+            "stateChangeTime": "2026-11-23T17:57:13Z",
             "status": "started",
             "trigger": "unspecified",
             "updateScheduledTask": true
@@ -907,7 +800,188 @@
         "body": {
           "action": "updated",
           "resource": {
-            "added": "2026-11-13T13:34:08Z",
+            "added": "2026-11-23T17:57:13Z",
+            "alternateTitles": [
+              {
+                "id": 2804,
+                "movieMetadataId": 521,
+                "sourceType": "tmdb",
+                "title": "Gravitatsioon"
+              },
+              {
+                "id": 2805,
+                "movieMetadataId": 521,
+                "sourceType": "tmdb",
+                "title": "Ko'akh Meshikha"
+              },
+              {
+                "id": 2806,
+                "movieMetadataId": 521,
+                "sourceType": "tmdb",
+                "title": "Gravity: Misiune in spatiu"
+              },
+              {
+                "id": 2807,
+                "movieMetadataId": 521,
+                "sourceType": "tmdb",
+                "title": "Гравiтацiя"
+              },
+              {
+                "id": 2808,
+                "movieMetadataId": 521,
+                "sourceType": "tmdb",
+                "title": "כוח משיכה"
+              },
+              {
+                "id": 2809,
+                "movieMetadataId": 521,
+                "sourceType": "tmdb",
+                "title": "גרביטי"
+              },
+              {
+                "id": 2810,
+                "movieMetadataId": 521,
+                "sourceType": "tmdb",
+                "title": "גראביטי"
+              },
+              {
+                "id": 2811,
+                "movieMetadataId": 521,
+                "sourceType": "tmdb",
+                "title": "Gravity 3D"
+              },
+              {
+                "id": 2812,
+                "movieMetadataId": 521,
+                "sourceType": "tmdb",
+                "title": "그래비티"
+              },
+              {
+                "id": 2813,
+                "movieMetadataId": 521,
+                "sourceType": "tmdb",
+                "title": "Gravity 2013"
+              },
+              {
+                "id": 2814,
+                "movieMetadataId": 521,
+                "sourceType": "tmdb",
+                "title": "Cuộc Chiến Không Trọng Lực"
+              },
+              {
+                "id": 2815,
+                "movieMetadataId": 521,
+                "sourceType": "tmdb",
+                "title": "Yerçəkimi"
+              }
+            ],
+            "certification": "PG-13",
+            "cleanTitle": "gravity",
+            "digitalRelease": "2018-03-04T00:00:00Z",
+            "folderName": "/movies/Gravity (2013) {tmdb-49047}",
+            "genres": [
+              "Science Fiction",
+              "Thriller",
+              "Drama"
+            ],
+            "hasFile": false,
+            "id": 329,
+            "images": [
+              {
+                "coverType": "poster",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/kZ2nZw8D681aphje8NJi8EfbL1U.jpg",
+                "url": "/MediaCover/329/poster.jpg?h=4bec224bff500bb8e466"
+              },
+              {
+                "coverType": "fanart",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/a2n6bKD7qhCPCAEALgsAhWOAQcc.jpg",
+                "url": "/MediaCover/329/fanart.jpg?h=b5ed21e051629541b0fd"
+              }
+            ],
+            "imdbId": "tt1454468",
+            "inCinemas": "2013-10-03T00:00:00Z",
+            "isAvailable": true,
+            "keywords": [
+              "astronaut",
+              "loss",
+              "space",
+              "space mission",
+              "space station",
+              "trapped in space"
+            ],
+            "lastSearchTime": "2026-11-23T17:57:13Z",
+            "minimumAvailability": "released",
+            "monitored": true,
+            "movieFileId": 0,
+            "originalLanguage": {
+              "id": 1,
+              "name": "English"
+            },
+            "originalTitle": "Gravity",
+            "overview": "Dr Ryan Stone, an engineer on her first space mission, and Matt Kowalski, an astronaut on his final expedition, have to survive in space after they are hit by debris while spacewalking.",
+            "path": "/movies/Gravity (2013) {tmdb-49047}",
+            "physicalRelease": "2014-01-29T00:00:00Z",
+            "popularity": 9.6727,
+            "qualityProfileId": 11,
+            "ratings": {
+              "imdb": {
+                "type": "user",
+                "value": 7.7,
+                "votes": 909284
+              },
+              "metacritic": {
+                "type": "user",
+                "value": 96,
+                "votes": 0
+              },
+              "rottenTomatoes": {
+                "type": "user",
+                "value": 96,
+                "votes": 0
+              },
+              "tmdb": {
+                "type": "user",
+                "value": 7.172,
+                "votes": 16869
+              },
+              "trakt": {
+                "type": "user",
+                "value": 7.50158,
+                "votes": 25001
+              }
+            },
+            "releaseDate": "2014-01-29T00:00:00Z",
+            "rootFolderPath": "/movies",
+            "runtime": 91,
+            "secondaryYearSourceId": 0,
+            "sizeOnDisk": 0,
+            "sortTitle": "gravity",
+            "statistics": {
+              "movieFileCount": 0,
+              "movieFileQualities": [],
+              "releaseGroups": [],
+              "sizeOnDisk": 0
+            },
+            "status": "released",
+            "studio": "Esperanto Filmoj",
+            "tags": [
+              1
+            ],
+            "title": "Gravity",
+            "titleSlug": "49047",
+            "tmdbId": 49047,
+            "website": "http://gravitymovie.warnerbros.com",
+            "year": 2013,
+            "youTubeTrailerId": "OiTiKOy59o4"
+          }
+        },
+        "name": "movie"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "added": "2026-11-23T17:57:13Z",
             "alternateTitles": [
               {
                 "id": 2816,
@@ -1043,7 +1117,7 @@
               "tricks",
               "twist"
             ],
-            "lastSearchTime": "2026-11-13T13:34:08Z",
+            "lastSearchTime": "2026-11-23T17:57:13Z",
             "minimumAvailability": "released",
             "monitored": true,
             "movieFileId": 0,
@@ -1115,187 +1189,6 @@
         "body": {
           "action": "updated",
           "resource": {
-            "added": "2026-11-13T13:34:08Z",
-            "alternateTitles": [
-              {
-                "id": 2804,
-                "movieMetadataId": 521,
-                "sourceType": "tmdb",
-                "title": "Gravitatsioon"
-              },
-              {
-                "id": 2805,
-                "movieMetadataId": 521,
-                "sourceType": "tmdb",
-                "title": "Ko'akh Meshikha"
-              },
-              {
-                "id": 2806,
-                "movieMetadataId": 521,
-                "sourceType": "tmdb",
-                "title": "Gravity: Misiune in spatiu"
-              },
-              {
-                "id": 2807,
-                "movieMetadataId": 521,
-                "sourceType": "tmdb",
-                "title": "Гравiтацiя"
-              },
-              {
-                "id": 2808,
-                "movieMetadataId": 521,
-                "sourceType": "tmdb",
-                "title": "כוח משיכה"
-              },
-              {
-                "id": 2809,
-                "movieMetadataId": 521,
-                "sourceType": "tmdb",
-                "title": "גרביטי"
-              },
-              {
-                "id": 2810,
-                "movieMetadataId": 521,
-                "sourceType": "tmdb",
-                "title": "גראביטי"
-              },
-              {
-                "id": 2811,
-                "movieMetadataId": 521,
-                "sourceType": "tmdb",
-                "title": "Gravity 3D"
-              },
-              {
-                "id": 2812,
-                "movieMetadataId": 521,
-                "sourceType": "tmdb",
-                "title": "그래비티"
-              },
-              {
-                "id": 2813,
-                "movieMetadataId": 521,
-                "sourceType": "tmdb",
-                "title": "Gravity 2013"
-              },
-              {
-                "id": 2814,
-                "movieMetadataId": 521,
-                "sourceType": "tmdb",
-                "title": "Cuộc Chiến Không Trọng Lực"
-              },
-              {
-                "id": 2815,
-                "movieMetadataId": 521,
-                "sourceType": "tmdb",
-                "title": "Yerçəkimi"
-              }
-            ],
-            "certification": "PG-13",
-            "cleanTitle": "gravity",
-            "digitalRelease": "2018-03-04T00:00:00Z",
-            "folderName": "/movies/Gravity (2013) {tmdb-49047}",
-            "genres": [
-              "Science Fiction",
-              "Thriller",
-              "Drama"
-            ],
-            "hasFile": false,
-            "id": 329,
-            "images": [
-              {
-                "coverType": "poster",
-                "remoteUrl": "https://image.tmdb.org/t/p/original/kZ2nZw8D681aphje8NJi8EfbL1U.jpg",
-                "url": "/MediaCover/329/poster.jpg?h=4bec224bff500bb8e466"
-              },
-              {
-                "coverType": "fanart",
-                "remoteUrl": "https://image.tmdb.org/t/p/original/a2n6bKD7qhCPCAEALgsAhWOAQcc.jpg",
-                "url": "/MediaCover/329/fanart.jpg?h=b5ed21e051629541b0fd"
-              }
-            ],
-            "imdbId": "tt1454468",
-            "inCinemas": "2013-10-03T00:00:00Z",
-            "isAvailable": true,
-            "keywords": [
-              "astronaut",
-              "loss",
-              "space",
-              "space mission",
-              "space station",
-              "trapped in space"
-            ],
-            "lastSearchTime": "2026-11-13T13:34:08Z",
-            "minimumAvailability": "released",
-            "monitored": true,
-            "movieFileId": 0,
-            "originalLanguage": {
-              "id": 1,
-              "name": "English"
-            },
-            "originalTitle": "Gravity",
-            "overview": "Dr Ryan Stone, an engineer on her first space mission, and Matt Kowalski, an astronaut on his final expedition, have to survive in space after they are hit by debris while spacewalking.",
-            "path": "/movies/Gravity (2013) {tmdb-49047}",
-            "physicalRelease": "2014-01-29T00:00:00Z",
-            "popularity": 9.6727,
-            "qualityProfileId": 11,
-            "ratings": {
-              "imdb": {
-                "type": "user",
-                "value": 7.7,
-                "votes": 909284
-              },
-              "metacritic": {
-                "type": "user",
-                "value": 96,
-                "votes": 0
-              },
-              "rottenTomatoes": {
-                "type": "user",
-                "value": 96,
-                "votes": 0
-              },
-              "tmdb": {
-                "type": "user",
-                "value": 7.172,
-                "votes": 16869
-              },
-              "trakt": {
-                "type": "user",
-                "value": 7.50158,
-                "votes": 25001
-              }
-            },
-            "releaseDate": "2014-01-29T00:00:00Z",
-            "rootFolderPath": "/movies",
-            "runtime": 91,
-            "secondaryYearSourceId": 0,
-            "sizeOnDisk": 0,
-            "sortTitle": "gravity",
-            "statistics": {
-              "movieFileCount": 0,
-              "movieFileQualities": [],
-              "releaseGroups": [],
-              "sizeOnDisk": 0
-            },
-            "status": "released",
-            "studio": "Esperanto Filmoj",
-            "tags": [
-              1
-            ],
-            "title": "Gravity",
-            "titleSlug": "49047",
-            "tmdbId": 49047,
-            "website": "http://gravitymovie.warnerbros.com",
-            "year": 2013,
-            "youTubeTrailerId": "OiTiKOy59o4"
-          }
-        },
-        "name": "movie"
-      },
-      {
-        "body": {
-          "action": "updated",
-          "resource": {
             "body": {
               "isExclusive": false,
               "isLongRunning": false,
@@ -1311,17 +1204,17 @@
               "updateScheduledTask": true
             },
             "commandName": "Movies Search",
-            "duration": "00:00:00.2799916",
-            "ended": "2026-11-13T13:34:08Z",
-            "id": 472958,
+            "duration": "00:00:00.3322748",
+            "ended": "2026-11-23T17:57:13Z",
+            "id": 472959,
             "message": "Completed search for 1 movies. 0 reports downloaded.",
             "name": "MoviesSearch",
             "priority": "normal",
-            "queued": "2026-11-13T13:34:08Z",
+            "queued": "2026-11-23T17:57:13Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T13:34:08Z",
-            "stateChangeTime": "2026-11-13T13:34:08Z",
+            "started": "2026-11-23T17:57:13Z",
+            "stateChangeTime": "2026-11-23T17:57:13Z",
             "status": "completed",
             "trigger": "unspecified",
             "updateScheduledTask": true
@@ -1348,17 +1241,17 @@
               "updateScheduledTask": true
             },
             "commandName": "Movies Search",
-            "duration": "00:00:00.2408107",
-            "ended": "2026-11-13T13:34:08Z",
-            "id": 472959,
+            "duration": "00:00:00.3715143",
+            "ended": "2026-11-23T17:57:13Z",
+            "id": 472958,
             "message": "Completed search for 1 movies. 0 reports downloaded.",
             "name": "MoviesSearch",
             "priority": "normal",
-            "queued": "2026-11-13T13:34:08Z",
+            "queued": "2026-11-23T17:57:13Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T13:34:08Z",
-            "stateChangeTime": "2026-11-13T13:34:08Z",
+            "started": "2026-11-23T17:57:13Z",
+            "stateChangeTime": "2026-11-23T17:57:13Z",
             "status": "completed",
             "trigger": "unspecified",
             "updateScheduledTask": true
@@ -1432,11 +1325,11 @@
             "message": "Starting Import List Refresh for List IMDb Top 250",
             "name": "ImportListSync",
             "priority": "normal",
-            "queued": "2026-11-13T13:34:10Z",
+            "queued": "2026-11-23T17:57:14Z",
             "result": "unknown",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T13:34:10Z",
-            "stateChangeTime": "2026-11-13T13:34:10Z",
+            "started": "2026-11-23T17:57:14Z",
+            "stateChangeTime": "2026-11-23T17:57:14Z",
             "status": "started",
             "trigger": "unspecified",
             "updateScheduledTask": false
@@ -1473,17 +1366,17 @@
               "updateScheduledTask": false
             },
             "commandName": "Import List Sync",
-            "duration": "00:00:02.0001649",
-            "ended": "2026-11-13T13:34:12Z",
+            "duration": "00:00:01.9932377",
+            "ended": "2026-11-23T17:57:16Z",
             "id": 472960,
             "message": "Starting Import List Refresh for List IMDb Top 250",
             "name": "ImportListSync",
             "priority": "normal",
-            "queued": "2026-11-13T13:34:10Z",
+            "queued": "2026-11-23T17:57:14Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T13:34:10Z",
-            "stateChangeTime": "2026-11-13T13:34:10Z",
+            "started": "2026-11-23T17:57:14Z",
+            "stateChangeTime": "2026-11-23T17:57:14Z",
             "status": "completed",
             "trigger": "unspecified",
             "updateScheduledTask": false
@@ -1517,11 +1410,11 @@
             "message": "Starting Import List Refresh for List IMDb Watchlist",
             "name": "ImportListSync",
             "priority": "normal",
-            "queued": "2026-11-13T13:34:20Z",
+            "queued": "2026-11-23T17:57:24Z",
             "result": "unknown",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T13:34:20Z",
-            "stateChangeTime": "2026-11-13T13:34:20Z",
+            "started": "2026-11-23T17:57:24Z",
+            "stateChangeTime": "2026-11-23T17:57:24Z",
             "status": "started",
             "trigger": "manual",
             "updateScheduledTask": false
@@ -1558,17 +1451,17 @@
               "updateScheduledTask": false
             },
             "commandName": "Import List Sync",
-            "duration": "00:00:01.9897489",
-            "ended": "2026-11-13T13:34:22Z",
+            "duration": "00:00:01.9814275",
+            "ended": "2026-11-23T17:57:26Z",
             "id": 472961,
             "message": "Starting Import List Refresh for List IMDb Watchlist",
             "name": "ImportListSync",
             "priority": "normal",
-            "queued": "2026-11-13T13:34:20Z",
+            "queued": "2026-11-23T17:57:24Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T13:34:20Z",
-            "stateChangeTime": "2026-11-13T13:34:20Z",
+            "started": "2026-11-23T17:57:24Z",
+            "stateChangeTime": "2026-11-23T17:57:24Z",
             "status": "completed",
             "trigger": "manual",
             "updateScheduledTask": false
@@ -1629,16 +1522,16 @@
               "updateScheduledTask": true
             },
             "commandName": "Import List Sync",
-            "duration": "00:00:00.0076785",
-            "ended": "2026-11-13T13:34:41Z",
+            "duration": "00:00:00.0103577",
+            "ended": "2026-11-23T17:57:46Z",
             "id": 472962,
             "name": "ImportListSync",
             "priority": "normal",
-            "queued": "2026-11-13T13:34:41Z",
+            "queued": "2026-11-23T17:57:46Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T13:34:41Z",
-            "stateChangeTime": "2026-11-13T13:34:41Z",
+            "started": "2026-11-23T17:57:46Z",
+            "stateChangeTime": "2026-11-23T17:57:46Z",
             "status": "completed",
             "trigger": "manual",
             "updateScheduledTask": true
@@ -1716,18 +1609,18 @@
               "updateScheduledTask": false
             },
             "commandName": "Import List Sync",
-            "duration": "00:00:00.0019180",
-            "ended": "2026-11-13T13:35:01Z",
+            "duration": "00:00:00.0020638",
+            "ended": "2026-11-23T17:58:06Z",
             "exception": "NzbDrone.Core.Datastore.ModelNotFoundException: ImportListDefinition with ID 999 does not exist\n   at NzbDrone.Core.Datastore.BasicRepository`1.Get(Int32 id) in ./NzbDrone.Core/Datastore/BasicRepository.cs:line 121\n   at NzbDrone.Core.ThingiProvider.ProviderFactory`2.Get(Int32 id) in ./NzbDrone.Core/ThingiProvider/ProviderFactory.cs:line 101\n   at NzbDrone.Core.ImportLists.ImportListSyncService.Execute(ImportListSyncCommand message) in ./NzbDrone.Core/ImportLists/ImportListSyncService.cs:line 175\n   at NzbDrone.Core.Messaging.Commands.CommandExecutor.ExecuteCommand[TCommand](TCommand command, CommandModel commandModel) in ./NzbDrone.Core/Messaging/Commands/CommandExecutor.cs:line 81",
             "id": 472965,
             "message": "Failed",
             "name": "ImportListSync",
             "priority": "normal",
-            "queued": "2026-11-13T13:35:01Z",
+            "queued": "2026-11-23T17:58:06Z",
             "result": "unknown",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T13:35:01Z",
-            "stateChangeTime": "2026-11-13T13:35:01Z",
+            "started": "2026-11-23T17:58:06Z",
+            "stateChangeTime": "2026-11-23T17:58:06Z",
             "status": "failed",
             "trigger": "manual",
             "updateScheduledTask": false
@@ -1850,7 +1743,7 @@
     ]
   },
   {
-    "after": "importlist-after",
+    "after": "importlist-movie-after",
     "messages": [
       {
         "body": {
@@ -1880,17 +1773,17 @@
               "updateScheduledTask": false
             },
             "commandName": "Import List Sync",
-            "duration": "00:00:00.0038113",
-            "ended": "2026-11-13T13:35:07Z",
+            "duration": "00:00:00.0070338",
+            "ended": "2026-11-23T17:58:12Z",
             "id": 472966,
             "message": "Starting Import List Refresh for List IMDb Watchlist",
             "name": "ImportListSync",
             "priority": "normal",
-            "queued": "2026-11-13T13:35:07Z",
+            "queued": "2026-11-23T17:58:12Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T13:35:07Z",
-            "stateChangeTime": "2026-11-13T13:35:07Z",
+            "started": "2026-11-23T17:58:12Z",
+            "stateChangeTime": "2026-11-23T17:58:12Z",
             "status": "completed",
             "trigger": "unspecified",
             "updateScheduledTask": false

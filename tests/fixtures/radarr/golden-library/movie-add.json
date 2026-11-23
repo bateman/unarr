@@ -7,7 +7,7 @@
       "monitor": "movieOnly",
       "searchForMovie": false
     },
-    "added": "2026-11-13T12:38:48Z",
+    "added": "2026-11-23T17:53:26Z",
     "alternateTitles": [],
     "certification": "PG-13",
     "cleanTitle": "dune",
@@ -27,12 +27,12 @@
       {
         "coverType": "poster",
         "remoteUrl": "https://image.tmdb.org/t/p/original/v1tRXZ4JtD2Iv6fjkPvT4GiwslV.jpg",
-        "url": "/MediaCover/328/poster.jpg?h=bd15f9a27331fc78d4df"
+        "url": "/MediaCover/328/poster.jpg"
       },
       {
         "coverType": "fanart",
         "remoteUrl": "https://image.tmdb.org/t/p/original/qVgZu5BTx6pu4owCvVOm4zjTfOi.jpg",
-        "url": "/MediaCover/328/fanart.jpg?h=251f444906d2ce7ea00b"
+        "url": "/MediaCover/328/fanart.jpg"
       }
     ],
     "imdbId": "tt1160419",
@@ -133,7 +133,7 @@
     "year": 2021,
     "youTubeTrailerId": "w0HgHet0sxg"
   },
-  "recordedAt": "2026-11-13T12:38:48Z",
+  "recordedAt": "2026-11-23T17:53:26Z",
   "request": {
     "body": "bodies/movie-add.json",
     "method": "POST",

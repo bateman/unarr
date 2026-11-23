@@ -17,4 +17,5 @@
   <AnalyticsEnabled>False</AnalyticsEnabled>
   <AllowedHosts>*</AllowedHosts>
   <TrustedNetworks></TrustedNetworks>
+  <SslKeyPath></SslKeyPath>
 </Config>

@@ -53,11 +53,11 @@
       "tmdbId": 726871
     }
   ],
-  "recordedAt": "2026-11-13T12:42:08Z",
+  "recordedAt": "2026-11-23T17:56:46Z",
   "request": {
     "body": "bodies/collections-put.json",
     "method": "PUT",
     "path": "/api/v3/collection"
   },
-  "status": 202
+  "status": 200
 }

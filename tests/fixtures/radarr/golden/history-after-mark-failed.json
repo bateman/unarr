@@ -16,7 +16,7 @@
         "releaseGroup": null,
         "size": "8740258447"
       },
-      "date": "2026-11-12T14:20:39Z",
+      "date": "2026-11-23T17:45:43Z",
       "downloadId": "932161398c8420b934b0d047c43b66b8d1337383",
       "eventType": "downloadFailed",
       "id": 1017,
@@ -163,7 +163,7 @@
       "sourceTitle": "Predestination 2014 DTS ITA ENG 1080p BluRay x264 BLUWORLD mkv torrent"
     }
   ],
-  "recordedAt": "2026-11-12T14:20:47Z",
+  "recordedAt": "2026-11-23T17:45:51Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/history/movie?movieId=327"

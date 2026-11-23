@@ -2,7 +2,7 @@
   "body": [
     {
       "body": {
-        "content": "Test message from Radarr posted at 11/12/2026 14:21:05",
+        "content": "Test message from Radarr posted at 11/23/2026 17:46:10",
         "username": "Unarr fixture"
       },
       "headers": {
@@ -67,7 +67,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685"
+        "X-Plex-Version": "7.0.3.10918"
       },
       "service": "plex"
     },
@@ -83,12 +83,12 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "wrong",
-        "X-Plex-Version": "6.4.4.10685"
+        "X-Plex-Version": "7.0.3.10918"
       },
       "service": "plex"
     }
   ],
-  "recordedAt": "2026-11-12T14:21:06Z",
+  "recordedAt": "2026-11-23T17:46:10Z",
   "request": {
     "method": "GET",
     "path": "/mock/notifications",

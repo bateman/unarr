@@ -106,7 +106,7 @@
     ],
     "imdbId": "tt33764258",
     "inCinemas": "2026-07-15T00:00:00Z",
-    "isAvailable": false,
+    "isAvailable": true,
     "keywords": [
       "ancient",
       "ancient world",
@@ -184,7 +184,7 @@
     "year": 2026,
     "youTubeTrailerId": "AyIZ9tiiN8I"
   },
-  "recordedAt": "2026-11-12T14:19:08Z",
+  "recordedAt": "2026-11-23T17:44:13Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/movie/125"

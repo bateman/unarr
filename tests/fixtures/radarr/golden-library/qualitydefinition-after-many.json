@@ -419,7 +419,7 @@
       "weight": 26
     }
   ],
-  "recordedAt": "2026-11-13T12:41:35Z",
+  "recordedAt": "2026-11-23T17:56:13Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/qualitydefinition"

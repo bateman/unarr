@@ -1224,6 +1224,13 @@
               "name": "ka",
               "order": 79,
               "value": 36
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Irish",
+              "name": "ga",
+              "order": 81,
+              "value": 37
             }
           ],
           "type": "select"
@@ -1647,6 +1654,97 @@
       "tags": []
     },
     {
+      "configContract": "TraktSmartListSettings",
+      "enableAuto": true,
+      "enabled": false,
+      "fields": [
+        {
+          "advanced": false,
+          "hidden": "hidden",
+          "isFloat": false,
+          "label": "Access Token",
+          "name": "accessToken",
+          "order": 0,
+          "privacy": "normal",
+          "type": "textbox"
+        },
+        {
+          "advanced": false,
+          "hidden": "hidden",
+          "isFloat": false,
+          "label": "Refresh Token",
+          "name": "refreshToken",
+          "order": 1,
+          "privacy": "normal",
+          "type": "textbox"
+        },
+        {
+          "advanced": false,
+          "hidden": "hidden",
+          "isFloat": false,
+          "label": "Expires",
+          "name": "expires",
+          "order": 2,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": "0001-01-01T00:00:00Z"
+        },
+        {
+          "advanced": false,
+          "hidden": "hidden",
+          "isFloat": false,
+          "label": "Auth User",
+          "name": "authUser",
+          "order": 3,
+          "privacy": "normal",
+          "type": "textbox"
+        },
+        {
+          "advanced": false,
+          "helpText": "Smart list slug, e.g. my-list-1a2b3c4d5e6f7a8b from https://app.trakt.tv/lists/smart/view/my-list-1a2b3c4d5e6f7a8b. The list must be public or yours",
+          "isFloat": false,
+          "label": "Smart List Slug",
+          "name": "smartListId",
+          "order": 4,
+          "privacy": "normal",
+          "type": "textbox"
+        },
+        {
+          "advanced": false,
+          "helpText": "Limit the number of movies to get",
+          "isFloat": false,
+          "label": "Limit",
+          "name": "limit",
+          "order": 5,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": 100
+        },
+        {
+          "advanced": false,
+          "isFloat": false,
+          "label": "Authenticate with Trakt",
+          "name": "signIn",
+          "order": 6,
+          "privacy": "normal",
+          "type": "oAuth",
+          "value": "startOAuth"
+        }
+      ],
+      "implementation": "TraktSmartListImport",
+      "implementationName": "Trakt Smart List",
+      "infoLink": "https://wiki.servarr.com/radarr/supported#traktsmartlistimport",
+      "listOrder": 2,
+      "listType": "trakt",
+      "minRefreshInterval": "12:00:00",
+      "minimumAvailability": "tba",
+      "monitor": "movieOnly",
+      "presets": [],
+      "qualityProfileId": 0,
+      "searchOnAdd": false,
+      "tags": []
+    },
+    {
       "configContract": "TraktUserSettings",
       "enableAuto": true,
       "enabled": false,
@@ -1809,7 +1907,7 @@
       "tags": []
     }
   ],
-  "recordedAt": "2026-11-13T13:34:06Z",
+  "recordedAt": "2026-11-23T17:57:10Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/importlist/schema"

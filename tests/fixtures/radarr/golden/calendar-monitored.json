@@ -101,9 +101,27 @@
           "audioCodec": "DTS-HD MA",
           "audioLanguages": "eng",
           "audioStreamCount": 1,
+          "audioStreams": [
+            {
+              "bitrate": 3310698,
+              "channelPositions": "5.1(side)",
+              "channels": 5.1,
+              "codec": "DTS-HD MA",
+              "language": "eng",
+              "profile": "DTS-HD MA"
+            }
+          ],
           "resolution": "1920x1080",
           "runTime": "1:36:58",
           "scanType": "Progressive",
+          "subtitleStreams": [
+            {
+              "language": "eng"
+            },
+            {
+              "language": "eng"
+            }
+          ],
           "subtitles": "eng/eng",
           "videoBitDepth": 8,
           "videoBitrate": 33626396,
@@ -323,9 +341,105 @@
           "audioCodec": "DTS-HD MA",
           "audioLanguages": "eng/eng/spa/fre/rus/eng",
           "audioStreamCount": 6,
+          "audioStreams": [
+            {
+              "bitrate": 3630693,
+              "channelPositions": "5.1(side)",
+              "channels": 5.1,
+              "codec": "DTS-HD MA",
+              "language": "eng",
+              "profile": "DTS-HD MA"
+            },
+            {
+              "bitrate": 0,
+              "channels": 0,
+              "codec": "",
+              "language": "eng"
+            },
+            {
+              "bitrate": 0,
+              "channels": 0,
+              "codec": "",
+              "language": "spa"
+            },
+            {
+              "bitrate": 0,
+              "channels": 0,
+              "codec": "",
+              "language": "fre"
+            },
+            {
+              "bitrate": 0,
+              "channels": 0,
+              "codec": "",
+              "language": "rus"
+            },
+            {
+              "bitrate": 0,
+              "channels": 0,
+              "codec": "",
+              "language": "eng"
+            }
+          ],
           "resolution": "1920x1080",
           "runTime": "2:01:54",
           "scanType": "Progressive",
+          "subtitleStreams": [
+            {
+              "language": "eng"
+            },
+            {
+              "language": "eng"
+            },
+            {
+              "language": "spa"
+            },
+            {
+              "language": "fre"
+            },
+            {
+              "language": "por"
+            },
+            {
+              "language": "por"
+            },
+            {
+              "language": "alb"
+            },
+            {
+              "language": "ara"
+            },
+            {
+              "language": "dan"
+            },
+            {
+              "language": "ger"
+            },
+            {
+              "language": "gre"
+            },
+            {
+              "language": "fin"
+            },
+            {
+              "language": "ind"
+            },
+            {
+              "language": "dut"
+            },
+            {
+              "language": "nor"
+            },
+            {
+              "language": "rus"
+            },
+            {
+              "language": "swe"
+            },
+            {
+              "language": "tur"
+            }
+          ],
           "subtitles": "eng/eng/spa/fre/por/por/alb/ara/dan/ger/gre/fin/ind/dut/nor/rus/swe/tur",
           "videoBitDepth": 8,
           "videoBitrate": 32008375,
@@ -524,9 +638,29 @@
           "audioCodec": "MP3",
           "audioLanguages": "ita/eng",
           "audioStreamCount": 2,
+          "audioStreams": [
+            {
+              "bitrate": 320000,
+              "channelPositions": "stereo",
+              "channels": 2,
+              "codec": "MP3",
+              "language": "ita"
+            },
+            {
+              "bitrate": 0,
+              "channels": 0,
+              "codec": "",
+              "language": "eng"
+            }
+          ],
           "resolution": "1920x960",
           "runTime": "1:35:03",
           "scanType": "Progressive",
+          "subtitleStreams": [
+            {
+              "language": "eng"
+            }
+          ],
           "subtitles": "eng",
           "videoBitDepth": 10,
           "videoBitrate": 2467456,
@@ -753,9 +887,38 @@
           "audioCodec": "AC3",
           "audioLanguages": "ita/eng",
           "audioStreamCount": 2,
+          "audioStreams": [
+            {
+              "bitrate": 448000,
+              "channelPositions": "5.1(side)",
+              "channels": 5.1,
+              "codec": "AC3",
+              "language": "ita"
+            },
+            {
+              "bitrate": 0,
+              "channels": 0,
+              "codec": "",
+              "language": "eng"
+            }
+          ],
           "resolution": "1920x800",
           "runTime": "1:44:59",
           "scanType": "Progressive",
+          "subtitleStreams": [
+            {
+              "language": "ita"
+            },
+            {
+              "language": "ita"
+            },
+            {
+              "language": "eng"
+            },
+            {
+              "language": "eng"
+            }
+          ],
           "subtitles": "ita/ita/eng/eng",
           "videoBitDepth": 8,
           "videoBitrate": 2859946,
@@ -840,7 +1003,7 @@
       "youTubeTrailerId": "UkMuGKqAux4"
     }
   ],
-  "recordedAt": "2026-11-12T14:19:13Z",
+  "recordedAt": "2026-11-23T17:44:18Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/calendar?start=2026-09-01T00:00:00Z&end=2026-09-30T00:00:00Z"

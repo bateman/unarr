@@ -5,17 +5,17 @@
       "downloadUrl": "/logfile/radarr.debug.txt",
       "filename": "radarr.debug.txt",
       "id": 2,
-      "lastWriteTime": "2026-11-12T14:19:06Z"
+      "lastWriteTime": "2026-11-23T17:44:12Z"
     },
     {
       "contentsUrl": "/api/v1//radarr.txt",
       "downloadUrl": "/logfile/radarr.txt",
       "filename": "radarr.txt",
       "id": 1,
-      "lastWriteTime": "2026-11-12T14:19:06Z"
+      "lastWriteTime": "2026-11-23T17:44:12Z"
     }
   ],
-  "recordedAt": "2026-11-12T14:19:06Z",
+  "recordedAt": "2026-11-23T17:44:12Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/log/file"

@@ -141,6 +141,11 @@
       "nameLower": "indonesian"
     },
     {
+      "id": 58,
+      "name": "Irish",
+      "nameLower": "irish"
+    },
+    {
       "id": 5,
       "name": "Italian",
       "nameLower": "italian"
@@ -301,7 +306,7 @@
       "nameLower": "vietnamese"
     }
   ],
-  "recordedAt": "2026-11-12T14:19:09Z",
+  "recordedAt": "2026-11-23T17:44:14Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/language"

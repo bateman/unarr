@@ -5,11 +5,11 @@
     "localPath": "/downloads/",
     "remotePath": "/remote/other/"
   },
-  "recordedAt": "2026-11-13T12:41:28Z",
+  "recordedAt": "2026-11-23T17:56:07Z",
   "request": {
     "body": "bodies/remotepathmapping-update.json",
     "method": "PUT",
     "path": "/api/v3/remotepathmapping/1"
   },
-  "status": 202
+  "status": 200
 }

@@ -20,7 +20,7 @@
           "sourcePath": "/movies/Backcountry (2015)/Backcountry.2015.1080p.BluRay.x264-GRP.mkv",
           "sourceRelativePath": "Backcountry.2015.1080p.BluRay.x264-GRP.mkv"
         },
-        "date": "2026-11-12T14:23:55Z",
+        "date": "2026-11-23T17:48:58Z",
         "eventType": "movieFileRenamed",
         "id": 1129,
         "languages": [
@@ -52,7 +52,7 @@
     "sortKey": "date",
     "totalRecords": 1
   },
-  "recordedAt": "2026-11-12T14:24:07Z",
+  "recordedAt": "2026-11-23T17:49:10Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/history?page=1&pageSize=5&sortKey=date&sortDirection=descending&eventType=8&includeMovie=false"

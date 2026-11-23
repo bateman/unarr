@@ -22,7 +22,7 @@
           "releaseGroup": "MeM",
           "size": "177860"
         },
-        "date": "2026-11-12T14:21:18Z",
+        "date": "2026-11-23T17:46:22Z",
         "downloadId": "SABnzbd_nzo_mock6",
         "eventType": "downloadFolderImported",
         "id": 1022,
@@ -173,7 +173,7 @@
           "releaseGroup": "MeM",
           "size": "119980"
         },
-        "date": "2026-11-12T14:21:06Z",
+        "date": "2026-11-23T17:46:10Z",
         "downloadId": "SABnzbd_nzo_mock7",
         "eventType": "downloadFolderImported",
         "id": 1021,
@@ -310,9 +310,9 @@
           }
         ],
         "data": {
-          "age": "2",
-          "ageHours": "52.34825040361111",
-          "ageMinutes": "3140.8950243066665",
+          "age": "13",
+          "ageHours": "319.7660948087778",
+          "ageMinutes": "19185.965688661665",
           "customFormatScore": "0",
           "downloadClient": "SABnzbd",
           "downloadClientName": "Mock SABnzbd",
@@ -331,7 +331,7 @@
           "size": "6979321856",
           "tmdbId": "0"
         },
-        "date": "2026-11-12T14:20:53Z",
+        "date": "2026-11-23T17:45:57Z",
         "downloadId": "SABnzbd_nzo_mock7",
         "eventType": "grabbed",
         "id": 1020,
@@ -472,9 +472,9 @@
           }
         ],
         "data": {
-          "age": "2",
-          "ageHours": "54.347696950916664",
-          "ageMinutes": "3260.8618172083334",
+          "age": "13",
+          "ageHours": "321.76554002791664",
+          "ageMinutes": "19305.93240180833",
           "customFormatScore": "0",
           "downloadClient": "SABnzbd",
           "downloadClientName": "Mock SABnzbd",
@@ -493,7 +493,7 @@
           "size": "7516192768",
           "tmdbId": "0"
         },
-        "date": "2026-11-12T14:20:51Z",
+        "date": "2026-11-23T17:45:55Z",
         "downloadId": "SABnzbd_nzo_mock6",
         "eventType": "grabbed",
         "id": 1019,
@@ -638,9 +638,9 @@
           }
         ],
         "data": {
-          "age": "3",
-          "ageHours": "87.66380775941667",
-          "ageMinutes": "5259.828465706667",
+          "age": "14",
+          "ageHours": "355.08165045752776",
+          "ageMinutes": "21304.89902758",
           "customFormatScore": "0",
           "downloadClient": "SABnzbd",
           "downloadClientName": "Mock SABnzbd",
@@ -659,7 +659,7 @@
           "size": "5153960755",
           "tmdbId": "0"
         },
-        "date": "2026-11-12T14:20:49Z",
+        "date": "2026-11-23T17:45:53Z",
         "downloadId": "SABnzbd_nzo_mock5",
         "eventType": "grabbed",
         "id": 1018,
@@ -805,7 +805,7 @@
           "releaseGroup": null,
           "size": "8740258447"
         },
-        "date": "2026-11-12T14:20:39Z",
+        "date": "2026-11-23T17:45:43Z",
         "downloadId": "932161398c8420b934b0d047c43b66b8d1337383",
         "eventType": "downloadFailed",
         "id": 1017,
@@ -867,7 +867,7 @@
             "time paradox",
             "time travel"
           ],
-          "lastSearchTime": "2026-11-12T14:20:41Z",
+          "lastSearchTime": "2026-11-23T17:45:45Z",
           "minimumAvailability": "released",
           "monitored": true,
           "movieFileId": 404,
@@ -946,9 +946,9 @@
         "customFormatScore": 0,
         "customFormats": [],
         "data": {
-          "age": "2",
-          "ageHours": "64.84158477394445",
-          "ageMinutes": "3890.4950865966666",
+          "age": "13",
+          "ageHours": "332.25941501983334",
+          "ageMinutes": "19935.564901306665",
           "customFormatScore": "0",
           "downloadClient": "Transmission",
           "downloadClientName": "Mock Transmission",
@@ -968,7 +968,7 @@
           "tmdbId": "0",
           "torrentInfoHash": "7e59b884110362736e39ead456edcbdac5ef0fe6"
         },
-        "date": "2026-11-12T14:20:29Z",
+        "date": "2026-11-23T17:45:33Z",
         "downloadId": "B133034E90669E52E3BA3460A651D3545769CB85",
         "eventType": "grabbed",
         "id": 1016,
@@ -1031,7 +1031,7 @@
             "winter",
             "winter break"
           ],
-          "lastSearchTime": "2026-11-12T14:20:27Z",
+          "lastSearchTime": "2026-11-23T17:45:31Z",
           "minimumAvailability": "released",
           "monitored": true,
           "movieFileId": 0,
@@ -1117,7 +1117,7 @@
           "releaseGroup": "MIRCrew",
           "size": "768000"
         },
-        "date": "2026-11-12T14:20:27Z",
+        "date": "2026-11-23T17:45:31Z",
         "downloadId": "SABnzbd_nzo_mock3",
         "eventType": "downloadFailed",
         "id": 1015,
@@ -1180,7 +1180,7 @@
             "winter",
             "winter break"
           ],
-          "lastSearchTime": "2026-11-12T14:20:27Z",
+          "lastSearchTime": "2026-11-23T17:45:31Z",
           "minimumAvailability": "released",
           "monitored": true,
           "movieFileId": 0,
@@ -1259,9 +1259,9 @@
         "customFormatScore": 0,
         "customFormats": [],
         "data": {
-          "age": "2",
-          "ageHours": "65.10038343466667",
-          "ageMinutes": "3906.0230062",
+          "age": "13",
+          "ageHours": "332.51823643613886",
+          "ageMinutes": "19951.094186331666",
           "customFormatScore": "0",
           "downloadClient": "SABnzbd",
           "downloadClientName": "Mock SABnzbd",
@@ -1280,7 +1280,7 @@
           "size": "7945689497",
           "tmdbId": "840430"
         },
-        "date": "2026-11-12T14:20:01Z",
+        "date": "2026-11-23T17:45:05Z",
         "downloadId": "SABnzbd_nzo_mock3",
         "eventType": "grabbed",
         "id": 1014,
@@ -1343,7 +1343,7 @@
             "winter",
             "winter break"
           ],
-          "lastSearchTime": "2026-11-12T14:20:27Z",
+          "lastSearchTime": "2026-11-23T17:45:31Z",
           "minimumAvailability": "released",
           "monitored": true,
           "movieFileId": 0,
@@ -1422,9 +1422,9 @@
         "customFormatScore": 0,
         "customFormats": [],
         "data": {
-          "age": "2",
-          "ageHours": "67.24704415894445",
-          "ageMinutes": "4034.8226496583334",
+          "age": "13",
+          "ageHours": "334.66489657513887",
+          "ageMinutes": "20079.893794656666",
           "customFormatScore": "0",
           "downloadClient": "qBittorrent",
           "downloadClientName": "Mock qBittorrent",
@@ -1444,7 +1444,7 @@
           "tmdbId": "0",
           "torrentInfoHash": "d0c1309e36cdb92c5d7b4abfd794f9bdff969920"
         },
-        "date": "2026-11-12T14:19:49Z",
+        "date": "2026-11-23T17:44:53Z",
         "downloadId": "13706ED57ADBE030F510BEDCD37595376901117C",
         "eventType": "grabbed",
         "id": 1013,
@@ -1586,7 +1586,7 @@
     "sortKey": "date",
     "totalRecords": 683
   },
-  "recordedAt": "2026-11-12T14:21:54Z",
+  "recordedAt": "2026-11-23T17:46:58Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/history?page=1&pageSize=10&sortKey=date&sortDirection=descending&includeMovie=true"

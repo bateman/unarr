@@ -27,7 +27,7 @@
       "severity": "error"
     }
   ],
-  "recordedAt": "2026-11-14T06:29:39Z",
+  "recordedAt": "2026-11-23T17:59:07Z",
   "request": {
     "body": "bodies/movie-add-path-dotted-bin.json",
     "method": "POST",

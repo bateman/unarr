@@ -25,7 +25,7 @@
       "wikiUrl": "https://wiki.servarr.com/radarr/system#indexers-are-unavailable-due-to-failures"
     }
   ],
-  "recordedAt": "2026-11-13T13:35:07Z",
+  "recordedAt": "2026-11-23T17:58:12Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/health"

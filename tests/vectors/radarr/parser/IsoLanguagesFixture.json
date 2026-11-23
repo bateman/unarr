@@ -220,6 +220,22 @@
      "ka-GE"
     ]
    ]
+  },
+  "should_return_irish": {
+   "params": [
+    "isoCode"
+   ],
+   "cases": [
+    [
+     "ga"
+    ],
+    [
+     "gle"
+    ],
+    [
+     "ga-IE"
+    ]
+   ]
   }
  }
 }

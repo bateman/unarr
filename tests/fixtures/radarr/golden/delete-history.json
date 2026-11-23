@@ -21,7 +21,7 @@
           "releaseGroup": "MIRCrew",
           "size": "1106640"
         },
-        "date": "2026-11-12T14:24:43Z",
+        "date": "2026-11-23T17:49:47Z",
         "eventType": "movieFileDeleted",
         "id": 1132,
         "languages": [
@@ -62,7 +62,7 @@
           "releaseGroup": "GRP",
           "size": "119980"
         },
-        "date": "2026-11-12T14:24:31Z",
+        "date": "2026-11-23T17:49:35Z",
         "eventType": "movieFileDeleted",
         "id": 1131,
         "languages": [
@@ -103,7 +103,7 @@
           "releaseGroup": "BLUWORLD",
           "size": "8735974490"
         },
-        "date": "2026-11-12T14:22:51Z",
+        "date": "2026-11-23T17:47:54Z",
         "eventType": "movieFileDeleted",
         "id": 1126,
         "languages": [
@@ -152,7 +152,7 @@
           "releaseGroup": null,
           "size": "2262743736"
         },
-        "date": "2026-11-12T14:22:51Z",
+        "date": "2026-11-23T17:47:54Z",
         "eventType": "movieFileDeleted",
         "id": 1125,
         "languages": [
@@ -197,7 +197,7 @@
           "releaseGroup": "BLUWORLD",
           "size": "24278085946"
         },
-        "date": "2026-11-12T14:22:51Z",
+        "date": "2026-11-23T17:47:54Z",
         "eventType": "movieFileDeleted",
         "id": 1124,
         "languages": [
@@ -245,7 +245,7 @@
     "sortKey": "date",
     "totalRecords": 270
   },
-  "recordedAt": "2026-11-12T14:24:55Z",
+  "recordedAt": "2026-11-23T17:49:59Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/history?page=1&pageSize=5&sortKey=date&sortDirection=descending&eventType=6&includeMovie=false"

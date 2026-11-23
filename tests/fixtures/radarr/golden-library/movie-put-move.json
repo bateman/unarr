@@ -1,6 +1,6 @@
 {
   "body": {
-    "added": "2026-11-13T12:38:48Z",
+    "added": "2026-11-23T17:53:26Z",
     "alternateTitles": [
       {
         "id": 2805,
@@ -174,7 +174,7 @@
     "minimumAvailability": "inCinemas",
     "monitored": false,
     "movieFile": {
-      "dateAdded": "2026-11-13T12:39:59Z",
+      "dateAdded": "2026-11-23T17:54:37Z",
       "edition": "",
       "id": 405,
       "indexerFlags": 0,
@@ -190,9 +190,27 @@
         "audioCodec": "AAC",
         "audioLanguages": "eng",
         "audioStreamCount": 1,
+        "audioStreams": [
+          {
+            "bitrate": 0,
+            "channelPositions": "mono",
+            "channels": 1,
+            "codec": "AAC",
+            "language": "eng",
+            "profile": "LC"
+          }
+        ],
         "resolution": "1920x1080",
         "runTime": "10:10",
         "scanType": "Progressive",
+        "subtitleStreams": [
+          {
+            "forced": false,
+            "format": "subrip",
+            "hearingImpaired": false,
+            "language": "eng"
+          }
+        ],
         "subtitles": "eng",
         "videoBitDepth": 8,
         "videoBitrate": 0,
@@ -202,6 +220,7 @@
         "videoFps": 1000
       },
       "movieId": 328,
+      "originalFilePath": "Dune (2021) {tmdb-438631}/Dune.2021.1080p.BluRay.x264-GRP.mkv",
       "path": "/movies/Dune Moved/Dune.2021.1080p.BluRay.x264-GRP.mkv",
       "quality": {
         "quality": {
@@ -295,7 +314,7 @@
     "year": 2021,
     "youTubeTrailerId": "w0HgHet0sxg"
   },
-  "recordedAt": "2026-11-13T12:40:10Z",
+  "recordedAt": "2026-11-23T17:54:48Z",
   "request": {
     "body": "bodies/movie-put-move.json",
     "method": "PUT",

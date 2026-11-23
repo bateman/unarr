@@ -17,7 +17,7 @@
           "releaseGroup": "BLUWORLD",
           "size": "8735974490"
         },
-        "date": "2026-11-12T14:22:51Z",
+        "date": "2026-11-23T17:47:54Z",
         "eventType": "movieFileDeleted",
         "id": 1126,
         "languages": [
@@ -66,7 +66,7 @@
           "releaseGroup": null,
           "size": "2262743736"
         },
-        "date": "2026-11-12T14:22:51Z",
+        "date": "2026-11-23T17:47:54Z",
         "eventType": "movieFileDeleted",
         "id": 1125,
         "languages": [
@@ -111,7 +111,7 @@
           "releaseGroup": "BLUWORLD",
           "size": "24278085946"
         },
-        "date": "2026-11-12T14:22:51Z",
+        "date": "2026-11-23T17:47:54Z",
         "eventType": "movieFileDeleted",
         "id": 1124,
         "languages": [
@@ -176,7 +176,7 @@
           "releaseGroup": "K0rS4R",
           "size": "1635395311"
         },
-        "date": "2026-11-12T14:22:51Z",
+        "date": "2026-11-23T17:47:54Z",
         "eventType": "movieFileDeleted",
         "id": 1123,
         "languages": [
@@ -216,7 +216,7 @@
           "releaseGroup": null,
           "size": "732430668"
         },
-        "date": "2026-11-12T14:22:51Z",
+        "date": "2026-11-23T17:47:54Z",
         "eventType": "movieFileDeleted",
         "id": 1122,
         "languages": [
@@ -261,7 +261,7 @@
           "releaseGroup": "Fratposa",
           "size": "8373383912"
         },
-        "date": "2026-11-12T14:22:51Z",
+        "date": "2026-11-23T17:47:54Z",
         "eventType": "movieFileDeleted",
         "id": 1121,
         "languages": [
@@ -310,7 +310,7 @@
           "releaseGroup": "WRaTh",
           "size": "1172289536"
         },
-        "date": "2026-11-12T14:22:51Z",
+        "date": "2026-11-23T17:47:54Z",
         "eventType": "movieFileDeleted",
         "id": 1120,
         "languages": [
@@ -346,7 +346,7 @@
           "releaseGroup": null,
           "size": "3066779018"
         },
-        "date": "2026-11-12T14:22:51Z",
+        "date": "2026-11-23T17:47:54Z",
         "eventType": "movieFileDeleted",
         "id": 1119,
         "languages": [
@@ -382,7 +382,7 @@
     "sortKey": "date",
     "totalRecords": 787
   },
-  "recordedAt": "2026-11-12T14:23:07Z",
+  "recordedAt": "2026-11-23T17:48:10Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/history?page=1&pageSize=8&sortKey=date&sortDirection=descending&includeMovie=false"

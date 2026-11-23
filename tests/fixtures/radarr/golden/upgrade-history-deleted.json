@@ -21,7 +21,7 @@
           "releaseGroup": "MeM",
           "size": "119980"
         },
-        "date": "2026-11-12T14:22:06Z",
+        "date": "2026-11-23T17:47:10Z",
         "eventType": "movieFileDeleted",
         "id": 1024,
         "languages": [
@@ -256,7 +256,7 @@
     "sortKey": "date",
     "totalRecords": 167
   },
-  "recordedAt": "2026-11-12T14:22:18Z",
+  "recordedAt": "2026-11-23T17:47:22Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/history?page=1&pageSize=5&sortKey=date&sortDirection=descending&eventType=6&includeMovie=false"

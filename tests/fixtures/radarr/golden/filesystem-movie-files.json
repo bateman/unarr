@@ -2,7 +2,7 @@
   "body": {
     "directories": [
       {
-        "lastModified": "2026-11-12T14:22:18Z",
+        "lastModified": "2026-11-23T17:47:22Z",
         "name": "Sample",
         "path": "/movies/Backcountry (2015)/Sample/",
         "size": 0,
@@ -12,7 +12,7 @@
     "files": [
       {
         "extension": ".mkv",
-        "lastModified": "2026-11-12T14:22:18Z",
+        "lastModified": "2026-11-23T17:47:22Z",
         "name": "Backcountry (2015) {tmdb-228973} - [Bluray-1080p][AAC 1.0][x264]-GRP.mkv",
         "path": "/movies/Backcountry (2015)/Backcountry (2015) {tmdb-228973} - [Bluray-1080p][AAC 1.0][x264]-GRP.mkv",
         "size": 1106640,
@@ -20,7 +20,7 @@
       },
       {
         "extension": ".srt",
-        "lastModified": "2026-11-12T14:22:18Z",
+        "lastModified": "2026-11-23T17:47:22Z",
         "name": "Backcountry.2015.1080p.BluRay.x264-GRP.en.srt",
         "path": "/movies/Backcountry (2015)/Backcountry.2015.1080p.BluRay.x264-GRP.en.srt",
         "size": 10347,
@@ -29,7 +29,7 @@
     ],
     "parent": "/movies/"
   },
-  "recordedAt": "2026-11-12T14:24:55Z",
+  "recordedAt": "2026-11-23T17:49:59Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/filesystem?path=/movies/Backcountry%20(2015)/&includeFiles=true&allowFoldersWithoutTrailingSlashes=false"

@@ -1,9 +1,9 @@
 {
   "body": [
     {
-      "age": 2,
-      "ageHours": 51.34772111991666,
-      "ageMinutes": 3080.8632672,
+      "age": 13,
+      "ageHours": 318.7655574446111,
+      "ageMinutes": 19125.9334467,
       "approved": false,
       "customFormatScore": 0,
       "customFormats": [
@@ -66,7 +66,7 @@
       "tmdbId": 0
     }
   ],
-  "recordedAt": "2026-11-12T14:20:51Z",
+  "recordedAt": "2026-11-23T17:45:56Z",
   "request": {
     "body": "bodies/release-push-delayed-fourth.json",
     "method": "POST",

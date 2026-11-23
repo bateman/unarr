@@ -1,10 +1,10 @@
 {
-  "body": {},
-  "recordedAt": "2026-11-13T13:34:14Z",
+  "body": null,
+  "recordedAt": "2026-11-23T17:57:18Z",
   "request": {
     "body": "bodies/importlist-test.json",
     "method": "POST",
     "path": "/api/v3/importlist/test"
   },
-  "status": 200
+  "status": 204
 }

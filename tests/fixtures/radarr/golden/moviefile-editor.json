@@ -12,7 +12,7 @@
           "name": "Language not Italian"
         }
       ],
-      "dateAdded": "2026-11-12T14:24:19Z",
+      "dateAdded": "2026-11-23T17:49:23Z",
       "edition": "Extended",
       "id": 411,
       "indexerFlags": 1,
@@ -28,9 +28,27 @@
         "audioCodec": "AAC",
         "audioLanguages": "eng",
         "audioStreamCount": 1,
+        "audioStreams": [
+          {
+            "bitrate": 0,
+            "channelPositions": "mono",
+            "channels": 1,
+            "codec": "AAC",
+            "language": "eng",
+            "profile": "LC"
+          }
+        ],
         "resolution": "64x64",
         "runTime": "10:10",
         "scanType": "Progressive",
+        "subtitleStreams": [
+          {
+            "forced": false,
+            "format": "subrip",
+            "hearingImpaired": false,
+            "language": "eng"
+          }
+        ],
         "subtitles": "eng",
         "videoBitDepth": 8,
         "videoBitrate": 0,
@@ -63,11 +81,11 @@
       "size": 119980
     }
   ],
-  "recordedAt": "2026-11-12T14:24:31Z",
+  "recordedAt": "2026-11-23T17:49:35Z",
   "request": {
     "body": "bodies/moviefile-editor.json",
     "method": "PUT",
     "path": "/api/v3/moviefile/editor"
   },
-  "status": 202
+  "status": 200
 }

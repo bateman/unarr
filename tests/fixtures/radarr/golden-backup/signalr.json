@@ -4,7 +4,7 @@
     "messages": [
       {
         "body": {
-          "version": "6.4.4.10685"
+          "version": "7.0.3.10918"
         },
         "name": "version"
       }
@@ -34,11 +34,11 @@
             "message": "Backing up database",
             "name": "Backup",
             "priority": "normal",
-            "queued": "2026-11-13T14:05:37Z",
+            "queued": "2026-11-23T17:50:45Z",
             "result": "unknown",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T14:05:37Z",
-            "stateChangeTime": "2026-11-13T14:05:37Z",
+            "started": "2026-11-23T17:50:45Z",
+            "stateChangeTime": "2026-11-23T17:50:45Z",
             "status": "started",
             "trigger": "manual",
             "updateScheduledTask": false
@@ -67,11 +67,11 @@
             "message": "Creating backup zip",
             "name": "Backup",
             "priority": "normal",
-            "queued": "2026-11-13T14:05:37Z",
+            "queued": "2026-11-23T17:50:45Z",
             "result": "unknown",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T14:05:37Z",
-            "stateChangeTime": "2026-11-13T14:05:37Z",
+            "started": "2026-11-23T17:50:45Z",
+            "stateChangeTime": "2026-11-23T17:50:45Z",
             "status": "started",
             "trigger": "manual",
             "updateScheduledTask": false
@@ -108,17 +108,17 @@
               "updateScheduledTask": false
             },
             "commandName": "Backup",
-            "duration": "00:00:01.7606999",
-            "ended": "2026-11-13T14:05:39Z",
+            "duration": "00:00:02.3003170",
+            "ended": "2026-11-23T17:50:47Z",
             "id": 472955,
             "message": "Backup zip created",
             "name": "Backup",
             "priority": "normal",
-            "queued": "2026-11-13T14:05:37Z",
+            "queued": "2026-11-23T17:50:45Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T14:05:37Z",
-            "stateChangeTime": "2026-11-13T14:05:37Z",
+            "started": "2026-11-23T17:50:45Z",
+            "stateChangeTime": "2026-11-23T17:50:45Z",
             "status": "completed",
             "trigger": "manual",
             "updateScheduledTask": false

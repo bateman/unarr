@@ -2,10 +2,10 @@
   "body": {
     "restartRequired": true
   },
-  "recordedAt": "2026-11-13T14:05:48Z",
+  "recordedAt": "2026-11-23T17:50:55Z",
   "request": {
     "method": "POST",
-    "path": "/api/v3/system/backup/restore/1453437342"
+    "path": "/api/v3/system/backup/restore/169613786"
   },
   "status": 200
 }

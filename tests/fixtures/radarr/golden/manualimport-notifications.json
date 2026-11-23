@@ -78,7 +78,7 @@
             "thumbnail": {
               "url": "https://image.tmdb.org/t/p/original/n1ZRmjlk1BJTY7aASqACfPAaLn2.jpg"
             },
-            "timestamp": "2026-11-12T14:24:19.5302336Z",
+            "timestamp": "2026-11-23T17:49:23.0629903Z",
             "title": "Last Night in Soho (2021)",
             "url": "https://www.themoviedb.org/movie/576845"
           }
@@ -98,7 +98,12 @@
         "applicationUrl": "",
         "customFormatInfo": {
           "customFormatScore": 0,
-          "customFormats": []
+          "customFormats": [
+            {
+              "id": 53,
+              "name": "AAC"
+            }
+          ]
         },
         "downloadClient": "Mock qBittorrent",
         "downloadClientType": "qBittorrent",
@@ -141,7 +146,7 @@
           "year": 2021
         },
         "movieFile": {
-          "dateAdded": "2026-11-12T14:24:19.497687Z",
+          "dateAdded": "2026-11-23T17:49:23.0287403Z",
           "id": 411,
           "indexerFlags": "G_Freeleech",
           "languages": [
@@ -215,7 +220,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685"
+        "X-Plex-Version": "7.0.3.10918"
       },
       "service": "plex"
     },
@@ -231,13 +236,13 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Last Night in Soho (2021)"
       },
       "service": "plex"
     }
   ],
-  "recordedAt": "2026-11-12T14:24:31Z",
+  "recordedAt": "2026-11-23T17:49:35Z",
   "request": {
     "method": "GET",
     "path": "/mock/notifications",

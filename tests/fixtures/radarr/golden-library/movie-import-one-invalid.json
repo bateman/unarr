@@ -7,7 +7,7 @@
       "severity": "error"
     }
   ],
-  "recordedAt": "2026-11-13T12:40:47Z",
+  "recordedAt": "2026-11-23T17:55:25Z",
   "request": {
     "body": "bodies/movie-import-one-invalid.json",
     "method": "POST",

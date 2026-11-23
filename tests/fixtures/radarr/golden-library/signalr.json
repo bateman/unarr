@@ -4,7 +4,7 @@
     "messages": [
       {
         "body": {
-          "version": "6.4.4.10685"
+          "version": "7.0.3.10918"
         },
         "name": "version"
       }
@@ -30,43 +30,6 @@
   {
     "after": "command-refresh-movie",
     "messages": [
-      {
-        "body": {
-          "action": "updated",
-          "resource": {
-            "body": {
-              "completionMessage": "Completed",
-              "isExclusive": false,
-              "isLongRunning": true,
-              "isNewMovie": false,
-              "isTypeExclusive": false,
-              "movieIds": [
-                116
-              ],
-              "name": "RefreshMovie",
-              "requiresDiskAccess": false,
-              "sendUpdatesToClient": true,
-              "suppressMessages": false,
-              "trigger": "manual",
-              "updateScheduledTask": false
-            },
-            "commandName": "Refresh Movie",
-            "id": 472955,
-            "message": "Updating info for The Holdovers",
-            "name": "RefreshMovie",
-            "priority": "normal",
-            "queued": "2026-11-13T12:38:03Z",
-            "result": "unknown",
-            "sendUpdatesToClient": true,
-            "started": "2026-11-13T12:38:03Z",
-            "stateChangeTime": "2026-11-13T12:38:03Z",
-            "status": "started",
-            "trigger": "manual",
-            "updateScheduledTask": false
-          }
-        },
-        "name": "command"
-      },
       {
         "body": {
           "action": "updated",
@@ -258,6 +221,43 @@
       },
       {
         "body": {
+          "action": "updated",
+          "resource": {
+            "body": {
+              "completionMessage": "Completed",
+              "isExclusive": false,
+              "isLongRunning": true,
+              "isNewMovie": false,
+              "isTypeExclusive": false,
+              "movieIds": [
+                116
+              ],
+              "name": "RefreshMovie",
+              "requiresDiskAccess": false,
+              "sendUpdatesToClient": true,
+              "suppressMessages": false,
+              "trigger": "manual",
+              "updateScheduledTask": false
+            },
+            "commandName": "Refresh Movie",
+            "id": 472955,
+            "message": "Updating info for The Holdovers",
+            "name": "RefreshMovie",
+            "priority": "normal",
+            "queued": "2026-11-23T17:52:41Z",
+            "result": "unknown",
+            "sendUpdatesToClient": true,
+            "started": "2026-11-23T17:52:41Z",
+            "stateChangeTime": "2026-11-23T17:52:41Z",
+            "status": "started",
+            "trigger": "manual",
+            "updateScheduledTask": false
+          }
+        },
+        "name": "command"
+      },
+      {
+        "body": {
           "action": "sync"
         },
         "name": "system/task"
@@ -283,17 +283,17 @@
               "updateScheduledTask": false
             },
             "commandName": "Refresh Movie",
-            "duration": "00:00:00.1766889",
-            "ended": "2026-11-13T12:38:03Z",
+            "duration": "00:00:00.1596657",
+            "ended": "2026-11-23T17:52:41Z",
             "id": 472955,
             "message": "Completed",
             "name": "RefreshMovie",
             "priority": "normal",
-            "queued": "2026-11-13T12:38:03Z",
+            "queued": "2026-11-23T17:52:41Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T12:38:03Z",
-            "stateChangeTime": "2026-11-13T12:38:03Z",
+            "started": "2026-11-23T17:52:41Z",
+            "stateChangeTime": "2026-11-23T17:52:41Z",
             "status": "completed",
             "trigger": "manual",
             "updateScheduledTask": false
@@ -619,9 +619,41 @@
                 "audioCodec": "EAC3",
                 "audioLanguages": "ita/ita/eng",
                 "audioStreamCount": 3,
+                "audioStreams": [
+                  {
+                    "bitrate": 640000,
+                    "channelPositions": "5.1(side)",
+                    "channels": 5.1,
+                    "codec": "EAC3",
+                    "language": "ita"
+                  },
+                  {
+                    "bitrate": 0,
+                    "channels": 0,
+                    "codec": "",
+                    "language": "ita"
+                  },
+                  {
+                    "bitrate": 0,
+                    "channels": 0,
+                    "codec": "",
+                    "language": "eng"
+                  }
+                ],
                 "resolution": "1920x1036",
                 "runTime": "1:54:17",
                 "scanType": "Progressive",
+                "subtitleStreams": [
+                  {
+                    "language": "ita"
+                  },
+                  {
+                    "language": "ita"
+                  },
+                  {
+                    "language": "eng"
+                  }
+                ],
                 "subtitles": "ita/ita/eng",
                 "videoBitDepth": 8,
                 "videoBitrate": 10942436,
@@ -889,6 +921,45 @@
           }
         },
         "name": "movie"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "body": {
+              "completionMessage": "Completed",
+              "isExclusive": false,
+              "isLongRunning": true,
+              "isNewMovie": false,
+              "isTypeExclusive": false,
+              "movieIds": [
+                5,
+                125,
+                186
+              ],
+              "name": "RefreshMovie",
+              "requiresDiskAccess": false,
+              "sendUpdatesToClient": true,
+              "suppressMessages": false,
+              "trigger": "manual",
+              "updateScheduledTask": false
+            },
+            "commandName": "Refresh Movie",
+            "id": 472956,
+            "message": "Scanning disk for Air",
+            "name": "RefreshMovie",
+            "priority": "normal",
+            "queued": "2026-11-23T17:53:01Z",
+            "result": "unknown",
+            "sendUpdatesToClient": true,
+            "started": "2026-11-23T17:53:01Z",
+            "stateChangeTime": "2026-11-23T17:53:01Z",
+            "status": "started",
+            "trigger": "manual",
+            "updateScheduledTask": false
+          }
+        },
+        "name": "command"
       },
       {
         "body": {
@@ -1390,45 +1461,6 @@
         "body": {
           "action": "updated",
           "resource": {
-            "body": {
-              "completionMessage": "Completed",
-              "isExclusive": false,
-              "isLongRunning": true,
-              "isNewMovie": false,
-              "isTypeExclusive": false,
-              "movieIds": [
-                5,
-                125,
-                186
-              ],
-              "name": "RefreshMovie",
-              "requiresDiskAccess": false,
-              "sendUpdatesToClient": true,
-              "suppressMessages": false,
-              "trigger": "manual",
-              "updateScheduledTask": false
-            },
-            "commandName": "Refresh Movie",
-            "id": 472956,
-            "message": "Scanning disk for Air",
-            "name": "RefreshMovie",
-            "priority": "normal",
-            "queued": "2026-11-13T12:38:23Z",
-            "result": "unknown",
-            "sendUpdatesToClient": true,
-            "started": "2026-11-13T12:38:23Z",
-            "stateChangeTime": "2026-11-13T12:38:23Z",
-            "status": "started",
-            "trigger": "manual",
-            "updateScheduledTask": false
-          }
-        },
-        "name": "command"
-      },
-      {
-        "body": {
-          "action": "updated",
-          "resource": {
             "added": "2026-03-07T09:12:06Z",
             "alternateTitles": [
               {
@@ -1703,7 +1735,7 @@
             ],
             "imdbId": "tt33764258",
             "inCinemas": "2026-07-15T00:00:00Z",
-            "isAvailable": false,
+            "isAvailable": true,
             "keywords": [
               "ancient",
               "ancient world",
@@ -1771,7 +1803,7 @@
               "releaseGroups": [],
               "sizeOnDisk": 0
             },
-            "status": "inCinemas",
+            "status": "released",
             "studio": "Universal Pictures",
             "tags": [],
             "title": "The Odyssey",
@@ -1865,45 +1897,6 @@
       },
       {
         "body": {
-          "action": "updated",
-          "resource": {
-            "body": {
-              "completionMessage": "Completed",
-              "isExclusive": false,
-              "isLongRunning": true,
-              "isNewMovie": false,
-              "isTypeExclusive": false,
-              "movieIds": [
-                5,
-                125,
-                186
-              ],
-              "name": "RefreshMovie",
-              "requiresDiskAccess": false,
-              "sendUpdatesToClient": true,
-              "suppressMessages": false,
-              "trigger": "manual",
-              "updateScheduledTask": false
-            },
-            "commandName": "Refresh Movie",
-            "id": 472956,
-            "message": "Updating info for The Great Beyond",
-            "name": "RefreshMovie",
-            "priority": "normal",
-            "queued": "2026-11-13T12:38:23Z",
-            "result": "unknown",
-            "sendUpdatesToClient": true,
-            "started": "2026-11-13T12:38:23Z",
-            "stateChangeTime": "2026-11-13T12:38:23Z",
-            "status": "started",
-            "trigger": "manual",
-            "updateScheduledTask": false
-          }
-        },
-        "name": "command"
-      },
-      {
-        "body": {
           "action": "sync"
         },
         "name": "system/task"
@@ -1931,17 +1924,17 @@
               "updateScheduledTask": false
             },
             "commandName": "Refresh Movie",
-            "duration": "00:00:00.2125094",
-            "ended": "2026-11-13T12:38:23Z",
+            "duration": "00:00:00.1902326",
+            "ended": "2026-11-23T17:53:01Z",
             "id": 472956,
             "message": "Completed",
             "name": "RefreshMovie",
             "priority": "normal",
-            "queued": "2026-11-13T12:38:23Z",
+            "queued": "2026-11-23T17:53:01Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T12:38:23Z",
-            "stateChangeTime": "2026-11-13T12:38:23Z",
+            "started": "2026-11-23T17:53:01Z",
+            "stateChangeTime": "2026-11-23T17:53:01Z",
             "status": "completed",
             "trigger": "manual",
             "updateScheduledTask": false
@@ -2065,7 +2058,7 @@
             ],
             "imdbId": "tt33764258",
             "inCinemas": "2026-07-15T00:00:00Z",
-            "isAvailable": false,
+            "isAvailable": true,
             "keywords": [
               "ancient",
               "ancient world",
@@ -2133,7 +2126,7 @@
               "releaseGroups": [],
               "sizeOnDisk": 0
             },
-            "status": "inCinemas",
+            "status": "released",
             "studio": "Universal Pictures",
             "tags": [],
             "title": "The Odyssey",
@@ -2168,7 +2161,7 @@
               "monitor": "movieOnly",
               "searchForMovie": false
             },
-            "added": "2026-11-13T12:38:48Z",
+            "added": "2026-11-23T17:53:26Z",
             "alternateTitles": [
               {
                 "id": 2805,
@@ -2297,12 +2290,12 @@
               {
                 "coverType": "poster",
                 "remoteUrl": "https://image.tmdb.org/t/p/original/v1tRXZ4JtD2Iv6fjkPvT4GiwslV.jpg",
-                "url": "/MediaCover/328/poster.jpg?h=bd15f9a27331fc78d4df"
+                "url": "/MediaCover/328/poster.jpg"
               },
               {
                 "coverType": "fanart",
                 "remoteUrl": "https://image.tmdb.org/t/p/original/qVgZu5BTx6pu4owCvVOm4zjTfOi.jpg",
-                "url": "/MediaCover/328/fanart.jpg?h=251f444906d2ce7ea00b"
+                "url": "/MediaCover/328/fanart.jpg"
               }
             ],
             "imdbId": "tt1160419",
@@ -2433,17 +2426,17 @@
               "updateScheduledTask": false
             },
             "commandName": "Refresh Movie",
-            "duration": "00:00:00.0424810",
-            "ended": "2026-11-13T12:38:48Z",
+            "duration": "00:00:00.0408705",
+            "ended": "2026-11-23T17:53:26Z",
             "id": 472957,
             "message": "Completed",
             "name": "RefreshMovie",
             "priority": "normal",
-            "queued": "2026-11-13T12:38:48Z",
+            "queued": "2026-11-23T17:53:26Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T12:38:48Z",
-            "stateChangeTime": "2026-11-13T12:38:48Z",
+            "started": "2026-11-23T17:53:26Z",
+            "stateChangeTime": "2026-11-23T17:53:26Z",
             "status": "completed",
             "trigger": "unspecified",
             "updateScheduledTask": false
@@ -2455,7 +2448,7 @@
         "body": {
           "action": "updated",
           "resource": {
-            "added": "2026-11-13T12:38:48Z",
+            "added": "2026-11-23T17:53:26Z",
             "alternateTitles": [
               {
                 "id": 2805,
@@ -2846,6 +2839,149 @@
         "body": {
           "action": "updated",
           "resource": {
+            "id": 77,
+            "images": [
+              {
+                "coverType": "poster",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/qTcATCpiFDcgY8snQIfS2j0bFP7.jpg"
+              },
+              {
+                "coverType": "fanart",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/li3buIx57ph3RX5XlbpMzJPewZ0.jpg"
+              }
+            ],
+            "minimumAvailability": "inCinemas",
+            "missingMovies": 1,
+            "monitored": true,
+            "movies": [
+              {
+                "cleanTitle": "bladerunner2049",
+                "folder": "Blade Runner 2049 (2017) {tmdb-335984}",
+                "genres": [
+                  "Science Fiction",
+                  "Drama"
+                ],
+                "images": [
+                  {
+                    "coverType": "poster",
+                    "remoteUrl": "https://image.tmdb.org/t/p/original/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg"
+                  },
+                  {
+                    "coverType": "fanart",
+                    "remoteUrl": "https://image.tmdb.org/t/p/original/gNdLJU9TxrpGx4dkZidjys3fyy0.jpg"
+                  }
+                ],
+                "imdbId": "tt1856101",
+                "isExcluded": false,
+                "isExisting": true,
+                "overview": "Thirty years after the events of the first film, a new blade runner, LAPD Officer K, unearths a long-buried secret that has the potential to plunge what's left of society into chaos. K's discovery leads him on a quest to find Rick Deckard, a former LAPD blade runner who has been missing for 30 years.",
+                "ratings": {
+                  "imdb": {
+                    "type": "user",
+                    "value": 8,
+                    "votes": 774962
+                  },
+                  "metacritic": {
+                    "type": "user",
+                    "value": 81,
+                    "votes": 0
+                  },
+                  "rottenTomatoes": {
+                    "type": "user",
+                    "value": 88,
+                    "votes": 0
+                  },
+                  "tmdb": {
+                    "type": "user",
+                    "value": 7.613,
+                    "votes": 15957
+                  },
+                  "trakt": {
+                    "type": "user",
+                    "value": 7.89062,
+                    "votes": 33371
+                  }
+                },
+                "runtime": 164,
+                "sortTitle": "blade runner 2049",
+                "status": "released",
+                "title": "Blade Runner 2049",
+                "tmdbId": 335984,
+                "year": 2017
+              },
+              {
+                "cleanTitle": "bladerunner",
+                "folder": "Blade Runner (1982) {tmdb-78}",
+                "genres": [
+                  "Science Fiction",
+                  "Drama",
+                  "Thriller"
+                ],
+                "images": [
+                  {
+                    "coverType": "poster",
+                    "remoteUrl": "https://image.tmdb.org/t/p/original/63N9uy8nd9j7Eog2axPQ8lbr3Wj.jpg"
+                  },
+                  {
+                    "coverType": "fanart",
+                    "remoteUrl": "https://image.tmdb.org/t/p/original/2spEHYDcyE9r9mS7AFEscfKVDzO.jpg"
+                  }
+                ],
+                "imdbId": "tt0083658",
+                "isExcluded": false,
+                "isExisting": false,
+                "overview": "In the smog-choked dystopian Los Angeles of 2019, blade runner Rick Deckard is called out of retirement to terminate a quartet of replicants who have escaped to Earth seeking their creator for a way to extend their short life spans.",
+                "ratings": {
+                  "imdb": {
+                    "type": "user",
+                    "value": 8.1,
+                    "votes": 895937
+                  },
+                  "metacritic": {
+                    "type": "user",
+                    "value": 84,
+                    "votes": 0
+                  },
+                  "rottenTomatoes": {
+                    "type": "user",
+                    "value": 89,
+                    "votes": 0
+                  },
+                  "tmdb": {
+                    "type": "user",
+                    "value": 7.9,
+                    "votes": 15590
+                  },
+                  "trakt": {
+                    "type": "user",
+                    "value": 7.97593,
+                    "votes": 25757
+                  }
+                },
+                "runtime": 118,
+                "sortTitle": "blade runner",
+                "status": "released",
+                "title": "Blade Runner",
+                "tmdbId": 78,
+                "year": 1982
+              }
+            ],
+            "overview": "An American neo-noir science-fiction film series set in a dystopian Los Angeles, depicting a future in which synthetic humans known as \"replicants\" are bio-engineered by the powerful Tyrell Corporation, to work on off-world colonies. Based on the novel ‘Do Androids Dream of Electric Sheep?’",
+            "qualityProfileId": 7,
+            "rootFolderPath": "/movies",
+            "searchOnAdd": true,
+            "sortTitle": "blade runner collection",
+            "tags": [],
+            "title": "Blade Runner Collection",
+            "tmdbId": 422837
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
             "addOptions": {
               "addMethod": "manual",
               "ignoreEpisodesWithFiles": false,
@@ -2853,7 +2989,7 @@
               "monitor": "movieAndCollection",
               "searchForMovie": true
             },
-            "added": "2026-11-13T12:39:08Z",
+            "added": "2026-11-23T17:53:46Z",
             "alternateTitles": [
               {
                 "id": 2823,
@@ -2934,12 +3070,12 @@
               {
                 "coverType": "poster",
                 "remoteUrl": "https://image.tmdb.org/t/p/original/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg",
-                "url": "/MediaCover/329/poster.jpg?h=ad244719f1b6472728d2"
+                "url": "/MediaCover/329/poster.jpg"
               },
               {
                 "coverType": "fanart",
                 "remoteUrl": "https://image.tmdb.org/t/p/original/gNdLJU9TxrpGx4dkZidjys3fyy0.jpg",
-                "url": "/MediaCover/329/fanart.jpg?h=d6597a53a04564e4d049"
+                "url": "/MediaCover/329/fanart.jpg"
               }
             ],
             "imdbId": "tt1856101",
@@ -3175,155 +3311,6 @@
         "body": {
           "action": "updated",
           "resource": {
-            "id": 77,
-            "images": [
-              {
-                "coverType": "poster",
-                "remoteUrl": "https://image.tmdb.org/t/p/original/qTcATCpiFDcgY8snQIfS2j0bFP7.jpg"
-              },
-              {
-                "coverType": "fanart",
-                "remoteUrl": "https://image.tmdb.org/t/p/original/li3buIx57ph3RX5XlbpMzJPewZ0.jpg"
-              }
-            ],
-            "minimumAvailability": "inCinemas",
-            "missingMovies": 1,
-            "monitored": true,
-            "movies": [
-              {
-                "cleanTitle": "bladerunner2049",
-                "folder": "Blade Runner 2049 (2017) {tmdb-335984}",
-                "genres": [
-                  "Science Fiction",
-                  "Drama"
-                ],
-                "images": [
-                  {
-                    "coverType": "poster",
-                    "remoteUrl": "https://image.tmdb.org/t/p/original/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg"
-                  },
-                  {
-                    "coverType": "fanart",
-                    "remoteUrl": "https://image.tmdb.org/t/p/original/gNdLJU9TxrpGx4dkZidjys3fyy0.jpg"
-                  }
-                ],
-                "imdbId": "tt1856101",
-                "isExcluded": false,
-                "isExisting": true,
-                "overview": "Thirty years after the events of the first film, a new blade runner, LAPD Officer K, unearths a long-buried secret that has the potential to plunge what's left of society into chaos. K's discovery leads him on a quest to find Rick Deckard, a former LAPD blade runner who has been missing for 30 years.",
-                "ratings": {
-                  "imdb": {
-                    "type": "user",
-                    "value": 8,
-                    "votes": 775743
-                  },
-                  "metacritic": {
-                    "type": "user",
-                    "value": 81,
-                    "votes": 0
-                  },
-                  "rottenTomatoes": {
-                    "type": "user",
-                    "value": 88,
-                    "votes": 0
-                  },
-                  "tmdb": {
-                    "type": "user",
-                    "value": 7.614,
-                    "votes": 16009
-                  },
-                  "trakt": {
-                    "type": "user",
-                    "value": 7.89062,
-                    "votes": 33371
-                  }
-                },
-                "runtime": 164,
-                "sortTitle": "blade runner 2049",
-                "status": "released",
-                "title": "Blade Runner 2049",
-                "tmdbId": 335984,
-                "year": 2017
-              },
-              {
-                "cleanTitle": "bladerunner",
-                "folder": "Blade Runner (1982) {tmdb-78}",
-                "genres": [
-                  "Science Fiction",
-                  "Drama",
-                  "Thriller"
-                ],
-                "images": [
-                  {
-                    "coverType": "poster",
-                    "remoteUrl": "https://image.tmdb.org/t/p/original/63N9uy8nd9j7Eog2axPQ8lbr3Wj.jpg"
-                  },
-                  {
-                    "coverType": "fanart",
-                    "remoteUrl": "https://image.tmdb.org/t/p/original/2spEHYDcyE9r9mS7AFEscfKVDzO.jpg"
-                  }
-                ],
-                "imdbId": "tt0083658",
-                "isExcluded": false,
-                "isExisting": false,
-                "overview": "In the smog-choked dystopian Los Angeles of 2019, blade runner Rick Deckard is called out of retirement to terminate a quartet of replicants who have escaped to Earth seeking their creator for a way to extend their short life spans.",
-                "ratings": {
-                  "imdb": {
-                    "type": "user",
-                    "value": 8.1,
-                    "votes": 895937
-                  },
-                  "metacritic": {
-                    "type": "user",
-                    "value": 84,
-                    "votes": 0
-                  },
-                  "rottenTomatoes": {
-                    "type": "user",
-                    "value": 89,
-                    "votes": 0
-                  },
-                  "tmdb": {
-                    "type": "user",
-                    "value": 7.9,
-                    "votes": 15590
-                  },
-                  "trakt": {
-                    "type": "user",
-                    "value": 7.97593,
-                    "votes": 25757
-                  }
-                },
-                "runtime": 118,
-                "sortTitle": "blade runner",
-                "status": "released",
-                "title": "Blade Runner",
-                "tmdbId": 78,
-                "year": 1982
-              }
-            ],
-            "overview": "An American neo-noir science-fiction film series set in a dystopian Los Angeles, depicting a future in which synthetic humans known as \"replicants\" are bio-engineered by the powerful Tyrell Corporation, to work on off-world colonies. Based on the novel ‘Do Androids Dream of Electric Sheep?’",
-            "qualityProfileId": 7,
-            "rootFolderPath": "/movies",
-            "searchOnAdd": true,
-            "sortTitle": "blade runner collection",
-            "tags": [],
-            "title": "Blade Runner Collection",
-            "tmdbId": 422837
-          }
-        },
-        "name": "collection"
-      },
-      {
-        "body": {
-          "action": "sync"
-        },
-        "name": "system/task"
-      },
-      {
-        "body": {
-          "action": "updated",
-          "resource": {
             "body": {
               "completionMessage": "Completed",
               "isExclusive": false,
@@ -3341,17 +3328,17 @@
               "updateScheduledTask": false
             },
             "commandName": "Refresh Movie",
-            "duration": "00:00:00.0973366",
-            "ended": "2026-11-13T12:39:08Z",
+            "duration": "00:00:00.0988419",
+            "ended": "2026-11-23T17:53:46Z",
             "id": 472960,
             "message": "Completed",
             "name": "RefreshMovie",
             "priority": "normal",
-            "queued": "2026-11-13T12:39:08Z",
+            "queued": "2026-11-23T17:53:46Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T12:39:08Z",
-            "stateChangeTime": "2026-11-13T12:39:08Z",
+            "started": "2026-11-23T17:53:46Z",
+            "stateChangeTime": "2026-11-23T17:53:46Z",
             "status": "completed",
             "trigger": "unspecified",
             "updateScheduledTask": false
@@ -3383,11 +3370,11 @@
             "message": "Updating info for Blade Runner Collection",
             "name": "RefreshCollections",
             "priority": "normal",
-            "queued": "2026-11-13T12:39:08Z",
+            "queued": "2026-11-23T17:53:46Z",
             "result": "unknown",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T12:39:08Z",
-            "stateChangeTime": "2026-11-13T12:39:08Z",
+            "started": "2026-11-23T17:53:46Z",
+            "stateChangeTime": "2026-11-23T17:53:46Z",
             "status": "started",
             "trigger": "unspecified",
             "updateScheduledTask": false
@@ -3418,11 +3405,11 @@
             "message": "Performing search for 1 movies",
             "name": "MoviesSearch",
             "priority": "normal",
-            "queued": "2026-11-13T12:39:08Z",
+            "queued": "2026-11-23T17:53:46Z",
             "result": "unknown",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T12:39:08Z",
-            "stateChangeTime": "2026-11-13T12:39:08Z",
+            "started": "2026-11-23T17:53:46Z",
+            "stateChangeTime": "2026-11-23T17:53:46Z",
             "status": "started",
             "trigger": "unspecified",
             "updateScheduledTask": true
@@ -3440,7 +3427,7 @@
         "body": {
           "action": "updated",
           "resource": {
-            "added": "2026-11-13T12:39:08Z",
+            "added": "2026-11-23T17:53:46Z",
             "alternateTitles": [
               {
                 "id": 2823,
@@ -3617,6 +3604,12 @@
       },
       {
         "body": {
+          "action": "sync"
+        },
+        "name": "system/task"
+      },
+      {
+        "body": {
           "action": "updated",
           "resource": {
             "addOptions": {
@@ -3626,7 +3619,7 @@
               "monitor": "movieOnly",
               "searchForMovie": true
             },
-            "added": "2026-11-13T12:39:08Z",
+            "added": "2026-11-23T17:53:46Z",
             "alternateTitles": [
               {
                 "id": 2833,
@@ -3780,12 +3773,12 @@
               {
                 "coverType": "poster",
                 "remoteUrl": "https://image.tmdb.org/t/p/original/63N9uy8nd9j7Eog2axPQ8lbr3Wj.jpg",
-                "url": "/MediaCover/330/poster.jpg?h=260418fed1f1d6039c6b"
+                "url": "/MediaCover/330/poster.jpg"
               },
               {
                 "coverType": "fanart",
                 "remoteUrl": "https://image.tmdb.org/t/p/original/2spEHYDcyE9r9mS7AFEscfKVDzO.jpg",
-                "url": "/MediaCover/330/fanart.jpg?h=0b4de9684d06011cd0b4"
+                "url": "/MediaCover/330/fanart.jpg"
               }
             ],
             "imdbId": "tt0083658",
@@ -3894,7 +3887,7 @@
         "body": {
           "action": "updated",
           "resource": {
-            "added": "2026-11-13T12:39:08Z",
+            "added": "2026-11-23T17:53:46Z",
             "alternateTitles": [
               {
                 "id": 2833,
@@ -4157,41 +4150,6 @@
           "action": "updated",
           "resource": {
             "body": {
-              "isExclusive": false,
-              "isLongRunning": false,
-              "isTypeExclusive": false,
-              "movieIds": [
-                329
-              ],
-              "name": "MoviesSearch",
-              "requiresDiskAccess": false,
-              "sendUpdatesToClient": true,
-              "suppressMessages": false,
-              "trigger": "unspecified",
-              "updateScheduledTask": true
-            },
-            "commandName": "Movies Search",
-            "id": 472962,
-            "message": "Searching indexers for [Blade Runner 2049]. 12 active indexers",
-            "name": "MoviesSearch",
-            "priority": "normal",
-            "queued": "2026-11-13T12:39:08Z",
-            "result": "unknown",
-            "sendUpdatesToClient": true,
-            "started": "2026-11-13T12:39:08Z",
-            "stateChangeTime": "2026-11-13T12:39:08Z",
-            "status": "started",
-            "trigger": "unspecified",
-            "updateScheduledTask": true
-          }
-        },
-        "name": "command"
-      },
-      {
-        "body": {
-          "action": "updated",
-          "resource": {
-            "body": {
               "completionMessage": "Completed",
               "isExclusive": false,
               "isLongRunning": true,
@@ -4208,17 +4166,17 @@
               "updateScheduledTask": false
             },
             "commandName": "Refresh Movie",
-            "duration": "00:00:00.0480191",
-            "ended": "2026-11-13T12:39:08Z",
+            "duration": "00:00:00.0592391",
+            "ended": "2026-11-23T17:53:46Z",
             "id": 472963,
             "message": "Completed",
             "name": "RefreshMovie",
             "priority": "normal",
-            "queued": "2026-11-13T12:39:08Z",
+            "queued": "2026-11-23T17:53:46Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T12:39:08Z",
-            "stateChangeTime": "2026-11-13T12:39:08Z",
+            "started": "2026-11-23T17:53:46Z",
+            "stateChangeTime": "2026-11-23T17:53:46Z",
             "status": "completed",
             "trigger": "unspecified",
             "updateScheduledTask": false
@@ -4246,20 +4204,55 @@
               "updateScheduledTask": false
             },
             "commandName": "Refresh Collections",
-            "duration": "00:00:00.0773058",
-            "ended": "2026-11-13T12:39:08Z",
+            "duration": "00:00:00.0908261",
+            "ended": "2026-11-23T17:53:46Z",
             "id": 472961,
             "message": "Completed",
             "name": "RefreshCollections",
             "priority": "normal",
-            "queued": "2026-11-13T12:39:08Z",
+            "queued": "2026-11-23T17:53:46Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T12:39:08Z",
-            "stateChangeTime": "2026-11-13T12:39:08Z",
+            "started": "2026-11-23T17:53:46Z",
+            "stateChangeTime": "2026-11-23T17:53:46Z",
             "status": "completed",
             "trigger": "unspecified",
             "updateScheduledTask": false
+          }
+        },
+        "name": "command"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "body": {
+              "isExclusive": false,
+              "isLongRunning": false,
+              "isTypeExclusive": false,
+              "movieIds": [
+                329
+              ],
+              "name": "MoviesSearch",
+              "requiresDiskAccess": false,
+              "sendUpdatesToClient": true,
+              "suppressMessages": false,
+              "trigger": "unspecified",
+              "updateScheduledTask": true
+            },
+            "commandName": "Movies Search",
+            "id": 472962,
+            "message": "Searching indexers for [Blade Runner 2049]. 12 active indexers",
+            "name": "MoviesSearch",
+            "priority": "normal",
+            "queued": "2026-11-23T17:53:46Z",
+            "result": "unknown",
+            "sendUpdatesToClient": true,
+            "started": "2026-11-23T17:53:46Z",
+            "stateChangeTime": "2026-11-23T17:53:46Z",
+            "status": "started",
+            "trigger": "unspecified",
+            "updateScheduledTask": true
           }
         },
         "name": "command"
@@ -4287,11 +4280,11 @@
             "message": "Searching indexers for [Blade Runner]. 10 active indexers",
             "name": "MoviesSearch",
             "priority": "normal",
-            "queued": "2026-11-13T12:39:08Z",
+            "queued": "2026-11-23T17:53:46Z",
             "result": "unknown",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T12:39:08Z",
-            "stateChangeTime": "2026-11-13T12:39:08Z",
+            "started": "2026-11-23T17:53:46Z",
+            "stateChangeTime": "2026-11-23T17:53:46Z",
             "status": "started",
             "trigger": "unspecified",
             "updateScheduledTask": true
@@ -4320,7 +4313,7 @@
               "isLongRunning": false,
               "isTypeExclusive": false,
               "movieIds": [
-                330
+                329
               ],
               "name": "MoviesSearch",
               "requiresDiskAccess": false,
@@ -4330,17 +4323,17 @@
               "updateScheduledTask": true
             },
             "commandName": "Movies Search",
-            "duration": "00:00:00.1590551",
-            "ended": "2026-11-13T12:39:08Z",
-            "id": 472964,
+            "duration": "00:00:00.2336897",
+            "ended": "2026-11-23T17:53:46Z",
+            "id": 472962,
             "message": "Completed search for 1 movies. 0 reports downloaded.",
             "name": "MoviesSearch",
             "priority": "normal",
-            "queued": "2026-11-13T12:39:08Z",
+            "queued": "2026-11-23T17:53:46Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T12:39:08Z",
-            "stateChangeTime": "2026-11-13T12:39:08Z",
+            "started": "2026-11-23T17:53:46Z",
+            "stateChangeTime": "2026-11-23T17:53:46Z",
             "status": "completed",
             "trigger": "unspecified",
             "updateScheduledTask": true
@@ -4357,7 +4350,7 @@
               "isLongRunning": false,
               "isTypeExclusive": false,
               "movieIds": [
-                329
+                330
               ],
               "name": "MoviesSearch",
               "requiresDiskAccess": false,
@@ -4367,17 +4360,17 @@
               "updateScheduledTask": true
             },
             "commandName": "Movies Search",
-            "duration": "00:00:00.2291050",
-            "ended": "2026-11-13T12:39:08Z",
-            "id": 472962,
+            "duration": "00:00:00.1404063",
+            "ended": "2026-11-23T17:53:46Z",
+            "id": 472964,
             "message": "Completed search for 1 movies. 0 reports downloaded.",
             "name": "MoviesSearch",
             "priority": "normal",
-            "queued": "2026-11-13T12:39:08Z",
+            "queued": "2026-11-23T17:53:46Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T12:39:08Z",
-            "stateChangeTime": "2026-11-13T12:39:08Z",
+            "started": "2026-11-23T17:53:46Z",
+            "stateChangeTime": "2026-11-23T17:53:46Z",
             "status": "completed",
             "trigger": "unspecified",
             "updateScheduledTask": true
@@ -4407,7 +4400,7 @@
               "monitor": "none",
               "searchForMovie": false
             },
-            "added": "2026-11-13T12:39:38Z",
+            "added": "2026-11-23T17:54:16Z",
             "alternateTitles": [
               {
                 "id": 2855,
@@ -4479,12 +4472,12 @@
               {
                 "coverType": "poster",
                 "remoteUrl": "https://image.tmdb.org/t/p/original/7fn624j5lj3xTme2SgiLCeuedmO.jpg",
-                "url": "/MediaCover/331/poster.jpg?h=dc3230e5e17521242510"
+                "url": "/MediaCover/331/poster.jpg"
               },
               {
                 "coverType": "fanart",
                 "remoteUrl": "https://image.tmdb.org/t/p/original/fRGxZuo7jJUWQsVg9PREb98Aclp.jpg",
-                "url": "/MediaCover/331/fanart.jpg?h=1408d3155874e8e4bb8b"
+                "url": "/MediaCover/331/fanart.jpg"
               }
             ],
             "imdbId": "tt2582802",
@@ -4588,7 +4581,7 @@
         "body": {
           "action": "updated",
           "resource": {
-            "added": "2026-11-13T12:39:38Z",
+            "added": "2026-11-23T17:54:16Z",
             "alternateTitles": [
               {
                 "id": 2855,
@@ -4780,17 +4773,17 @@
               "updateScheduledTask": false
             },
             "commandName": "Refresh Movie",
-            "duration": "00:00:00.0354115",
-            "ended": "2026-11-13T12:39:38Z",
+            "duration": "00:00:00.0297435",
+            "ended": "2026-11-23T17:54:16Z",
             "id": 472965,
             "message": "Completed",
             "name": "RefreshMovie",
             "priority": "normal",
-            "queued": "2026-11-13T12:39:38Z",
+            "queued": "2026-11-23T17:54:16Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T12:39:38Z",
-            "stateChangeTime": "2026-11-13T12:39:38Z",
+            "started": "2026-11-23T17:54:16Z",
+            "stateChangeTime": "2026-11-23T17:54:16Z",
             "status": "completed",
             "trigger": "unspecified",
             "updateScheduledTask": false
@@ -4813,7 +4806,7 @@
         "body": {
           "action": "updated",
           "resource": {
-            "added": "2026-11-13T12:38:48Z",
+            "added": "2026-11-23T17:53:26Z",
             "alternateTitles": [
               {
                 "id": 2805,
@@ -5056,7 +5049,7 @@
         "body": {
           "action": "updated",
           "resource": {
-            "added": "2026-11-13T12:38:48Z",
+            "added": "2026-11-23T17:53:26Z",
             "alternateTitles": [
               {
                 "id": 2805,
@@ -5321,11 +5314,11 @@
             "message": "Scanning disk for Dune",
             "name": "RescanMovie",
             "priority": "normal",
-            "queued": "2026-11-13T12:39:58Z",
+            "queued": "2026-11-23T17:54:36Z",
             "result": "unknown",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T12:39:58Z",
-            "stateChangeTime": "2026-11-13T12:39:58Z",
+            "started": "2026-11-23T17:54:36Z",
+            "stateChangeTime": "2026-11-23T17:54:36Z",
             "status": "started",
             "trigger": "manual",
             "updateScheduledTask": true
@@ -5344,7 +5337,7 @@
                 "name": "Language not Italian"
               }
             ],
-            "dateAdded": "2026-11-13T12:39:59Z",
+            "dateAdded": "2026-11-23T17:54:37Z",
             "edition": "",
             "id": 405,
             "indexerFlags": 0,
@@ -5360,9 +5353,27 @@
               "audioCodec": "AAC",
               "audioLanguages": "eng",
               "audioStreamCount": 1,
+              "audioStreams": [
+                {
+                  "bitrate": 0,
+                  "channelPositions": "mono",
+                  "channels": 1,
+                  "codec": "AAC",
+                  "language": "eng",
+                  "profile": "LC"
+                }
+              ],
               "resolution": "1920x1080",
               "runTime": "10:10",
               "scanType": "Progressive",
+              "subtitleStreams": [
+                {
+                  "forced": false,
+                  "format": "subrip",
+                  "hearingImpaired": false,
+                  "language": "eng"
+                }
+              ],
               "subtitles": "eng",
               "videoBitDepth": 8,
               "videoBitrate": 0,
@@ -5372,6 +5383,7 @@
               "videoFps": 1000
             },
             "movieId": 328,
+            "originalFilePath": "Dune (2021) {tmdb-438631}/Dune.2021.1080p.BluRay.x264-GRP.mkv",
             "path": "/movies/Dune (2021) {tmdb-438631}/Dune.2021.1080p.BluRay.x264-GRP.mkv",
             "quality": {
               "quality": {
@@ -5399,7 +5411,7 @@
         "body": {
           "action": "updated",
           "resource": {
-            "added": "2026-11-13T12:38:48Z",
+            "added": "2026-11-23T17:53:26Z",
             "alternateTitles": [
               {
                 "id": 2805,
@@ -5580,7 +5592,7 @@
                   "name": "Language not Italian"
                 }
               ],
-              "dateAdded": "2026-11-13T12:39:59Z",
+              "dateAdded": "2026-11-23T17:54:37Z",
               "edition": "",
               "id": 405,
               "indexerFlags": 0,
@@ -5596,9 +5608,27 @@
                 "audioCodec": "AAC",
                 "audioLanguages": "eng",
                 "audioStreamCount": 1,
+                "audioStreams": [
+                  {
+                    "bitrate": 0,
+                    "channelPositions": "mono",
+                    "channels": 1,
+                    "codec": "AAC",
+                    "language": "eng",
+                    "profile": "LC"
+                  }
+                ],
                 "resolution": "1920x1080",
                 "runTime": "10:10",
                 "scanType": "Progressive",
+                "subtitleStreams": [
+                  {
+                    "forced": false,
+                    "format": "subrip",
+                    "hearingImpaired": false,
+                    "language": "eng"
+                  }
+                ],
                 "subtitles": "eng",
                 "videoBitDepth": 8,
                 "videoBitrate": 0,
@@ -5608,6 +5638,7 @@
                 "videoFps": 1000
               },
               "movieId": 328,
+              "originalFilePath": "Dune (2021) {tmdb-438631}/Dune.2021.1080p.BluRay.x264-GRP.mkv",
               "path": "/movies/Dune (2021) {tmdb-438631}/Dune.2021.1080p.BluRay.x264-GRP.mkv",
               "quality": {
                 "quality": {
@@ -5707,7 +5738,7 @@
         "body": {
           "action": "updated",
           "resource": {
-            "added": "2026-11-13T12:38:48Z",
+            "added": "2026-11-23T17:53:26Z",
             "alternateTitles": [
               {
                 "id": 2805,
@@ -5888,7 +5919,7 @@
                   "name": "Language not Italian"
                 }
               ],
-              "dateAdded": "2026-11-13T12:39:59Z",
+              "dateAdded": "2026-11-23T17:54:37Z",
               "edition": "",
               "id": 405,
               "indexerFlags": 0,
@@ -5904,9 +5935,27 @@
                 "audioCodec": "AAC",
                 "audioLanguages": "eng",
                 "audioStreamCount": 1,
+                "audioStreams": [
+                  {
+                    "bitrate": 0,
+                    "channelPositions": "mono",
+                    "channels": 1,
+                    "codec": "AAC",
+                    "language": "eng",
+                    "profile": "LC"
+                  }
+                ],
                 "resolution": "1920x1080",
                 "runTime": "10:10",
                 "scanType": "Progressive",
+                "subtitleStreams": [
+                  {
+                    "forced": false,
+                    "format": "subrip",
+                    "hearingImpaired": false,
+                    "language": "eng"
+                  }
+                ],
                 "subtitles": "eng",
                 "videoBitDepth": 8,
                 "videoBitrate": 0,
@@ -5916,6 +5965,7 @@
                 "videoFps": 1000
               },
               "movieId": 328,
+              "originalFilePath": "Dune (2021) {tmdb-438631}/Dune.2021.1080p.BluRay.x264-GRP.mkv",
               "path": "/movies/Dune (2021) {tmdb-438631}/Dune.2021.1080p.BluRay.x264-GRP.mkv",
               "quality": {
                 "quality": {
@@ -6015,7 +6065,7 @@
         "body": {
           "action": "updated",
           "resource": {
-            "added": "2026-11-13T12:38:48Z",
+            "added": "2026-11-23T17:53:26Z",
             "alternateTitles": [
               {
                 "id": 2805,
@@ -6196,7 +6246,7 @@
                   "name": "Language not Italian"
                 }
               ],
-              "dateAdded": "2026-11-13T12:39:59Z",
+              "dateAdded": "2026-11-23T17:54:37Z",
               "edition": "",
               "id": 405,
               "indexerFlags": 0,
@@ -6212,9 +6262,27 @@
                 "audioCodec": "AAC",
                 "audioLanguages": "eng",
                 "audioStreamCount": 1,
+                "audioStreams": [
+                  {
+                    "bitrate": 0,
+                    "channelPositions": "mono",
+                    "channels": 1,
+                    "codec": "AAC",
+                    "language": "eng",
+                    "profile": "LC"
+                  }
+                ],
                 "resolution": "1920x1080",
                 "runTime": "10:10",
                 "scanType": "Progressive",
+                "subtitleStreams": [
+                  {
+                    "forced": false,
+                    "format": "subrip",
+                    "hearingImpaired": false,
+                    "language": "eng"
+                  }
+                ],
                 "subtitles": "eng",
                 "videoBitDepth": 8,
                 "videoBitrate": 0,
@@ -6224,6 +6292,7 @@
                 "videoFps": 1000
               },
               "movieId": 328,
+              "originalFilePath": "Dune (2021) {tmdb-438631}/Dune.2021.1080p.BluRay.x264-GRP.mkv",
               "path": "/movies/Dune (2021) {tmdb-438631}/Dune.2021.1080p.BluRay.x264-GRP.mkv",
               "quality": {
                 "quality": {
@@ -6342,41 +6411,23 @@
               "updateScheduledTask": true
             },
             "commandName": "Rescan Movie",
-            "duration": "00:00:00.6126436",
-            "ended": "2026-11-13T12:39:59Z",
+            "duration": "00:00:00.7418519",
+            "ended": "2026-11-23T17:54:37Z",
             "id": 472966,
             "message": "Scanning disk for Dune",
             "name": "RescanMovie",
             "priority": "normal",
-            "queued": "2026-11-13T12:39:58Z",
+            "queued": "2026-11-23T17:54:36Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T12:39:58Z",
-            "stateChangeTime": "2026-11-13T12:39:58Z",
+            "started": "2026-11-23T17:54:36Z",
+            "stateChangeTime": "2026-11-23T17:54:36Z",
             "status": "completed",
             "trigger": "manual",
             "updateScheduledTask": true
           }
         },
         "name": "command"
-      },
-      {
-        "body": {
-          "action": "sync"
-        },
-        "name": "health"
-      },
-      {
-        "body": {
-          "action": "sync"
-        },
-        "name": "queue"
-      },
-      {
-        "body": {
-          "action": "sync"
-        },
-        "name": "queue/details"
       },
       {
         "body": {
@@ -6395,6 +6446,18 @@
           "action": "sync"
         },
         "name": "system/task"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "queue"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "queue/details"
       },
       {
         "body": {
@@ -6432,7 +6495,7 @@
         "body": {
           "action": "updated",
           "resource": {
-            "added": "2026-11-13T12:38:48Z",
+            "added": "2026-11-23T17:53:26Z",
             "alternateTitles": [
               {
                 "id": 2805,
@@ -6606,7 +6669,7 @@
             "minimumAvailability": "inCinemas",
             "monitored": false,
             "movieFile": {
-              "dateAdded": "2026-11-13T12:39:59Z",
+              "dateAdded": "2026-11-23T17:54:37Z",
               "edition": "",
               "id": 405,
               "indexerFlags": 0,
@@ -6622,9 +6685,27 @@
                 "audioCodec": "AAC",
                 "audioLanguages": "eng",
                 "audioStreamCount": 1,
+                "audioStreams": [
+                  {
+                    "bitrate": 0,
+                    "channelPositions": "mono",
+                    "channels": 1,
+                    "codec": "AAC",
+                    "language": "eng",
+                    "profile": "LC"
+                  }
+                ],
                 "resolution": "1920x1080",
                 "runTime": "10:10",
                 "scanType": "Progressive",
+                "subtitleStreams": [
+                  {
+                    "forced": false,
+                    "format": "subrip",
+                    "hearingImpaired": false,
+                    "language": "eng"
+                  }
+                ],
                 "subtitles": "eng",
                 "videoBitDepth": 8,
                 "videoBitrate": 0,
@@ -6634,6 +6715,7 @@
                 "videoFps": 1000
               },
               "movieId": 328,
+              "originalFilePath": "Dune (2021) {tmdb-438631}/Dune.2021.1080p.BluRay.x264-GRP.mkv",
               "path": "/movies/Dune Moved/Dune.2021.1080p.BluRay.x264-GRP.mkv",
               "quality": {
                 "quality": {
@@ -6734,7 +6816,7 @@
         "body": {
           "action": "updated",
           "resource": {
-            "added": "2026-11-13T12:38:48Z",
+            "added": "2026-11-23T17:53:26Z",
             "alternateTitles": [
               {
                 "id": 2805,
@@ -6908,7 +6990,7 @@
             "minimumAvailability": "inCinemas",
             "monitored": false,
             "movieFile": {
-              "dateAdded": "2026-11-13T12:39:59Z",
+              "dateAdded": "2026-11-23T17:54:37Z",
               "edition": "",
               "id": 405,
               "indexerFlags": 0,
@@ -6924,9 +7006,27 @@
                 "audioCodec": "AAC",
                 "audioLanguages": "eng",
                 "audioStreamCount": 1,
+                "audioStreams": [
+                  {
+                    "bitrate": 0,
+                    "channelPositions": "mono",
+                    "channels": 1,
+                    "codec": "AAC",
+                    "language": "eng",
+                    "profile": "LC"
+                  }
+                ],
                 "resolution": "1920x1080",
                 "runTime": "10:10",
                 "scanType": "Progressive",
+                "subtitleStreams": [
+                  {
+                    "forced": false,
+                    "format": "subrip",
+                    "hearingImpaired": false,
+                    "language": "eng"
+                  }
+                ],
                 "subtitles": "eng",
                 "videoBitDepth": 8,
                 "videoBitrate": 0,
@@ -6936,6 +7036,7 @@
                 "videoFps": 1000
               },
               "movieId": 328,
+              "originalFilePath": "Dune (2021) {tmdb-438631}/Dune.2021.1080p.BluRay.x264-GRP.mkv",
               "path": "/movies/Dune Moved/Dune.2021.1080p.BluRay.x264-GRP.mkv",
               "quality": {
                 "quality": {
@@ -7057,17 +7158,17 @@
               "updateScheduledTask": true
             },
             "commandName": "Move Movie",
-            "duration": "00:00:00.0128252",
-            "ended": "2026-11-13T12:40:10Z",
+            "duration": "00:00:00.0193690",
+            "ended": "2026-11-23T17:54:48Z",
             "id": 472969,
             "message": "Dune moved successfully to /movies/Dune Moved",
             "name": "MoveMovie",
             "priority": "normal",
-            "queued": "2026-11-13T12:40:10Z",
+            "queued": "2026-11-23T17:54:48Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T12:40:10Z",
-            "stateChangeTime": "2026-11-13T12:40:10Z",
+            "started": "2026-11-23T17:54:48Z",
+            "stateChangeTime": "2026-11-23T17:54:48Z",
             "status": "completed",
             "trigger": "manual",
             "updateScheduledTask": true
@@ -7090,7 +7191,7 @@
         "body": {
           "action": "updated",
           "resource": {
-            "added": "2026-11-13T12:39:38Z",
+            "added": "2026-11-23T17:54:16Z",
             "alternateTitles": [
               {
                 "id": 2855,
@@ -7265,7 +7366,7 @@
         "body": {
           "action": "updated",
           "resource": {
-            "added": "2026-11-13T12:39:38Z",
+            "added": "2026-11-23T17:54:16Z",
             "alternateTitles": [
               {
                 "id": 2855,
@@ -7445,7 +7546,7 @@
         "body": {
           "action": "updated",
           "resource": {
-            "added": "2026-11-13T12:38:48Z",
+            "added": "2026-11-23T17:53:26Z",
             "alternateTitles": [
               {
                 "id": 2805,
@@ -7619,7 +7720,7 @@
             "minimumAvailability": "released",
             "monitored": true,
             "movieFile": {
-              "dateAdded": "2026-11-13T12:39:59Z",
+              "dateAdded": "2026-11-23T17:54:37Z",
               "edition": "",
               "id": 405,
               "indexerFlags": 0,
@@ -7635,9 +7736,27 @@
                 "audioCodec": "AAC",
                 "audioLanguages": "eng",
                 "audioStreamCount": 1,
+                "audioStreams": [
+                  {
+                    "bitrate": 0,
+                    "channelPositions": "mono",
+                    "channels": 1,
+                    "codec": "AAC",
+                    "language": "eng",
+                    "profile": "LC"
+                  }
+                ],
                 "resolution": "1920x1080",
                 "runTime": "10:10",
                 "scanType": "Progressive",
+                "subtitleStreams": [
+                  {
+                    "forced": false,
+                    "format": "subrip",
+                    "hearingImpaired": false,
+                    "language": "eng"
+                  }
+                ],
                 "subtitles": "eng",
                 "videoBitDepth": 8,
                 "videoBitrate": 0,
@@ -7647,6 +7766,7 @@
                 "videoFps": 1000
               },
               "movieId": 328,
+              "originalFilePath": "Dune (2021) {tmdb-438631}/Dune.2021.1080p.BluRay.x264-GRP.mkv",
               "path": "/movies/Dune Moved/Dune.2021.1080p.BluRay.x264-GRP.mkv",
               "quality": {
                 "quality": {
@@ -7748,7 +7868,7 @@
         "body": {
           "action": "updated",
           "resource": {
-            "added": "2026-11-13T12:39:38Z",
+            "added": "2026-11-23T17:54:16Z",
             "alternateTitles": [
               {
                 "id": 2855,
@@ -7930,7 +8050,7 @@
         "body": {
           "action": "updated",
           "resource": {
-            "added": "2026-11-13T12:38:48Z",
+            "added": "2026-11-23T17:53:26Z",
             "alternateTitles": [
               {
                 "id": 2805,
@@ -8104,7 +8224,7 @@
             "minimumAvailability": "released",
             "monitored": true,
             "movieFile": {
-              "dateAdded": "2026-11-13T12:39:59Z",
+              "dateAdded": "2026-11-23T17:54:37Z",
               "edition": "",
               "id": 405,
               "indexerFlags": 0,
@@ -8120,9 +8240,27 @@
                 "audioCodec": "AAC",
                 "audioLanguages": "eng",
                 "audioStreamCount": 1,
+                "audioStreams": [
+                  {
+                    "bitrate": 0,
+                    "channelPositions": "mono",
+                    "channels": 1,
+                    "codec": "AAC",
+                    "language": "eng",
+                    "profile": "LC"
+                  }
+                ],
                 "resolution": "1920x1080",
                 "runTime": "10:10",
                 "scanType": "Progressive",
+                "subtitleStreams": [
+                  {
+                    "forced": false,
+                    "format": "subrip",
+                    "hearingImpaired": false,
+                    "language": "eng"
+                  }
+                ],
                 "subtitles": "eng",
                 "videoBitDepth": 8,
                 "videoBitrate": 0,
@@ -8132,6 +8270,7 @@
                 "videoFps": 1000
               },
               "movieId": 328,
+              "originalFilePath": "Dune (2021) {tmdb-438631}/Dune.2021.1080p.BluRay.x264-GRP.mkv",
               "path": "/movies/Dune Moved/Dune.2021.1080p.BluRay.x264-GRP.mkv",
               "quality": {
                 "quality": {
@@ -8231,7 +8370,7 @@
         "body": {
           "action": "updated",
           "resource": {
-            "added": "2026-11-13T12:39:38Z",
+            "added": "2026-11-23T17:54:16Z",
             "alternateTitles": [
               {
                 "id": 2855,
@@ -8413,7 +8552,7 @@
         "body": {
           "action": "updated",
           "resource": {
-            "added": "2026-11-13T12:38:48Z",
+            "added": "2026-11-23T17:53:26Z",
             "alternateTitles": [
               {
                 "id": 2805,
@@ -8587,7 +8726,7 @@
             "minimumAvailability": "released",
             "monitored": true,
             "movieFile": {
-              "dateAdded": "2026-11-13T12:39:59Z",
+              "dateAdded": "2026-11-23T17:54:37Z",
               "edition": "",
               "id": 405,
               "indexerFlags": 0,
@@ -8603,9 +8742,27 @@
                 "audioCodec": "AAC",
                 "audioLanguages": "eng",
                 "audioStreamCount": 1,
+                "audioStreams": [
+                  {
+                    "bitrate": 0,
+                    "channelPositions": "mono",
+                    "channels": 1,
+                    "codec": "AAC",
+                    "language": "eng",
+                    "profile": "LC"
+                  }
+                ],
                 "resolution": "1920x1080",
                 "runTime": "10:10",
                 "scanType": "Progressive",
+                "subtitleStreams": [
+                  {
+                    "forced": false,
+                    "format": "subrip",
+                    "hearingImpaired": false,
+                    "language": "eng"
+                  }
+                ],
                 "subtitles": "eng",
                 "videoBitDepth": 8,
                 "videoBitrate": 0,
@@ -8615,6 +8772,7 @@
                 "videoFps": 1000
               },
               "movieId": 328,
+              "originalFilePath": "Dune (2021) {tmdb-438631}/Dune.2021.1080p.BluRay.x264-GRP.mkv",
               "path": "/movies/Dune Moved/Dune.2021.1080p.BluRay.x264-GRP.mkv",
               "quality": {
                 "quality": {
@@ -8717,7 +8875,7 @@
         "body": {
           "action": "updated",
           "resource": {
-            "added": "2026-11-13T12:38:48Z",
+            "added": "2026-11-23T17:53:26Z",
             "alternateTitles": [
               {
                 "id": 2805,
@@ -8891,7 +9049,7 @@
             "minimumAvailability": "released",
             "monitored": true,
             "movieFile": {
-              "dateAdded": "2026-11-13T12:39:59Z",
+              "dateAdded": "2026-11-23T17:54:37Z",
               "edition": "",
               "id": 405,
               "indexerFlags": 0,
@@ -8907,9 +9065,27 @@
                 "audioCodec": "AAC",
                 "audioLanguages": "eng",
                 "audioStreamCount": 1,
+                "audioStreams": [
+                  {
+                    "bitrate": 0,
+                    "channelPositions": "mono",
+                    "channels": 1,
+                    "codec": "AAC",
+                    "language": "eng",
+                    "profile": "LC"
+                  }
+                ],
                 "resolution": "1920x1080",
                 "runTime": "10:10",
                 "scanType": "Progressive",
+                "subtitleStreams": [
+                  {
+                    "forced": false,
+                    "format": "subrip",
+                    "hearingImpaired": false,
+                    "language": "eng"
+                  }
+                ],
                 "subtitles": "eng",
                 "videoBitDepth": 8,
                 "videoBitrate": 0,
@@ -8919,6 +9095,7 @@
                 "videoFps": 1000
               },
               "movieId": 328,
+              "originalFilePath": "Dune (2021) {tmdb-438631}/Dune.2021.1080p.BluRay.x264-GRP.mkv",
               "path": "/movies/Dune (2021) {tmdb-438631}/Dune.2021.1080p.BluRay.x264-GRP.mkv",
               "quality": {
                 "quality": {
@@ -9016,7 +9193,7 @@
         "body": {
           "action": "updated",
           "resource": {
-            "added": "2026-11-13T12:39:38Z",
+            "added": "2026-11-23T17:54:16Z",
             "alternateTitles": [
               {
                 "id": 2855,
@@ -9222,17 +9399,17 @@
               "updateScheduledTask": true
             },
             "commandName": "Bulk Move Movie",
-            "duration": "00:00:00.0101195",
-            "ended": "2026-11-13T12:40:20Z",
+            "duration": "00:00:00.0176187",
+            "ended": "2026-11-23T17:54:59Z",
             "id": 472970,
             "message": "Finished moving 2 movies to '/movies'",
             "name": "BulkMoveMovie",
             "priority": "normal",
-            "queued": "2026-11-13T12:40:20Z",
+            "queued": "2026-11-23T17:54:59Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T12:40:20Z",
-            "stateChangeTime": "2026-11-13T12:40:20Z",
+            "started": "2026-11-23T17:54:59Z",
+            "stateChangeTime": "2026-11-23T17:54:59Z",
             "status": "completed",
             "trigger": "unspecified",
             "updateScheduledTask": true
@@ -9255,7 +9432,7 @@
         "body": {
           "action": "updated",
           "resource": {
-            "added": "2026-11-13T12:39:38Z",
+            "added": "2026-11-23T17:54:16Z",
             "alternateTitles": [
               {
                 "id": 2855,
@@ -9547,228 +9724,10 @@
               "addMethod": "manual",
               "ignoreEpisodesWithFiles": false,
               "ignoreEpisodesWithoutFiles": false,
-              "monitor": "movieOnly",
-              "searchForMovie": false
-            },
-            "added": "2026-11-13T12:40:47Z",
-            "alternateTitles": [
-              {
-                "id": 2864,
-                "movieMetadataId": 522,
-                "sourceType": "tmdb",
-                "title": "致命魔术"
-              },
-              {
-                "id": 2865,
-                "movieMetadataId": 522,
-                "sourceType": "tmdb",
-                "title": "Престиж"
-              },
-              {
-                "id": 2866,
-                "movieMetadataId": 522,
-                "sourceType": "tmdb",
-                "title": "El Truco Final (El Prestigio)"
-              },
-              {
-                "id": 2867,
-                "movieMetadataId": 522,
-                "sourceType": "tmdb",
-                "title": "Prestiż"
-              },
-              {
-                "id": 2868,
-                "movieMetadataId": 522,
-                "sourceType": "tmdb",
-                "title": "El Truco Final"
-              },
-              {
-                "id": 2869,
-                "movieMetadataId": 522,
-                "sourceType": "tmdb",
-                "title": "프레스티지"
-              },
-              {
-                "id": 2870,
-                "movieMetadataId": 522,
-                "sourceType": "tmdb",
-                "title": "プレステージ"
-              },
-              {
-                "id": 2871,
-                "movieMetadataId": 522,
-                "sourceType": "tmdb",
-                "title": "حیثیت"
-              },
-              {
-                "id": 2872,
-                "movieMetadataId": 522,
-                "sourceType": "tmdb",
-                "title": "O Grande Truque"
-              },
-              {
-                "id": 2873,
-                "movieMetadataId": 522,
-                "sourceType": "tmdb",
-                "title": "O Terceiro Passo"
-              },
-              {
-                "id": 2874,
-                "movieMetadataId": 522,
-                "sourceType": "tmdb",
-                "title": "Prestij"
-              },
-              {
-                "id": 2875,
-                "movieMetadataId": 522,
-                "sourceType": "tmdb",
-                "title": "A tökéletes trükk"
-              },
-              {
-                "id": 2876,
-                "movieMetadataId": 522,
-                "sourceType": "tmdb",
-                "title": "Ảo Thuật Gia Đấu Trí"
-              }
-            ],
-            "certification": "PG-13",
-            "cleanTitle": "theprestige",
-            "digitalRelease": "2009-09-01T00:00:00Z",
-            "folderName": "/movies/The Prestige (2006)",
-            "genres": [
-              "Drama",
-              "Mystery",
-              "Science Fiction"
-            ],
-            "hasFile": false,
-            "id": 332,
-            "images": [
-              {
-                "coverType": "poster",
-                "remoteUrl": "https://image.tmdb.org/t/p/original/Ag2B2KHKQPukjH7WutmgnnSNurZ.jpg",
-                "url": "/MediaCover/332/poster.jpg?h=cb6c8ba0aeaf56c924d7"
-              },
-              {
-                "coverType": "fanart",
-                "remoteUrl": "https://image.tmdb.org/t/p/original/yaExZh6qE2cfyK3o4kAMEq0mkgy.jpg",
-                "url": "/MediaCover/332/fanart.jpg?h=598403f8ae73bb3898bf"
-              }
-            ],
-            "imdbId": "tt0482571",
-            "inCinemas": "2006-10-19T00:00:00Z",
-            "isAvailable": true,
-            "keywords": [
-              "19th century",
-              "based on novel or book",
-              "bittersweet",
-              "class",
-              "class society",
-              "competition",
-              "cruelty",
-              "diary",
-              "dying and death",
-              "hanging",
-              "hostility",
-              "illusion",
-              "jail cell",
-              "london, england",
-              "magic",
-              "magician",
-              "mind-blowing",
-              "nikola tesla",
-              "obsession",
-              "partner",
-              "rivalry",
-              "secret",
-              "steampunk",
-              "suicide",
-              "tesla coil",
-              "tricks",
-              "twist"
-            ],
-            "minimumAvailability": "released",
-            "monitored": true,
-            "movieFileId": 0,
-            "originalLanguage": {
-              "id": 1,
-              "name": "English"
-            },
-            "originalTitle": "The Prestige",
-            "overview": "A mysterious story of two magicians whose intense rivalry leads them on a life-long battle for supremacy -- full of obsession, deceit and jealousy with dangerous and deadly consequences.",
-            "path": "/movies/The Prestige (2006)",
-            "physicalRelease": "2007-06-06T00:00:00Z",
-            "popularity": 18.951,
-            "qualityProfileId": 4,
-            "ratings": {
-              "imdb": {
-                "type": "user",
-                "value": 8.5,
-                "votes": 1640237
-              },
-              "metacritic": {
-                "type": "user",
-                "value": 66,
-                "votes": 0
-              },
-              "rottenTomatoes": {
-                "type": "user",
-                "value": 77,
-                "votes": 0
-              },
-              "tmdb": {
-                "type": "user",
-                "value": 8.212,
-                "votes": 18448
-              },
-              "trakt": {
-                "type": "user",
-                "value": 8.46334,
-                "votes": 30755
-              }
-            },
-            "releaseDate": "2007-06-06T00:00:00Z",
-            "rootFolderPath": "/movies",
-            "runtime": 131,
-            "secondaryYearSourceId": 0,
-            "sizeOnDisk": 0,
-            "sortTitle": "prestige",
-            "statistics": {
-              "movieFileCount": 0,
-              "movieFileQualities": [],
-              "releaseGroups": [],
-              "sizeOnDisk": 0
-            },
-            "status": "released",
-            "studio": "Warner Bros. Pictures",
-            "tags": [],
-            "title": "The Prestige",
-            "titleSlug": "1124",
-            "tmdbId": 1124,
-            "website": "https://www.warnerbros.co.uk/movies/prestige",
-            "year": 2006,
-            "youTubeTrailerId": "ObGVA1WOqyE"
-          }
-        },
-        "name": "movie"
-      },
-      {
-        "body": {
-          "action": "sync"
-        },
-        "name": "system/task"
-      },
-      {
-        "body": {
-          "action": "updated",
-          "resource": {
-            "addOptions": {
-              "addMethod": "manual",
-              "ignoreEpisodesWithFiles": false,
-              "ignoreEpisodesWithoutFiles": false,
               "monitor": "none",
               "searchForMovie": false
             },
-            "added": "2026-11-13T12:40:47Z",
+            "added": "2026-11-23T17:55:25Z",
             "alternateTitles": [
               {
                 "id": 2877,
@@ -9858,12 +9817,12 @@
               {
                 "coverType": "poster",
                 "remoteUrl": "https://image.tmdb.org/t/p/original/kZ2nZw8D681aphje8NJi8EfbL1U.jpg",
-                "url": "/MediaCover/333/poster.jpg?h=4bec224bff500bb8e466"
+                "url": "/MediaCover/333/poster.jpg"
               },
               {
                 "coverType": "fanart",
                 "remoteUrl": "https://image.tmdb.org/t/p/original/a2n6bKD7qhCPCAEALgsAhWOAQcc.jpg",
-                "url": "/MediaCover/333/fanart.jpg?h=b5ed21e051629541b0fd"
+                "url": "/MediaCover/333/fanart.jpg"
               }
             ],
             "imdbId": "tt1454468",
@@ -9954,7 +9913,14 @@
         "body": {
           "action": "updated",
           "resource": {
-            "added": "2026-11-13T12:40:47Z",
+            "addOptions": {
+              "addMethod": "manual",
+              "ignoreEpisodesWithFiles": false,
+              "ignoreEpisodesWithoutFiles": false,
+              "monitor": "movieOnly",
+              "searchForMovie": false
+            },
+            "added": "2026-11-23T17:55:25Z",
             "alternateTitles": [
               {
                 "id": 2864,
@@ -10050,12 +10016,12 @@
               {
                 "coverType": "poster",
                 "remoteUrl": "https://image.tmdb.org/t/p/original/Ag2B2KHKQPukjH7WutmgnnSNurZ.jpg",
-                "url": "/MediaCover/332/poster.jpg?h=cb6c8ba0aeaf56c924d7"
+                "url": "/MediaCover/332/poster.jpg"
               },
               {
                 "coverType": "fanart",
                 "remoteUrl": "https://image.tmdb.org/t/p/original/yaExZh6qE2cfyK3o4kAMEq0mkgy.jpg",
-                "url": "/MediaCover/332/fanart.jpg?h=598403f8ae73bb3898bf"
+                "url": "/MediaCover/332/fanart.jpg"
               }
             ],
             "imdbId": "tt0482571",
@@ -10157,9 +10123,15 @@
       },
       {
         "body": {
+          "action": "sync"
+        },
+        "name": "system/task"
+      },
+      {
+        "body": {
           "action": "updated",
           "resource": {
-            "added": "2026-11-13T12:40:47Z",
+            "added": "2026-11-23T17:55:25Z",
             "alternateTitles": [
               {
                 "id": 2877,
@@ -10356,17 +10328,17 @@
               "updateScheduledTask": false
             },
             "commandName": "Refresh Movie",
-            "duration": "00:00:00.0295972",
-            "ended": "2026-11-13T12:40:47Z",
+            "duration": "00:00:00.0644683",
+            "ended": "2026-11-23T17:55:25Z",
             "id": 472971,
             "message": "Completed",
             "name": "RefreshMovie",
             "priority": "normal",
-            "queued": "2026-11-13T12:40:47Z",
+            "queued": "2026-11-23T17:55:25Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T12:40:47Z",
-            "stateChangeTime": "2026-11-13T12:40:47Z",
+            "started": "2026-11-23T17:55:25Z",
+            "stateChangeTime": "2026-11-23T17:55:25Z",
             "status": "completed",
             "trigger": "unspecified",
             "updateScheduledTask": false
@@ -10395,23 +10367,228 @@
               "updateScheduledTask": false
             },
             "commandName": "Refresh Movie",
-            "duration": "00:00:00.0368978",
-            "ended": "2026-11-13T12:40:47Z",
+            "duration": "00:00:00.0357060",
+            "ended": "2026-11-23T17:55:25Z",
             "id": 472972,
             "message": "Completed",
             "name": "RefreshMovie",
             "priority": "normal",
-            "queued": "2026-11-13T12:40:47Z",
+            "queued": "2026-11-23T17:55:25Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T12:40:47Z",
-            "stateChangeTime": "2026-11-13T12:40:47Z",
+            "started": "2026-11-23T17:55:25Z",
+            "stateChangeTime": "2026-11-23T17:55:25Z",
             "status": "completed",
             "trigger": "unspecified",
             "updateScheduledTask": false
           }
         },
         "name": "command"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "added": "2026-11-23T17:55:25Z",
+            "alternateTitles": [
+              {
+                "id": 2864,
+                "movieMetadataId": 522,
+                "sourceType": "tmdb",
+                "title": "致命魔术"
+              },
+              {
+                "id": 2865,
+                "movieMetadataId": 522,
+                "sourceType": "tmdb",
+                "title": "Престиж"
+              },
+              {
+                "id": 2866,
+                "movieMetadataId": 522,
+                "sourceType": "tmdb",
+                "title": "El Truco Final (El Prestigio)"
+              },
+              {
+                "id": 2867,
+                "movieMetadataId": 522,
+                "sourceType": "tmdb",
+                "title": "Prestiż"
+              },
+              {
+                "id": 2868,
+                "movieMetadataId": 522,
+                "sourceType": "tmdb",
+                "title": "El Truco Final"
+              },
+              {
+                "id": 2869,
+                "movieMetadataId": 522,
+                "sourceType": "tmdb",
+                "title": "프레스티지"
+              },
+              {
+                "id": 2870,
+                "movieMetadataId": 522,
+                "sourceType": "tmdb",
+                "title": "プレステージ"
+              },
+              {
+                "id": 2871,
+                "movieMetadataId": 522,
+                "sourceType": "tmdb",
+                "title": "حیثیت"
+              },
+              {
+                "id": 2872,
+                "movieMetadataId": 522,
+                "sourceType": "tmdb",
+                "title": "O Grande Truque"
+              },
+              {
+                "id": 2873,
+                "movieMetadataId": 522,
+                "sourceType": "tmdb",
+                "title": "O Terceiro Passo"
+              },
+              {
+                "id": 2874,
+                "movieMetadataId": 522,
+                "sourceType": "tmdb",
+                "title": "Prestij"
+              },
+              {
+                "id": 2875,
+                "movieMetadataId": 522,
+                "sourceType": "tmdb",
+                "title": "A tökéletes trükk"
+              },
+              {
+                "id": 2876,
+                "movieMetadataId": 522,
+                "sourceType": "tmdb",
+                "title": "Ảo Thuật Gia Đấu Trí"
+              }
+            ],
+            "certification": "PG-13",
+            "cleanTitle": "theprestige",
+            "digitalRelease": "2009-09-01T00:00:00Z",
+            "folderName": "/movies/The Prestige (2006)",
+            "genres": [
+              "Drama",
+              "Mystery",
+              "Science Fiction"
+            ],
+            "hasFile": false,
+            "id": 332,
+            "images": [
+              {
+                "coverType": "poster",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/Ag2B2KHKQPukjH7WutmgnnSNurZ.jpg",
+                "url": "/MediaCover/332/poster.jpg?h=cb6c8ba0aeaf56c924d7"
+              },
+              {
+                "coverType": "fanart",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/yaExZh6qE2cfyK3o4kAMEq0mkgy.jpg",
+                "url": "/MediaCover/332/fanart.jpg?h=598403f8ae73bb3898bf"
+              }
+            ],
+            "imdbId": "tt0482571",
+            "inCinemas": "2006-10-19T00:00:00Z",
+            "isAvailable": true,
+            "keywords": [
+              "19th century",
+              "based on novel or book",
+              "bittersweet",
+              "class",
+              "class society",
+              "competition",
+              "cruelty",
+              "diary",
+              "dying and death",
+              "hanging",
+              "hostility",
+              "illusion",
+              "jail cell",
+              "london, england",
+              "magic",
+              "magician",
+              "mind-blowing",
+              "nikola tesla",
+              "obsession",
+              "partner",
+              "rivalry",
+              "secret",
+              "steampunk",
+              "suicide",
+              "tesla coil",
+              "tricks",
+              "twist"
+            ],
+            "minimumAvailability": "released",
+            "monitored": true,
+            "movieFileId": 0,
+            "originalLanguage": {
+              "id": 1,
+              "name": "English"
+            },
+            "originalTitle": "The Prestige",
+            "overview": "A mysterious story of two magicians whose intense rivalry leads them on a life-long battle for supremacy -- full of obsession, deceit and jealousy with dangerous and deadly consequences.",
+            "path": "/movies/The Prestige (2006)",
+            "physicalRelease": "2007-06-06T00:00:00Z",
+            "popularity": 18.951,
+            "qualityProfileId": 4,
+            "ratings": {
+              "imdb": {
+                "type": "user",
+                "value": 8.5,
+                "votes": 1640237
+              },
+              "metacritic": {
+                "type": "user",
+                "value": 66,
+                "votes": 0
+              },
+              "rottenTomatoes": {
+                "type": "user",
+                "value": 77,
+                "votes": 0
+              },
+              "tmdb": {
+                "type": "user",
+                "value": 8.212,
+                "votes": 18448
+              },
+              "trakt": {
+                "type": "user",
+                "value": 8.46334,
+                "votes": 30755
+              }
+            },
+            "releaseDate": "2007-06-06T00:00:00Z",
+            "rootFolderPath": "/movies",
+            "runtime": 131,
+            "secondaryYearSourceId": 0,
+            "sizeOnDisk": 0,
+            "sortTitle": "prestige",
+            "statistics": {
+              "movieFileCount": 0,
+              "movieFileQualities": [],
+              "releaseGroups": [],
+              "sizeOnDisk": 0
+            },
+            "status": "released",
+            "studio": "Warner Bros. Pictures",
+            "tags": [],
+            "title": "The Prestige",
+            "titleSlug": "1124",
+            "tmdbId": 1124,
+            "website": "https://www.warnerbros.co.uk/movies/prestige",
+            "year": 2006,
+            "youTubeTrailerId": "ObGVA1WOqyE"
+          }
+        },
+        "name": "movie"
       },
       {
         "body": {
@@ -10484,7 +10661,7 @@
           "action": "created",
           "resource": {
             "accessible": true,
-            "freeSpace": 12120109056,
+            "freeSpace": 63281303552,
             "id": 2,
             "path": "/downloads/library",
             "unmappedFolders": [
@@ -10519,6 +10696,12 @@
         "body": {
           "action": "sync"
         },
+        "name": "system/task"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
         "name": "queue"
       },
       {
@@ -10526,12 +10709,6 @@
           "action": "sync"
         },
         "name": "queue/details"
-      },
-      {
-        "body": {
-          "action": "sync"
-        },
-        "name": "system/task"
       },
       {
         "body": {
@@ -10638,16 +10815,16 @@
               "updateScheduledTask": true
             },
             "commandName": "Reset Quality Definitions",
-            "duration": "00:00:00.0062070",
-            "ended": "2026-11-13T12:41:35Z",
+            "duration": "00:00:00.0059567",
+            "ended": "2026-11-23T17:56:13Z",
             "id": 472975,
             "name": "ResetQualityDefinitions",
             "priority": "normal",
-            "queued": "2026-11-13T12:41:35Z",
+            "queued": "2026-11-23T17:56:13Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T12:41:35Z",
-            "stateChangeTime": "2026-11-13T12:41:35Z",
+            "started": "2026-11-23T17:56:13Z",
+            "stateChangeTime": "2026-11-23T17:56:13Z",
             "status": "completed",
             "trigger": "manual",
             "updateScheduledTask": true
@@ -10981,9 +11158,44 @@
                 "audioCodec": "EAC3",
                 "audioLanguages": "ita/ita/eng",
                 "audioStreamCount": 3,
+                "audioStreams": [
+                  {
+                    "bitrate": 1024000,
+                    "channelPositions": "7.1",
+                    "channels": 7.1,
+                    "codec": "EAC3",
+                    "language": "ita"
+                  },
+                  {
+                    "bitrate": 0,
+                    "channels": 0,
+                    "codec": "",
+                    "language": "ita"
+                  },
+                  {
+                    "bitrate": 0,
+                    "channels": 0,
+                    "codec": "",
+                    "language": "eng"
+                  }
+                ],
                 "resolution": "1920x804",
                 "runTime": "1:59:01",
                 "scanType": "Progressive",
+                "subtitleStreams": [
+                  {
+                    "language": "ita"
+                  },
+                  {
+                    "language": "ita"
+                  },
+                  {
+                    "language": "ita"
+                  },
+                  {
+                    "language": "eng"
+                  }
+                ],
                 "subtitles": "ita/ita/ita/eng",
                 "videoBitDepth": 8,
                 "videoBitrate": 8508386,
@@ -11261,6 +11473,230 @@
       },
       {
         "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 1,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 2,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 4,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 74,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 3,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 6,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 42,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 7,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 27,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 41,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 28,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 8,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 9,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 12,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
           "action": "updated",
           "resource": {
             "body": {
@@ -11278,20 +11714,52 @@
             },
             "commandName": "Refresh Collections",
             "id": 472976,
-            "message": "Updating info for It Follows Collection",
+            "message": "Updating info for Indiana Jones Collection",
             "name": "RefreshCollections",
             "priority": "normal",
-            "queued": "2026-11-13T12:42:08Z",
+            "queued": "2026-11-23T17:56:46Z",
             "result": "unknown",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T12:42:08Z",
-            "stateChangeTime": "2026-11-13T12:42:08Z",
+            "started": "2026-11-23T17:56:46Z",
+            "stateChangeTime": "2026-11-23T17:56:46Z",
             "status": "started",
             "trigger": "unspecified",
             "updateScheduledTask": true
           }
         },
         "name": "command"
+      },
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 13,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 14,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
       },
       {
         "body": {
@@ -11415,6 +11883,280 @@
       },
       {
         "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 76,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 17,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 29,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 30,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 44,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 18,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 20,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 75,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 23,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 72,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 26,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 33,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 34,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 35,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "body": {
+              "collectionIds": [],
+              "completionMessage": "Completed",
+              "isExclusive": false,
+              "isLongRunning": true,
+              "isTypeExclusive": false,
+              "name": "RefreshCollections",
+              "requiresDiskAccess": false,
+              "sendUpdatesToClient": true,
+              "suppressMessages": false,
+              "trigger": "unspecified",
+              "updateScheduledTask": true
+            },
+            "commandName": "Refresh Collections",
+            "id": 472976,
+            "message": "Updating info for X Collection",
+            "name": "RefreshCollections",
+            "priority": "normal",
+            "queued": "2026-11-23T17:56:46Z",
+            "result": "unknown",
+            "sendUpdatesToClient": true,
+            "started": "2026-11-23T17:56:46Z",
+            "stateChangeTime": "2026-11-23T17:56:46Z",
+            "status": "started",
+            "trigger": "unspecified",
+            "updateScheduledTask": true
+          }
+        },
+        "name": "command"
+      },
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 21,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
           "action": "sync"
         },
         "name": "system/task"
@@ -11437,17 +12179,17 @@
               "updateScheduledTask": true
             },
             "commandName": "Refresh Collections",
-            "duration": "00:00:00.7432629",
-            "ended": "2026-11-13T12:42:09Z",
+            "duration": "00:00:00.2066857",
+            "ended": "2026-11-23T17:56:47Z",
             "id": 472976,
             "message": "Completed",
             "name": "RefreshCollections",
             "priority": "normal",
-            "queued": "2026-11-13T12:42:08Z",
+            "queued": "2026-11-23T17:56:46Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T12:42:08Z",
-            "stateChangeTime": "2026-11-13T12:42:08Z",
+            "started": "2026-11-23T17:56:46Z",
+            "stateChangeTime": "2026-11-23T17:56:46Z",
             "status": "completed",
             "trigger": "unspecified",
             "updateScheduledTask": true

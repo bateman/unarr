@@ -129,7 +129,7 @@
         ],
         "imdbId": "tt33764258",
         "inCinemas": "2026-07-15T00:00:00Z",
-        "isAvailable": false,
+        "isAvailable": true,
         "keywords": [
           "ancient",
           "ancient world",
@@ -2017,7 +2017,7 @@
     "sortKey": "movieMetadata.digitalRelease",
     "totalRecords": 91
   },
-  "recordedAt": "2026-11-12T14:19:14Z",
+  "recordedAt": "2026-11-23T17:44:18Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/wanted/missing?page=1&pageSize=20&sortKey=movieMetadata.digitalRelease&sortDirection=descending"

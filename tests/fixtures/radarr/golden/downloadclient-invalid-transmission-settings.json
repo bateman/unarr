@@ -6,16 +6,9 @@
       "isWarning": false,
       "propertyName": "MovieCategory",
       "severity": "error"
-    },
-    {
-      "attemptedValue": "tv_1",
-      "errorMessage": "Cannot use Category and Directory",
-      "isWarning": false,
-      "propertyName": "MovieCategory",
-      "severity": "error"
     }
   ],
-  "recordedAt": "2026-11-12T14:19:23Z",
+  "recordedAt": "2026-11-23T17:44:27Z",
   "request": {
     "body": "bodies/downloadclient-invalid-transmission-settings.json",
     "method": "POST",

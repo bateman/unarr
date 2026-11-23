@@ -4,7 +4,7 @@
     "files": [
       {
         "extension": ".mkv",
-        "lastModified": "2026-11-13T12:39:58Z",
+        "lastModified": "2026-11-23T17:54:36Z",
         "name": "Dune.2021.1080p.BluRay.x264-GRP.mkv",
         "path": "/movies/Dune Moved/Dune.2021.1080p.BluRay.x264-GRP.mkv",
         "size": 1106640,
@@ -13,7 +13,7 @@
     ],
     "parent": "/movies/"
   },
-  "recordedAt": "2026-11-13T12:40:20Z",
+  "recordedAt": "2026-11-23T17:54:58Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/filesystem?path=/movies/Dune%20Moved/&includeFiles=true"

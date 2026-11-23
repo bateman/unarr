@@ -223,6 +223,12 @@
             },
             {
               "dividerAfter": false,
+              "name": "Irish",
+              "order": 0,
+              "value": 58
+            },
+            {
+              "dividerAfter": false,
               "name": "Italian",
               "order": 0,
               "value": 5
@@ -462,34 +468,6 @@
       "tags": []
     },
     {
-      "configContract": "KometaMetadataSettings",
-      "enable": false,
-      "fields": [
-        {
-          "advanced": false,
-          "hidden": "hidden",
-          "isFloat": false,
-          "label": "Deprecated",
-          "name": "deprecated",
-          "order": 0,
-          "privacy": "normal",
-          "section": "image",
-          "type": "checkbox",
-          "value": true
-        }
-      ],
-      "id": 5,
-      "implementation": "KometaMetadata",
-      "implementationName": "Kometa",
-      "infoLink": "https://wiki.servarr.com/radarr/supported#kometametadata",
-      "message": {
-        "message": "Kometa files will no longer be created, support will be removed completely in v6",
-        "type": "warning"
-      },
-      "name": "Kometa",
-      "tags": []
-    },
-    {
       "configContract": "RoksboxMetadataSettings",
       "enable": false,
       "fields": [
@@ -558,7 +536,7 @@
       "tags": []
     }
   ],
-  "recordedAt": "2026-11-20T14:53:37Z",
+  "recordedAt": "2026-11-23T17:51:05Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/metadata"

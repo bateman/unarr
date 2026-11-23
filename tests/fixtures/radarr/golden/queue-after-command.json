@@ -4,7 +4,7 @@
     "pageSize": 20,
     "records": [
       {
-        "added": "2026-11-12T14:19:35Z",
+        "added": "2026-11-23T17:44:39Z",
         "customFormatScore": 0,
         "customFormats": [
           {
@@ -15,7 +15,7 @@
         "downloadClient": "Mock Transmission",
         "downloadClientHasPostImportCategory": false,
         "downloadId": "5AE419C220561D2F40DDBB4026B5D0121DCC040E",
-        "estimatedCompletionTime": "2026-11-12T14:30:23Z",
+        "estimatedCompletionTime": "2026-11-23T17:55:27Z",
         "id": 936833475,
         "indexer": "Mock Torznab (Prowlarr)",
         "languages": [
@@ -29,7 +29,7 @@
           }
         ],
         "movieId": 70,
-        "outputPath": "/downloads/movies/bc295ecb0fb56b9e5df74be19469cef4",
+        "outputPath": "/downloads/bc295ecb0fb56b9e5df74be19469cef4",
         "protocol": "torrent",
         "quality": {
           "quality": {
@@ -55,13 +55,13 @@
         "trackedDownloadStatus": "ok"
       },
       {
-        "added": "2026-11-12T14:19:49Z",
+        "added": "2026-11-23T17:44:53Z",
         "customFormatScore": 0,
         "customFormats": [],
         "downloadClient": "Mock qBittorrent",
         "downloadClientHasPostImportCategory": false,
         "downloadId": "13706ED57ADBE030F510BEDCD37595376901117C",
-        "estimatedCompletionTime": "2026-11-12T14:30:23Z",
+        "estimatedCompletionTime": "2026-11-23T17:55:27Z",
         "id": 1132538262,
         "indexer": "Mock Torznab (Prowlarr)",
         "languages": [
@@ -100,13 +100,13 @@
         "trackedDownloadStatus": "ok"
       },
       {
-        "added": "2026-11-12T14:20:01Z",
+        "added": "2026-11-23T17:45:05Z",
         "customFormatScore": 0,
         "customFormats": [],
         "downloadClient": "Mock SABnzbd",
         "downloadClientHasPostImportCategory": false,
         "downloadId": "SABnzbd_nzo_mock3",
-        "estimatedCompletionTime": "2026-11-12T14:30:23Z",
+        "estimatedCompletionTime": "2026-11-23T17:55:27Z",
         "id": 1692936012,
         "indexer": "Mock Newznab (Prowlarr)",
         "languages": [
@@ -149,7 +149,7 @@
     "sortKey": "timeleft",
     "totalRecords": 3
   },
-  "recordedAt": "2026-11-12T14:20:27Z",
+  "recordedAt": "2026-11-23T17:45:31Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending"

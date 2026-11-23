@@ -112,7 +112,7 @@
     ],
     "imdbId": "tt33764258",
     "inCinemas": "2026-07-15T00:00:00Z",
-    "isAvailable": false,
+    "isAvailable": true,
     "keywords": [
       "ancient",
       "ancient world",
@@ -180,7 +180,7 @@
       "releaseGroups": [],
       "sizeOnDisk": 0
     },
-    "status": "inCinemas",
+    "status": "released",
     "studio": "Universal Pictures",
     "tags": [],
     "title": "The Odyssey",
@@ -190,7 +190,7 @@
     "year": 2026,
     "youTubeTrailerId": "AyIZ9tiiN8I"
   },
-  "recordedAt": "2026-11-13T12:38:48Z",
+  "recordedAt": "2026-11-23T17:53:26Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/movie/125"

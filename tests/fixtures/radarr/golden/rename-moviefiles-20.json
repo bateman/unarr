@@ -12,7 +12,7 @@
           "name": "Language not Italian"
         }
       ],
-      "dateAdded": "2026-11-12T14:22:06Z",
+      "dateAdded": "2026-11-23T17:47:10Z",
       "edition": "",
       "id": 407,
       "indexerFlags": 0,
@@ -28,9 +28,27 @@
         "audioCodec": "AAC",
         "audioLanguages": "eng",
         "audioStreamCount": 1,
+        "audioStreams": [
+          {
+            "bitrate": 0,
+            "channelPositions": "mono",
+            "channels": 1,
+            "codec": "AAC",
+            "language": "eng",
+            "profile": "LC"
+          }
+        ],
         "resolution": "1920x1080",
         "runTime": "10:10",
         "scanType": "Progressive",
+        "subtitleStreams": [
+          {
+            "forced": false,
+            "format": "subrip",
+            "hearingImpaired": false,
+            "language": "eng"
+          }
+        ],
         "subtitles": "eng",
         "videoBitDepth": 8,
         "videoBitrate": 0,
@@ -63,7 +81,7 @@
       "size": 1106640
     }
   ],
-  "recordedAt": "2026-11-12T14:24:19Z",
+  "recordedAt": "2026-11-23T17:49:22Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/moviefile?movieId=20"

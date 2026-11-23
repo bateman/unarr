@@ -4,7 +4,7 @@
     "messages": [
       {
         "body": {
-          "version": "6.4.4.10685"
+          "version": "7.0.3.10918"
         },
         "name": "version"
       }
@@ -13,12 +13,6 @@
   {
     "after": "command-check-finished",
     "messages": [
-      {
-        "body": {
-          "action": "sync"
-        },
-        "name": "queue"
-      },
       {
         "body": {
           "action": "updated",
@@ -38,11 +32,11 @@
             "id": 472955,
             "name": "CheckForFinishedDownload",
             "priority": "normal",
-            "queued": "2026-11-19T21:48:40Z",
+            "queued": "2026-11-23T17:51:12Z",
             "result": "unknown",
             "sendUpdatesToClient": true,
-            "started": "2026-11-19T21:48:40Z",
-            "stateChangeTime": "2026-11-19T21:48:40Z",
+            "started": "2026-11-23T17:51:12Z",
+            "stateChangeTime": "2026-11-23T17:51:12Z",
             "status": "started",
             "trigger": "manual",
             "updateScheduledTask": true
@@ -54,13 +48,13 @@
         "body": {
           "action": "sync"
         },
-        "name": "queue/details"
+        "name": "queue"
       },
       {
         "body": {
           "action": "sync"
         },
-        "name": "system/task"
+        "name": "queue/details"
       },
       {
         "body": {
@@ -73,6 +67,12 @@
           "action": "sync"
         },
         "name": "queue/details"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "system/task"
       },
       {
         "body": {
@@ -96,16 +96,16 @@
               "updateScheduledTask": true
             },
             "commandName": "Check For Finished Download",
-            "duration": "00:00:00.1723872",
-            "ended": "2026-11-19T21:48:40Z",
+            "duration": "00:00:00.3681733",
+            "ended": "2026-11-23T17:51:13Z",
             "id": 472955,
             "name": "CheckForFinishedDownload",
             "priority": "normal",
-            "queued": "2026-11-19T21:48:40Z",
+            "queued": "2026-11-23T17:51:12Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-19T21:48:40Z",
-            "stateChangeTime": "2026-11-19T21:48:40Z",
+            "started": "2026-11-23T17:51:12Z",
+            "stateChangeTime": "2026-11-23T17:51:12Z",
             "status": "completed",
             "trigger": "manual",
             "updateScheduledTask": true

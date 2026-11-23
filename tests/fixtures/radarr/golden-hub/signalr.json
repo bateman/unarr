@@ -4,7 +4,7 @@
     "messages": [
       {
         "body": {
-          "version": "6.4.4.10685"
+          "version": "7.0.3.10918"
         },
         "name": "version"
       },
@@ -29,17 +29,23 @@
             "message": "Scanning disk for Backcountry",
             "name": "RescanMovie",
             "priority": "normal",
-            "queued": "2026-11-13T07:47:38Z",
+            "queued": "2026-11-23T17:51:44Z",
             "result": "unknown",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T07:47:38Z",
-            "stateChangeTime": "2026-11-13T07:47:38Z",
+            "started": "2026-11-23T17:51:44Z",
+            "stateChangeTime": "2026-11-23T17:51:44Z",
             "status": "started",
             "trigger": "manual",
             "updateScheduledTask": true
           }
         },
         "name": "command"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "health"
       },
       {
         "body": {
@@ -52,7 +58,7 @@
                 "name": "Language not Italian"
               }
             ],
-            "dateAdded": "2026-11-13T07:47:38Z",
+            "dateAdded": "2026-11-23T17:51:46Z",
             "edition": "",
             "id": 405,
             "indexerFlags": 0,
@@ -68,9 +74,27 @@
               "audioCodec": "AAC",
               "audioLanguages": "eng",
               "audioStreamCount": 1,
+              "audioStreams": [
+                {
+                  "bitrate": 0,
+                  "channelPositions": "mono",
+                  "channels": 1,
+                  "codec": "AAC",
+                  "language": "eng",
+                  "profile": "LC"
+                }
+              ],
               "resolution": "1920x1080",
               "runTime": "10:10",
               "scanType": "Progressive",
+              "subtitleStreams": [
+                {
+                  "forced": false,
+                  "format": "subrip",
+                  "hearingImpaired": false,
+                  "language": "eng"
+                }
+              ],
               "subtitles": "eng",
               "videoBitDepth": 8,
               "videoBitrate": 0,
@@ -80,6 +104,7 @@
               "videoFps": 1000
             },
             "movieId": 10,
+            "originalFilePath": "Backcountry (2015)/Backcountry.2015.1080p.BluRay.x264-GRP.mkv",
             "path": "/movies/Backcountry (2015)/Backcountry.2015.1080p.BluRay.x264-GRP.mkv",
             "quality": {
               "quality": {
@@ -225,7 +250,7 @@
                   "name": "Language not Italian"
                 }
               ],
-              "dateAdded": "2026-11-13T07:47:38Z",
+              "dateAdded": "2026-11-23T17:51:46Z",
               "edition": "",
               "id": 405,
               "indexerFlags": 0,
@@ -241,9 +266,27 @@
                 "audioCodec": "AAC",
                 "audioLanguages": "eng",
                 "audioStreamCount": 1,
+                "audioStreams": [
+                  {
+                    "bitrate": 0,
+                    "channelPositions": "mono",
+                    "channels": 1,
+                    "codec": "AAC",
+                    "language": "eng",
+                    "profile": "LC"
+                  }
+                ],
                 "resolution": "1920x1080",
                 "runTime": "10:10",
                 "scanType": "Progressive",
+                "subtitleStreams": [
+                  {
+                    "forced": false,
+                    "format": "subrip",
+                    "hearingImpaired": false,
+                    "language": "eng"
+                  }
+                ],
                 "subtitles": "eng",
                 "videoBitDepth": 8,
                 "videoBitrate": 0,
@@ -253,6 +296,7 @@
                 "videoFps": 1000
               },
               "movieId": 10,
+              "originalFilePath": "Backcountry (2015)/Backcountry.2015.1080p.BluRay.x264-GRP.mkv",
               "path": "/movies/Backcountry (2015)/Backcountry.2015.1080p.BluRay.x264-GRP.mkv",
               "quality": {
                 "quality": {
@@ -470,7 +514,7 @@
                   "name": "Language not Italian"
                 }
               ],
-              "dateAdded": "2026-11-13T07:47:38Z",
+              "dateAdded": "2026-11-23T17:51:46Z",
               "edition": "",
               "id": 405,
               "indexerFlags": 0,
@@ -486,9 +530,27 @@
                 "audioCodec": "AAC",
                 "audioLanguages": "eng",
                 "audioStreamCount": 1,
+                "audioStreams": [
+                  {
+                    "bitrate": 0,
+                    "channelPositions": "mono",
+                    "channels": 1,
+                    "codec": "AAC",
+                    "language": "eng",
+                    "profile": "LC"
+                  }
+                ],
                 "resolution": "1920x1080",
                 "runTime": "10:10",
                 "scanType": "Progressive",
+                "subtitleStreams": [
+                  {
+                    "forced": false,
+                    "format": "subrip",
+                    "hearingImpaired": false,
+                    "language": "eng"
+                  }
+                ],
                 "subtitles": "eng",
                 "videoBitDepth": 8,
                 "videoBitrate": 0,
@@ -498,6 +560,7 @@
                 "videoFps": 1000
               },
               "movieId": 10,
+              "originalFilePath": "Backcountry (2015)/Backcountry.2015.1080p.BluRay.x264-GRP.mkv",
               "path": "/movies/Backcountry (2015)/Backcountry.2015.1080p.BluRay.x264-GRP.mkv",
               "quality": {
                 "quality": {
@@ -715,7 +778,7 @@
                   "name": "Language not Italian"
                 }
               ],
-              "dateAdded": "2026-11-13T07:47:38Z",
+              "dateAdded": "2026-11-23T17:51:46Z",
               "edition": "",
               "id": 405,
               "indexerFlags": 0,
@@ -731,9 +794,27 @@
                 "audioCodec": "AAC",
                 "audioLanguages": "eng",
                 "audioStreamCount": 1,
+                "audioStreams": [
+                  {
+                    "bitrate": 0,
+                    "channelPositions": "mono",
+                    "channels": 1,
+                    "codec": "AAC",
+                    "language": "eng",
+                    "profile": "LC"
+                  }
+                ],
                 "resolution": "1920x1080",
                 "runTime": "10:10",
                 "scanType": "Progressive",
+                "subtitleStreams": [
+                  {
+                    "forced": false,
+                    "format": "subrip",
+                    "hearingImpaired": false,
+                    "language": "eng"
+                  }
+                ],
                 "subtitles": "eng",
                 "videoBitDepth": 8,
                 "videoBitrate": 0,
@@ -743,6 +824,7 @@
                 "videoFps": 1000
               },
               "movieId": 10,
+              "originalFilePath": "Backcountry (2015)/Backcountry.2015.1080p.BluRay.x264-GRP.mkv",
               "path": "/movies/Backcountry (2015)/Backcountry.2015.1080p.BluRay.x264-GRP.mkv",
               "quality": {
                 "quality": {
@@ -846,12 +928,6 @@
       },
       {
         "body": {
-          "action": "sync"
-        },
-        "name": "health"
-      },
-      {
-        "body": {
           "action": "updated",
           "resource": {
             "body": {
@@ -867,17 +943,17 @@
               "updateScheduledTask": true
             },
             "commandName": "Rescan Movie",
-            "duration": "00:00:01.0538983",
-            "ended": "2026-11-13T07:47:39Z",
+            "duration": "00:00:01.9315014",
+            "ended": "2026-11-23T17:51:46Z",
             "id": 472955,
             "message": "Scanning disk for Backcountry",
             "name": "RescanMovie",
             "priority": "normal",
-            "queued": "2026-11-13T07:47:38Z",
+            "queued": "2026-11-23T17:51:44Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T07:47:38Z",
-            "stateChangeTime": "2026-11-13T07:47:38Z",
+            "started": "2026-11-23T17:51:44Z",
+            "stateChangeTime": "2026-11-23T17:51:44Z",
             "status": "completed",
             "trigger": "manual",
             "updateScheduledTask": true
@@ -968,7 +1044,7 @@
                 "name": "Language not Italian"
               }
             ],
-            "dateAdded": "2026-11-13T07:47:50Z",
+            "dateAdded": "2026-11-23T17:51:56Z",
             "edition": "",
             "id": 406,
             "indexerFlags": 0,
@@ -984,9 +1060,27 @@
               "audioCodec": "AAC",
               "audioLanguages": "eng",
               "audioStreamCount": 1,
+              "audioStreams": [
+                {
+                  "bitrate": 0,
+                  "channelPositions": "mono",
+                  "channels": 1,
+                  "codec": "AAC",
+                  "language": "eng",
+                  "profile": "LC"
+                }
+              ],
               "resolution": "1920x1080",
               "runTime": "10:10",
               "scanType": "Progressive",
+              "subtitleStreams": [
+                {
+                  "forced": false,
+                  "format": "subrip",
+                  "hearingImpaired": false,
+                  "language": "eng"
+                }
+              ],
               "subtitles": "eng",
               "videoBitDepth": 8,
               "videoBitrate": 0,
@@ -1146,7 +1240,7 @@
                   "name": "Language not Italian"
                 }
               ],
-              "dateAdded": "2026-11-13T07:47:50Z",
+              "dateAdded": "2026-11-23T17:51:56Z",
               "edition": "",
               "id": 406,
               "indexerFlags": 0,
@@ -1162,9 +1256,27 @@
                 "audioCodec": "AAC",
                 "audioLanguages": "eng",
                 "audioStreamCount": 1,
+                "audioStreams": [
+                  {
+                    "bitrate": 0,
+                    "channelPositions": "mono",
+                    "channels": 1,
+                    "codec": "AAC",
+                    "language": "eng",
+                    "profile": "LC"
+                  }
+                ],
                 "resolution": "1920x1080",
                 "runTime": "10:10",
                 "scanType": "Progressive",
+                "subtitleStreams": [
+                  {
+                    "forced": false,
+                    "format": "subrip",
+                    "hearingImpaired": false,
+                    "language": "eng"
+                  }
+                ],
                 "subtitles": "eng",
                 "videoBitDepth": 8,
                 "videoBitrate": 0,
@@ -1393,7 +1505,7 @@
                   "name": "Language not Italian"
                 }
               ],
-              "dateAdded": "2026-11-13T07:47:50Z",
+              "dateAdded": "2026-11-23T17:51:56Z",
               "edition": "",
               "id": 406,
               "indexerFlags": 0,
@@ -1409,9 +1521,27 @@
                 "audioCodec": "AAC",
                 "audioLanguages": "eng",
                 "audioStreamCount": 1,
+                "audioStreams": [
+                  {
+                    "bitrate": 0,
+                    "channelPositions": "mono",
+                    "channels": 1,
+                    "codec": "AAC",
+                    "language": "eng",
+                    "profile": "LC"
+                  }
+                ],
                 "resolution": "1920x1080",
                 "runTime": "10:10",
                 "scanType": "Progressive",
+                "subtitleStreams": [
+                  {
+                    "forced": false,
+                    "format": "subrip",
+                    "hearingImpaired": false,
+                    "language": "eng"
+                  }
+                ],
                 "subtitles": "eng",
                 "videoBitDepth": 8,
                 "videoBitrate": 0,
@@ -1640,7 +1770,7 @@
                   "name": "Language not Italian"
                 }
               ],
-              "dateAdded": "2026-11-13T07:47:50Z",
+              "dateAdded": "2026-11-23T17:51:56Z",
               "edition": "",
               "id": 406,
               "indexerFlags": 0,
@@ -1656,9 +1786,27 @@
                 "audioCodec": "AAC",
                 "audioLanguages": "eng",
                 "audioStreamCount": 1,
+                "audioStreams": [
+                  {
+                    "bitrate": 0,
+                    "channelPositions": "mono",
+                    "channels": 1,
+                    "codec": "AAC",
+                    "language": "eng",
+                    "profile": "LC"
+                  }
+                ],
                 "resolution": "1920x1080",
                 "runTime": "10:10",
                 "scanType": "Progressive",
+                "subtitleStreams": [
+                  {
+                    "forced": false,
+                    "format": "subrip",
+                    "hearingImpaired": false,
+                    "language": "eng"
+                  }
+                ],
                 "subtitles": "eng",
                 "videoBitDepth": 8,
                 "videoBitrate": 0,
@@ -1858,16 +2006,16 @@
               "updateScheduledTask": true
             },
             "commandName": "Messaging Cleanup",
-            "duration": "00:00:00.0045068",
-            "ended": "2026-11-13T07:48:02Z",
+            "duration": "00:00:00.0064348",
+            "ended": "2026-11-23T17:52:08Z",
             "id": 472961,
             "name": "MessagingCleanup",
             "priority": "normal",
-            "queued": "2026-11-13T07:48:02Z",
+            "queued": "2026-11-23T17:52:08Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-13T07:48:02Z",
-            "stateChangeTime": "2026-11-13T07:48:02Z",
+            "started": "2026-11-23T17:52:08Z",
+            "stateChangeTime": "2026-11-23T17:52:08Z",
             "status": "completed",
             "trigger": "manual",
             "updateScheduledTask": true

@@ -1,7 +1,7 @@
 {
   "body": [
     {
-      "added": "2026-11-13T12:39:38Z",
+      "added": "2026-11-23T17:54:16Z",
       "alternateTitles": [
         {
           "id": 2855,
@@ -164,11 +164,11 @@
       "youTubeTrailerId": "Q7kZy3T6vRM"
     }
   ],
-  "recordedAt": "2026-11-13T12:40:30Z",
+  "recordedAt": "2026-11-23T17:55:09Z",
   "request": {
     "body": "bodies/movie-editor-root.json",
     "method": "PUT",
     "path": "/api/v3/movie/editor"
   },
-  "status": 202
+  "status": 200
 }

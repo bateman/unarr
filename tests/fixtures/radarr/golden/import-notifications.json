@@ -73,7 +73,7 @@
             "thumbnail": {
               "url": "https://image.tmdb.org/t/p/original/jQtgkgDZE7egMq532sOt83DnT83.jpg"
             },
-            "timestamp": "2026-11-12T14:21:06.9634298Z",
+            "timestamp": "2026-11-23T17:46:10.6165586Z",
             "title": "Candyman (1992)",
             "url": "https://www.themoviedb.org/movie/9529"
           }
@@ -94,10 +94,6 @@
         "customFormatInfo": {
           "customFormatScore": -10000,
           "customFormats": [
-            {
-              "id": 54,
-              "name": "DD"
-            },
             {
               "id": 58,
               "name": "Language not Italian"
@@ -143,7 +139,7 @@
           "year": 1992
         },
         "movieFile": {
-          "dateAdded": "2026-11-12T14:21:06.8046718Z",
+          "dateAdded": "2026-11-23T17:46:10.525257Z",
           "id": 405,
           "indexerFlags": "0",
           "languages": [
@@ -211,7 +207,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685"
+        "X-Plex-Version": "7.0.3.10918"
       },
       "service": "plex"
     },
@@ -227,7 +223,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685"
+        "X-Plex-Version": "7.0.3.10918"
       },
       "service": "plex"
     },
@@ -243,7 +239,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Candyman (1992)"
       },
       "service": "plex"
@@ -321,7 +317,7 @@
             "thumbnail": {
               "url": "https://image.tmdb.org/t/p/original/8jxqAvSDoneSKRczaK8v9X5gqBp.jpg"
             },
-            "timestamp": "2026-11-12T14:21:18.7631203Z",
+            "timestamp": "2026-11-23T17:46:22.3895808Z",
             "title": "BlacKkKlansman (2018)",
             "url": "https://www.themoviedb.org/movie/487558"
           }
@@ -341,12 +337,7 @@
         "applicationUrl": "",
         "customFormatInfo": {
           "customFormatScore": 0,
-          "customFormats": [
-            {
-              "id": 54,
-              "name": "DD"
-            }
-          ]
+          "customFormats": []
         },
         "downloadClient": "Mock SABnzbd",
         "downloadClientType": "SABnzbd",
@@ -387,7 +378,7 @@
           "year": 2018
         },
         "movieFile": {
-          "dateAdded": "2026-11-12T14:21:18.7074626Z",
+          "dateAdded": "2026-11-23T17:46:22.3624543Z",
           "id": 406,
           "indexerFlags": "0",
           "languages": [
@@ -461,7 +452,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685"
+        "X-Plex-Version": "7.0.3.10918"
       },
       "service": "plex"
     },
@@ -477,7 +468,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/BlacKkKlansman (2018)"
       },
       "service": "plex"
@@ -545,7 +536,7 @@
             "thumbnail": {
               "url": "https://image.tmdb.org/t/p/original/n1ZRmjlk1BJTY7aASqACfPAaLn2.jpg"
             },
-            "timestamp": "2026-11-12T14:21:30.6826041Z",
+            "timestamp": "2026-11-23T17:46:34.3285506Z",
             "title": "Last Night in Soho (2021)",
             "url": "https://www.themoviedb.org/movie/576845"
           }
@@ -641,7 +632,7 @@
       "service": "webhook"
     }
   ],
-  "recordedAt": "2026-11-12T14:21:54Z",
+  "recordedAt": "2026-11-23T17:46:58Z",
   "request": {
     "method": "GET",
     "path": "/mock/notifications",

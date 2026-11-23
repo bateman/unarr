@@ -4,7 +4,7 @@
     "messages": [
       {
         "body": {
-          "version": "6.4.4.10685"
+          "version": "7.0.3.10918"
         },
         "name": "version"
       }
@@ -28,13 +28,13 @@
     ]
   },
   {
-    "after": "movie-put-path-in-bin",
+    "after": "movie-import-path-in-bin",
     "messages": [
       {
         "body": {
           "action": "updated",
           "resource": {
-            "added": "2026-11-14T06:29:39Z",
+            "added": "2026-11-23T17:59:07Z",
             "alternateTitles": [
               {
                 "id": 2804,
@@ -304,12 +304,12 @@
               {
                 "coverType": "poster",
                 "remoteUrl": "https://image.tmdb.org/t/p/original/yQvGrMoipbRoddT0ZR8tPoR7NfX.jpg",
-                "url": "/MediaCover/328/poster.jpg?h=6ea857fa1664e710ba38"
+                "url": "/MediaCover/328/poster.jpg"
               },
               {
                 "coverType": "fanart",
                 "remoteUrl": "https://image.tmdb.org/t/p/original/8sNiAPPYU14PUepFNeSNGUTiHW.jpg",
-                "url": "/MediaCover/328/fanart.jpg?h=09050d90b1d43db56511"
+                "url": "/MediaCover/328/fanart.jpg"
               }
             ],
             "imdbId": "tt0816692",
@@ -441,11 +441,11 @@
             "message": "Scanning disk for Interstellar",
             "name": "RefreshMovie",
             "priority": "normal",
-            "queued": "2026-11-14T06:29:39Z",
+            "queued": "2026-11-23T17:59:07Z",
             "result": "unknown",
             "sendUpdatesToClient": true,
-            "started": "2026-11-14T06:29:39Z",
-            "stateChangeTime": "2026-11-14T06:29:39Z",
+            "started": "2026-11-23T17:59:07Z",
+            "stateChangeTime": "2026-11-23T17:59:07Z",
             "status": "started",
             "trigger": "unspecified",
             "updateScheduledTask": false
@@ -462,7 +462,7 @@
     ]
   },
   {
-    "after": "movie-after-imports",
+    "after": "movie-import-spaced-root",
     "messages": [
       {
         "body": {
@@ -485,17 +485,17 @@
               "updateScheduledTask": false
             },
             "commandName": "Refresh Movie",
-            "duration": "00:00:00.1173593",
-            "ended": "2026-11-14T06:29:39Z",
+            "duration": "00:00:00.1598595",
+            "ended": "2026-11-23T17:59:08Z",
             "id": 472955,
             "message": "Completed",
             "name": "RefreshMovie",
             "priority": "normal",
-            "queued": "2026-11-14T06:29:39Z",
+            "queued": "2026-11-23T17:59:07Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-14T06:29:39Z",
-            "stateChangeTime": "2026-11-14T06:29:39Z",
+            "started": "2026-11-23T17:59:07Z",
+            "stateChangeTime": "2026-11-23T17:59:07Z",
             "status": "completed",
             "trigger": "unspecified",
             "updateScheduledTask": false
@@ -513,7 +513,7 @@
           "action": "created",
           "resource": {
             "accessible": true,
-            "freeSpace": 9954615296,
+            "freeSpace": 63283335168,
             "id": 2,
             "path": "/downloads",
             "unmappedFolders": []
@@ -530,7 +530,7 @@
         "body": {
           "action": "updated",
           "resource": {
-            "added": "2026-11-14T06:29:39Z",
+            "added": "2026-11-23T17:59:07Z",
             "alternateTitles": [
               {
                 "id": 2804,

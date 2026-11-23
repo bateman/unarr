@@ -16,14 +16,14 @@
     "id": 473009,
     "name": "Backup",
     "priority": "normal",
-    "queued": "2026-11-12T14:23:47Z",
+    "queued": "2026-11-23T17:48:50Z",
     "result": "unknown",
     "sendUpdatesToClient": true,
     "status": "queued",
     "trigger": "manual",
     "updateScheduledTask": false
   },
-  "recordedAt": "2026-11-12T14:23:47Z",
+  "recordedAt": "2026-11-23T17:48:50Z",
   "request": {
     "body": "bodies/command-backup.json",
     "method": "POST",

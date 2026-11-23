@@ -7,10 +7,10 @@
     },
     "status": 400,
     "title": "One or more validation errors occurred.",
-    "traceId": "00-6bb61691f61c284e6de45b2a59bc4599-66be9e6fdef8701e-00",
+    "traceId": "00-273eb2ba00e06ea7d1c67d90ccc8a7df-d4b1f5b9b4861324-00",
     "type": "https://tools.ietf.org/html/rfc9110#section-15.5.1"
   },
-  "recordedAt": "2026-11-14T06:29:39Z",
+  "recordedAt": "2026-11-23T17:59:08Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/blocklist?page=1&pageSize=5&movieIds=%20"

@@ -12,21 +12,21 @@
       "updateScheduledTask": true
     },
     "commandName": "Clear Log",
-    "duration": "00:00:00.0053751",
-    "ended": "2026-11-20T07:24:21Z",
+    "duration": "00:00:00.0075325",
+    "ended": "2026-11-23T17:50:27Z",
     "id": 472956,
     "name": "ClearLog",
     "priority": "normal",
-    "queued": "2026-11-20T07:24:21Z",
+    "queued": "2026-11-23T17:50:27Z",
     "result": "successful",
     "sendUpdatesToClient": true,
-    "started": "2026-11-20T07:24:21Z",
-    "stateChangeTime": "2026-11-20T07:24:21Z",
+    "started": "2026-11-23T17:50:27Z",
+    "stateChangeTime": "2026-11-23T17:50:27Z",
     "status": "completed",
     "trigger": "manual",
     "updateScheduledTask": true
   },
-  "recordedAt": "2026-11-20T07:24:31Z",
+  "recordedAt": "2026-11-23T17:50:37Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/command/472956"

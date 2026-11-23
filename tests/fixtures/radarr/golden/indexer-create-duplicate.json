@@ -13,7 +13,7 @@
       "severity": "error"
     }
   ],
-  "recordedAt": "2026-11-12T14:19:16Z",
+  "recordedAt": "2026-11-23T17:44:21Z",
   "request": {
     "body": "bodies/indexer-create.json",
     "method": "POST",

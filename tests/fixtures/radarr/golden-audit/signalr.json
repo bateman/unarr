@@ -4,7 +4,7 @@
     "messages": [
       {
         "body": {
-          "version": "6.4.4.10685"
+          "version": "7.0.3.10918"
         },
         "name": "version"
       }
@@ -226,6 +226,12 @@
                     "name": "Indonesian",
                     "order": 0,
                     "value": 44
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Irish",
+                    "order": 0,
+                    "value": 58
                   },
                   {
                     "dividerAfter": false,
@@ -674,6 +680,12 @@
                   },
                   {
                     "dividerAfter": false,
+                    "name": "Irish",
+                    "order": 0,
+                    "value": 58
+                  },
+                  {
+                    "dividerAfter": false,
                     "name": "Italian",
                     "order": 0,
                     "value": 5
@@ -924,6 +936,43 @@
         "body": {
           "action": "updated",
           "resource": {
+            "body": {
+              "completionMessage": "Completed",
+              "isExclusive": false,
+              "isLongRunning": true,
+              "isNewMovie": true,
+              "isTypeExclusive": false,
+              "movieIds": [
+                328
+              ],
+              "name": "RefreshMovie",
+              "requiresDiskAccess": false,
+              "sendUpdatesToClient": true,
+              "suppressMessages": false,
+              "trigger": "unspecified",
+              "updateScheduledTask": false
+            },
+            "commandName": "Refresh Movie",
+            "id": 472955,
+            "message": "Updating info for Interstellar",
+            "name": "RefreshMovie",
+            "priority": "normal",
+            "queued": "2026-11-23T17:50:15Z",
+            "result": "unknown",
+            "sendUpdatesToClient": true,
+            "started": "2026-11-23T17:50:15Z",
+            "stateChangeTime": "2026-11-23T17:50:15Z",
+            "status": "started",
+            "trigger": "unspecified",
+            "updateScheduledTask": false
+          }
+        },
+        "name": "command"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
             "addOptions": {
               "addMethod": "manual",
               "ignoreEpisodesWithFiles": false,
@@ -931,7 +980,7 @@
               "monitor": "movieOnly",
               "searchForMovie": false
             },
-            "added": "2026-11-20T07:24:10Z",
+            "added": "2026-11-23T17:50:15Z",
             "alternateTitles": [
               {
                 "id": 2804,
@@ -1201,12 +1250,12 @@
               {
                 "coverType": "poster",
                 "remoteUrl": "https://image.tmdb.org/t/p/original/yQvGrMoipbRoddT0ZR8tPoR7NfX.jpg",
-                "url": "/MediaCover/328/poster.jpg?h=6ea857fa1664e710ba38"
+                "url": "/MediaCover/328/poster.jpg"
               },
               {
                 "coverType": "fanart",
                 "remoteUrl": "https://image.tmdb.org/t/p/original/8sNiAPPYU14PUepFNeSNGUTiHW.jpg",
-                "url": "/MediaCover/328/fanart.jpg?h=09050d90b1d43db56511"
+                "url": "/MediaCover/328/fanart.jpg"
               }
             ],
             "imdbId": "tt0816692",
@@ -1310,43 +1359,6 @@
       },
       {
         "body": {
-          "action": "updated",
-          "resource": {
-            "body": {
-              "completionMessage": "Completed",
-              "isExclusive": false,
-              "isLongRunning": true,
-              "isNewMovie": true,
-              "isTypeExclusive": false,
-              "movieIds": [
-                328
-              ],
-              "name": "RefreshMovie",
-              "requiresDiskAccess": false,
-              "sendUpdatesToClient": true,
-              "suppressMessages": false,
-              "trigger": "unspecified",
-              "updateScheduledTask": false
-            },
-            "commandName": "Refresh Movie",
-            "id": 472955,
-            "message": "Updating info for Interstellar",
-            "name": "RefreshMovie",
-            "priority": "normal",
-            "queued": "2026-11-20T07:24:10Z",
-            "result": "unknown",
-            "sendUpdatesToClient": true,
-            "started": "2026-11-20T07:24:10Z",
-            "stateChangeTime": "2026-11-20T07:24:10Z",
-            "status": "started",
-            "trigger": "unspecified",
-            "updateScheduledTask": false
-          }
-        },
-        "name": "command"
-      },
-      {
-        "body": {
           "action": "sync"
         },
         "name": "system/task"
@@ -1372,17 +1384,17 @@
               "updateScheduledTask": false
             },
             "commandName": "Refresh Movie",
-            "duration": "00:00:00.1558200",
-            "ended": "2026-11-20T07:24:10Z",
+            "duration": "00:00:00.1904521",
+            "ended": "2026-11-23T17:50:16Z",
             "id": 472955,
             "message": "Completed",
             "name": "RefreshMovie",
             "priority": "normal",
-            "queued": "2026-11-20T07:24:10Z",
+            "queued": "2026-11-23T17:50:15Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-20T07:24:10Z",
-            "stateChangeTime": "2026-11-20T07:24:10Z",
+            "started": "2026-11-23T17:50:15Z",
+            "stateChangeTime": "2026-11-23T17:50:15Z",
             "status": "completed",
             "trigger": "unspecified",
             "updateScheduledTask": false
@@ -1394,7 +1406,7 @@
         "body": {
           "action": "updated",
           "resource": {
-            "added": "2026-11-20T07:24:10Z",
+            "added": "2026-11-23T17:50:15Z",
             "alternateTitles": [
               {
                 "id": 2804,
@@ -1780,14 +1792,8 @@
     ]
   },
   {
-    "after": "command-delete-update-log-files",
+    "after": "command-delete-log-files",
     "messages": [
-      {
-        "body": {
-          "action": "sync"
-        },
-        "name": "system/task"
-      },
       {
         "body": {
           "action": "sync"
@@ -1799,6 +1805,12 @@
   {
     "after": "command-clear-blocklist",
     "messages": [
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "system/task"
+      },
       {
         "body": {
           "action": "sync"
@@ -1849,16 +1861,16 @@
               "updateScheduledTask": true
             },
             "commandName": "Clear Log",
-            "duration": "00:00:00.0053751",
-            "ended": "2026-11-20T07:24:21Z",
+            "duration": "00:00:00.0075325",
+            "ended": "2026-11-23T17:50:27Z",
             "id": 472956,
             "name": "ClearLog",
             "priority": "normal",
-            "queued": "2026-11-20T07:24:21Z",
+            "queued": "2026-11-23T17:50:27Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-20T07:24:21Z",
-            "stateChangeTime": "2026-11-20T07:24:21Z",
+            "started": "2026-11-23T17:50:27Z",
+            "stateChangeTime": "2026-11-23T17:50:27Z",
             "status": "completed",
             "trigger": "manual",
             "updateScheduledTask": true
@@ -1882,16 +1894,16 @@
               "updateScheduledTask": true
             },
             "commandName": "Delete Log Files",
-            "duration": "00:00:00.0045804",
-            "ended": "2026-11-20T07:24:21Z",
+            "duration": "00:00:00.0064849",
+            "ended": "2026-11-23T17:50:27Z",
             "id": 472957,
             "name": "DeleteLogFiles",
             "priority": "normal",
-            "queued": "2026-11-20T07:24:21Z",
+            "queued": "2026-11-23T17:50:27Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-20T07:24:21Z",
-            "stateChangeTime": "2026-11-20T07:24:21Z",
+            "started": "2026-11-23T17:50:27Z",
+            "stateChangeTime": "2026-11-23T17:50:27Z",
             "status": "completed",
             "trigger": "manual",
             "updateScheduledTask": true
@@ -1915,18 +1927,18 @@
               "updateScheduledTask": true
             },
             "commandName": "Delete Update Log Files",
-            "duration": "00:00:00.0032792",
-            "ended": "2026-11-20T07:24:21Z",
-            "exception": "System.IO.DirectoryNotFoundException: Could not find a part of the path '/config/UpdateLogs'.\n   at System.IO.Enumeration.FileSystemEnumerator`1.CreateDirectoryHandle(String path, Boolean ignoreNotFound)\n   at System.IO.Enumeration.FileSystemEnumerator`1.Init()\n   at System.IO.Enumeration.FileSystemEnumerable`1..ctor(String directory, FindTransform transform, EnumerationOptions options, Boolean isNormalized)\n   at System.IO.Enumeration.FileSystemEnumerableFactory.UserFiles(String directory, String expression, EnumerationOptions options)\n   at System.IO.Directory.InternalEnumeratePaths(String path, String searchPattern, SearchTarget searchTarget, EnumerationOptions options)\n   at NzbDrone.Common.Disk.DiskProviderBase.GetFiles(String path, Boolean recursive) in ./NzbDrone.Common/Disk/DiskProviderBase.cs:line 168\n   at NzbDrone.Common.Disk.DiskProviderBase.EmptyFolder(String path) in ./NzbDrone.Common/Disk/DiskProviderBase.cs:line 464\n   at NzbDrone.Core.Instrumentation.DeleteLogFilesService.Execute(DeleteUpdateLogFilesCommand message) in ./NzbDrone.Core/Instrumentation/DeleteLogFilesService.cs:line 36\n   at NzbDrone.Core.Messaging.Commands.CommandExecutor.ExecuteCommand[TCommand](TCommand command, CommandModel commandModel) in ./NzbDrone.Core/Messaging/Commands/CommandExecutor.cs:line 81",
+            "duration": "00:00:00.0048560",
+            "ended": "2026-11-23T17:50:27Z",
+            "exception": "System.IO.DirectoryNotFoundException: Could not find a part of the path '/config/UpdateLogs'.\n   at System.IO.Enumeration.FileSystemEnumerator`1.CreateDirectoryHandle(String path, Boolean ignoreNotFound)\n   at System.IO.Enumeration.FileSystemEnumerator`1.Init()\n   at System.IO.Enumeration.FileSystemEnumerable`1..ctor(String directory, FindTransform transform, EnumerationOptions options, Boolean isNormalized, String expression)\n   at System.IO.Enumeration.FileSystemEnumerableFactory.UserFiles(String directory, String expression, EnumerationOptions options)\n   at System.IO.Directory.InternalEnumeratePaths(String path, String searchPattern, SearchTarget searchTarget, EnumerationOptions enumerationOptions)\n   at NzbDrone.Common.Disk.DiskProviderBase.GetFiles(String path, Boolean recursive) in ./NzbDrone.Common/Disk/DiskProviderBase.cs:line 168\n   at NzbDrone.Common.Disk.DiskProviderBase.EmptyFolder(String path) in ./NzbDrone.Common/Disk/DiskProviderBase.cs:line 454\n   at NzbDrone.Core.Instrumentation.DeleteLogFilesService.Execute(DeleteUpdateLogFilesCommand message) in ./NzbDrone.Core/Instrumentation/DeleteLogFilesService.cs:line 36\n   at NzbDrone.Core.Messaging.Commands.CommandExecutor.ExecuteCommand[TCommand](TCommand command, CommandModel commandModel) in ./NzbDrone.Core/Messaging/Commands/CommandExecutor.cs:line 81",
             "id": 472958,
             "message": "Failed",
             "name": "DeleteUpdateLogFiles",
             "priority": "normal",
-            "queued": "2026-11-20T07:24:21Z",
+            "queued": "2026-11-23T17:50:27Z",
             "result": "unknown",
             "sendUpdatesToClient": true,
-            "started": "2026-11-20T07:24:21Z",
-            "stateChangeTime": "2026-11-20T07:24:21Z",
+            "started": "2026-11-23T17:50:27Z",
+            "stateChangeTime": "2026-11-23T17:50:27Z",
             "status": "failed",
             "trigger": "manual",
             "updateScheduledTask": true
@@ -1950,16 +1962,16 @@
               "updateScheduledTask": true
             },
             "commandName": "Clear Blocklist",
-            "duration": "00:00:00.0026097",
-            "ended": "2026-11-20T07:24:21Z",
+            "duration": "00:00:00.0043836",
+            "ended": "2026-11-23T17:50:27Z",
             "id": 472959,
             "name": "ClearBlocklist",
             "priority": "normal",
-            "queued": "2026-11-20T07:24:21Z",
+            "queued": "2026-11-23T17:50:27Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-20T07:24:21Z",
-            "stateChangeTime": "2026-11-20T07:24:21Z",
+            "started": "2026-11-23T17:50:27Z",
+            "stateChangeTime": "2026-11-23T17:50:27Z",
             "status": "completed",
             "trigger": "manual",
             "updateScheduledTask": true
@@ -1984,17 +1996,17 @@
               "updateScheduledTask": true
             },
             "commandName": "Application Check Update",
-            "duration": "00:00:00.0076292",
-            "ended": "2026-11-20T07:24:21Z",
+            "duration": "00:00:00.0159628",
+            "ended": "2026-11-23T17:50:27Z",
             "id": 472960,
             "message": "No update available",
             "name": "ApplicationCheckUpdate",
             "priority": "normal",
-            "queued": "2026-11-20T07:24:21Z",
+            "queued": "2026-11-23T17:50:27Z",
             "result": "successful",
             "sendUpdatesToClient": true,
-            "started": "2026-11-20T07:24:21Z",
-            "stateChangeTime": "2026-11-20T07:24:21Z",
+            "started": "2026-11-23T17:50:27Z",
+            "stateChangeTime": "2026-11-23T17:50:27Z",
             "status": "completed",
             "trigger": "manual",
             "updateScheduledTask": true

@@ -12,7 +12,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685"
+        "X-Plex-Version": "7.0.3.10918"
       },
       "service": "plex"
     },
@@ -38,7 +38,7 @@
                 "value": "```/movies/Last Night in Soho (2021)/Last Night in Soho (2021) {tmdb-576845} - [Bluray-1080p][AAC 1.0][x264]-MIRCrew.mkv```"
               }
             ],
-            "timestamp": "2026-11-12T14:24:31.5843155Z",
+            "timestamp": "2026-11-23T17:49:35.1430837Z",
             "title": "Last Night in Soho (2021)",
             "url": "https://www.themoviedb.org/movie/576845"
           }
@@ -94,7 +94,7 @@
           "year": 2021
         },
         "movieFile": {
-          "dateAdded": "2026-11-12T14:24:19.497687Z",
+          "dateAdded": "2026-11-23T17:49:23.0287403Z",
           "id": 411,
           "indexerFlags": "G_Freeleech",
           "languages": [
@@ -149,7 +149,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685"
+        "X-Plex-Version": "7.0.3.10918"
       },
       "service": "plex"
     },
@@ -165,7 +165,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685"
+        "X-Plex-Version": "7.0.3.10918"
       },
       "service": "plex"
     },
@@ -181,13 +181,13 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/media/movies/Last Night in Soho (2021)"
       },
       "service": "plex"
     }
   ],
-  "recordedAt": "2026-11-12T14:24:43Z",
+  "recordedAt": "2026-11-23T17:49:47Z",
   "request": {
     "method": "GET",
     "path": "/mock/notifications",

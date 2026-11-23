@@ -6,13 +6,13 @@
     "branch": "master",
     "instanceName": "Radarr",
     "isProduction": true,
-    "release": "6.4.4.10685-master",
+    "release": "7.0.3.10918-master",
     "theme": "auto",
     "urlBase": "",
     "userHash": "53984e57",
-    "version": "6.4.4.10685"
+    "version": "7.0.3.10918"
   },
-  "recordedAt": "2026-11-12T14:19:07Z",
+  "recordedAt": "2026-11-23T17:44:12Z",
   "request": {
     "method": "GET",
     "path": "/initialize.json"

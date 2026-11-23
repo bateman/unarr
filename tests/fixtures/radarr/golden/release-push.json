@@ -1,9 +1,9 @@
 {
   "body": [
     {
-      "age": 3,
-      "ageHours": 91.32527407852778,
-      "ageMinutes": 5479.516444738333,
+      "age": 14,
+      "ageHours": 358.7431268171944,
+      "ageMinutes": 21524.58760905,
       "approved": false,
       "customFormatScore": 0,
       "customFormats": [],
@@ -57,7 +57,7 @@
       "tmdbId": 0
     }
   ],
-  "recordedAt": "2026-11-12T14:19:30Z",
+  "recordedAt": "2026-11-23T17:44:35Z",
   "request": {
     "body": "bodies/release-push.json",
     "method": "POST",

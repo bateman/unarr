@@ -2245,7 +2245,7 @@
       "upgradeAllowed": false
     }
   ],
-  "recordedAt": "2026-11-20T14:53:37Z",
+  "recordedAt": "2026-11-23T17:51:05Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/qualityprofile"

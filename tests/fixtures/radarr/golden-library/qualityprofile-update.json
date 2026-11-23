@@ -684,7 +684,7 @@
     "name": "Library Copy 2",
     "upgradeAllowed": true
   },
-  "recordedAt": "2026-11-13T12:41:29Z",
+  "recordedAt": "2026-11-23T17:56:07Z",
   "request": {
     "body": "bodies/qualityprofile-update.json",
     "method": "PUT",

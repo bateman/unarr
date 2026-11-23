@@ -2,7 +2,12 @@
   "body": [
     {
       "customFormatScore": 0,
-      "customFormats": [],
+      "customFormats": [
+        {
+          "id": 53,
+          "name": "AAC"
+        }
+      ],
       "downloadId": "13706ED57ADBE030F510BEDCD37595376901117C",
       "folderName": "c8949b89db6f20a1e049aa8170a7a05c",
       "id": 1955259751,
@@ -206,7 +211,7 @@
       "size": 119980
     }
   ],
-  "recordedAt": "2026-11-12T14:24:19Z",
+  "recordedAt": "2026-11-23T17:49:22Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/manualimport?downloadId=13706ED57ADBE030F510BEDCD37595376901117C&filterExistingFiles=true"

@@ -154,9 +154,90 @@
           "audioCodec": "DTS",
           "audioLanguages": "ita/ita/eng/eng/fre/fre/spa/spa/ger/ger",
           "audioStreamCount": 10,
+          "audioStreams": [
+            {
+              "bitrate": 768000,
+              "channelPositions": "5.1(side)",
+              "channels": 5.1,
+              "codec": "DTS",
+              "language": "ita",
+              "profile": "DTS"
+            },
+            {
+              "bitrate": 0,
+              "channels": 0,
+              "codec": "",
+              "language": "ita"
+            },
+            {
+              "bitrate": 0,
+              "channels": 0,
+              "codec": "",
+              "language": "eng"
+            },
+            {
+              "bitrate": 0,
+              "channels": 0,
+              "codec": "",
+              "language": "eng"
+            },
+            {
+              "bitrate": 0,
+              "channels": 0,
+              "codec": "",
+              "language": "fre"
+            },
+            {
+              "bitrate": 0,
+              "channels": 0,
+              "codec": "",
+              "language": "fre"
+            },
+            {
+              "bitrate": 0,
+              "channels": 0,
+              "codec": "",
+              "language": "spa"
+            },
+            {
+              "bitrate": 0,
+              "channels": 0,
+              "codec": "",
+              "language": "spa"
+            },
+            {
+              "bitrate": 0,
+              "channels": 0,
+              "codec": "",
+              "language": "ger"
+            },
+            {
+              "bitrate": 0,
+              "channels": 0,
+              "codec": "",
+              "language": "ger"
+            }
+          ],
           "resolution": "1920x1040",
           "runTime": "2:11:30",
           "scanType": "Progressive",
+          "subtitleStreams": [
+            {
+              "language": "ita"
+            },
+            {
+              "language": "eng"
+            },
+            {
+              "language": "fre"
+            },
+            {
+              "language": "spa"
+            },
+            {
+              "language": "ger"
+            }
+          ],
           "subtitles": "ita/eng/fre/spa/ger",
           "videoBitDepth": 8,
           "videoBitrate": 0,
@@ -575,7 +656,7 @@
       "youTubeTrailerId": "u82n0e1mgmQ"
     }
   ],
-  "recordedAt": "2026-11-12T14:19:14Z",
+  "recordedAt": "2026-11-23T17:44:18Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/calendar?start=2004-08-01T00:00:00Z&end=2004-08-31T00:00:00Z&unmonitored=true"

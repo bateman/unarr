@@ -4,7 +4,7 @@
     "pageSize": 20,
     "records": [
       {
-        "added": "2026-11-12T14:20:49Z",
+        "added": "2026-11-23T17:45:53Z",
         "customFormatScore": -10000,
         "customFormats": [
           {
@@ -23,7 +23,7 @@
         "downloadClient": "Mock SABnzbd",
         "downloadClientHasPostImportCategory": false,
         "downloadId": "SABnzbd_nzo_mock5",
-        "estimatedCompletionTime": "2026-11-12T14:34:24Z",
+        "estimatedCompletionTime": "2026-11-23T17:59:28Z",
         "id": 2039898284,
         "indexer": "Mock Newznab (Prowlarr)",
         "languages": [
@@ -58,7 +58,7 @@
         "trackedDownloadStatus": "ok"
       },
       {
-        "added": "2026-11-12T14:19:35Z",
+        "added": "2026-11-23T17:44:39Z",
         "customFormatScore": 0,
         "customFormats": [
           {
@@ -69,7 +69,7 @@
         "downloadClient": "Mock Transmission",
         "downloadClientHasPostImportCategory": false,
         "downloadId": "5AE419C220561D2F40DDBB4026B5D0121DCC040E",
-        "estimatedCompletionTime": "2026-11-12T14:34:24Z",
+        "estimatedCompletionTime": "2026-11-23T17:59:28Z",
         "id": 936833475,
         "indexer": "Mock Torznab (Prowlarr)",
         "languages": [
@@ -83,7 +83,7 @@
           }
         ],
         "movieId": 70,
-        "outputPath": "/downloads/movies/bc295ecb0fb56b9e5df74be19469cef4",
+        "outputPath": "/downloads/bc295ecb0fb56b9e5df74be19469cef4",
         "protocol": "torrent",
         "quality": {
           "quality": {
@@ -113,7 +113,7 @@
     "sortKey": "timeleft",
     "totalRecords": 2
   },
-  "recordedAt": "2026-11-12T14:24:31Z",
+  "recordedAt": "2026-11-23T17:49:35Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending&includeUnknownMovieItems=true&includeMovie=false"

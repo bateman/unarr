@@ -15,14 +15,14 @@
     "id": 472999,
     "name": "RescanMovie",
     "priority": "normal",
-    "queued": "2026-11-12T14:22:47Z",
+    "queued": "2026-11-23T17:47:50Z",
     "result": "unknown",
     "sendUpdatesToClient": true,
     "status": "queued",
     "trigger": "manual",
     "updateScheduledTask": true
   },
-  "recordedAt": "2026-11-12T14:22:47Z",
+  "recordedAt": "2026-11-23T17:47:50Z",
   "request": {
     "body": "bodies/command-rescan-all.json",
     "method": "POST",

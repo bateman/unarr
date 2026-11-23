@@ -73,7 +73,7 @@
             "thumbnail": {
               "url": "https://image.tmdb.org/t/p/original/vfn1feL0V9HNSXuLLpaxAW8O6LO.jpg"
             },
-            "timestamp": "2026-11-12T14:23:07.1622830Z",
+            "timestamp": "2026-11-23T17:48:10.6818468Z",
             "title": "Nightmare Alley (2021)",
             "url": "https://www.themoviedb.org/movie/597208"
           }
@@ -94,6 +94,10 @@
         "customFormatInfo": {
           "customFormatScore": -10000,
           "customFormats": [
+            {
+              "id": 53,
+              "name": "AAC"
+            },
             {
               "id": 58,
               "name": "Language not Italian"
@@ -136,7 +140,7 @@
           "year": 2021
         },
         "movieFile": {
-          "dateAdded": "2026-11-12T14:23:07.1310448Z",
+          "dateAdded": "2026-11-23T17:48:10.6490763Z",
           "id": 409,
           "indexerFlags": "0",
           "languages": [
@@ -202,7 +206,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685"
+        "X-Plex-Version": "7.0.3.10918"
       },
       "service": "plex"
     },
@@ -218,7 +222,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/BlacKkKlansman (2018)"
       },
       "service": "plex"
@@ -235,7 +239,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/It's Never Over, Jeff Buckley (2025)"
       },
       "service": "plex"
@@ -252,7 +256,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/A Girl Walks Home Alone at Night (2014)"
       },
       "service": "plex"
@@ -269,7 +273,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Adventureland (2009)"
       },
       "service": "plex"
@@ -286,7 +290,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Air (2023)"
       },
       "service": "plex"
@@ -303,7 +307,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Alien Romulus (2024)"
       },
       "service": "plex"
@@ -320,7 +324,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/American Pie (1999)"
       },
       "service": "plex"
@@ -337,7 +341,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Batman Begins (2005)"
       },
       "service": "plex"
@@ -354,7 +358,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Beau Is Afraid (2023)"
       },
       "service": "plex"
@@ -371,7 +375,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Blockers (2018)"
       },
       "service": "plex"
@@ -388,7 +392,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Booksmart (2019)"
       },
       "service": "plex"
@@ -405,7 +409,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Bugonia (2025)"
       },
       "service": "plex"
@@ -422,7 +426,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Cloverfield (2008)"
       },
       "service": "plex"
@@ -439,7 +443,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Console Wars (2020)"
       },
       "service": "plex"
@@ -456,7 +460,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Constantine (2005)"
       },
       "service": "plex"
@@ -473,7 +477,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Deadwood The Movie (2019)"
       },
       "service": "plex"
@@ -490,7 +494,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/District 9 (2009)"
       },
       "service": "plex"
@@ -507,7 +511,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Edge of Tomorrow (2014)"
       },
       "service": "plex"
@@ -524,7 +528,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Fight Club (1999)"
       },
       "service": "plex"
@@ -541,7 +545,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Final Destination (2000)"
       },
       "service": "plex"
@@ -558,7 +562,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/From Bedrooms to Billions (2014)"
       },
       "service": "plex"
@@ -575,7 +579,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/From Bedrooms to Billions The Amiga Years! (2016)"
       },
       "service": "plex"
@@ -592,7 +596,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/From Bedrooms to Billions The PlayStation Revolution (2020)"
       },
       "service": "plex"
@@ -609,7 +613,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/GoodFellas (1990)"
       },
       "service": "plex"
@@ -626,7 +630,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Hot Tub Time Machine (2010)"
       },
       "service": "plex"
@@ -643,7 +647,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Indiana Jones and the Last Crusade (1989)"
       },
       "service": "plex"
@@ -660,7 +664,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Infinity Pool (2023)"
       },
       "service": "plex"
@@ -677,7 +681,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Invasion of the Body Snatchers (1978)"
       },
       "service": "plex"
@@ -694,7 +698,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Johnny Stecchino (1991)"
       },
       "service": "plex"
@@ -711,7 +715,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Juror #2 (2024)"
       },
       "service": "plex"
@@ -728,7 +732,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Leap Year (2010)"
       },
       "service": "plex"
@@ -745,7 +749,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Mad Max Fury Road (2015)"
       },
       "service": "plex"
@@ -762,7 +766,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/My Super Psycho Sweet 16 (2009)"
       },
       "service": "plex"
@@ -779,7 +783,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/New Order (2020)"
       },
       "service": "plex"
@@ -796,7 +800,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Pearl (2022)"
       },
       "service": "plex"
@@ -813,7 +817,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Point Break (1991)"
       },
       "service": "plex"
@@ -830,7 +834,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Predator Killer of Killers (2025)"
       },
       "service": "plex"
@@ -847,7 +851,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Project X (2012)"
       },
       "service": "plex"
@@ -864,7 +868,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Raw (2016)"
       },
       "service": "plex"
@@ -881,7 +885,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Rental Family (2025)"
       },
       "service": "plex"
@@ -898,7 +902,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Reservoir Dogs (1992)"
       },
       "service": "plex"
@@ -915,7 +919,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Road Trip (2000)"
       },
       "service": "plex"
@@ -932,7 +936,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Running Scared (2006)"
       },
       "service": "plex"
@@ -949,7 +953,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Schindler's List (1993)"
       },
       "service": "plex"
@@ -966,7 +970,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Serendipity (2001)"
       },
       "service": "plex"
@@ -983,7 +987,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/She’s Out of My League (2010)"
       },
       "service": "plex"
@@ -1000,7 +1004,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Signs (2002)"
       },
       "service": "plex"
@@ -1017,7 +1021,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Stillwater (2021)"
       },
       "service": "plex"
@@ -1034,7 +1038,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Terminator 2 Judgment Day (1991)"
       },
       "service": "plex"
@@ -1051,7 +1055,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/The Dark Knight (2008)"
       },
       "service": "plex"
@@ -1068,7 +1072,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/The Gorge (2025)"
       },
       "service": "plex"
@@ -1085,7 +1089,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/The Life of Chuck (2025)"
       },
       "service": "plex"
@@ -1102,7 +1106,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/The Matrix (1999)"
       },
       "service": "plex"
@@ -1119,7 +1123,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/The Northman (2022)"
       },
       "service": "plex"
@@ -1136,7 +1140,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/The Terminator (1984)"
       },
       "service": "plex"
@@ -1153,7 +1157,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/The Thing (2011)"
       },
       "service": "plex"
@@ -1170,7 +1174,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/The Usual Suspects (1995)"
       },
       "service": "plex"
@@ -1187,7 +1191,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/The Way Way Back (2013)"
       },
       "service": "plex"
@@ -1204,7 +1208,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Together (2025)"
       },
       "service": "plex"
@@ -1221,7 +1225,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Top Gun (1986)"
       },
       "service": "plex"
@@ -1238,7 +1242,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Trading Places (1983)"
       },
       "service": "plex"
@@ -1255,7 +1259,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Triangle (2009)"
       },
       "service": "plex"
@@ -1272,7 +1276,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/War of the Worlds (2005)"
       },
       "service": "plex"
@@ -1289,7 +1293,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/WarGames (1983)"
       },
       "service": "plex"
@@ -1306,7 +1310,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Wedding Crashers (2005)"
       },
       "service": "plex"
@@ -1323,7 +1327,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Wolfs (2024)"
       },
       "service": "plex"
@@ -1340,7 +1344,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/You've Got Mail (1998)"
       },
       "service": "plex"
@@ -1357,7 +1361,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/The Exorcist (1973) {tmdb-9552}"
       },
       "service": "plex"
@@ -1374,7 +1378,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Dominion Prequel to The Exorcist (2005) {tmdb-12700}"
       },
       "service": "plex"
@@ -1391,7 +1395,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/The Exorcist Believer (2023) {tmdb-807172}"
       },
       "service": "plex"
@@ -1408,7 +1412,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Project Hail Mary (2026) {tmdb-687163}"
       },
       "service": "plex"
@@ -1425,7 +1429,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Animal Kingdom (2010) {tmdb-44629}"
       },
       "service": "plex"
@@ -1442,7 +1446,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/The Courier (2020)"
       },
       "service": "plex"
@@ -1459,7 +1463,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/The Dog Stars (2026) {tmdb-1384216}"
       },
       "service": "plex"
@@ -1476,7 +1480,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/The 'Burbs (1989) {tmdb-11974}"
       },
       "service": "plex"
@@ -1493,7 +1497,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Love Hard (2021) {tmdb-734265}"
       },
       "service": "plex"
@@ -1510,7 +1514,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/The Martian (2015) {tmdb-286217}"
       },
       "service": "plex"
@@ -1527,7 +1531,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Heart of the Beast (2026) {tmdb-1263337}"
       },
       "service": "plex"
@@ -1544,7 +1548,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Fuze (2026) {tmdb-1242265}"
       },
       "service": "plex"
@@ -1561,7 +1565,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Gattaca (1997) {tmdb-782}"
       },
       "service": "plex"
@@ -1578,7 +1582,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Memento (2000) {tmdb-77}"
       },
       "service": "plex"
@@ -1595,7 +1599,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Teenage Sex and Death at Camp Miasma (2026) {tmdb-1240889}"
       },
       "service": "plex"
@@ -1612,7 +1616,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Good Luck Have Fun Dont Die (2026) {tmdb-1119449}"
       },
       "service": "plex"
@@ -1629,7 +1633,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Bumblebee (2018) {tmdb-424783}"
       },
       "service": "plex"
@@ -1646,7 +1650,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Chronicle (2012) {tmdb-76726}"
       },
       "service": "plex"
@@ -1663,7 +1667,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Perdiamoci di vista (1994) {tmdb-58189}"
       },
       "service": "plex"
@@ -1680,7 +1684,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Buddy (2026) {tmdb-1514026}"
       },
       "service": "plex"
@@ -1697,7 +1701,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/The Death of Robin Hood (2026) {tmdb-1284465}"
       },
       "service": "plex"
@@ -1714,7 +1718,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/One Night at McCool's (2001) {tmdb-2144}"
       },
       "service": "plex"
@@ -1731,7 +1735,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Sinister (2012) {tmdb-82507}"
       },
       "service": "plex"
@@ -1748,7 +1752,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/(500) Days of Summer"
       },
       "service": "plex"
@@ -1765,7 +1769,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Alta tensione (2003)"
       },
       "service": "plex"
@@ -1782,7 +1786,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Drive (2011)"
       },
       "service": "plex"
@@ -1799,7 +1803,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Slither (2006)"
       },
       "service": "plex"
@@ -1816,7 +1820,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Splinter (2008)"
       },
       "service": "plex"
@@ -1833,7 +1837,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Superbad (2007)"
       },
       "service": "plex"
@@ -1850,7 +1854,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Two Night Stand (2014) {tmdb-286554}"
       },
       "service": "plex"
@@ -1867,7 +1871,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/[Rec] (2007)"
       },
       "service": "plex"
@@ -1884,7 +1888,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Van Helsing (2004) {tmdb-7131}"
       },
       "service": "plex"
@@ -1901,7 +1905,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Mutiny (2026) {tmdb-1288445}"
       },
       "service": "plex"
@@ -1918,7 +1922,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Predestination (2014) {tmdb-206487}"
       },
       "service": "plex"
@@ -1935,7 +1939,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Nightmare Alley (2021)"
       },
       "service": "plex"
@@ -2018,7 +2022,7 @@
             "thumbnail": {
               "url": "https://image.tmdb.org/t/p/original/VHSzNBTwxV8vh7wylo7O9CLdac.jpg"
             },
-            "timestamp": "2026-11-12T14:23:23.2730570Z",
+            "timestamp": "2026-11-23T17:48:26.7042043Z",
             "title": "The Holdovers (2023)",
             "url": "https://www.themoviedb.org/movie/840430"
           }
@@ -2038,7 +2042,12 @@
         "applicationUrl": "",
         "customFormatInfo": {
           "customFormatScore": 0,
-          "customFormats": []
+          "customFormats": [
+            {
+              "id": 53,
+              "name": "AAC"
+            }
+          ]
         },
         "downloadClient": "Mock Transmission",
         "downloadClientType": "Transmission",
@@ -2080,7 +2089,7 @@
           "year": 2023
         },
         "movieFile": {
-          "dateAdded": "2026-11-12T14:23:23.2466964Z",
+          "dateAdded": "2026-11-23T17:48:26.6812634Z",
           "id": 410,
           "indexerFlags": "0",
           "languages": [
@@ -2154,7 +2163,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685"
+        "X-Plex-Version": "7.0.3.10918"
       },
       "service": "plex"
     },
@@ -2170,13 +2179,13 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/The Holdovers (2023)"
       },
       "service": "plex"
     }
   ],
-  "recordedAt": "2026-11-12T14:23:35Z",
+  "recordedAt": "2026-11-23T17:48:38Z",
   "request": {
     "method": "GET",
     "path": "/mock/notifications",

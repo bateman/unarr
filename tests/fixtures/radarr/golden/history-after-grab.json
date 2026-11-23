@@ -12,9 +12,9 @@
           }
         ],
         "data": {
-          "age": "4",
-          "ageHours": "97.75973041075",
-          "ageMinutes": "5865.583824753333",
+          "age": "15",
+          "ageHours": "365.17758516630556",
+          "ageMinutes": "21910.655110098334",
           "customFormatScore": "0",
           "downloadClient": "Transmission",
           "downloadClientName": "Mock Transmission",
@@ -34,7 +34,7 @@
           "tmdbId": "0",
           "torrentInfoHash": "2076338e94f6fc307b43e478146e941fbd6ef7ba"
         },
-        "date": "2026-11-12T14:19:35Z",
+        "date": "2026-11-23T17:44:39Z",
         "downloadId": "5AE419C220561D2F40DDBB4026B5D0121DCC040E",
         "eventType": "grabbed",
         "id": 1011,
@@ -98,7 +98,7 @@
             "tarot cards",
             "violence"
           ],
-          "lastSearchTime": "2026-11-12T14:19:28Z",
+          "lastSearchTime": "2026-11-23T17:44:33Z",
           "minimumAvailability": "released",
           "monitored": true,
           "movieFileId": 0,
@@ -175,9 +175,9 @@
         "customFormatScore": 0,
         "customFormats": [],
         "data": {
-          "age": "2",
-          "ageHours": "67.24251997538889",
-          "ageMinutes": "4034.5511986516667",
+          "age": "13",
+          "ageHours": "334.6603701281945",
+          "ageMinutes": "20079.622207821667",
           "customFormatScore": "0",
           "downloadClient": "qBittorrent",
           "downloadClientName": "Mock qBittorrent",
@@ -197,7 +197,7 @@
           "tmdbId": "0",
           "torrentInfoHash": "d0c1309e36cdb92c5d7b4abfd794f9bdff969920"
         },
-        "date": "2026-11-12T14:19:33Z",
+        "date": "2026-11-23T17:44:37Z",
         "downloadId": "13706ED57ADBE030F510BEDCD37595376901117C",
         "eventType": "grabbed",
         "id": 1010,
@@ -338,9 +338,9 @@
         "customFormatScore": 0,
         "customFormats": [],
         "data": {
-          "age": "2",
-          "ageHours": "65.0919609173611",
-          "ageMinutes": "3905.5176552",
+          "age": "13",
+          "ageHours": "332.5098168257222",
+          "ageMinutes": "19950.589009685",
           "customFormatScore": "0",
           "downloadClient": "SABnzbd",
           "downloadClientName": "Mock SABnzbd",
@@ -359,7 +359,7 @@
           "size": "7945689497",
           "tmdbId": "840430"
         },
-        "date": "2026-11-12T14:19:31Z",
+        "date": "2026-11-23T17:44:35Z",
         "downloadId": "SABnzbd_nzo_mock1",
         "eventType": "grabbed",
         "id": 1009,
@@ -422,7 +422,7 @@
             "winter",
             "winter break"
           ],
-          "lastSearchTime": "2026-11-12T14:19:24Z",
+          "lastSearchTime": "2026-11-23T17:44:29Z",
           "minimumAvailability": "released",
           "monitored": true,
           "movieFileId": 0,
@@ -826,7 +826,7 @@
     "sortKey": "date",
     "totalRecords": 672
   },
-  "recordedAt": "2026-11-12T14:19:47Z",
+  "recordedAt": "2026-11-23T17:44:51Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/history?page=1&pageSize=5&sortKey=date&sortDirection=descending&includeMovie=true"
