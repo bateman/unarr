@@ -418,7 +418,7 @@ fn process_folder(
     };
     let folder_info = parse_movie_title(&folder_name, false);
     let files = filter_paths(root_folder, &video_files(base_folder, true), true);
-    let probes = Probes::probe_all(&files);
+    let probes = Probes::probe_all_for(&files, crate::Personality::Radarr);
     let scene = scene_source(&movie, base_folder);
     let tracked_flags = tracked
         .as_ref()
@@ -548,7 +548,10 @@ fn try_process_file(
         );
         return Ok(Some(map_decision(env, decision, root_folder, download_id, None)));
     };
-    let probes = Probes::probe_all(std::slice::from_ref(&file.to_string()));
+    let probes = Probes::probe_all_for(
+        std::slice::from_ref(&file.to_string()),
+        crate::Personality::Radarr,
+    );
     let scene = scene_source(&movie, base_folder);
     let item = tracked.as_ref().map(|t| t.item.clone());
     let tracked_flags = tracked
@@ -665,7 +668,9 @@ pub fn reprocess_item(
     };
     decide::score_formats(&env.catalog, &mut local);
     let media_info = (!existing_file || env.config.enable_media_info)
-        .then(|| Probes::probe_all(std::slice::from_ref(&req.path)).get(&req.path))
+        .then(|| {
+            Probes::probe_all_for(std::slice::from_ref(&req.path), crate::Personality::Radarr).get(&req.path)
+        })
         .flatten();
     let env2 = env.clone();
     let indexer_flags = req.indexer_flags;
@@ -761,7 +766,10 @@ pub fn execute(
             local.scene_source = !existing_file;
         }
         let media_info = (!existing_file || env.config.enable_media_info)
-            .then(|| Probes::probe_all(std::slice::from_ref(&file.path)).get(&file.path))
+            .then(|| {
+                Probes::probe_all_for(std::slice::from_ref(&file.path), crate::Personality::Radarr)
+                    .get(&file.path)
+            })
             .flatten();
         let item = tracked.as_ref().map(|t| t.item.clone());
         let (file2, catalog, item2) = (file.clone(), env.catalog.clone(), item.clone());

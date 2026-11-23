@@ -110,21 +110,11 @@ fn media_info_json(file: &MovieFile) -> Option<Value> {
         "audioChannels",
         Value::Number(serde_json::Number::from_f64(format::audio_channels(raw)).unwrap_or_else(|| 0.into())),
     );
-    o.opt(
-        "audioCodec",
-        format::audio_codec(
-            format::str(raw, "audioFormat"),
-            format::str(raw, "audioCodecID").unwrap_or(""),
-            format::str(raw, "audioProfile").unwrap_or(""),
-        ),
-    );
-    o.set(
-        "audioLanguages",
-        json!(distinct(format::list(raw, "audioLanguages"))),
-    );
+    o.opt("audioCodec", format::primary_audio(raw).codec());
+    o.set("audioLanguages", json!(distinct(format::audio_languages(raw))));
     o.set("height", json!(format::int(raw, "height")));
     o.set("width", json!(format::int(raw, "width")));
-    o.set("subtitles", json!(distinct(format::list(raw, "subtitles"))));
+    o.set("subtitles", json!(distinct(format::subtitle_languages(raw))));
     o.opt(
         "videoCodec",
         format::video_codec(

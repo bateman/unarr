@@ -14,7 +14,9 @@
 //! runs; the tests still use the originals' build when `make ui` left it in
 //! `.cache`.
 
+use crate::mediafiles::format;
 use crate::sync::Recover;
+use crate::Personality;
 use std::path::{Path, PathBuf};
 use std::process::Command;
 use std::sync::{Mutex, OnceLock};
@@ -23,6 +25,28 @@ use serde_json::{json, Map, Value};
 
 pub const CURRENT_MEDIA_INFO_SCHEMA_REVISION: i64 = 11;
 pub const MINIMUM_MEDIA_INFO_SCHEMA_REVISION: i64 = 8;
+
+/// Radarr's revisions since its media info keeps every audio and subtitle
+/// stream (Radarr 7, `MediaInfoModel` revision 16): a file probed before is
+/// probed again at the next scan.
+pub const RADARR_CURRENT_MEDIA_INFO_SCHEMA_REVISION: i64 = 16;
+pub const RADARR_MINIMUM_MEDIA_INFO_SCHEMA_REVISION: i64 = 16;
+
+/// The revision a personality's probe writes.
+pub fn current_schema_revision(personality: Personality) -> i64 {
+    match personality {
+        Personality::Radarr => RADARR_CURRENT_MEDIA_INFO_SCHEMA_REVISION,
+        Personality::Sonarr | Personality::Lidarr => CURRENT_MEDIA_INFO_SCHEMA_REVISION,
+    }
+}
+
+/// The oldest revision a personality still reads without probing again.
+pub fn minimum_schema_revision(personality: Personality) -> i64 {
+    match personality {
+        Personality::Radarr => RADARR_MINIMUM_MEDIA_INFO_SCHEMA_REVISION,
+        Personality::Sonarr | Personality::Lidarr => MINIMUM_MEDIA_INFO_SCHEMA_REVISION,
+    }
+}
 
 const VALID_HDR_COLOUR_PRIMARIES: &[&str] = &["bt2020"];
 const HLG_TRANSFER_FUNCTIONS: &[&str] = &["arib-std-b67"];
@@ -46,7 +70,7 @@ impl MediaInfo {
     }
 
     pub fn audio_stream_count(&self) -> i64 {
-        int(&self.model, "audioStreamCount")
+        format::audio_stream_count(&self.model)
     }
 
     pub fn width(&self) -> i64 {
@@ -58,11 +82,7 @@ impl MediaInfo {
     }
 
     pub fn audio_languages(&self) -> Vec<String> {
-        self.model
-            .get("audioLanguages")
-            .and_then(Value::as_array)
-            .map(|a| a.iter().filter_map(Value::as_str).map(String::from).collect())
-            .unwrap_or_default()
+        format::audio_languages(&self.model)
     }
 }
 
@@ -534,9 +554,17 @@ pub fn hdr_format(
     "none"
 }
 
-/// `GetMediaInfo`: `None` when the file is a disk image or a stream file,
-/// or when ffprobe cannot read it (logged, as the originals do).
+/// `GetMediaInfo` in Sonarr's shape: see [`probe_for`].
 pub fn probe(file: &Path) -> Option<MediaInfo> {
+    probe_for(file, Personality::Sonarr)
+}
+
+/// `GetMediaInfo`: `None` when the file is a disk image or a stream file,
+/// or when ffprobe cannot read it (logged, as the originals do). The model
+/// has the shape of the personality's original: Sonarr's keeps the primary
+/// audio stream's fields and the lists of languages, Radarr's one entry per
+/// audio and subtitle stream.
+pub fn probe_for(file: &Path, personality: Personality) -> Option<MediaInfo> {
     let ext = file
         .extension()
         .and_then(|e| e.to_str())
@@ -545,7 +573,7 @@ pub fn probe(file: &Path) -> Option<MediaInfo> {
     if crate::parser::media_extensions::is_disk_or_stream_extension(&ext) {
         return None;
     }
-    match probe_inner(file) {
+    match probe_inner(file, personality) {
         Ok(info) => Some(info),
         Err(e) => {
             tracing::error!(file = %file.display(), error = %e, "unable to parse media info from file");
@@ -554,7 +582,7 @@ pub fn probe(file: &Path) -> Option<MediaInfo> {
     }
 }
 
-fn probe_inner(file: &Path) -> anyhow::Result<MediaInfo> {
+fn probe_inner(file: &Path, personality: Personality) -> anyhow::Result<MediaInfo> {
     if !file.is_file() {
         anyhow::bail!("media file does not exist: {}", file.display());
     }
@@ -628,7 +656,7 @@ fn probe_inner(file: &Path) -> anyhow::Result<MediaInfo> {
             model.insert(k.to_string(), v);
         }
     };
-    put("schemaRevision", json!(CURRENT_MEDIA_INFO_SCHEMA_REVISION));
+    put("schemaRevision", json!(current_schema_revision(personality)));
     put("containerFormat", opt(str_of(format, "format_name")));
     put("videoFormat", opt(video.and_then(|v| str_of(v, "codec_name"))));
     put(
@@ -669,38 +697,51 @@ fn probe_inner(file: &Path) -> anyhow::Result<MediaInfo> {
         "width",
         json!(video.and_then(|v| v["width"].as_i64()).unwrap_or(0)),
     );
-    put("audioFormat", opt(audio.and_then(|a| str_of(a, "codec_name"))));
-    put(
-        "audioCodecID",
-        opt(audio.and_then(|a| str_of(a, "codec_tag_string"))),
-    );
-    put("audioProfile", opt(audio.and_then(|a| str_of(a, "profile"))));
-    put("audioBitrate", json!(audio.map(bit_rate).unwrap_or(0)));
+    let streams_shape = personality == Personality::Radarr;
+    if !streams_shape {
+        put("audioFormat", opt(audio.and_then(|a| str_of(a, "codec_name"))));
+        put(
+            "audioCodecID",
+            opt(audio.and_then(|a| str_of(a, "codec_tag_string"))),
+        );
+        put("audioProfile", opt(audio.and_then(|a| str_of(a, "profile"))));
+        put("audioBitrate", json!(audio.map(bit_rate).unwrap_or(0)));
+    }
     put("runTime", json!(format_timespan(run_time)));
-    put("audioStreamCount", json!(audio_streams.len()));
-    put(
-        "audioChannels",
-        json!(audio.and_then(|a| a["channels"].as_i64()).unwrap_or(0)),
-    );
-    put(
-        "audioChannelPositions",
-        opt(audio.and_then(|a| str_of(a, "channel_layout"))),
-    );
+    if !streams_shape {
+        put("audioStreamCount", json!(audio_streams.len()));
+        put(
+            "audioChannels",
+            json!(audio.and_then(|a| a["channels"].as_i64()).unwrap_or(0)),
+        );
+        put(
+            "audioChannelPositions",
+            opt(audio.and_then(|a| str_of(a, "channel_layout"))),
+        );
+    }
     put("videoFps", json!(video.map(frame_rate).unwrap_or(0.0)));
-    put(
-        "audioLanguages",
-        json!(audio_streams
-            .iter()
-            .filter_map(|s| language(s))
-            .collect::<Vec<_>>()),
-    );
-    put(
-        "subtitles",
-        json!(subtitle_streams
-            .iter()
-            .filter_map(|s| language(s))
-            .collect::<Vec<_>>()),
-    );
+    if streams_shape {
+        put("audioStreams", Value::Array(audio_stream_models(&audio_streams)));
+        put(
+            "subtitleStreams",
+            Value::Array(subtitle_stream_models(&subtitle_streams)),
+        );
+    } else {
+        put(
+            "audioLanguages",
+            json!(audio_streams
+                .iter()
+                .filter_map(|s| language(s))
+                .collect::<Vec<_>>()),
+        );
+        put(
+            "subtitles",
+            json!(subtitle_streams
+                .iter()
+                .filter_map(|s| language(s))
+                .collect::<Vec<_>>()),
+        );
+    }
     put("scanType", json!("Progressive"));
 
     let title = format
@@ -713,6 +754,78 @@ fn probe_inner(file: &Path) -> anyhow::Result<MediaInfo> {
         model: Value::Object(model),
         title,
     })
+}
+
+/// A stream's `title` tag, trimmed, when it has one.
+fn stream_title(stream: &Value) -> Option<String> {
+    let tags = stream.get("tags")?.as_object()?;
+    tags.iter()
+        .find(|(k, _)| k.eq_ignore_ascii_case("title"))
+        .and_then(|(_, v)| v.as_str())
+        .map(str::trim)
+        .filter(|t| !t.is_empty())
+        .map(String::from)
+}
+
+/// A stream's disposition flag, when ffprobe reports it.
+fn disposition(stream: &Value, flag: &str) -> Option<bool> {
+    stream
+        .get("disposition")
+        .and_then(|d| d.get(flag))
+        .and_then(Value::as_i64)
+        .map(|v| v != 0)
+}
+
+/// Radarr's `MediaInfoAudioStreamModel` list: the audio streams with a
+/// language, in the file's order.
+fn audio_stream_models(streams: &[&Value]) -> Vec<Value> {
+    let mut sorted: Vec<&&Value> = streams.iter().filter(|s| language(s).is_some()).collect();
+    sorted.sort_by_key(|s| s["index"].as_i64().unwrap_or(0));
+    sorted
+        .into_iter()
+        .map(|s| {
+            let mut m = Map::new();
+            m.insert("language".into(), opt(language(s).as_deref()));
+            m.insert("format".into(), opt(str_of(s, "codec_name")));
+            m.insert("codecId".into(), opt(str_of(s, "codec_tag_string")));
+            m.insert("profile".into(), opt(str_of(s, "profile")));
+            m.insert("bitrate".into(), json!(bit_rate(s)));
+            m.insert("channels".into(), json!(s["channels"].as_i64().unwrap_or(0)));
+            m.insert("channelPositions".into(), opt(str_of(s, "channel_layout")));
+            if let Some(title) = stream_title(s) {
+                m.insert("title".into(), json!(title));
+            }
+            // The original's database serializer leaves nulls out.
+            m.retain(|_, v| !v.is_null());
+            Value::Object(m)
+        })
+        .collect()
+}
+
+/// Radarr's `MediaInfoSubtitleStreamModel` list: the subtitle streams with
+/// a language, in the file's order.
+fn subtitle_stream_models(streams: &[&Value]) -> Vec<Value> {
+    let mut sorted: Vec<&&Value> = streams.iter().filter(|s| language(s).is_some()).collect();
+    sorted.sort_by_key(|s| s["index"].as_i64().unwrap_or(0));
+    sorted
+        .into_iter()
+        .map(|s| {
+            let mut m = Map::new();
+            m.insert("language".into(), opt(language(s).as_deref()));
+            m.insert("format".into(), opt(str_of(s, "codec_name")));
+            if let Some(title) = stream_title(s) {
+                m.insert("title".into(), json!(title));
+            }
+            if let Some(forced) = disposition(s, "forced") {
+                m.insert("forced".into(), json!(forced));
+            }
+            if let Some(hi) = disposition(s, "hearing_impaired") {
+                m.insert("hearingImpaired".into(), json!(hi));
+            }
+            m.retain(|_, v| !v.is_null());
+            Value::Object(m)
+        })
+        .collect()
 }
 
 /// `VideoMultiViewCount`: two for a stream that carries a `stereo_mode`
@@ -857,6 +970,67 @@ mod tests {
         );
         let short = probe(&clip("sample.mkv")).unwrap();
         assert_eq!(short.run_time_seconds(), 45.0);
+    }
+
+    /// Radarr 7's shape: one entry per audio and subtitle stream, no flat
+    /// audio fields, revision 16; Sonarr's probe of the same clip keeps its
+    /// own shape (above).
+    #[test]
+    fn radarr_probes_every_stream() {
+        if !ffprobe_available() {
+            eprintln!("ffprobe not available, skipping");
+            return;
+        }
+        let info = probe_for(&clip("episode-dual.mkv"), Personality::Radarr).expect("a readable clip");
+        let m = &info.model;
+        assert_eq!(m["schemaRevision"], 16);
+        for gone in [
+            "audioFormat",
+            "audioLanguages",
+            "subtitles",
+            "audioStreamCount",
+            "audioChannels",
+        ] {
+            assert!(m.get(gone).is_none(), "{gone}");
+        }
+        let audio = m["audioStreams"].as_array().unwrap();
+        assert_eq!(audio.len(), 2);
+        assert_eq!(audio[0]["language"], "eng");
+        assert_eq!(audio[0]["format"], "aac");
+        assert_eq!(audio[0]["profile"], "LC");
+        assert_eq!(audio[0]["channels"], 1);
+        assert_eq!(audio[0]["channelPositions"], "mono");
+        assert_eq!(audio[1]["language"], "ita");
+        let subs = m["subtitleStreams"].as_array().unwrap();
+        assert_eq!(
+            subs.iter().map(|s| s["language"].clone()).collect::<Vec<_>>(),
+            [json!("eng"), json!("ita")]
+        );
+        assert!(subs[0]["format"].is_string());
+        assert!(subs[0].get("forced").is_some_and(Value::is_boolean));
+        assert_eq!(info.audio_stream_count(), 2);
+        assert_eq!(info.audio_languages(), vec!["eng", "ita"]);
+        assert_eq!(m["videoFormat"], "h264");
+        assert_eq!(m["runTime"], "00:10:10");
+    }
+
+    /// A stream's title is kept trimmed; a missing disposition is no flag.
+    #[test]
+    fn stream_models_keep_titles_and_flags() {
+        let audio = json!({"index": 2, "codec_type": "audio", "codec_name": "ac3",
+            "channels": 6, "channel_layout": "5.1(side)", "tags": {"language": "eng", "title": " Main "}});
+        let untagged = json!({"index": 1, "codec_type": "audio", "codec_name": "aac"});
+        let models = audio_stream_models(&[&audio, &untagged]);
+        assert_eq!(models.len(), 1, "a stream without a language is left out");
+        assert_eq!(models[0]["title"], "Main");
+        assert!(models[0].get("profile").is_none(), "nulls are left out");
+        let sub = json!({"index": 3, "codec_type": "subtitle", "codec_name": "subrip",
+            "tags": {"language": "ita"}, "disposition": {"forced": 1, "hearing_impaired": 0}});
+        let models = subtitle_stream_models(&[&sub]);
+        assert_eq!(
+            models[0],
+            json!({"language": "ita", "format": "subrip", "forced": true, "hearingImpaired": false})
+        );
     }
 
     /// Whichever ffprobe runs, an x264 stream is `x264`, as the originals'

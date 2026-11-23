@@ -25,6 +25,106 @@ pub fn list(v: &Value, key: &str) -> Vec<String> {
     }
 }
 
+/// The primary audio stream of a stored media info, in either shape: the
+/// first of `audioStreams` (Radarr from migration 243 on), or the flat
+/// `audio*` fields of the primary stream (Sonarr, and Radarr before).
+/// Each personality only ever stores its own shape, so reading both changes
+/// nothing for the other one.
+#[derive(Debug, Clone, Copy, Default, PartialEq)]
+pub struct AudioStream<'a> {
+    pub format: Option<&'a str>,
+    pub codec_id: Option<&'a str>,
+    pub profile: Option<&'a str>,
+    pub bitrate: i64,
+    pub channels: i64,
+    pub channel_positions: Option<&'a str>,
+}
+
+impl<'a> AudioStream<'a> {
+    /// One element of `audioStreams`.
+    pub fn of_stream(stream: &'a Value) -> AudioStream<'a> {
+        AudioStream {
+            format: str(stream, "format"),
+            codec_id: str(stream, "codecId"),
+            profile: str(stream, "profile"),
+            bitrate: int(stream, "bitrate"),
+            channels: int(stream, "channels"),
+            channel_positions: str(stream, "channelPositions"),
+        }
+    }
+
+    /// `FormatAudioCodec` of this stream.
+    pub fn codec(&self) -> Option<String> {
+        audio_codec(
+            self.format,
+            self.codec_id.unwrap_or(""),
+            self.profile.unwrap_or(""),
+        )
+    }
+
+    /// `FormatAudioChannels` of this stream.
+    pub fn channels_formatted(&self) -> f64 {
+        channels_from(self.channel_positions.unwrap_or(""), self.channels)
+    }
+}
+
+/// The audio streams the model stores, when it has the streams' shape.
+pub fn audio_streams(raw: &Value) -> Option<&Vec<Value>> {
+    raw.get("audioStreams").and_then(Value::as_array)
+}
+
+/// The subtitle streams the model stores, when it has the streams' shape.
+pub fn subtitle_streams(raw: &Value) -> Option<&Vec<Value>> {
+    raw.get("subtitleStreams").and_then(Value::as_array)
+}
+
+/// `MediaInfoModel.PrimaryAudioStream`, or the flat fields that held it.
+pub fn primary_audio(raw: &Value) -> AudioStream<'_> {
+    match audio_streams(raw) {
+        Some(streams) => streams.first().map(AudioStream::of_stream).unwrap_or_default(),
+        None => AudioStream {
+            format: str(raw, "audioFormat"),
+            codec_id: str(raw, "audioCodecID"),
+            profile: str(raw, "audioProfile"),
+            bitrate: int(raw, "audioBitrate"),
+            channels: int(raw, "audioChannels"),
+            channel_positions: str(raw, "audioChannelPositions"),
+        },
+    }
+}
+
+fn stream_languages(streams: &[Value]) -> Vec<String> {
+    streams
+        .iter()
+        .filter_map(|s| str(s, "language"))
+        .map(String::from)
+        .collect()
+}
+
+/// The languages of the audio streams, in either shape.
+pub fn audio_languages(raw: &Value) -> Vec<String> {
+    match audio_streams(raw) {
+        Some(streams) => stream_languages(streams),
+        None => list(raw, "audioLanguages"),
+    }
+}
+
+/// The languages of the subtitle streams, in either shape.
+pub fn subtitle_languages(raw: &Value) -> Vec<String> {
+    match subtitle_streams(raw) {
+        Some(streams) => stream_languages(streams),
+        None => list(raw, "subtitles"),
+    }
+}
+
+/// How many audio streams: the streams' count, else `audioStreamCount`.
+pub fn audio_stream_count(raw: &Value) -> i64 {
+    match audio_streams(raw) {
+        Some(streams) => streams.len() as i64,
+        None => int(raw, "audioStreamCount"),
+    }
+}
+
 /// `FormatAudioCodec`.
 pub fn audio_codec(format: Option<&str>, codec_id: &str, profile: &str) -> Option<String> {
     let format = format?;
@@ -155,13 +255,16 @@ pub fn dynamic_range(hdr: &str) -> &'static str {
 
 /// `FormatAudioChannels`: positions like `5.1` win over the channel count.
 pub fn audio_channels(raw: &Value) -> f64 {
-    let positions = str(raw, "audioChannelPositions").unwrap_or("");
+    primary_audio(raw).channels_formatted()
+}
+
+fn channels_from(positions: &str, channels: i64) -> f64 {
     let from_positions = positions
         .get(..3)
         .filter(|p| p.as_bytes()[0].is_ascii_digit() && &p[1..2] == "." && p.as_bytes()[2].is_ascii_digit())
         .and_then(|p| p.parse::<f64>().ok())
         .filter(|f| *f != 0.0);
-    from_positions.unwrap_or(int(raw, "audioChannels") as f64)
+    from_positions.unwrap_or(channels as f64)
 }
 
 /// The media info the naming tokens read, from the stored model.
@@ -175,15 +278,10 @@ pub fn naming_media_info(raw: &Value, scene_name: Option<&str>) -> NamingMediaIn
         )
         .unwrap_or_default(),
         video_bit_depth: int(raw, "videoBitDepth"),
-        audio_codec: audio_codec(
-            str(raw, "audioFormat"),
-            str(raw, "audioCodecID").unwrap_or(""),
-            str(raw, "audioProfile").unwrap_or(""),
-        )
-        .unwrap_or_default(),
+        audio_codec: primary_audio(raw).codec().unwrap_or_default(),
         audio_channels: audio_channels(raw),
-        audio_languages: list(raw, "audioLanguages"),
-        subtitles: list(raw, "subtitles"),
+        audio_languages: audio_languages(raw),
+        subtitles: subtitle_languages(raw),
         video_dynamic_range: dynamic_range(hdr).to_string(),
         video_dynamic_range_type: dynamic_range_type(hdr).to_string(),
     }
@@ -219,5 +317,36 @@ mod tests {
         assert_eq!(n.audio_languages, vec!["eng", "ita"]);
         assert_eq!(n.video_dynamic_range, "HDR");
         assert_eq!(n.video_dynamic_range_type, "HDR10");
+    }
+
+    /// Radarr's migration 243 moved the primary stream into `audioStreams`:
+    /// both shapes of one file read the same.
+    #[test]
+    fn both_shapes_read_alike() {
+        let flat = serde_json::json!({
+            "audioFormat": "eac3", "audioCodecID": "[0][0][0][0]", "audioBitrate": 256000,
+            "audioChannels": 6, "audioChannelPositions": "5.1(side)", "audioStreamCount": 2,
+            "audioLanguages": ["eng", "ita"], "subtitles": ["eng"],
+        });
+        let streams = serde_json::json!({
+            "audioStreamCount": 2,
+            "audioStreams": [
+                {"language": "eng", "format": "eac3", "codecId": "[0][0][0][0]", "profile": null,
+                 "bitrate": 256000, "channels": 6, "channelPositions": "5.1(side)"},
+                {"language": "ita"}
+            ],
+            "subtitleStreams": [{"language": "eng"}],
+        });
+        for raw in [&flat, &streams] {
+            assert_eq!(primary_audio(raw).codec().as_deref(), Some("EAC3"));
+            assert_eq!(primary_audio(raw).bitrate, 256000);
+            assert_eq!(audio_channels(raw), 5.1);
+            assert_eq!(audio_languages(raw), vec!["eng", "ita"]);
+            assert_eq!(subtitle_languages(raw), vec!["eng"]);
+            assert_eq!(audio_stream_count(raw), 2);
+        }
+        let none = serde_json::json!({"audioStreams": [], "subtitleStreams": []});
+        assert_eq!(primary_audio(&none), AudioStream::default());
+        assert_eq!(audio_stream_count(&none), 0);
     }
 }

@@ -252,8 +252,12 @@ pub fn movie_file_resource(ctx: &MovieContext, file: &MovieFile, movie: &Movie, 
     set(
         &mut out,
         "mediaInfo",
-        crate::mediainfo::resource(file.media_info.as_ref(), file.scene_name.as_deref())
-            .and_then(|m| serde_json::to_value(m).ok()),
+        crate::mediainfo::resource(
+            file.media_info.as_ref(),
+            file.scene_name.as_deref(),
+            unarr_core::Personality::Radarr,
+        )
+        .and_then(|m| serde_json::to_value(m).ok()),
     );
     out.insert(
         "qualityCutoffNotMet".into(),

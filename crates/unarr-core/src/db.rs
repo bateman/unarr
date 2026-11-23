@@ -52,7 +52,12 @@ const RADARR_MIGRATIONS: &[&str] = &[
         include_str!("../migrations/radarr/0001_movies.sql")
     ),
     include_str!("../migrations/shared/0010_update_history.sql"),
+    RADARR_MEDIA_INFO_STREAMS,
 ];
+
+/// Radarr's migration 243 for the media info of the movie files, also run
+/// by the importer on a database older than 243.
+pub const RADARR_MEDIA_INFO_STREAMS: &str = include_str!("../migrations/radarr/0002_media_info_streams.sql");
 
 /// The migration set of a personality's database. Lidarr has none yet and
 /// gets Sonarr's, as it did before the sets were split: it serves nothing
@@ -389,6 +394,113 @@ mod tests {
         for table in ["series", "episodes", "scene_mappings"] {
             assert!(!has(table), "{table}");
         }
+    }
+
+    /// Radarr's migration 243 on a database Unarr wrote before it: the
+    /// flat media info becomes one entry per stream, as the original
+    /// migrates it (its fixture `mediainfo_multiple_streamsFixture`), and
+    /// the movies' metadata is marked stale.
+    #[test]
+    fn radarr_media_info_moves_to_streams() {
+        let mut conn = Connection::open_in_memory().unwrap();
+        let before = RADARR_MIGRATIONS
+            .iter()
+            .position(|m| *m == RADARR_MEDIA_INFO_STREAMS)
+            .unwrap();
+        for sql in &RADARR_MIGRATIONS[..before] {
+            conn.execute_batch(sql).unwrap();
+        }
+        conn.pragma_update(None, "user_version", before as i64).unwrap();
+        conn.execute(
+            "INSERT INTO movie_metadata (id, tmdb_id, title, status, last_info_sync)
+             VALUES (1, 603, 'The Matrix', 'released', '2026-11-20T10:00:00Z')",
+            [],
+        )
+        .unwrap();
+        let rows = [
+            (
+                1,
+                Some(
+                    r#"{"schemaRevision":11,"audioFormat":"truehd","audioCodecID":"[0][0][0][0]","audioProfile":"Dolby TrueHD + Dolby Atmos","audioBitrate":224000,"audioChannels":2,"audioChannelPositions":"stereo","audioStreamCount":2,"audioLanguages":["eng","rum"],"subtitles":["ger","eng","rum"],"scanType":"Progressive"}"#,
+                ),
+            ),
+            (2, None),
+            (
+                3,
+                Some(r#"{"audioLanguages":"eng/rum","subtitles":"ger/eng/rum","schemaRevision":13}"#),
+            ),
+            (4, Some("not json")),
+            (5, Some(r#"{"videoFormat":"h264"}"#)),
+            (
+                6,
+                Some(r#"{"audioStreams":[{"language":"eng"}],"subtitleStreams":[]}"#),
+            ),
+        ];
+        for (id, info) in rows {
+            conn.execute(
+                "INSERT INTO movie_files (id, movie_id, relative_path, date_added, media_info)
+                 VALUES (?1, 1, 'm.mkv', '2026-01-01T00:00:00Z', ?2)",
+                rusqlite::params![id, info],
+            )
+            .unwrap();
+        }
+        migrate(&mut conn, Personality::Radarr).unwrap();
+        let info = |id: i64| -> Option<serde_json::Value> {
+            conn.query_row("SELECT media_info FROM movie_files WHERE id = ?1", [id], |r| {
+                r.get::<_, Option<String>>(0)
+            })
+            .unwrap()
+            .map(|s| serde_json::from_str(&s).unwrap())
+        };
+        let migrated = info(1).unwrap();
+        assert_eq!(
+            migrated["audioStreams"],
+            serde_json::json!([
+                {"language": "eng", "format": "truehd", "codecId": "[0][0][0][0]",
+                 "profile": "Dolby TrueHD + Dolby Atmos", "bitrate": 224000, "channels": 2,
+                 "channelPositions": "stereo"},
+                {"language": "rum"}
+            ])
+        );
+        assert_eq!(
+            migrated["subtitleStreams"],
+            serde_json::json!([{"language": "ger"}, {"language": "eng"}, {"language": "rum"}])
+        );
+        for gone in [
+            "audioLanguages",
+            "audioFormat",
+            "audioCodecID",
+            "audioProfile",
+            "audioBitrate",
+            "audioChannels",
+            "audioChannelPositions",
+            "subtitles",
+        ] {
+            assert!(migrated.get(gone).is_none(), "{gone}");
+        }
+        assert_eq!(migrated["audioStreamCount"], 2);
+        assert_eq!(migrated["scanType"], "Progressive");
+        assert_eq!(info(2), None, "no media info stays none");
+        assert_eq!(info(3), None, "lists that are not lists: dropped, probed again");
+        assert_eq!(info(4), None, "not JSON: dropped, probed again");
+        assert_eq!(
+            info(5),
+            Some(serde_json::json!({"videoFormat": "h264"})),
+            "neither list: left"
+        );
+        assert_eq!(
+            info(6),
+            Some(serde_json::json!({"audioStreams": [{"language": "eng"}], "subtitleStreams": []})),
+            "already migrated: left"
+        );
+        let synced: String = conn
+            .query_row(
+                "SELECT last_info_sync FROM movie_metadata WHERE id = 1",
+                [],
+                |r| r.get(0),
+            )
+            .unwrap();
+        assert_eq!(synced, "2026-01-01T00:00:00Z");
     }
 
     #[test]

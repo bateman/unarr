@@ -350,13 +350,7 @@ pub(crate) fn download_payload(settings: &Settings, m: &DownloadMessage<'_>, ctx
                         None,
                     )
                 });
-                let audio = media.and_then(|raw| {
-                    format::audio_codec(
-                        format::str(raw, "audioFormat"),
-                        format::str(raw, "audioCodecID").unwrap_or(""),
-                        format::str(raw, "audioProfile").unwrap_or(""),
-                    )
-                });
+                let audio = media.and_then(|raw| format::primary_audio(raw).codec());
                 let channels = media.map(format::audio_channels).unwrap_or(0.0);
                 embed.field(
                     "Codecs",
@@ -373,12 +367,12 @@ pub(crate) fn download_payload(settings: &Settings, m: &DownloadMessage<'_>, ctx
             import_field::SIZE => embed.field("Size", Some(bytes_to_string(m.file.size)), true),
             import_field::LANGUAGES => embed.field(
                 "Languages",
-                media.map(|raw| format::list(raw, "audioLanguages").join("/")),
+                media.map(|raw| format::audio_languages(raw).join("/")),
                 false,
             ),
             import_field::SUBTITLES => embed.field(
                 "Subtitles",
-                media.map(|raw| format::list(raw, "subtitles").join("/")),
+                media.map(|raw| format::subtitle_languages(raw).join("/")),
                 false,
             ),
             import_field::RELEASE => embed.field(

@@ -912,7 +912,7 @@ pub fn import_movie(
     let files = files_in(source_folder, folder_search_option);
     let metadata = movie.metadata.clone();
     let is_sample = move |file: &str| {
-        let info = mediainfo::probe(Path::new(file));
+        let info = mediainfo::probe_for(Path::new(file), crate::Personality::Radarr);
         sample::is_sample(&metadata, file, info.as_ref())
     };
     import_listed_files(db, config, local, movie_file, &files, read_only, &is_sample, now)
