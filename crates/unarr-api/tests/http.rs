@@ -2164,3 +2164,35 @@ async fn backup_errors_follow_each_original() {
         );
     }
 }
+
+/// A key reset takes effect at once: the old key is refused and the new
+/// one accepted, without a restart (Radarr 7 reads the key at each
+/// request). The reset is what `ResetApiKey` stores.
+#[tokio::test]
+async fn a_reset_api_key_takes_effect_at_once() {
+    let (app, state) = app_and_state(Personality::Radarr, "", |_| {});
+    let new_key = "fedcba9876543210fedcba9876543210";
+    let writer = state.clone();
+    tokio::task::spawn_blocking(move || {
+        unarr_api::routes::settings_writes::set_host_override_blocking(
+            &writer,
+            "apiKey",
+            serde_json::json!(new_key),
+        )
+    })
+    .await
+    .unwrap()
+    .unwrap();
+    assert_eq!(state.settings().host.api_key, new_key);
+    let (status, _, _) = ask(&app, "GET", "/api/v3/system/status", &[("X-Api-Key", KEY)], "").await;
+    assert_eq!(status, StatusCode::UNAUTHORIZED);
+    let (status, _, _) = ask(
+        &app,
+        "GET",
+        "/api/v3/system/status",
+        &[("X-Api-Key", new_key)],
+        "",
+    )
+    .await;
+    assert_eq!(status, StatusCode::OK);
+}
