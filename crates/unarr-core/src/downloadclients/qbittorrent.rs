@@ -660,6 +660,19 @@ impl<'a> QBittorrent<'a> {
         Ok(())
     }
 
+    /// Radarr 7: a 409 from the add, which qBittorrent answers when it has
+    /// the torrent already, refuses the release rather than fail the grab
+    /// as a fault of the client.
+    fn conflict_rejects(&self, e: ClientError, what: &str) -> ClientError {
+        let conflict = matches!(&e, ClientError::Http { cause, .. }
+            if cause.starts_with("HTTP request failed: [409:"));
+        if conflict && self.settings.app.qbittorrent_conflict_rejects {
+            ClientError::Rejected(format!("QBittorrent rejected the {what} due to a conflict"))
+        } else {
+            e
+        }
+    }
+
     pub async fn add_magnet(
         &self,
         request: &GrabRequest<'_>,
@@ -674,7 +687,8 @@ impl<'a> QBittorrent<'a> {
         let seed = request.seed_limits();
         let on_add = seed.is_some() && self.api_version().await? >= Version::with_build(2, 8, 1);
         self.add_from_url(magnet, if on_add { seed } else { None })
-            .await?;
+            .await
+            .map_err(|e| self.conflict_rejects(e, "magnet link"))?;
         self.after_add(request, hash, on_add).await?;
         Ok(hash.to_string())
     }
@@ -689,7 +703,8 @@ impl<'a> QBittorrent<'a> {
         let seed = request.seed_limits();
         let on_add = seed.is_some() && self.api_version().await? >= Version::with_build(2, 8, 1);
         self.add_from_file(filename, torrent, if on_add { seed } else { None })
-            .await?;
+            .await
+            .map_err(|e| self.conflict_rejects(e, "torrent file"))?;
         self.after_add(request, hash, on_add).await?;
         Ok(hash.to_string())
     }
@@ -1178,6 +1193,30 @@ mod tests {
             "Failed to connect to qBittorrent, check your settings."
         );
         assert!(format!("{api:#}").ends_with(&cause), "{api:#}");
+
+        // Radarr 7 refuses the release over that 409, where Sonarr's pin
+        // fails the grab as the client's error.
+        let rejected = QBittorrent::new(&client, &settings).conflict_rejects(
+            QBittorrent::new(&client, &settings)
+                .add_from_url("magnet:?xt=urn:btih:0123456789abcdef0123456789abcdef01234567", None)
+                .await
+                .unwrap_err(),
+            "magnet link",
+        );
+        assert!(
+            matches!(&rejected, ClientError::Rejected(m) if m == "QBittorrent rejected the magnet link due to a conflict"),
+            "{rejected:?}"
+        );
+        let mut sonarr = settings.clone();
+        sonarr.app = super::super::SONARR;
+        let kept = QBittorrent::new(&client, &sonarr).conflict_rejects(
+            QBittorrent::new(&client, &sonarr)
+                .add_from_url("magnet:?xt=urn:btih:0123456789abcdef0123456789abcdef01234567", None)
+                .await
+                .unwrap_err(),
+            "magnet link",
+        );
+        assert!(matches!(&kept, ClientError::Http { .. }), "{kept:?}");
 
         // The cause names the URL with its query, as the originals log it.
         let e = QBittorrent::new(&client, &settings)

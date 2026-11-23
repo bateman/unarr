@@ -55,6 +55,10 @@ pub struct App {
     pub nzbget_category: &'static str,
     /// qBittorrent's and Transmission's.
     pub torrent_category: &'static str,
+    /// A 409 from qBittorrent's add (it has the torrent already) refuses
+    /// the release instead of failing the client: Radarr 7 does, Sonarr's
+    /// pin does not.
+    pub qbittorrent_conflict_rejects: bool,
 }
 
 impl App {
@@ -80,6 +84,7 @@ pub const SONARR: App = App {
     sabnzbd_category: "tv",
     nzbget_category: "tv",
     torrent_category: "tv-sonarr",
+    qbittorrent_conflict_rejects: false,
 };
 
 pub const RADARR: App = App {
@@ -94,6 +99,7 @@ pub const RADARR: App = App {
     sabnzbd_category: "movies",
     nzbget_category: "Movies",
     torrent_category: "radarr",
+    qbittorrent_conflict_rejects: true,
 };
 
 /// The implementations this phase drives.
