@@ -55,7 +55,7 @@ fn without_nulls(mut m: Map<String, Value>) -> Value {
     Value::Object(m)
 }
 
-/// `MediaInfoAudioStreamResource`.
+/// `MediaInfoAudioStreamResource`: the codec's name, not its id.
 fn audio_stream_resource(stream: &Value) -> Value {
     let a = AudioStream::of_stream(stream);
     let mut m = Map::new();
@@ -64,10 +64,6 @@ fn audio_stream_resource(stream: &Value) -> Value {
         stream.get("language").cloned().unwrap_or(Value::Null),
     );
     m.insert("codec".into(), a.codec().map(Value::from).unwrap_or(Value::Null));
-    m.insert(
-        "codecId".into(),
-        a.codec_id.map(Value::from).unwrap_or(Value::Null),
-    );
     m.insert(
         "profile".into(),
         a.profile.map(Value::from).unwrap_or(Value::Null),
@@ -220,7 +216,7 @@ mod tests {
         assert_eq!(r["subtitles"], "eng/eng");
         assert_eq!(
             r["audioStreams"],
-            serde_json::json!([{"language": "eng", "codec": "EAC3", "codecId": "[0][0][0][0]",
+            serde_json::json!([{"language": "eng", "codec": "EAC3",
                 "bitrate": 256000, "channels": 5.1, "channelPositions": "5.1(side)"}])
         );
         assert_eq!(
