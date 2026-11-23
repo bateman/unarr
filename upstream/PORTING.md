@@ -320,8 +320,12 @@ clone; then
 When the commit you port would change what such a file does, or answers,
 for the other personality too (a field added to a shared answer counts):
 
-- **The other original has the change at its pin:** port it for both, and
-  say so in the PR, with the file at the other pin.
+- **The other original has the change at its pin:** port it for both, with
+  two tests, one per personality. The other personality's test carries what
+  its original does at its pin (that original's upstream test, when there
+  is one), and the PR names the file at the other pin. When no test can
+  show it for the other personality, leave the other personality as it
+  is: the change goes behind the personality, as below.
 - **It does not:** the change goes behind the personality, in this PR and
   on this branch (`<app>/upstream-<target>`, though it touches shared
   crates), so that each personality still answers as its own pinned
@@ -343,8 +347,10 @@ for the other personality too (a field added to a shared answer counts):
      and the PR body lists it under "Behind the personality".
 
 **A branch the other personality's port left.** Before you port, list
-them: `grep -n 'behind the personality:' upstream/<other>-log.csv`. For
-each, check whether your target has that behaviour
+them: `grep -n 'behind the personality:' upstream/<other>-log.csv`. Skip
+those already removed: this personality's log says `removes the branch of
+<Other> #<pr>` for them, or the file no longer has the branch. For each
+other, check whether your target has that behaviour
 (`git -C .cache/upstream/<App>.git grep -n <Name> v<target> -- src`).
 When it has, the port of the upstream commit that brings it removes the
 branch: the shared code does the same for both personalities, the test
@@ -502,11 +508,12 @@ All of these, on the branch, and their results in the PR:
      why:
      1. the replays of check 4 pass against Unarr;
      2. the source of each client has been read where it tells the
-        versions apart. Read the release the replay was written from:
-        Prowlarr 2.7.0.5723 (`scripts/prowlarr-replay.py`), Recyclarr 8.8.1
-        (`tests/fixtures/recyclarr/README.md`); `scripts/bazarr-replay.py`
-        names no release, so read Bazarr's newest and name it. The
-        repositories are `morpheus65535/bazarr`, `Prowlarr/Prowlarr` and
+        versions apart. Read each client's newest release and name it in
+        the PR. When it is newer than the release its replay was written
+        from (`scripts/prowlarr-replay.py` and
+        `tests/fixtures/recyclarr/README.md` name theirs;
+        `scripts/bazarr-replay.py` names none), say so: the replay may be
+        behind the client too. The repositories are `morpheus65535/bazarr`, `Prowlarr/Prowlarr` and
         `recyclarr/recyclarr` on GitHub; clone each at the release's tag
         into `.cache/clients/<client>` (`git clone --depth 1 --branch <tag>
         https://github.com/<owner>/<repo> .cache/clients/<client>`), read it
