@@ -322,12 +322,13 @@ Rules of a ported commit:
    tree may still be red (other commits not yet ported).
    **A change to shared code** (next subsection) can break a test of
    another target, or of the other personality, that the commit's own
-   tests do not reach. Before committing one, run every test target of
-   each crate it touches and the contract tests of both personalities:
+   tests do not reach, in any crate that depends on it (`unarr-core` is
+   used by `unarr-import`, `unarr-mock`, `unarr-api` and `unarrd`). Before
+   committing one, run every test target of the workspace, both
+   personalities' included:
 
    ```sh
-   cargo test -p <crate>          # each crate touched: its library, every tests/*.rs, its doc tests
-   cargo test -p unarr-api --test contract --test contract_radarr --test personalities
+   cargo test --workspace         # make test: every crate, every tests/*.rs, the doc tests
    ```
 
    A test that passed before the change must pass after it; one that was
