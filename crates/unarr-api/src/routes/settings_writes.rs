@@ -708,6 +708,21 @@ pub fn apply_host_overrides(h: &mut unarr_core::config::HostConfig, o: &Map<Stri
     if let Some(v) = s("sslKeyPath") {
         h.ssl_key_path = v;
     }
+    if let Some(v) = s("oidcAuthority") {
+        h.oidc.authority = v;
+    }
+    if let Some(v) = s("oidcClientId") {
+        h.oidc.client_id = v;
+    }
+    if let Some(v) = s("oidcClientSecret") {
+        h.oidc.client_secret = v;
+    }
+    if let Some(v) = s("oidcUserIdentifier") {
+        h.oidc.user_identifier = v;
+    }
+    if let Some(v) = s("oidcScopes") {
+        h.oidc.scopes = v;
+    }
     if let Some(v) = s("urlBase") {
         h.url_base = v;
     }
@@ -941,6 +956,21 @@ pub async fn host(State(state): State<AppState>, Json(body): Json<Value>) -> Api
     let radarr = state.personality() == unarr_core::Personality::Radarr;
     if radarr {
         failures.extend(ssl_key_path_failures(&text(&body, "sslKeyPath")).await);
+        // Radarr 7 signs in with OIDC; Unarr does not yet (deferred), and
+        // refuses the setting rather than keep a sign-in it would not do.
+        if method.eq_ignore_ascii_case("oidc") {
+            let mut f = rule(
+                "AuthenticationMethod",
+                "PredicateValidator",
+                "OIDC authentication is not supported by Unarr yet, use 'Forms' instead.",
+                json!(method),
+            );
+            f.placeholders = vec![
+                ("propertyName".into(), json!("Authentication Method")),
+                ("propertyValue".into(), json!(method)),
+            ];
+            failures.push(f);
+        }
     }
     failures.extend(between("LogSizeLimit", int(&body, "logSizeLimit"), 1, 10));
     failures.extend(between("BackupInterval", int(&body, "backupInterval"), 1, 7));
@@ -995,9 +1025,23 @@ pub async fn host(State(state): State<AppState>, Json(body): Json<Value>) -> Api
         }
     }
     // Radarr 7's own settings, which Sonarr, at its pin, does not take.
-    let radarr_keys: &[&str] = if radarr { &["sslKeyPath"] } else { &[] };
+    let radarr_keys: &[&str] = if radarr {
+        &[
+            "sslKeyPath",
+            "oidcAuthority",
+            "oidcClientId",
+            "oidcClientSecret",
+            "oidcUserIdentifier",
+            "oidcScopes",
+        ]
+    } else {
+        &[]
+    };
     for key in radarr_keys {
-        if let Some(v) = body.get(*key) {
+        // The placeholder the secret is shown as keeps the stored one.
+        let placeholder = *key == "oidcClientSecret"
+            && body.get(*key).and_then(Value::as_str) == Some(crate::routes::config::OIDC_SECRET_PLACEHOLDER);
+        if let Some(v) = body.get(*key).filter(|_| !placeholder) {
             overrides.insert((*key).into(), v.clone());
         }
     }

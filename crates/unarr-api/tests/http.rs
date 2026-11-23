@@ -2285,3 +2285,51 @@ async fn radarr_keeps_the_key_of_a_pem_certificate() {
     let host: serde_json::Value = serde_json::from_slice(&host).unwrap();
     assert!(host.get("sslKeyPath").is_none());
 }
+
+/// Radarr 7's OIDC settings: answered with the original's defaults, kept,
+/// the secret shown only as there or not; the OIDC sign-in itself is
+/// refused, as Unarr does not do it yet. Sonarr, at its pin, has none.
+#[tokio::test]
+async fn radarr_keeps_its_oidc_settings_and_refuses_the_oidc_sign_in() {
+    let app = app_edited(Personality::Radarr, "", |_| {});
+    let (_, _, host) = ask(&app, "GET", "/api/v3/config/host", &[("X-Api-Key", KEY)], "").await;
+    let host: serde_json::Value = serde_json::from_slice(&host).unwrap();
+    for (key, default) in [
+        ("oidcAuthority", ""),
+        ("oidcClientId", ""),
+        ("oidcClientSecret", ""),
+        ("oidcUserIdentifier", ""),
+        ("oidcScopes", "openid profile email"),
+    ] {
+        assert_eq!(host[key], default, "{key}");
+    }
+
+    let (status, answer) = put_host(&app, |b| {
+        b["oidcAuthority"] = serde_json::json!("https://id.example.com");
+        b["oidcClientId"] = serde_json::json!("radarr");
+        b["oidcClientSecret"] = serde_json::json!("s3cret");
+        b["oidcUserIdentifier"] = serde_json::json!("me@example.com");
+    })
+    .await;
+    assert_eq!(status, StatusCode::ACCEPTED, "{answer}");
+    assert_eq!(answer["oidcAuthority"], "https://id.example.com");
+    assert_eq!(answer["oidcClientSecret"], "********", "never shown");
+    // Sent back as shown, the secret stays.
+    let (status, answer) = put_host(&app, |b| b["oidcClientId"] = serde_json::json!("radarr-2")).await;
+    assert_eq!(status, StatusCode::ACCEPTED, "{answer}");
+    assert_eq!(answer["oidcClientSecret"], "********");
+    assert_eq!(answer["oidcClientId"], "radarr-2");
+
+    let (status, answer) = put_host(&app, |b| b["authenticationMethod"] = serde_json::json!("oidc")).await;
+    assert_eq!(status, StatusCode::BAD_REQUEST);
+    assert_eq!(answer[0]["propertyName"], "AuthenticationMethod");
+    assert_eq!(answer[0]["attemptedValue"], "oidc");
+    let (_, _, host) = ask(&app, "GET", "/api/v3/config/host", &[("X-Api-Key", KEY)], "").await;
+    let host: serde_json::Value = serde_json::from_slice(&host).unwrap();
+    assert_eq!(host["authenticationMethod"], "forms", "not switched");
+
+    let sonarr = app_edited(Personality::Sonarr, "", |_| {});
+    let (_, _, host) = ask(&sonarr, "GET", "/api/v3/config/host", &[("X-Api-Key", KEY)], "").await;
+    let host: serde_json::Value = serde_json::from_slice(&host).unwrap();
+    assert!(host.as_object().unwrap().keys().all(|k| !k.starts_with("oidc")));
+}

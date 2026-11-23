@@ -66,6 +66,10 @@ fn lower_first(s: &str) -> String {
     }
 }
 
+/// `HostConfigController.PrivateValue`: what the OIDC client secret is
+/// shown as, and, sent back, what keeps the stored one.
+pub const OIDC_SECRET_PLACEHOLDER: &str = "********";
+
 pub async fn host(State(state): State<AppState>) -> ApiResult<Json<serde_json::Value>> {
     let v = Values::load(&state).await?;
     // The originals report the first user's name and stored password hash.
@@ -120,6 +124,16 @@ pub async fn host(State(state): State<AppState>) -> ApiResult<Json<serde_json::V
     // Radarr 7's settings; Sonarr, at its pin, has none of them.
     if state.personality() == unarr_core::Personality::Radarr {
         out["sslKeyPath"] = serde_json::json!(h.ssl_key_path);
+        out["oidcAuthority"] = serde_json::json!(h.oidc.authority);
+        out["oidcClientId"] = serde_json::json!(h.oidc.client_id);
+        // The original never shows the secret, only that there is one.
+        out["oidcClientSecret"] = serde_json::json!(if h.oidc.client_secret.trim().is_empty() {
+            ""
+        } else {
+            OIDC_SECRET_PLACEHOLDER
+        });
+        out["oidcUserIdentifier"] = serde_json::json!(h.oidc.user_identifier);
+        out["oidcScopes"] = serde_json::json!(h.oidc.scopes);
     }
     Ok(Json(out))
 }

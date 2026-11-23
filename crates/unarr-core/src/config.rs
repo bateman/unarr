@@ -36,6 +36,32 @@ impl AuthenticationMethod {
     }
 }
 
+/// Radarr 7's OIDC settings (`OidcAuthority`, `OidcClientId`,
+/// `OidcClientSecret`, `OidcUserIdentifier`, `OidcScopes`). Unarr does not
+/// sign in with OIDC yet: they are kept and answered, and the sign-in they
+/// configure cannot be switched on.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct OidcSettings {
+    pub authority: String,
+    pub client_id: String,
+    pub client_secret: String,
+    pub user_identifier: String,
+    pub scopes: String,
+}
+
+impl Default for OidcSettings {
+    /// The original's defaults: nothing set, the scopes `openid profile email`.
+    fn default() -> Self {
+        OidcSettings {
+            authority: String::new(),
+            client_id: String::new(),
+            client_secret: String::new(),
+            user_identifier: String::new(),
+            scopes: "openid profile email".into(),
+        }
+    }
+}
+
 /// `AuthenticationRequired`: when the UI asks for credentials.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -174,6 +200,8 @@ pub struct HostConfig {
     /// `SslKeyPath` (Radarr 7): the private key of a PEM certificate. Unarr
     /// serves no HTTPS: it is kept and answered, as the certificate is.
     pub ssl_key_path: String,
+    /// Radarr 7's OIDC settings, kept and answered only.
+    pub oidc: OidcSettings,
     pub url_base: String,
     /// Raw value; see [`HostConfig::effective_instance_name`].
     pub instance_name: Option<String>,
@@ -220,6 +248,11 @@ impl HostConfig {
                 "server__sslcertpath" => self.ssl_cert_path = value.clone(),
                 "server__sslcertpassword" => self.ssl_cert_password = value.clone(),
                 "server__sslkeypath" => self.ssl_key_path = value.clone(),
+                "auth__oidcauthority" => self.oidc.authority = value.clone(),
+                "auth__oidcclientid" => self.oidc.client_id = value.clone(),
+                "auth__oidcclientsecret" => self.oidc.client_secret = value.clone(),
+                "auth__oidcuseridentifier" => self.oidc.user_identifier = value.clone(),
+                "auth__oidcscopes" => self.oidc.scopes = value.clone(),
                 "server__port" => match value.trim().parse() {
                     Ok(port) => self.port = port,
                     Err(_) => unusable = true,
@@ -344,6 +377,7 @@ mod environment_tests {
             ssl_cert_path: String::new(),
             ssl_cert_password: String::new(),
             ssl_key_path: String::new(),
+            oidc: OidcSettings::default(),
             url_base: String::new(),
             instance_name: None,
             analytics_enabled: true,

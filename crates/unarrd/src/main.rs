@@ -391,6 +391,7 @@ fn load_or_create_config(
         ssl_cert_path: String::new(),
         ssl_cert_password: String::new(),
         ssl_key_path: String::new(),
+        oidc: unarr_core::config::OidcSettings::default(),
         url_base: String::new(),
         instance_name: None,
         analytics_enabled: false,

@@ -79,6 +79,13 @@ pub fn parse(xml: &str, default_port: u16) -> anyhow::Result<HostConfig> {
         ssl_cert_path: string("SslCertPath", ""),
         ssl_cert_password: string("SslCertPassword", ""),
         ssl_key_path: string("SslKeyPath", ""),
+        oidc: unarr_core::config::OidcSettings {
+            authority: string("OidcAuthority", ""),
+            client_id: string("OidcClientId", ""),
+            client_secret: string("OidcClientSecret", ""),
+            user_identifier: string("OidcUserIdentifier", ""),
+            scopes: string("OidcScopes", "openid profile email"),
+        },
         url_base: string("UrlBase", ""),
         instance_name: text("InstanceName").filter(|s| !s.is_empty()),
         analytics_enabled: boolean("AnalyticsEnabled", true)?,
