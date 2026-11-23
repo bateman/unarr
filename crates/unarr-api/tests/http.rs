@@ -2333,3 +2333,31 @@ async fn radarr_keeps_its_oidc_settings_and_refuses_the_oidc_sign_in() {
     let host: serde_json::Value = serde_json::from_slice(&host).unwrap();
     assert!(host.as_object().unwrap().keys().all(|k| !k.starts_with("oidc")));
 }
+
+/// "Remember me" as each original reads it: Radarr 7 a boolean (its page
+/// sends `true`), Sonarr the checkbox's `on`.
+#[tokio::test]
+async fn remember_me_is_read_as_each_original_reads_it() {
+    for (personality, remembered, forgotten) in [
+        (Personality::Radarr, "true", "on"),
+        (Personality::Sonarr, "on", "true"),
+    ] {
+        let app = app_edited(personality, "", |host| {
+            host.authentication_method = unarr_core::config::AuthenticationMethod::Forms;
+        });
+        for (value, persistent) in [(remembered, true), (forgotten, false), ("", false)] {
+            let body = format!("username=unarr&password=fixture&rememberMe={value}");
+            let body: &'static str = Box::leak(body.into_boxed_str());
+            let form = [("Content-Type", "application/x-www-form-urlencoded")];
+            let (status, headers, _) = ask(&app, "POST", "/login", &form, body).await;
+            assert_eq!(status, StatusCode::FOUND, "{personality:?} {value}");
+            let cookie = header(&headers, "set-cookie").expect("a session");
+            assert!(!cookie.is_empty());
+            assert_eq!(
+                cookie.to_ascii_lowercase().contains("max-age="),
+                persistent,
+                "{personality:?} rememberMe={value}: {cookie}"
+            );
+        }
+    }
+}
