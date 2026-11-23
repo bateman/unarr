@@ -400,6 +400,15 @@ pub fn cacheable(path: &str, query: Option<&str>, personality: Personality) -> b
     if !covers_kept && starts_with_segment(path, "/mediacover") {
         return false;
     }
+    // Radarr 7 keeps none of the sign-in pages; Sonarr, at its pin, has no
+    // such exception.
+    if personality == Personality::Radarr
+        && ["/login", "/logout", "/loggedout", "/reset-password"]
+            .iter()
+            .any(|p| starts_with_segment(path, p))
+    {
+        return false;
+    }
     if path.ends_with("/index.js") || path.ends_with("/initialize.json") {
         return false;
     }
@@ -1053,6 +1062,24 @@ mod tests {
         }
         assert!(cacheable("/Content/styles.css", None, Personality::Radarr));
         assert!(!cacheable("/api/v3/system/status", None, Personality::Radarr));
+    }
+
+    /// Radarr 7 keeps no sign-in page (`CacheableSpecification`, Radarr
+    /// 7.0); Sonarr, at its pin, keeps them as any other page.
+    #[test]
+    fn radarr_keeps_no_sign_in_page() {
+        for path in [
+            "/login",
+            "/Login",
+            "/logout",
+            "/loggedout",
+            "/reset-password",
+            "/login/x",
+        ] {
+            assert!(!cacheable(path, None, Personality::Radarr), "{path}");
+            assert!(cacheable(path, None, Personality::Sonarr), "{path}");
+        }
+        assert!(cacheable("/loginx", None, Personality::Radarr));
     }
 
     #[test]
