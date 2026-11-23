@@ -46,6 +46,8 @@ pub async fn update_library(
             &sections,
             &root_folders,
             "Movie",
+            // Radarr 7 refreshes every section with a matching location.
+            true,
         )
         .await?;
     }

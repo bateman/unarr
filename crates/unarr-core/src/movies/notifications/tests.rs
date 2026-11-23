@@ -310,7 +310,8 @@ fn the_section_at_the_mapped_root_is_the_one_refreshed() {
             "/data/media/movies/Candyman (1992)",
             &sections,
             &roots,
-            "Movie"
+            "Movie",
+            true
         ),
         [(1, "/media/movies/Candyman (1992)".to_string())]
     );
@@ -321,7 +322,8 @@ fn the_section_at_the_mapped_root_is_the_one_refreshed() {
             "/data/media/movies/Candyman (1992)",
             &sections,
             &roots,
-            "Movie"
+            "Movie",
+            true
         ),
         [(1, "/media/movies/Candyman (1992)".to_string())]
     );
@@ -332,7 +334,8 @@ fn the_section_at_the_mapped_root_is_the_one_refreshed() {
             "/data/media/movies/Candyman (1992)",
             &sections,
             &roots,
-            "Movie"
+            "Movie",
+            true
         ),
         [(1, "/media/movies/Candyman (1992)".to_string())]
     );
@@ -343,9 +346,50 @@ fn the_section_at_the_mapped_root_is_the_one_refreshed() {
             "/data/media/movies/Candyman (1992)",
             &[section(2, &["/data/media/movies"])],
             &roots,
-            "Movie"
+            "Movie",
+            true
         ),
         [(2, "/data/media/movies/Candyman (1992)".to_string())]
+    );
+}
+
+/// `PlexServerServiceFixture` (Radarr 7): every section with a location
+/// at the mapped root is refreshed, once each; Sonarr, at its pin, stops
+/// at the first.
+#[test]
+fn every_section_at_the_mapped_root_is_refreshed() {
+    let roots = [RootFolder {
+        id: 1,
+        path: "/data/media/movies".into(),
+    }];
+    let settings = mapping("/data/media/movies", "/media/movies");
+    let path = "/data/media/movies/Candyman (1992)";
+    let at = |id| (id, "/media/movies/Candyman (1992)".to_string());
+    // should_update_all_sections_matching_the_movie_path
+    let both = [
+        section(1, &["/media/movies"]),
+        section(2, &["/media/movies"]),
+        section(3, &["/media/kids"]),
+    ];
+    assert_eq!(
+        section_updates(&settings, path, &both, &roots, "Movie", true),
+        [at(1), at(2)]
+    );
+    assert_eq!(
+        section_updates(&settings, path, &both, &roots, "TV", false),
+        [at(1)]
+    );
+    // should_update_only_the_matching_section_when_a_single_section_matches
+    let one = [section(1, &["/media/kids"]), section(2, &["/media/movies"])];
+    assert_eq!(
+        section_updates(&settings, path, &one, &roots, "Movie", true),
+        [at(2)]
+    );
+    // should_only_update_a_section_once_when_multiple_locations_match
+    let twice = [section(1, &["/media/movies", "/media/movies/"])];
+    assert_eq!(
+        section_updates(&settings, path, &twice, &roots, "Movie", true),
+        [at(1)]
     );
 }
 
@@ -365,7 +409,8 @@ fn every_location_is_refreshed_when_none_is_the_mapped_root() {
             "/data/media/movies/Candyman (1992)",
             &sections,
             &roots,
-            "Movie"
+            "Movie",
+            true
         ),
         [
             (1, "/elsewhere/movies/Candyman (1992)".to_string()),
