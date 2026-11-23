@@ -1,9 +1,11 @@
 """The port logs, upstream/<app>-log.csv (issue #9, upstream/PORTING.md).
 
 One row per upstream commit a port handled: what it was, what was decided
-and what a human changed in review. Written by hand at the end of each
-port; this checks its format, so that a malformed row fails `make check`
-on the port's own branch. Run with `make test-scripts`.
+and what a human changed in review. Written by the port at the end of each
+of its runs, for the decisions made final in that run, so a log can be
+partial while its port is under way; this checks its format, so that a
+malformed row fails `make check` on the port's own branch. Run with
+`make test-scripts`.
 """
 
 from __future__ import annotations
@@ -19,6 +21,7 @@ SCRIPTS = Path(__file__).resolve().parent.parent
 REPO = SCRIPTS.parent
 HEADER = ["sha", "pr", "class", "decision", "unarr_commits", "tests", "issue", "reason", "review"]
 DECISIONS = {"ported", "not applicable", "deferred"}
+ALREADY_HAD_IT = "already had it:"  # behaviour Unarr had before the upstream commit (PORTING.md, section 4)
 
 
 def load_triage():
@@ -62,6 +65,11 @@ def problems(text: str) -> list[str]:
             out.append(f"line {n}: an issue on a commit that is not deferred")
         if r["decision"] in ("not applicable", "deferred") and not r["reason"].strip():
             out.append(f"line {n}: {r['decision']} needs a reason")
+        if r["reason"].startswith(ALREADY_HAD_IT):
+            if r["decision"] != "ported":
+                out.append(f"line {n}: {ALREADY_HAD_IT!r} is a reason of a ported commit only")
+            elif not r["tests"].strip():
+                out.append(f"line {n}: {ALREADY_HAD_IT!r} needs the test that covers it")
     return out
 
 
@@ -78,6 +86,8 @@ class TheLogs(unittest.TestCase):
         self.assertEqual(problems(good), [])
         deferred = head + f'{sha},#30,routes,deferred,0123456789ab,,#31,"over the threshold, a new subsystem",\n'
         self.assertEqual(problems(deferred), [])
+        already = head + f'{sha},#30,routes,ported,,a_reset_api_key_takes_effect_at_once,,"already had it: read at each request",\n'
+        self.assertEqual(problems(already), [])
         for bad, says in (
             ("sha,decision\n", "header"),
             (head + f"{sha[:12]},#30,schema,ported,,,,,\n", "40 hex"),
@@ -90,10 +100,21 @@ class TheLogs(unittest.TestCase):
             (head + f"{sha},#30,schema,ported,,,#31,,\n", "not deferred"),
             (head + f"{sha},#30,none,not applicable,,,,,\n", "needs a reason"),
             (head + f"{sha},#30,none\n", "columns"),
+            (head + f"{sha},#30,routes,ported,,,,already had it: read at each request,\n", "needs the test"),
+            (head + f"{sha},#30,routes,not applicable,,,,already had it: read at each request,\n", "ported commit only"),
         ):
             with self.subTest(says=says):
                 found = problems(bad)
                 self.assertTrue(found and says in found[0], found)
+
+    def test_a_port_under_way_logs_only_what_is_decided(self):
+        # Rows are written at the end of each run, for the final decisions only:
+        # a log with some of the triage's commits, the others still to do, is well formed.
+        head = ",".join(HEADER) + "\n"
+        first, third = "a" * 40, "c" * 40
+        partial = head + f"{first},#30,none,not applicable,,,,a project file,\n{third},#30,backend,ported,0123456789ab,plex::refresh,,,\n"
+        self.assertEqual(problems(partial), [])
+        self.assertEqual(problems(head), [])
 
 
 if __name__ == "__main__":
