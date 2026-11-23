@@ -75,7 +75,7 @@ pub async fn host(State(state): State<AppState>) -> ApiResult<Json<serde_json::V
         .await?;
     let s = state.settings();
     let h = &s.host;
-    Ok(Json(serde_json::json!({
+    let mut out = serde_json::json!({
         "bindAddress": h.bind_address,
         "port": h.port,
         "sslPort": h.ssl_port,
@@ -116,7 +116,12 @@ pub async fn host(State(state): State<AppState>) -> ApiResult<Json<serde_json::V
         "backupRetention": v.int("BackupRetention", 28),
         "trustCgnatIpAddresses": h.trust_cgnat_ip_addresses,
         "id": 1,
-    })))
+    });
+    // Radarr 7's settings; Sonarr, at its pin, has none of them.
+    if state.personality() == unarr_core::Personality::Radarr {
+        out["sslKeyPath"] = serde_json::json!(h.ssl_key_path);
+    }
+    Ok(Json(out))
 }
 
 pub async fn ui(State(state): State<AppState>) -> ApiResult<Json<serde_json::Value>> {

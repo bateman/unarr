@@ -2228,3 +2228,60 @@ async fn a_reset_api_key_takes_effect_at_once() {
     .await;
     assert_eq!(status, StatusCode::OK);
 }
+
+/// `PUT` of the host settings with `body` changed by `edit`, from what
+/// `GET` answers.
+async fn put_host(
+    app: &axum::Router,
+    edit: impl FnOnce(&mut serde_json::Value),
+) -> (StatusCode, serde_json::Value) {
+    let (_, _, current) = ask(app, "GET", "/api/v3/config/host", &[("X-Api-Key", KEY)], "").await;
+    let mut body: serde_json::Value = serde_json::from_slice(&current).unwrap();
+    // The fixture's file asks for no credentials and names no host, which
+    // a save refuses: the page as one that asks for them.
+    body["authenticationRequired"] = serde_json::json!("enabled");
+    body["allowedHosts"] = serde_json::json!("");
+    edit(&mut body);
+    let body: &'static str = Box::leak(body.to_string().into_boxed_str());
+    let json = [("X-Api-Key", KEY), ("Content-Type", "application/json")];
+    let (status, _, answer) = ask(app, "PUT", "/api/v3/config/host/1", &json, body).await;
+    let answer = serde_json::from_slice(&answer).unwrap_or(serde_json::Value::Null);
+    assert!(
+        status != StatusCode::BAD_REQUEST || answer[0]["propertyName"] != "AllowedHosts",
+        "{answer}"
+    );
+    (status, answer)
+}
+
+/// Radarr 7's `sslKeyPath`: answered, kept, and refused unless it names a
+/// file; Sonarr, at its pin, has no such setting.
+#[tokio::test]
+async fn radarr_keeps_the_key_of_a_pem_certificate() {
+    let app = app_edited(Personality::Radarr, "", |_| {});
+    let (status, answer) = put_host(&app, |b| b["sslKeyPath"] = serde_json::json!("/nowhere/key.pem")).await;
+    assert_eq!(status, StatusCode::BAD_REQUEST);
+    assert_eq!(answer[0]["propertyName"], "SslKeyPath");
+    assert_eq!(answer[0]["errorCode"], "FileExistsValidator");
+    assert_eq!(
+        answer[0]["errorMessage"],
+        "File '/nowhere/key.pem' does not exist"
+    );
+    let (status, answer) = put_host(&app, |b| b["sslKeyPath"] = serde_json::json!("key.pem")).await;
+    assert_eq!(status, StatusCode::BAD_REQUEST);
+    assert_eq!(answer[0]["errorMessage"], "Invalid Path: 'key.pem'");
+    let key = std::env::temp_dir().join(format!("unarr-key-{}.pem", std::process::id()));
+    std::fs::write(&key, "-----BEGIN PRIVATE KEY-----\n").unwrap();
+    let path = key.display().to_string();
+    let (status, answer) = put_host(&app, |b| b["sslKeyPath"] = serde_json::json!(path.clone())).await;
+    assert_eq!(status, StatusCode::ACCEPTED, "{answer}");
+    assert_eq!(answer["sslKeyPath"], path.as_str());
+    let (status, answer) = put_host(&app, |b| b["sslKeyPath"] = serde_json::json!("")).await;
+    assert_eq!(status, StatusCode::ACCEPTED, "{answer}");
+    assert_eq!(answer["sslKeyPath"], "");
+    std::fs::remove_file(&key).ok();
+
+    let sonarr = app_edited(Personality::Sonarr, "", |_| {});
+    let (_, _, host) = ask(&sonarr, "GET", "/api/v3/config/host", &[("X-Api-Key", KEY)], "").await;
+    let host: serde_json::Value = serde_json::from_slice(&host).unwrap();
+    assert!(host.get("sslKeyPath").is_none());
+}

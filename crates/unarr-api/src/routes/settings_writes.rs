@@ -705,6 +705,9 @@ pub fn apply_host_overrides(h: &mut unarr_core::config::HostConfig, o: &Map<Stri
     if let Some(v) = s("sslCertPassword") {
         h.ssl_cert_password = v;
     }
+    if let Some(v) = s("sslKeyPath") {
+        h.ssl_key_path = v;
+    }
     if let Some(v) = s("urlBase") {
         h.url_base = v;
     }
@@ -823,6 +826,37 @@ fn valid_host(host: &str) -> bool {
     host.parse::<std::net::IpAddr>().is_ok() || dns(host)
 }
 
+/// Radarr 7's rules for `SslKeyPath`, when it is set: a valid path
+/// (`PathValidator`) to a file that exists (`FileExistsValidator`), both
+/// checked, as FluentValidation goes on after a failure.
+async fn ssl_key_path_failures(path: &str) -> Vec<ValidationFailure> {
+    if path.trim().is_empty() {
+        return Vec::new();
+    }
+    let mut failures = Vec::new();
+    if !path.starts_with('/') || path.contains('\0') {
+        let mut f = rule(
+            "SslKeyPath",
+            "PathValidator",
+            &format!("Invalid Path: '{path}'"),
+            json!(path),
+        );
+        f.placeholders = vec![("path".into(), json!(path))];
+        failures.push(f);
+    }
+    if !tokio::fs::metadata(path).await.is_ok_and(|m| m.is_file()) {
+        let mut f = rule(
+            "SslKeyPath",
+            "FileExistsValidator",
+            &format!("File '{path}' does not exist"),
+            json!(path),
+        );
+        f.placeholders = vec![("file".into(), json!(path))];
+        failures.push(f);
+    }
+    failures
+}
+
 /// `PUT /config/host/{id}`.
 pub async fn host(State(state): State<AppState>, Json(body): Json<Value>) -> ApiResult<Response> {
     object(&body)?;
@@ -904,6 +938,10 @@ pub async fn host(State(state): State<AppState>, Json(body): Json<Value>) -> Api
     if body.get("enableSsl").and_then(Value::as_bool).unwrap_or(false) {
         failures.extend(between("SslPort", int(&body, "sslPort"), 1, 65535));
     }
+    let radarr = state.personality() == unarr_core::Personality::Radarr;
+    if radarr {
+        failures.extend(ssl_key_path_failures(&text(&body, "sslKeyPath")).await);
+    }
     failures.extend(between("LogSizeLimit", int(&body, "logSizeLimit"), 1, 10));
     failures.extend(between("BackupInterval", int(&body, "backupInterval"), 1, 7));
     failures.extend(between("BackupRetention", int(&body, "backupRetention"), 1, 90));
@@ -954,6 +992,13 @@ pub async fn host(State(state): State<AppState>, Json(body): Json<Value>) -> Api
     ] {
         if let Some(v) = body.get(key) {
             overrides.insert(key.into(), v.clone());
+        }
+    }
+    // Radarr 7's own settings, which Sonarr, at its pin, does not take.
+    let radarr_keys: &[&str] = if radarr { &["sslKeyPath"] } else { &[] };
+    for key in radarr_keys {
+        if let Some(v) = body.get(*key) {
+            overrides.insert((*key).into(), v.clone());
         }
     }
     save_host_overrides(&state, overrides).await?;

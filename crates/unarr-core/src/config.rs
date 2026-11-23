@@ -171,6 +171,9 @@ pub struct HostConfig {
     pub log_level: String,
     pub ssl_cert_path: String,
     pub ssl_cert_password: String,
+    /// `SslKeyPath` (Radarr 7): the private key of a PEM certificate. Unarr
+    /// serves no HTTPS: it is kept and answered, as the certificate is.
+    pub ssl_key_path: String,
     pub url_base: String,
     /// Raw value; see [`HostConfig::effective_instance_name`].
     pub instance_name: Option<String>,
@@ -216,6 +219,7 @@ impl HostConfig {
                 "server__trustednetworks" => self.trusted_networks = value.clone(),
                 "server__sslcertpath" => self.ssl_cert_path = value.clone(),
                 "server__sslcertpassword" => self.ssl_cert_password = value.clone(),
+                "server__sslkeypath" => self.ssl_key_path = value.clone(),
                 "server__port" => match value.trim().parse() {
                     Ok(port) => self.port = port,
                     Err(_) => unusable = true,
@@ -339,6 +343,7 @@ mod environment_tests {
             log_level: "info".into(),
             ssl_cert_path: String::new(),
             ssl_cert_password: String::new(),
+            ssl_key_path: String::new(),
             url_base: String::new(),
             instance_name: None,
             analytics_enabled: true,

@@ -390,6 +390,7 @@ fn load_or_create_config(
         log_level: "info".into(),
         ssl_cert_path: String::new(),
         ssl_cert_password: String::new(),
+        ssl_key_path: String::new(),
         url_base: String::new(),
         instance_name: None,
         analytics_enabled: false,

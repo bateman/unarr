@@ -78,6 +78,7 @@ pub fn parse(xml: &str, default_port: u16) -> anyhow::Result<HostConfig> {
         log_level: string("LogLevel", "info"),
         ssl_cert_path: string("SslCertPath", ""),
         ssl_cert_password: string("SslCertPassword", ""),
+        ssl_key_path: string("SslKeyPath", ""),
         url_base: string("UrlBase", ""),
         instance_name: text("InstanceName").filter(|s| !s.is_empty()),
         analytics_enabled: boolean("AnalyticsEnabled", true)?,
