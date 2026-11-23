@@ -43,7 +43,7 @@ regex!(trim_separators_re, r"[- ._]+$");
 regex!(title_prefix_re, r"(?i)^(The|An|A) (.*?)((?: *\([^)]+\))*)$");
 regex!(
     edition_ordinal_re,
-    r"(?i)((?:\b|_)\d{1,3}(?:st|th|rd|nd)(?:\b|_))"
+    r"(?i)((?:\b|_)\d{1,3}(?:st|th|rd|nd|mm)(?:\b|_))"
 );
 regex!(edition_upper_re, r"(?i)((?:\b|_)(?:IMAX|3D|SDR|HDR|DV)(?:\b|_))");
 
@@ -861,6 +861,41 @@ mod tests {
             edition("Uncut", "{Movie Title} {{edition-{Edition Tags}}}"),
             "Movie Title {{edition-Uncut}}"
         );
+        // A film gauge stays in lower case, as an ordinal does (Radarr 7).
+        for (given, format, expected) in [
+            (
+                "35mm edition",
+                "{Movie Title} [{edition tags}]",
+                "Movie Title [35mm edition]",
+            ),
+            (
+                "35MM EDITION",
+                "{Movie Title} [{edition tags}]",
+                "Movie Title [35mm edition]",
+            ),
+            (
+                "35mm edition",
+                "{Movie Title} [{Edition Tags}]",
+                "Movie Title [35mm Edition]",
+            ),
+            (
+                "35MM EDITION",
+                "{Movie Title} [{Edition Tags}]",
+                "Movie Title [35mm Edition]",
+            ),
+            (
+                "35mm edition",
+                "{Movie Title} [{EDITION TAGS}]",
+                "Movie Title [35MM EDITION]",
+            ),
+            (
+                "35MM EDITION",
+                "{Movie Title} [{EDITION TAGS}]",
+                "Movie Title [35MM EDITION]",
+            ),
+        ] {
+            assert_eq!(edition(given, format), expected, "{given} {format}");
+        }
         for (given, format, expected) in [
             (
                 "4th anNiverSary eDitIOn",
