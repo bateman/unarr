@@ -128,6 +128,7 @@ fn language_of(name: &str) -> Option<i64> {
         "romansh" => lang::ROMANSH,
         "mongolian" => lang::MONGOLIAN,
         "georgian" => lang::GEORGIAN,
+        "irish" => lang::IRISH,
         _ => return None,
     })
 }
@@ -246,6 +247,7 @@ fn run_method(fixture: &str, method: &str, cases: &[Value], out: &mut Outcome) -
                 "romansh",
                 "mongolian",
                 "georgian",
+                "irish",
             ];
             let name = method.trim_start_matches("should_parse_language_");
             let r = if DIRECT.contains(&name) {

@@ -137,6 +137,7 @@ const ISO_LANGUAGES: &[(&str, &str, &str, i64)] = &[
     ("rm", "", "roh", 55),
     ("mn", "", "mon", 56),
     ("ka", "", "kat", 57),
+    ("ga", "", "gle", 58),
 ];
 
 /// `Iso639BTMap`: the bibliographic three-letter codes, as terminologic.

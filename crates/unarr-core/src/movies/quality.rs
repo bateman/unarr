@@ -259,6 +259,10 @@ pub const RADARR_LANGUAGES: &[MovieLanguage] = &[
         name: "Indonesian",
     },
     MovieLanguage {
+        id: 58,
+        name: "Irish",
+    },
+    MovieLanguage {
         id: 5,
         name: "Italian",
     },
