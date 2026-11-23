@@ -32,7 +32,7 @@ impl AllowedHosts {
             .map(normalize)
             // Bind addresses, which the originals' parser drops: with nothing
             // else listed they would lock every real host out.
-            .filter(|h| h != "0.0.0.0" && h != "[::]")
+            .filter(|h| !is_bind_address(h))
             .collect();
         if hosts.is_empty() || hosts.iter().any(|h| h == "*") {
             return AllowedHosts(None);
@@ -69,6 +69,22 @@ impl AllowedHosts {
             }
         })
     }
+}
+
+/// `IsBindAddress`: an address a server listens on, which no request names.
+pub fn is_bind_address(host: &str) -> bool {
+    host == "0.0.0.0" || host == "[::]"
+}
+
+/// The bind addresses the setting lists, as written once normalised.
+pub fn bind_addresses(setting: &str) -> Vec<String> {
+    setting
+        .split([',', ';'])
+        .map(str::trim)
+        .filter(|h| !h.is_empty())
+        .map(normalize)
+        .filter(|h| is_bind_address(h))
+        .collect()
 }
 
 /// Lower-case, and bare IPv6 addresses in brackets as the originals store them.
@@ -155,6 +171,26 @@ pub async fn require_allowed_host(State(state): State<AppState>, request: Reques
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// `AllowedHostsParserFixture.should_be_bind_address` and
+    /// `should_not_be_bind_address` (Radarr 7), case for case; and
+    /// `ConfigureHostFilteringOptionsFixture`: bind addresses alone allow
+    /// every host.
+    #[test]
+    fn bind_addresses_are_told_apart() {
+        for host in ["0.0.0.0", "::", "[::]"] {
+            assert_eq!(bind_addresses(host).len(), 1, "{host}");
+            assert!(AllowedHosts::parse(host).allows_everything(), "{host}");
+        }
+        for host in ["*", "sonarr.local", "*.example.com", "192.168.1.5", "[::1]"] {
+            assert!(!is_bind_address(host), "{host}");
+        }
+        assert!(AllowedHosts::parse("0.0.0.0, [::]").allows_everything());
+        assert_eq!(bind_addresses("sonarr.local, 0.0.0.0, [::]"), ["0.0.0.0", "[::]"]);
+        let some = AllowedHosts::parse("sonarr.local, 0.0.0.0, [::]");
+        assert!(some.allows(Some("sonarr.local")));
+        assert!(!some.allows(Some("0.0.0.0")));
+    }
 
     #[test]
     fn empty_or_star_allows_everything() {

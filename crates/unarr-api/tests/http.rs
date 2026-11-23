@@ -2383,3 +2383,33 @@ async fn radarr_starts_a_command_whatever_its_body_field_says() {
     assert_eq!(answer["name"], "MessagingCleanup");
     assert_eq!(answer["body"]["name"], "MessagingCleanup");
 }
+
+/// Radarr 7 refuses a bind address in Allowed Hosts (`0.0.0.0`, `::`,
+/// `[::]`), which names no host; Sonarr, at its pin, takes it.
+#[tokio::test]
+async fn radarr_refuses_a_bind_address_in_the_allowed_hosts() {
+    for (personality, refused) in [(Personality::Radarr, true), (Personality::Sonarr, false)] {
+        let app = app_edited(personality, "", |_| {});
+        for hosts in ["0.0.0.0", "::", "[::]", "unarr.local, 0.0.0.0"] {
+            let (_, _, current) = ask(&app, "GET", "/api/v3/config/host", &[("X-Api-Key", KEY)], "").await;
+            let mut body: serde_json::Value = serde_json::from_slice(&current).unwrap();
+            body["authenticationRequired"] = serde_json::json!("enabled");
+            body["allowedHosts"] = serde_json::json!(hosts);
+            let body: &'static str = Box::leak(body.to_string().into_boxed_str());
+            let json = [("X-Api-Key", KEY), ("Content-Type", "application/json")];
+            let (status, _, answer) = ask(&app, "PUT", "/api/v3/config/host/1", &json, body).await;
+            let answer = serde_json::from_slice(&answer).unwrap_or(serde_json::Value::Null);
+            if refused {
+                assert_eq!(status, StatusCode::BAD_REQUEST, "{hosts}: {answer}");
+                assert_eq!(answer[0]["propertyName"], "AllowedHosts", "{hosts}");
+                assert_eq!(
+                    answer[0]["errorMessage"],
+                    "0.0.0.0 and [::] are not host names, leave empty to allow all hosts",
+                    "{hosts}"
+                );
+            } else {
+                assert!(status.is_success(), "{personality:?} {hosts}: {status} {answer}");
+            }
+        }
+    }
+}

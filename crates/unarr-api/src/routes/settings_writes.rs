@@ -898,6 +898,17 @@ pub async fn host(State(state): State<AppState>, Json(body): Json<Value>) -> Api
                 json!(hosts),
             ));
         }
+        // Radarr 7 refuses a bind address; Sonarr's pin takes it.
+        if state.personality() == unarr_core::Personality::Radarr
+            && parse_hosts(&hosts).iter().any(|h| crate::hosts::is_bind_address(h))
+        {
+            failures.push(rule(
+                "AllowedHosts",
+                "PredicateValidator",
+                "0.0.0.0 and [::] are not host names, leave empty to allow all hosts",
+                json!(hosts),
+            ));
+        }
     }
     let url_base = text(&body, "urlBase");
     let lower = url_base.trim_start_matches('/').to_ascii_lowercase();
