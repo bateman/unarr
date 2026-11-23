@@ -41,9 +41,11 @@ These hold for the whole run, whatever a step below says.
    it into the tree: the bump's `apply` step already copied what may be
    copied. In particular, never commit `migrated/<app>.db`.
 5. **One limit per run.** The job gives you a cap on time or spend. Before
-   you reach it: push every commit that is complete (section 5), update the
-   PR's table with the commits still to do, leave the cursor where it is,
-   leave the PR a draft. A half-ported commit is not pushed.
+   you reach it: push every commit that is complete (section 5), commit and
+   push the log rows of the decisions made final in this run (section 7,
+   "The log"), rewrite the PR body with the commits still to do, leave the
+   cursor where it is, leave the PR a draft. A half-ported commit is not
+   pushed.
 6. **The cursor moves last**, with `make bump-<app> STEPS=cursor`, only
    when every upstream commit has a final decision (section 9).
 7. **Authorship and names** as `CLAUDE.md` says: every commit authored and
@@ -68,18 +70,44 @@ These hold for the whole run, whatever a step below says.
 1. The branch is `<app>/upstream-<target>`, e.g. `radarr/upstream-7.0.3.10918`.
 2. If a PR for this personality is already open (`radarr/upstream-*`),
    continue that one, on its branch, to its own target: never open a
-   second. Its table says what is left (fixed rule 5). If the work
+   second. Its table says what is left (fixed rule 5), and
+   `upstream/<app>-log.csv` the reasons of what is decided. If the work
    directory is gone by then, `make upstream-<app> TARGET=<target>` on the
    branch lists the commits again (the cursor has not moved) and
    `make check` the tests that still fail.
+
+   **Decisions without their log row.** A run made under an earlier
+   version of this file may have left final decisions in the PR's table
+   with no row in the log, their reasons elsewhere (a comment on the PR).
+   Before porting anything else, write those rows (section 7, "The log"):
+   the decision, the Unarr commits and the tests from the table, the
+   reason from where the earlier run kept it, in your words. Check each
+   against the rules as they stand now: a `not applicable` whose
+   behaviour Unarr already had is `ported`, `already had it:` (section 4);
+   a change that only follows the pin is not a row (section 4,
+   "Consequences of the pin"); one already pushed with an `Upstream:`
+   line stays as it is (section 4, rule 6) and in that upstream commit's
+   row, and is listed under "Following the pin" too, saying so. Commit
+   them alone, subject
+   `Log the decisions already made in the <App> <target> port`, push, and
+   rewrite the PR body (section 7) so that it no longer points at the
+   comment. Leave the comment as it is: it is history, not a source to
+   keep in step.
 3. If the tree has the bump applied and not committed (`git status` shows
    `upstream/<app>.pin` changed), commit it first, alone: everything the
    bump wrote (pin, recordings, schemas, vectors), with the subject
    `Pin <App> <target>` and a body that names the old and new version.
-   No port goes in that commit.
+   No port goes in that commit. The consequences of the pin that belong
+   to no upstream commit follow it (section 4, "Consequences of the pin").
 4. Push, and open the PR into `main` as a **draft** at once, titled
-   `<App> <old> → <target>`, with the body of section 7 (most rows still
-   "to do"). Add the label `major` when the summary's title says `(major)`.
+   `<App> <old> → <target>`, with a **short body**: the Release section
+   (section 7, "The PR body", point 1, with the counts of the triage and
+   the summary), and a line saying that the table of the commits comes
+   with the first update, and what is left (all the commits, the checks).
+   Add the label
+   `major` when the summary's title says `(major)`. The full body of
+   section 7, with the table, comes at the first update, and every update
+   after it rewrites the whole body, never a part.
 
 ## 2. What to read first, and what is noise
 
@@ -184,8 +212,20 @@ For each migration the triage lists as added or changed:
    (`tests/fixtures/<app>/<app>.db`) by applying what the migration does,
    and a row in `VersionInfo` at the new level. Check what you built
    against `migrated/<app>.db` of the work directory by reading its
-   schema and a few rows (`sqlite3 ... .schema`); do not copy it (fixed rule 4).
-   The fixtures stay at the level the maintainer's installations had.
+   schema and a few rows; do not copy it (fixed rule 4). The `sqlite3`
+   command may not be on the machine: read it with Python's `sqlite3`
+   module, read-only, in isolated mode, e.g.
+
+   ```sh
+   python3 -I -c 'import sqlite3, sys
+   db = sqlite3.connect(f"file:{sys.argv[1]}?mode=ro", uri=True)
+   for (sql,) in db.execute("SELECT sql FROM sqlite_master WHERE name = ?", (sys.argv[2],)): print(sql)
+   for row in db.execute(f"SELECT * FROM \"{sys.argv[2]}\" LIMIT 3"): print(row)
+   ' .cache/bump/<app>/migrated/<app>.db MovieFiles
+   ```
+
+   (`$UNARR_CACHE/bump/<app>/...` when `UNARR_CACHE` is set.) The
+   fixtures stay at the level the maintainer's installations had.
 4. Only then raise `MAX_KNOWN_MIGRATION` in
    `crates/unarr-import/src/<app>.rs` to the pin's `migration`.
    `the_pinned_release_is_within_the_known_migrations` must turn green by
@@ -253,9 +293,19 @@ Every commit of the triage gets one of:
 
 | Decision | When | What it needs |
 |----------|------|---------------|
-| **ported** | Unarr now does what the commit does | one Unarr commit (or none for a ui commit that needs nothing), its test |
+| **ported** | Unarr now does what the commit does | one Unarr commit (or none for a ui commit that needs nothing, or for behaviour Unarr already had and a test already covers), its test |
 | **not applicable** | it changes nothing Unarr has or emulates | the reason, one line |
 | **deferred** | above the threshold (section 6) | an issue with a design sketch, linked |
+
+**Behaviour Unarr already had.** When the commit brings the original to
+what Unarr already does (Unarr read the API key at each request before
+Radarr 7 did), the decision is `ported`, never `not applicable`, and its
+log `reason` starts with `already had it:`, then what Unarr does and where.
+If an existing test covers that behaviour, name it in the `tests` column
+and make no commit. If none does, add a commit of tests only that holds the
+behaviour in place, citing the upstream commit as any port does
+(rule 1 below). `not applicable` stays for what Unarr neither has nor
+emulates (a download client it lacks, PostgreSQL, the upstream build).
 
 Rules of a ported commit:
 
@@ -270,10 +320,49 @@ Rules of a ported commit:
 4. `cargo build`, `cargo clippy --workspace --all-targets -- -D warnings`
    and the tests the commit touches pass before you commit it. The whole
    tree may still be red (other commits not yet ported).
+   **A change to shared code** (next subsection) can break a test of
+   another target, or of the other personality, that the commit's own
+   tests do not reach. Before committing one, run every test target of
+   each crate it touches and the contract tests of both personalities:
+
+   ```sh
+   cargo test -p <crate>          # each crate touched: its library, every tests/*.rs, its doc tests
+   cargo test -p unarr-api --test contract --test contract_radarr --test personalities
+   ```
+
+   A test that passed before the change must pass after it; one that was
+   already red (a commit not yet ported) may stay red, as long as its
+   output shows no new difference.
 5. A change that only follows an earlier upstream commit (a follow-up, a
    revert) is its own decision: a revert of something you ported is
    ported as a revert; a follow-up that changes nothing Unarr took is
    `not applicable`.
+6. **Rewriting commits.** A commit not yet pushed may be rewritten to keep
+   one Unarr commit per upstream commit: a fix to it goes in a
+   `git commit --fixup=<commit>`, folded in with
+   `git -c sequence.editor=: rebase -i --autosquash <base>` (non-interactive)
+   before the push. A commit already pushed is never rewritten, nor is the
+   branch force-pushed: the fix is a new commit, which cites the same
+   upstream commit (`Upstream:` line) and says what it corrects; the log
+   row of that upstream commit names both Unarr commits.
+
+### Consequences of the pin
+
+Some changes follow from the new pin itself and from no upstream commit:
+Radarr 7 migrates a Radarr 6 database to 243 at start, so `system/status`
+must report the pin's migration level on an imported database. Such a
+change:
+
+- is a commit of its own, right after `Pin <App> <target>` when you see it
+  then (later, when the work shows it), with no `Upstream:` line and a
+  message that says it follows the pin to `<target>` and why;
+- has its test, as any other change;
+- is listed in the PR body under "Following the pin" (section 7), with
+  the commit and the test;
+- is not a row of the log, which has one row per upstream commit.
+
+A change an upstream commit asks for is never put here to skip its
+decision: if a commit explains it, it is that commit's port.
 
 **What the recordings show is answered, whatever the decision.** A commit
 whose behaviour Unarr does not have, or defers, can still change the
@@ -361,8 +450,12 @@ not, leave the branch as it is.
 ## 5. Complete, for the limit of fixed rule 5
 
 A commit is complete when its decision is final and, for `ported`, its
-Unarr commit builds, passes clippy and its own tests. Push complete
-commits as you go; the next run continues from the PR's table.
+Unarr commit builds, passes clippy and its own tests (and, for shared
+code, the tests of section 4, rule 4). Push complete commits as you go:
+once pushed, they are not rewritten (section 4, rule 6). At the end of
+every run, the limit reached or not, the log rows of the decisions made
+final in it are committed and pushed (section 7, "The log"); the next run
+continues from the PR's table and the log.
 
 ## 6. When to defer, and the wontport list
 
@@ -395,9 +488,17 @@ and leave a review comment on it: it is the maintainer's to accept.
 
 ### The log, `upstream/<app>-log.csv`
 
-One row per upstream commit, for every commit of the triage, appended in
-the triage's order. Write it once every decision is final, in one commit
-before the cursor's (section 9). CSV as RFC 4180 (write it with Python's
+One row per upstream commit, for every commit of the triage, in the
+triage's order. It is written as the port goes, so that a run cut short
+loses no reason: at the end of every run, one commit adds the rows of the
+decisions made final in that run, each in its place in the triage's order,
+subject `Log <n> decisions of the <App> <target> port`; it comes after the
+run's last rewrite of commits (section 4, rule 6), so the Unarr commits it
+names are those pushed. Only final decisions have a row: a commit still
+**to do** or **asked** has none until it is decided. Until the PR merges, a
+later run may correct a row of its own PR, in its log commit, saying why in
+the body. The log is complete, one row per commit of the triage, before
+the cursor moves (section 9). CSV as RFC 4180 (write it with Python's
 `csv` module), UTF-8, this header:
 
 ```
@@ -413,7 +514,7 @@ sha,pr,class,decision,unarr_commits,tests,issue,reason,review
 | `unarr_commits` | the Unarr commits (12 hex digits), space separated; empty when none |
 | `tests` | the tests that cover it (`crate::module::test` or file name), space separated |
 | `issue` | `#<n>` for `deferred`; empty otherwise |
-| `reason` | one line in your words: why not applicable or deferred; what a ported change did when not obvious |
+| `reason` | one line in your words: why not applicable or deferred; what a ported change did when not obvious; `already had it: ...` for behaviour Unarr already had (section 4) |
 | `review` | what a human changed in review, one line; empty when nothing |
 
 No upstream text goes in the log: no subject, no quote. The `review`
@@ -423,7 +524,10 @@ is not otherwise changed after its PR merges.
 
 ### The PR body
 
-In this order, in English, no tool names, no footer:
+When the PR opens, the short body of section 1, point 4. From the first
+update on, the whole body below, rewritten whole at every update (a part
+left from an earlier update says what is no longer true). In this order,
+in English, no tool names, no footer:
 
 1. **Release.** `<App> <old> → <target>`, the kind of jump, the tag and its
    commit, and the counts of the triage and the summary.
@@ -431,21 +535,28 @@ In this order, in English, no tool names, no footer:
    SHA (10 digits, linked to `https://github.com/<App>/<App>/commit/<sha>`),
    class, decision (or **to do** / **asked**), the Unarr commit, the tests
    that cover it. No upstream subject in the table: the link has it, and
-   an upstream `(#11716)` would link an issue of this repository.
-3. **Deferred.** The issues opened, one line each.
-4. **Behind the personality.** One line per shared piece that now
+   an upstream `(#11716)` would link an issue of this repository. No
+   reason either: the log has it, row by row, from the end of the run
+   that decided.
+3. **Following the pin.** The commits of section 4, "Consequences of the
+   pin": each with what it changes and its test. "none" when there are
+   none.
+4. **Deferred.** The issues opened, one line each.
+5. **Behind the personality.** One line per shared piece that now
    branches on the personality (section 4, "Code both personalities
    share"): the file, the upstream commit, and what the other original
    must have for its port to remove the branch. Also each branch of the
    other personality this port removed. "none" when there are none.
-5. **The clients' version.** Section 8, check 8: the note for a patch or
+6. **The clients' version.** Section 8, check 8: the note for a patch or
    minor, the check for a major.
-6. **Questions for the maintainer.** Section "Stop and ask"; "none" when
+7. **Questions for the maintainer.** Section "Stop and ask"; "none" when
    there are none.
-7. **Checks.** Each check of section 8, with its result.
-8. **Left to check by hand.** What you could not do, and why.
-9. **Still to do** (only while the run limit cut the port short): the
-   commits without a decision.
+8. **Checks.** Each check of section 8, with its result.
+9. **Left to check by hand.** What you could not do, and why. Always
+   `docs/originals-comparison.md` while the workflow has no job that
+   measures it (section 8, check 7).
+10. **Still to do** (only while the run limit cut the port short): the
+    commits without a decision.
 
 ### Review comments on your own PR
 
@@ -495,8 +606,16 @@ All of these, on the branch, and their results in the PR:
    that need neither the original nor a host outside the machine (the
    prose: `tests/vectors/README.md`, `tests/fixtures/<app>/README.md`,
    `tests/fixtures/recyclarr/README.md`), and list the rest in the PR.
-7. `docs/originals-comparison.md` is not yours: a job of its own in the
-   workflow measures and commits it.
+7. `docs/originals-comparison.md` is not the port's work, and the port
+   does not measure it: `make compare-originals` runs the new original
+   (fixed rule 3). Issue #9 decides that a job of its own in the workflow
+   measures it and commits it on the PR's branch; that is how this PR
+   meets the rule of `CLAUDE.md` for a new pin. This holds even when the
+   task that started your run asks you to measure it: the issue wins
+   (see the top of this file), and you say so in the PR. Until that job
+   exists, the PR lists it under "Left to check by hand" (section 7) and
+   says that it is not to be merged until the comparison has been
+   measured on its branch and committed there.
 8. **The clients' version.** `system/status` reports the pinned version,
    and Bazarr, Prowlarr and Recyclarr branch on it (Prowlarr also reads
    the `X-Application-Version` header). By the jump:
@@ -509,8 +628,19 @@ All of these, on the branch, and their results in the PR:
      1. the replays of check 4 pass against Unarr;
      2. the source of each client has been read where it tells the
         versions apart. Read each client's newest release and name it in
-        the PR. When it is newer than the release its replay was written
-        from (`scripts/prowlarr-replay.py` and
+        the PR. The newest release is the newest one GitHub does not flag
+        as a pre-release: read the flag from the API when it is reachable
+        (`https://api.github.com/repos/<owner>/<repo>/releases/latest`,
+        anonymously or with the job's token). When it is not, take the
+        newest tag without a pre-release suffix (`-beta`, `-rc`, `-alpha`,
+        `-dev`, any `-` after the version):
+        `git ls-remote --tags --refs https://github.com/<owner>/<repo> | sed 's|.*refs/tags/||' | grep -v -- - | sort -V | tail -1`;
+        and say in the PR that the flag was not read and that the tag was
+        chosen this way. Tags alone cannot tell every pre-release: a
+        project that tags its pre-releases like its releases (Prowlarr's
+        `v<major>.<minor>.<patch>.<build>` carries no suffix) may give a
+        pre-release, and the PR says that too. When it is newer than the
+        release its replay was written from (`scripts/prowlarr-replay.py` and
         `tests/fixtures/recyclarr/README.md` name theirs;
         `scripts/bazarr-replay.py` names none), say so: the replay may be
         behind the client too. The repositories are `morpheus65535/bazarr`, `Prowlarr/Prowlarr` and
@@ -530,7 +660,9 @@ All of these, on the branch, and their results in the PR:
 When every commit has a final decision (none **to do**, none **asked**)
 and the checks of section 8 pass:
 
-1. Commit the log rows (section 7), subject `Log the port of <App> <target>`.
+1. Commit the log rows of the last run (section 7, "The log"), as at the
+   end of every run. Check that the log now has one row per commit of the
+   triage, no more, no fewer.
 2. `make bump-<app> STEPS=cursor`, commit `upstream/<app>.lock` alone,
    subject `Move the <App> cursor to <target>`. Run `make check` once more:
    now all green.

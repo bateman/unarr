@@ -8,7 +8,7 @@ personality:
 | `<app>.pin` | the release Unarr emulates: version, build time, migration level, SHA-256 of the tarball; the one place a pinned value is written (`scripts/tests/test_pins.py`) | `make bump-<app>` |
 | `<app>.lock` | the cursor: the last upstream commit handled, and its release | `make bump-<app> STEPS=cursor`, the last step of a port |
 | `<app>-wontport.md` | upstream changes Unarr does not take, so the triage does not assess them again | by hand |
-| `<app>-log.csv` | one row per upstream commit a port handled: its class, the decision, the Unarr commits, what a human changed in review (`scripts/tests/test_port_log.py`) | the port, at its end |
+| `<app>-log.csv` | one row per upstream commit a port handled: its class, the decision, the Unarr commits, what a human changed in review (`scripts/tests/test_port_log.py`) | the port, at the end of each run: the decisions made final in it |
 | `PORTING.md` | how a port is done, for both personalities: where it starts, the order, the decisions, the PR | by hand |
 
 Two commands, run in this order:
@@ -88,8 +88,11 @@ What the bump leaves to the port, and lists in the summary:
   tests fail ("the original's update list has no installed release"); the
   summary says so and gives the command;
 - the Bazarr and Prowlarr replays, written from those projects' source;
-- the prose that names the old release, and `docs/originals-comparison.md`
-  as `CLAUDE.md` says.
+- the prose that names the old release;
+- `docs/originals-comparison.md`, which a job of the workflow measures on
+  the PR's branch (issue #9); until that job exists, the port lists it as
+  left to check by hand and its PR is not merged without it
+  (`PORTING.md`, section 8).
 
 ### The recording reaches no host outside the machine
 
