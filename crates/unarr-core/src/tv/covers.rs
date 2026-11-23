@@ -287,6 +287,22 @@ mod tests {
         std::fs::remove_dir_all(&dir).unwrap();
     }
 
+    /// Radarr 7 limits the decoders of its resizer; Unarr's decodes JPEG and
+    /// PNG alone (the `image` crate's features), so a cover in another
+    /// format, a GIF here, is not resized and the full image is served.
+    #[test]
+    fn a_cover_in_another_format_is_not_resized() {
+        let dir = std::env::temp_dir().join(format!("unarr_covers_gif_{}", std::process::id()));
+        std::fs::create_dir_all(&dir).unwrap();
+        // A GIF of one pixel.
+        let gif: &[u8] = b"GIF89a\x01\x00\x01\x00\x80\x00\x00\x00\x00\x00\xff\xff\xff!\xf9\x04\x01\x00\x00\x00\x00,\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02\x02D\x01\x00;";
+        let source = dir.join("poster.jpg");
+        std::fs::write(&source, gif).unwrap();
+        let err = resize(&source, &dir.join("poster-250.jpg"), 250).unwrap_err();
+        assert!(err.to_string().contains("Gif"), "{err}");
+        std::fs::remove_dir_all(&dir).unwrap();
+    }
+
     #[test]
     fn the_last_write_is_remembered_until_the_covers_change() {
         let root = std::env::temp_dir().join(format!("unarr_cover_times_{}", std::process::id()));
