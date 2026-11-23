@@ -176,7 +176,7 @@ pub fn build_file_path(
     let media_info: Option<NamingMediaInfo> = file
         .media_info
         .as_ref()
-        .map(|m| super::format::naming_media_info(m, Some(&scene_or_file_name)));
+        .map(|m| super::format::naming_media_info(m, Some(&scene_or_file_name), crate::Personality::Sonarr));
     let definition = env.catalog.definition(file.quality.quality_id);
     let naming_file = NamingFile {
         quality: file.quality,

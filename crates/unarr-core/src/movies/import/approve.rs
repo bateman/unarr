@@ -108,7 +108,7 @@ pub fn build_file_path(
     let media_info = file
         .media_info
         .as_ref()
-        .map(|m| format::naming_media_info(m, Some(&scene_or_file_name)));
+        .map(|m| format::naming_media_info(m, Some(&scene_or_file_name), crate::Personality::Radarr));
     let definition = env.catalog.definition(file.quality.quality_id);
     let naming_file = NamingMovieFile {
         quality: file.quality,

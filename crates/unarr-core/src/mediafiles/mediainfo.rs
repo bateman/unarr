@@ -673,7 +673,9 @@ fn probe_inner(file: &Path, personality: Personality) -> anyhow::Result<MediaInf
     put("videoBitDepth", json!(bit_depth));
     put("videoColourPrimaries", opt(colour_primaries));
     put("videoTransferCharacteristics", opt(transfer));
-    if let Some(d) = &dovi {
+    // Radarr 7 (FFMpegCore 5.4) keeps the record out of the model: it is
+    // read for the HDR format alone.
+    if let Some(d) = dovi.as_ref().filter(|_| personality != Personality::Radarr) {
         put(
             "doviConfigurationRecord",
             json!({
@@ -742,7 +744,7 @@ fn probe_inner(file: &Path, personality: Personality) -> anyhow::Result<MediaInf
                 .collect::<Vec<_>>()),
         );
     }
-    put("scanType", json!("Progressive"));
+    put("scanType", json!(scan_type(personality, video)));
 
     let title = format
         .get("tags")
@@ -754,6 +756,20 @@ fn probe_inner(file: &Path, personality: Personality) -> anyhow::Result<MediaInf
         model: Value::Object(model),
         title,
     })
+}
+
+/// `ScanType`: Radarr 7 reads the video's field order (FFMpegCore 5.4);
+/// Sonarr, at its pin, writes every file as progressive.
+fn scan_type(personality: Personality, video: Option<&Value>) -> &'static str {
+    let interlaced = personality == Personality::Radarr
+        && video
+            .and_then(|v| str_of(v, "field_order"))
+            .is_some_and(|o| matches!(o, "tt" | "bb" | "tb" | "bt"));
+    if interlaced {
+        "Interlaced"
+    } else {
+        "Progressive"
+    }
 }
 
 /// A stream's `title` tag, trimmed, when it has one.
@@ -1015,6 +1031,29 @@ mod tests {
         assert_eq!(info.audio_languages(), vec!["eng", "ita"]);
         assert_eq!(m["videoFormat"], "h264");
         assert_eq!(m["runTime"], "00:10:10");
+        assert_eq!(m["scanType"], "Progressive");
+        assert!(m.get("doviConfigurationRecord").is_none());
+    }
+
+    #[test]
+    fn radarr_reads_the_field_order() {
+        for (order, radarr) in [
+            ("tt", "Interlaced"),
+            ("bb", "Interlaced"),
+            ("tb", "Interlaced"),
+            ("bt", "Interlaced"),
+            ("progressive", "Progressive"),
+            ("unknown", "Progressive"),
+        ] {
+            let video = json!({"codec_type": "video", "field_order": order});
+            assert_eq!(scan_type(Personality::Radarr, Some(&video)), radarr, "{order}");
+            assert_eq!(
+                scan_type(Personality::Sonarr, Some(&video)),
+                "Progressive",
+                "{order}"
+            );
+        }
+        assert_eq!(scan_type(Personality::Radarr, None), "Progressive");
     }
 
     /// A stream's title is kept trimmed; a missing disposition is no flag.

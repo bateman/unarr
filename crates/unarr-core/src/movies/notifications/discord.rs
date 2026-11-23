@@ -350,7 +350,8 @@ pub(crate) fn download_payload(settings: &Settings, m: &DownloadMessage<'_>, ctx
                         None,
                     )
                 });
-                let audio = media.and_then(|raw| format::primary_audio(raw).codec());
+                let audio =
+                    media.and_then(|raw| format::primary_audio(raw).codec_for(crate::Personality::Radarr));
                 let channels = media.map(format::audio_channels).unwrap_or(0.0);
                 embed.field(
                     "Codecs",

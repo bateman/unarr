@@ -56,7 +56,7 @@ fn without_nulls(mut m: Map<String, Value>) -> Value {
 }
 
 /// `MediaInfoAudioStreamResource`: the codec's name, not its id.
-fn audio_stream_resource(stream: &Value) -> Value {
+fn audio_stream_resource(stream: &Value, personality: Personality) -> Value {
     let a = AudioStream::of_stream(stream);
     let mut m = Map::new();
     m.insert(
@@ -64,7 +64,10 @@ fn audio_stream_resource(stream: &Value) -> Value {
         stream.get("language").cloned().unwrap_or(Value::Null),
     );
     // Radarr 7 names no codec as `""` (`FormatAudioCodec`), never null.
-    m.insert("codec".into(), Value::from(a.codec().unwrap_or_default()));
+    m.insert(
+        "codec".into(),
+        Value::from(a.codec_for(personality).unwrap_or_default()),
+    );
     m.insert(
         "profile".into(),
         a.profile.map(Value::from).unwrap_or(Value::Null),
@@ -124,7 +127,7 @@ pub fn resource(
     Some(MediaInfoResource {
         audio_bitrate: primary.bitrate,
         audio_channels: number(audio_channels),
-        audio_codec: or_empty(primary.codec(), streams_shape),
+        audio_codec: or_empty(primary.codec_for(personality), streams_shape),
         audio_languages: match audio_streams {
             Some(_) => joined_languages(audio_streams),
             None => joined(raw, "audioLanguages"),
@@ -153,7 +156,7 @@ pub fn resource(
         },
         audio_streams: audio_streams
             .filter(|_| streams_shape)
-            .map(|s| s.iter().map(audio_stream_resource).collect()),
+            .map(|s| s.iter().map(|x| audio_stream_resource(x, personality)).collect()),
         subtitle_streams: subtitle_streams
             .filter(|_| streams_shape)
             .map(|s| s.iter().map(subtitle_stream_resource).collect()),

@@ -53,9 +53,15 @@ impl<'a> AudioStream<'a> {
         }
     }
 
-    /// `FormatAudioCodec` of this stream.
+    /// `FormatAudioCodec` of this stream, as Sonarr names it.
     pub fn codec(&self) -> Option<String> {
-        audio_codec(
+        self.codec_for(crate::Personality::Sonarr)
+    }
+
+    /// `FormatAudioCodec` of this stream, as `personality`'s original names it.
+    pub fn codec_for(&self, personality: crate::Personality) -> Option<String> {
+        audio_codec_for(
+            personality,
             self.format,
             self.codec_id.unwrap_or(""),
             self.profile.unwrap_or(""),
@@ -125,7 +131,40 @@ pub fn audio_stream_count(raw: &Value) -> i64 {
     }
 }
 
-/// `FormatAudioCodec`.
+/// `FormatAudioCodec` of `personality`'s original. Radarr 7 (FFprobe 8)
+/// also reads the profile: Atmos in a TrueHD or E-AC-3 profile, HE-AAC and
+/// xHE-AAC, and DTS:X behind DTS-HD MA (`DTS-HD MA + DTS:X IMAX`); Sonarr,
+/// at its pin, reads the codec id alone for those.
+pub fn audio_codec_for(
+    personality: crate::Personality,
+    format: Option<&str>,
+    codec_id: &str,
+    profile: &str,
+) -> Option<String> {
+    if personality == crate::Personality::Radarr {
+        let named = match format.map(str::trim) {
+            Some("truehd") if codec_id != "thd+" && profile == "Dolby TrueHD + Dolby Atmos" => {
+                Some("TrueHD Atmos")
+            }
+            Some("dts") if profile == "DTS-HD MA + DTS:X IMAX" => Some("DTS-X"),
+            Some("eac3") if codec_id != "ec+3" && profile == "Dolby Digital Plus + Dolby Atmos" => {
+                Some("EAC3 Atmos")
+            }
+            Some("aac")
+                if codec_id != "A_AAC/MPEG4/LC/SBR" && (profile == "HE-AAC" || profile == "xHE-AAC") =>
+            {
+                Some(profile)
+            }
+            _ => None,
+        };
+        if let Some(named) = named {
+            return Some(named.to_string());
+        }
+    }
+    audio_codec(format, codec_id, profile)
+}
+
+/// `FormatAudioCodec`, Sonarr's.
 pub fn audio_codec(format: Option<&str>, codec_id: &str, profile: &str) -> Option<String> {
     let format = format?;
     if format.trim().is_empty() {
@@ -268,7 +307,11 @@ fn channels_from(positions: &str, channels: i64) -> f64 {
 }
 
 /// The media info the naming tokens read, from the stored model.
-pub fn naming_media_info(raw: &Value, scene_name: Option<&str>) -> NamingMediaInfo {
+pub fn naming_media_info(
+    raw: &Value,
+    scene_name: Option<&str>,
+    personality: crate::Personality,
+) -> NamingMediaInfo {
     let hdr = str(raw, "videoHdrFormat").unwrap_or("none");
     NamingMediaInfo {
         video_codec: video_codec(
@@ -278,7 +321,7 @@ pub fn naming_media_info(raw: &Value, scene_name: Option<&str>) -> NamingMediaIn
         )
         .unwrap_or_default(),
         video_bit_depth: int(raw, "videoBitDepth"),
-        audio_codec: primary_audio(raw).codec().unwrap_or_default(),
+        audio_codec: primary_audio(raw).codec_for(personality).unwrap_or_default(),
         audio_channels: audio_channels(raw),
         audio_languages: audio_languages(raw),
         subtitles: subtitle_languages(raw),
@@ -312,11 +355,55 @@ mod tests {
         let raw = serde_json::json!({"audioChannelPositions": "5.1", "audioChannels": 6});
         assert_eq!(audio_channels(&raw), 5.1);
         let raw = serde_json::json!({"audioChannels": 2, "audioLanguages": ["eng", "ita"], "videoHdrFormat": "hdr10"});
-        let n = naming_media_info(&raw, None);
+        let n = naming_media_info(&raw, None, crate::Personality::Sonarr);
         assert_eq!(n.audio_channels, 2.0);
         assert_eq!(n.audio_languages, vec!["eng", "ita"]);
         assert_eq!(n.video_dynamic_range, "HDR");
         assert_eq!(n.video_dynamic_range_type, "HDR10");
+    }
+
+    /// `FormatAudioCodecFixture`, Radarr 7: the profile names Atmos, HE-AAC
+    /// and DTS:X; Sonarr, at its pin, keeps the codec's plain name.
+    #[test]
+    fn radarr_reads_the_profile_of_the_audio_codec() {
+        use crate::Personality::{Radarr, Sonarr};
+        for (format, codec_id, profile, radarr, sonarr) in [
+            (
+                "truehd",
+                "",
+                "Dolby TrueHD + Dolby Atmos",
+                "TrueHD Atmos",
+                "TrueHD",
+            ),
+            ("truehd", "thd+", "", "TrueHD Atmos", "TrueHD Atmos"),
+            ("truehd", "", "", "TrueHD", "TrueHD"),
+            ("dts", "", "DTS-HD MA + DTS:X IMAX", "DTS-X", "DTS"),
+            ("dts", "", "DTS:X", "DTS-X", "DTS-X"),
+            (
+                "eac3",
+                "",
+                "Dolby Digital Plus + Dolby Atmos",
+                "EAC3 Atmos",
+                "EAC3",
+            ),
+            ("eac3", "ec+3", "", "EAC3 Atmos", "EAC3 Atmos"),
+            ("aac", "", "", "AAC", "AAC"),
+            ("aac", "", "HE-AAC", "HE-AAC", "AAC"),
+            ("aac", "", "xHE-AAC", "xHE-AAC", "AAC"),
+            ("aac", "A_AAC/MPEG4/LC/SBR", "", "HE-AAC", "HE-AAC"),
+        ] {
+            let of = |p| audio_codec_for(p, Some(format), codec_id, profile);
+            assert_eq!(
+                of(Radarr).as_deref(),
+                Some(radarr),
+                "{format} {codec_id} {profile}"
+            );
+            assert_eq!(
+                of(Sonarr).as_deref(),
+                Some(sonarr),
+                "{format} {codec_id} {profile}"
+            );
+        }
     }
 
     /// Radarr's migration 243 moved the primary stream into `audioStreams`:
