@@ -63,7 +63,8 @@ fn audio_stream_resource(stream: &Value) -> Value {
         "language".into(),
         stream.get("language").cloned().unwrap_or(Value::Null),
     );
-    m.insert("codec".into(), a.codec().map(Value::from).unwrap_or(Value::Null));
+    // Radarr 7 names no codec as `""` (`FormatAudioCodec`), never null.
+    m.insert("codec".into(), Value::from(a.codec().unwrap_or_default()));
     m.insert(
         "profile".into(),
         a.profile.map(Value::from).unwrap_or(Value::Null),
@@ -90,6 +91,15 @@ fn subtitle_stream_resource(stream: &Value) -> Value {
     without_nulls(m)
 }
 
+/// Radarr 7's `FormatAudioCodec` and `FormatVideoCodec` answer `""` where
+/// Sonarr's, at its pin, answer null: a file without that stream.
+fn or_empty(codec: Option<String>, radarr: bool) -> Option<String> {
+    match codec {
+        None if radarr => Some(String::new()),
+        other => other,
+    }
+}
+
 /// Build the resource from the stored JSON. `None` when nothing was stored.
 /// `personality` picks the original whose resource it is: Radarr's has the
 /// streams, Sonarr's not.
@@ -114,7 +124,7 @@ pub fn resource(
     Some(MediaInfoResource {
         audio_bitrate: primary.bitrate,
         audio_channels: number(audio_channels),
-        audio_codec: primary.codec(),
+        audio_codec: or_empty(primary.codec(), streams_shape),
         audio_languages: match audio_streams {
             Some(_) => joined_languages(audio_streams),
             None => joined(raw, "audioLanguages"),
@@ -122,10 +132,14 @@ pub fn resource(
         audio_stream_count: format::audio_stream_count(raw),
         video_bit_depth: int(raw, "videoBitDepth"),
         video_bitrate: int(raw, "videoBitrate"),
-        video_codec: video_codec(
-            str(raw, "videoFormat"),
-            str(raw, "videoCodecID").unwrap_or(""),
-            scene_name,
+        video_codec: or_empty(
+            video_codec(
+                // Radarr 7 reads the format trimmed.
+                str(raw, "videoFormat").map(|f| if streams_shape { f.trim() } else { f }),
+                str(raw, "videoCodecID").unwrap_or(""),
+                scene_name,
+            ),
+            streams_shape,
         ),
         video_fps: number(fps),
         video_dynamic_range: dynamic_range(hdr).to_string(),
@@ -223,6 +237,21 @@ mod tests {
             r["subtitleStreams"],
             serde_json::json!([{"language": "eng"}, {"language": "eng"}])
         );
+    }
+
+    /// A file without audio or video: Radarr 7 names the codecs `""`,
+    /// Sonarr null (`should_return_empty_string_when_audio_format_is_null`).
+    #[test]
+    fn a_missing_codec_is_empty_for_radarr_and_null_for_sonarr() {
+        let raw = serde_json::json!({"audioStreams": [{"language": "und"}], "subtitleStreams": []});
+        let r = serde_json::to_value(resource(Some(&raw), None, Personality::Radarr).unwrap()).unwrap();
+        assert_eq!(r["audioCodec"], "");
+        assert_eq!(r["videoCodec"], "");
+        assert_eq!(r["audioStreams"][0]["codec"], "");
+        let raw = serde_json::json!({"audioLanguages": [], "subtitles": []});
+        let r = serde_json::to_value(resource(Some(&raw), None, Personality::Sonarr).unwrap()).unwrap();
+        assert!(r["audioCodec"].is_null());
+        assert!(r["videoCodec"].is_null());
     }
 
     /// Sonarr, at its pin, has no streams in its answer.
