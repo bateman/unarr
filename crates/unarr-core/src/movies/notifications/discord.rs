@@ -581,10 +581,17 @@ pub(crate) fn manual_interaction_payload(
             ),
             manual_field::RATING => embed.field("Rating", movie.map(rating), false),
             manual_field::GENRES => embed.field("Genres", movie.map(genres), false),
-            manual_field::QUALITY => embed.field("Quality", Some(quality_name(&m.quality).to_string()), true),
+            // `message.Quality?.Quality?.Name`: none without a release.
+            manual_field::QUALITY => embed.field(
+                "Quality",
+                m.quality.as_ref().map(|q| quality_name(q).to_string()),
+                true,
+            ),
             manual_field::GROUP => embed.field(
                 "Group",
-                m.remote.parsed.as_ref().and_then(|p| p.release_group.clone()),
+                m.remote
+                    .and_then(|r| r.parsed.as_ref())
+                    .and_then(|p| p.release_group.clone()),
                 false,
             ),
             manual_field::SIZE => embed.field("Size", Some(bytes_to_string(item.total_size)), true),

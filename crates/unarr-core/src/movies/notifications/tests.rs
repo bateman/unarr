@@ -909,3 +909,77 @@ fn a_recent_movie_gets_the_cache_breaker_once_its_cover_exists() {
     );
     std::fs::remove_dir_all(&root).ok();
 }
+
+/// Radarr 7's `ShouldHandleMovie(definition, message.RemoteMovie?.Movie)`:
+/// a manual interaction for a release matched to no movie reaches a
+/// connection without tags, and a connection with tags skips it without a
+/// failure (Radarr 6 threw there, and recorded one).
+#[tokio::test]
+async fn a_manual_interaction_for_an_unknown_movie_skips_the_tagged_connections() {
+    use crate::downloadclients::{ClientKind, DownloadClientItem, ItemClientInfo};
+    use crate::downloads::{TrackedDownloadState, TrackedDownloadStatus};
+    use crate::movies::decision::testing::{release, remote};
+    use crate::movies::downloads::tracked::TrackedMovieDownload;
+    use crate::movies::import::events::MovieManualInteractionRequired;
+
+    let (url, seen) = receiver("nothing").await;
+    let mut tagged = webhook_provider(
+        1,
+        &format!("{url}/tagged"),
+        json!({"onManualInteractionRequired": true}),
+    );
+    tagged.tags = vec![1];
+    let open = webhook_provider(
+        2,
+        &format!("{url}/open"),
+        json!({"onManualInteractionRequired": true}),
+    );
+    let n = notifier(vec![tagged, open]);
+    let title = "Candyman.1992.1080p.BluRay.x264-GRP";
+    let mut unknown = remote(
+        release(title, now()),
+        &movie(1, "Candyman", 1992),
+        QualityModel::default(),
+    );
+    unknown.movie = None;
+    let item = DownloadClientItem::new(
+        ItemClientInfo {
+            protocol: crate::model::Protocol::Usenet,
+            kind: ClientKind::Sabnzbd,
+            id: 1,
+            name: "SABnzbd".into(),
+            remove_completed_downloads: true,
+            has_post_import_category: false,
+        },
+        "sab-1",
+        title,
+    );
+    let tracked = TrackedMovieDownload {
+        download_client: 1,
+        protocol: crate::model::Protocol::Usenet,
+        item,
+        import_item: None,
+        state: TrackedDownloadState::ImportBlocked,
+        status: TrackedDownloadStatus::Warning,
+        remote: Some(unknown),
+        status_messages: Vec::new(),
+        indexer: None,
+        added: None,
+        is_trackable: true,
+        has_notified_manual_interaction_required: false,
+        movie_by_id: false,
+    };
+    let event = MovieImportEvent::ManualInteractionRequired(Box::new(MovieManualInteractionRequired {
+        tracked,
+        release: None,
+    }));
+    n.on_import_events(&[event], now()).await;
+    let paths: Vec<String> = seen.lock().unwrap().iter().map(|(p, _)| p.clone()).collect();
+    assert_eq!(paths, ["open"]);
+    let status = n
+        .base()
+        .db()
+        .call_blocking(|c| store::provider_status::provider_status(c, ProviderKind::Notification, 1))
+        .unwrap();
+    assert_eq!(status.most_recent_failure, None, "skipped, not failed");
+}

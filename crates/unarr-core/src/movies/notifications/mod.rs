@@ -288,8 +288,10 @@ impl MovieDeleteMessage<'_> {
 /// Radarr's `ManualInteractionRequiredMessage`.
 pub struct ManualInteractionMessage<'a> {
     pub movie: Option<&'a Movie>,
-    pub remote: &'a RemoteMovie,
-    pub quality: QualityModel,
+    /// `RemoteMovie`: none for a download no release was matched to.
+    pub remote: Option<&'a RemoteMovie>,
+    /// `RemoteMovie?.ParsedMovieInfo?.Quality`.
+    pub quality: Option<QualityModel>,
     pub tracked: &'a TrackedMovieDownload,
     pub release: Option<&'a GrabbedMovieRelease>,
 }
@@ -782,13 +784,13 @@ impl MovieNotifier {
         let remote = tracked.remote.as_ref();
         let movie = remote.and_then(|r| r.movie.as_ref());
         // The message is the movie's or, failing that, the download's
-        // title; nothing is sent when both are blank. With a release but
-        // nothing parsed from it the original dereferences a null before
-        // it reaches any connection.
+        // title; nothing is sent when both are blank. With a movie but
+        // nothing parsed from its release the original dereferences a null
+        // (`GetMessage`) before it reaches any connection.
         if movie.is_none() && tracked.item.title.trim().is_empty() {
             return false;
         }
-        if remote.is_some_and(|r| r.parsed.is_none()) {
+        if movie.is_some() && remote.is_some_and(|r| r.parsed.is_none()) {
             tracing::error!("Object reference not set to an instance of an object.");
             return false;
         }
@@ -804,21 +806,16 @@ impl MovieNotifier {
             if !def.on_manual_interaction_required {
                 continue;
             }
-            // `ShouldHandleMovie(definition, message.RemoteMovie.Movie)`:
-            // without a release, or with tags to compare and no movie, the
-            // original throws, which the handler's catch records as a
-            // failure of the connection.
-            let null = || Err("Object reference not set to an instance of an object.".to_string());
-            let Some(remote) = remote else {
-                self.deliver(&def, "OnManualInteractionRequired", now, null())
-                    .await;
-                continue;
-            };
+            // `ShouldHandleMovie(definition, message.RemoteMovie?.Movie)`
+            // (Radarr 7): a connection with tags skips a movie it does not
+            // know, and one without tags is sent the download alone.
             match movie {
                 Some(m) if !def.handles(m) => continue,
                 None if !def.tags.is_empty() => {
-                    self.deliver(&def, "OnManualInteractionRequired", now, null())
-                        .await;
+                    tracing::debug!(
+                        "{} has tags but the movie is unknown. Notification will not be sent",
+                        def.name
+                    );
                     continue;
                 }
                 _ => {}
@@ -826,11 +823,7 @@ impl MovieNotifier {
             let message = ManualInteractionMessage {
                 movie,
                 remote,
-                quality: remote
-                    .parsed
-                    .as_ref()
-                    .map(|p| p.quality.quality)
-                    .unwrap_or_default(),
+                quality: remote.and_then(|r| r.parsed.as_ref()).map(|p| p.quality.quality),
                 tracked,
                 release,
             };

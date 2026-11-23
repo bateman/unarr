@@ -416,8 +416,9 @@ pub async fn on_rename(
 pub(crate) fn manual_interaction_payload(m: &ManualInteractionMessage<'_>, ctx: &Context<'_>) -> Value {
     let item = &m.tracked.item;
     let mut info = Object::new();
-    info.set("quality", json!(quality_name(&m.quality)));
-    info.set("qualityVersion", json!(m.quality.version));
+    let quality = m.quality.unwrap_or_default();
+    info.set("quality", json!(quality_name(&quality)));
+    info.set("qualityVersion", json!(quality.version));
     info.set("title", json!(item.title));
     info.set("size", json!(item.total_size));
     let messages: Vec<Value> = m
@@ -436,7 +437,10 @@ pub(crate) fn manual_interaction_payload(m: &ManualInteractionMessage<'_>, ctx: 
     o.set("downloadStatusMessages", Value::Array(messages));
     o.set(
         "customFormatInfo",
-        custom_format_info(&m.remote.custom_formats, m.remote.custom_format_score),
+        // Called with a release only (`on_manual_interaction_required`).
+        m.remote
+            .map(|r| custom_format_info(&r.custom_formats, r.custom_format_score))
+            .unwrap_or(Value::Null),
     );
     o.set("release", grabbed_release_json(m.release));
     o.done()
@@ -448,6 +452,11 @@ pub async fn on_manual_interaction_required(
     m: &ManualInteractionMessage<'_>,
     ctx: &Context<'_>,
 ) -> Result<(), String> {
+    // The payload reads the release's custom formats: without a release
+    // the original throws there, which the handler records as a failure.
+    if m.remote.is_none() {
+        return Err("Object reference not set to an instance of an object.".to_string());
+    }
     let settings = Settings::from_value(&def.settings);
     post(http, &settings, &manual_interaction_payload(m, ctx)).await
 }
