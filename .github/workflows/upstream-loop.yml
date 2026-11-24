@@ -1,0 +1,195 @@
+name: upstream-loop
+
+# The port's agent and the checks with the original, joined on one port's
+# draft PR (issue #9; upstream/README.md, "The loop: the agent and the
+# checks"). Called by the weekly workflow on the draft PR it opened, and
+# started on request with a PR's number to go on where a run stopped.
+#
+#   ready     a port's draft, ANTHROPIC_API_KEY set, main protected from
+#             the workflows' token: otherwise it says what is missing and
+#             the run ends green
+#   port-<n>  the agent, run n (upstream-port.yml), within its share of the
+#             spend of this run (scripts/upstream-port.py, round_limits)
+#   next-<n>  main's script reads the block `upstream-next` the agent left at
+#             the end of the PR's body (upstream/PORTING.md, section 7, "What
+#             comes next"): port, checks with their inputs, or stop
+#   checks-<n> the checks with the original (upstream-checks.yml), with those
+#             inputs; then run n+1 of the agent reads their report
+#
+# The rounds are written out, three runs of the agent and two of the checks
+# at most (ROUNDS in scripts/upstream-port.py): nothing loops, no job
+# starts another run, and no push starts a workflow. A loop that stops
+# leaves the PR a draft with its block: started again by hand, it goes on.
+# Secrets reach the called workflows by name, never `inherit`; the jobs that
+# decide hold a read token and check out main alone. Every job after
+# port-1 says `!cancelled()`: a job one of whose ancestors was skipped (a
+# round without checks) is skipped too unless its condition names a status.
+
+on:
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: "The port's draft PR number"
+        required: true
+        type: number
+  workflow_call:
+    inputs:
+      pr: { required: true, type: number }
+    secrets:
+      ANTHROPIC_API_KEY: { required: false }
+
+permissions: {}
+
+# One loop per PR. The called workflows have groups of their own
+# (upstream-port-pr-<n>, upstream-checks-pr-<n>), never this one: a loop
+# never waits on itself.
+concurrency:
+  group: upstream-loop-pr-${{ inputs.pr }}
+  cancel-in-progress: false
+
+jobs:
+  ready:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions: { contents: read, pull-requests: read }
+    outputs:
+      go: ${{ steps.ready.outputs.go }}
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with: { ref: main, persist-credentials: false }
+      - name: The PR, the key, main's protection
+        id: ready
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ inputs.pr }}
+          # Whether the secret is set, not the secret.
+          HAS_KEY: ${{ secrets.ANTHROPIC_API_KEY != '' }}
+        run: |
+          gh pr view "$PR" --repo "$GITHUB_REPOSITORY" \
+            --json number,state,isDraft,baseRefName,headRefName,headRefOid,isCrossRepository,headRepository,headRepositoryOwner,labels \
+            > "$RUNNER_TEMP/pr.json"
+          PR_JSON="$RUNNER_TEMP/pr.json" make -s upstream-loop-ready
+
+  port-1:
+    needs: ready
+    if: needs.ready.outputs.go == 'true'
+    permissions: { contents: write, pull-requests: write, issues: write }
+    uses: ./.github/workflows/upstream-port.yml
+    with:
+      pr: ${{ inputs.pr }}
+      round: 1
+    secrets:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+  next-1:
+    needs: [ready, port-1]
+    if: ${{ !cancelled() && needs.ready.outputs.go == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions: { contents: read, pull-requests: read }
+    env:
+      ROUND: "1"
+      PORT_RESULT: ${{ needs.port-1.result }}
+      CHECKED: ""
+    outputs: &next-outputs
+      action: ${{ steps.next.outputs.action }}
+      checked: ${{ steps.next.outputs.checked }}
+      recordings: ${{ steps.next.outputs.recordings }}
+      http_audit: ${{ steps.next.outputs.http_audit }}
+      compare: ${{ steps.next.outputs.compare }}
+      replays: ${{ steps.next.outputs.replays }}
+      old_pin_request: ${{ steps.next.outputs.old_pin_request }}
+      old_pin_wait: ${{ steps.next.outputs.old_pin_wait }}
+    steps: &next-steps
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with: { ref: main, persist-credentials: false }
+      # The body is the agent's text: only the block upstream-next is
+      # read, its keys and values checked; what leaves is checked values.
+      - name: What the port asks for next
+        id: next
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ inputs.pr }}
+        run: |
+          gh pr view "$PR" --repo "$GITHUB_REPOSITORY" \
+            --json number,state,isDraft,baseRefName,headRefName,headRefOid,isCrossRepository,headRepository,headRepositoryOwner,labels,body \
+            > "$RUNNER_TEMP/pr.json"
+          PR_JSON="$RUNNER_TEMP/pr.json" make -s upstream-loop-next
+
+  checks-1:
+    needs: next-1
+    if: ${{ !cancelled() && needs.next-1.result == 'success' && needs.next-1.outputs.action == 'checks' }}
+    permissions: { contents: write, pull-requests: write }
+    uses: ./.github/workflows/upstream-checks.yml
+    with:
+      pr: ${{ inputs.pr }}
+      recordings: ${{ needs.next-1.outputs.recordings }}
+      http_audit: ${{ needs.next-1.outputs.http_audit == 'true' }}
+      compare: ${{ needs.next-1.outputs.compare }}
+      replays: ${{ needs.next-1.outputs.replays == 'true' }}
+      old_pin_request: ${{ needs.next-1.outputs.old_pin_request }}
+      old_pin_wait: ${{ fromJSON(needs.next-1.outputs.old_pin_wait) }}
+
+  port-2:
+    needs: [next-1, checks-1]
+    if: ${{ !cancelled() && (needs.next-1.outputs.action == 'port' || (needs.next-1.outputs.action == 'checks' && needs.checks-1.result == 'success')) }}
+    permissions: { contents: write, pull-requests: write, issues: write }
+    uses: ./.github/workflows/upstream-port.yml
+    with:
+      pr: ${{ inputs.pr }}
+      round: 2
+    secrets:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+  next-2:
+    needs: [next-1, port-2]
+    if: ${{ !cancelled() && needs.port-2.result != 'skipped' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions: { contents: read, pull-requests: read }
+    env:
+      ROUND: "2"
+      PORT_RESULT: ${{ needs.port-2.result }}
+      CHECKED: ${{ needs.next-1.outputs.checked }}
+    outputs: *next-outputs
+    steps: *next-steps
+
+  checks-2:
+    needs: next-2
+    if: ${{ !cancelled() && needs.next-2.result == 'success' && needs.next-2.outputs.action == 'checks' }}
+    permissions: { contents: write, pull-requests: write }
+    uses: ./.github/workflows/upstream-checks.yml
+    with:
+      pr: ${{ inputs.pr }}
+      recordings: ${{ needs.next-2.outputs.recordings }}
+      http_audit: ${{ needs.next-2.outputs.http_audit == 'true' }}
+      compare: ${{ needs.next-2.outputs.compare }}
+      replays: ${{ needs.next-2.outputs.replays == 'true' }}
+      old_pin_request: ${{ needs.next-2.outputs.old_pin_request }}
+      old_pin_wait: ${{ fromJSON(needs.next-2.outputs.old_pin_wait) }}
+
+  port-3:
+    needs: [next-2, checks-2]
+    if: ${{ !cancelled() && (needs.next-2.outputs.action == 'port' || (needs.next-2.outputs.action == 'checks' && needs.checks-2.result == 'success')) }}
+    permissions: { contents: write, pull-requests: write, issues: write }
+    uses: ./.github/workflows/upstream-port.yml
+    with:
+      pr: ${{ inputs.pr }}
+      round: 3
+    secrets:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+  # The last round: what the agent asks for is said, and left to a start
+  # by hand.
+  next-3:
+    needs: [next-2, port-3]
+    if: ${{ !cancelled() && needs.port-3.result != 'skipped' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions: { contents: read, pull-requests: read }
+    env:
+      ROUND: "3"
+      PORT_RESULT: ${{ needs.port-3.result }}
+      CHECKED: ${{ needs.next-2.outputs.checked }}
+    outputs: *next-outputs
+    steps: *next-steps

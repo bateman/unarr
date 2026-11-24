@@ -100,6 +100,9 @@ class TheInputs(unittest.TestCase):
         self.assertEqual(out["app"], "radarr")
         self.assertEqual(out["head"], HEAD)
         self.assertEqual(json.loads(out["checks"])["recordings"], ["recyclarr"])
+        # One name per PR and commit: two runs of the checks in one run of
+        # upstream-loop.yml, or of two personalities, never share one.
+        self.assertEqual(out["artifact"], f"upstream-checks-results-28-{HEAD[:12]}")
 
 
 class TheRecordings(unittest.TestCase):
@@ -325,9 +328,59 @@ class TheArtifact(unittest.TestCase):
     def test_the_comment_stays_within_githubs_limit(self):
         result = {"commits": [], "kept": [], "rows": [],
                   "details": [(f"part {i}", ("y" * 100 + "\n") * 79) for i in range(12)]}
-        text = checks.render_comment(result, "radarr", "9.1.2.3456", HEAD, "")
+        text = checks.render_comment(result, "radarr", "9.1.2.3456", HEAD, "", 28)
         self.assertLessEqual(len(text), checks.MAX_COMMENT + 200)
-        self.assertIn("in the artifact `upstream-checks-results` (too long", text)
+        self.assertIn(f"in the artifact `upstream-checks-results-28-{HEAD[:12]}` (too long", text)
+
+
+def exchange(shuffled: bool = False, score: int = 10) -> bytes:
+    """A Recyclarr exchange in the shape the replay writes, small."""
+    items = [{"format": 3, "name": "AV1", "score": score}, {"format": 1, "name": "3D", "score": -10000},
+             {"format": 2, "name": "BCORE", "score": 15}]
+    if shuffled:
+        items = items[::-1]
+    names = ["MULTi", "3D", "AV1"] if not shuffled else ["MULTi", "BCORE", "CRiT"]
+    status = {"appData": "/home/user/unarr/.cache/radarr/golden-data" if not shuffled else "/srv/checks/work/x",
+              "startTime": "2026-11-24T06:30:21Z" if not shuffled else "2026-11-24T20:37:19Z", "appName": "Radarr"}
+    profile = {"id": 7, "name": "HD", "formatItems": items}
+    phases = [{"name": n, "output": ["[INF] start",
+                                     "[WRN] movies: 61 custom format(s) already existed in the service and were "
+                                     "replaced by Recyclarr: " + ", ".join(names) + " and 58 more"],
+               "exchange": [{"method": "GET", "path": "system/status", "body": None, "response": status, "status": 200},
+                            {"method": "PUT", "path": "qualityprofile/7", "body": profile, "response": profile,
+                             "status": 202}],
+               "after": {"qualityprofile": [profile]} if n.startswith("sync") else None}
+              for n in ("old-config", "drift", "sync-1", "sync-2")]
+    return (json.dumps(phases, indent=1, sort_keys=True) + "\n").encode()
+
+
+class SteadyExchange(unittest.TestCase):
+    """Two recordings of the Recyclarr exchange with the same tools differ by
+    what has no order: those are the same, a real change is not."""
+
+    def test_order_paths_and_times_alone_are_the_same(self):
+        self.assertNotEqual(exchange(), exchange(shuffled=True))
+        self.assertEqual(checks.exchange_differences(exchange(), exchange(shuffled=True)), [])
+        self.assertTrue(checks.same_recording("recyclarr", exchange(), exchange(shuffled=True)))
+
+    def test_a_score_a_status_or_a_request_is_a_change(self):
+        self.assertTrue(checks.exchange_differences(exchange(), exchange(score=99)))
+        changed = json.loads(exchange())
+        changed[2]["exchange"][1]["status"] = 500
+        self.assertTrue(checks.exchange_differences(exchange(), json.dumps(changed).encode()))
+        changed = json.loads(exchange())
+        changed[2]["exchange"].append({"method": "DELETE", "path": "customformat/9", "body": None,
+                                       "response": None, "status": 200})
+        self.assertTrue(checks.exchange_differences(exchange(), json.dumps(changed).encode()))
+        changed = json.loads(exchange())
+        changed[0]["output"].append("[ERR] something")
+        self.assertFalse(checks.same_recording("recyclarr", exchange(), json.dumps(changed).encode()))
+
+    def test_what_is_not_an_exchange_is_compared_by_its_bytes(self):
+        self.assertIsNone(checks.exchange_differences(b"[1]\n", b"[2]\n"))
+        self.assertFalse(checks.same_recording("recyclarr", b"[1]\n", b"[2]\n"))
+        self.assertTrue(checks.same_recording("recyclarr", b"[1]\n", b"[1]\n"))
+        self.assertFalse(checks.same_recording("recyclarr", None, b"[1]\n"))
 
 
 class Applying(unittest.TestCase):
@@ -408,6 +461,35 @@ class Applying(unittest.TestCase):
         got, comment = self.apply({"record:recyclarr": {"status": "failed", "exit": 2}}, {})
         self.assertEqual(self.log(), [])
         self.assertIn("failed (exit 2)", comment)
+
+    def test_a_recording_that_differs_only_by_what_has_no_order_is_not_committed(self):
+        rec = self.repo / "tests/fixtures/recyclarr/radarr-exchange.json"
+        rec.write_bytes(exchange())
+        for cmd in (["add", "."], ["commit", "-q", "-m", "an exchange"]):
+            subprocess.run(["git", "-C", str(self.repo), *cmd], check=True, env=self.env, capture_output=True)
+        self.head = subprocess.run(["git", "-C", str(self.repo), "rev-parse", "HEAD"], capture_output=True,
+                                   text=True, check=True).stdout.strip()
+        got, comment = self.apply({"record:recyclarr": {"status": "ok", "exit": 0, "changed": True}},
+                                  {"recordings/tests/fixtures/recyclarr/radarr-exchange.json": exchange(shuffled=True)})
+        self.assertEqual((got["commits"], self.log()), ([], []))
+        self.assertIn("but for what changes from one recording to the next", comment)
+        got, _ = self.apply({"record:recyclarr": {"status": "ok", "exit": 0, "changed": True}},
+                            {"recordings/tests/fixtures/recyclarr/radarr-exchange.json": exchange(score=99)})
+        self.assertEqual(self.log(), ["Record Radarr's Recyclarr exchange again from Radarr 9.1.2.3456"])
+
+    def test_an_audit_on_a_branch_without_the_mock_for_the_services_says_so(self):
+        text = b"update: GET /api/v3/update\n    status: 500 -> 200\n1 requests, 1 with a difference\n" \
+               b"make[1]: *** [Makefile:200: http-audit] Error 1\n"
+        audit = {"http-audit": {"status": "differences", "exit": 2, "requests": 1, "different": 1}}
+        _, comment = self.apply(audit, {"http-audit.txt": text})
+        self.assertIn("predates SHELL_VIA_MOCK", comment)
+        self.assertNotIn("make[1]", comment)
+        self.assertIn("status: 500 -> 200", comment)
+        script = self.repo / "scripts" / "radarr-fixture.sh"
+        script.parent.mkdir()
+        script.write_text('[ "${SHELL_VIA_MOCK:-0}" = 1 ] && MOCK_IS_PROXY=1\n')
+        _, comment = self.apply(audit, {"http-audit.txt": text})
+        self.assertNotIn("predates SHELL_VIA_MOCK", comment)
 
     def test_a_capture_is_never_committed(self):
         got, comment = self.apply({"record:transmission": {"status": "skipped"}}, {})

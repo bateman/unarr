@@ -3,7 +3,8 @@ name: upstream-port
 # The port's agent (issue #9): it follows upstream/PORTING.md on a port's
 # draft PR (<app>/upstream-<version>), one run at a time, within the limit
 # the PR's jump gives it (scripts/upstream-port.py: minutes, turns, spend).
-# Started on request; the weekly workflow will call it.
+# Started on request, or called by upstream-loop.yml, which joins it to the
+# checks with the original in rounds (`round`: the run's share of the spend).
 #
 # The agent never runs an original: UNARR_NO_ORIGINAL makes the fixture
 # scripts extract the web UI alone and refuse `golden` and `shell`, and the
@@ -29,8 +30,12 @@ on:
   workflow_call:
     inputs:
       pr: { required: true, type: number }
+      # The run of the agent in upstream-loop.yml, 1 to ROUNDS: its share
+      # of the spend of that run (scripts/upstream-port.py, round_limits).
+      round: { type: number, default: 1 }
     secrets:
-      ANTHROPIC_API_KEY: { required: true }
+      # Checked by `plan` (upstream-loop.yml checks it before calling).
+      ANTHROPIC_API_KEY: { required: false }
 
 permissions: {}
 
@@ -60,7 +65,10 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           PR: ${{ inputs.pr }}
+          ROUND: ${{ inputs.round || 1 }}
           HELPER: ${{ runner.temp }}/upstream/upstream-port.py
+          # Whether the secret is set, not the secret.
+          HAS_KEY: ${{ secrets.ANTHROPIC_API_KEY != '' }}
         run: |
           gh pr view "$PR" --repo "$GITHUB_REPOSITORY" \
             --json number,state,isDraft,baseRefName,headRefName,headRefOid,isCrossRepository,headRepository,headRepositoryOwner,labels \

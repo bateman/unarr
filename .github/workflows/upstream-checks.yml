@@ -4,7 +4,8 @@ name: upstream-checks
 # upstream/PORTING.md, section 10): the Recyclarr exchange recorded again,
 # the old pin asked for a golden that differs by timing, the HTTP audit,
 # the comparison with the originals, the replays. Started on request, on a
-# port's PR (<app>/upstream-<version>); the weekly workflow will call it.
+# port's PR (<app>/upstream-<version>), or called by upstream-loop.yml when
+# the port asks for them (the block `upstream-next` of its PR's body).
 #
 # The originals are binaries nobody vetted: they run only in `run`, which
 # has no permission, no secret and no saved cache, and hands its results on
@@ -72,6 +73,9 @@ jobs:
       branch: ${{ steps.plan.outputs.branch }}
       head: ${{ steps.plan.outputs.head }}
       checks: ${{ steps.plan.outputs.checks }}
+      # One name per PR and commit checked: a calling workflow may run
+      # these checks twice (two personalities, two rounds of the loop).
+      artifact: ${{ steps.plan.outputs.artifact }}
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with: { ref: main, persist-credentials: false }
@@ -181,7 +185,7 @@ jobs:
           sudo chown -R "$(id -u):$(id -g)" "$RUNNER_TEMP/checks"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: upstream-checks-results
+          name: ${{ needs.plan.outputs.artifact }}
           path: |
             ${{ runner.temp }}/checks
             !${{ runner.temp }}/checks/logs
@@ -190,7 +194,7 @@ jobs:
       - if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          name: upstream-checks-logs
+          name: ${{ needs.plan.outputs.artifact }}-logs
           path: ${{ runner.temp }}/checks/logs
           if-no-files-found: ignore
           retention-days: 30
@@ -217,7 +221,7 @@ jobs:
           path: work
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
-          name: upstream-checks-results
+          name: ${{ needs.plan.outputs.artifact }}
           path: ${{ runner.temp }}/artifact
       - name: Check, commit, report
         env:
@@ -226,6 +230,7 @@ jobs:
           BRANCH: ${{ needs.plan.outputs.branch }}
           PR: ${{ inputs.pr }}
           ARTIFACT: ${{ runner.temp }}/artifact
+          ARTIFACT_NAME: ${{ needs.plan.outputs.artifact }}
           COMMENT: ${{ runner.temp }}/comment.md
           WORK: ${{ github.workspace }}/work
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
@@ -243,7 +248,7 @@ jobs:
               echo "Pushed on \`$BRANCH\`." >> "$COMMENT"
             else
               # shellcheck disable=SC2016 # the backticks are Markdown
-              printf '\n**Not pushed:** the branch moved after the checks ran at `%s`. The recordings and the reports are in the artifact `upstream-checks-results` of this run.\n' "${HEAD_SHA:0:12}" >> "$COMMENT"
+              printf '\n**Not pushed:** the branch moved after the checks ran at `%s`. The recordings and the reports are in the artifact `%s` of this run.\n' "${HEAD_SHA:0:12}" "$ARTIFACT_NAME" >> "$COMMENT"
             fi
           fi
           gh pr comment "$PR" --repo "$GITHUB_REPOSITORY" --body-file "$COMMENT"

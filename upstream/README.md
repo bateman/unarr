@@ -23,9 +23,11 @@ Two commands, run in this order:
 Then the port: [`PORTING.md`](PORTING.md) is where it starts, and says how
 it goes from there to the PR.
 
-The workflow `upstream` runs both every Monday and on request, and opens
-the draft PR the port starts from: see
-[The workflow: up to the draft PR](#the-workflow-up-to-the-draft-pr).
+The workflow `upstream` runs both every Monday and on request, opens
+the draft PR the port starts from, and then runs the port's agent on it
+and the checks with the original when the port asks for them: see
+[The workflow: up to the draft PR](#the-workflow-up-to-the-draft-pr) and
+[The loop: the agent and the checks](#the-loop-the-agent-and-the-checks).
 
 ## `make bump-<app>`
 
@@ -207,9 +209,10 @@ log): try again later, nothing is made up in its place.
 
 `.github/workflows/upstream.yml` runs every Monday morning and on request
 (*Run workflow*: the personality, and a target `X.Y.Z.BUILD` or nothing
-for the rule of issue #9). It ends with the draft PR open: the port's
-agent, and the checks that need the original running, are workflows of
-their own, joined to this one in a later step.
+for the rule of issue #9). Up to the draft PR it is the jobs below; on
+the PR it opened, `loop-<app>` then calls `upstream-loop.yml`, which runs
+the port's agent and the checks that need the original running
+([The loop](#the-loop-the-agent-and-the-checks)).
 
 Per personality, a chain of jobs; the two chains are the same steps and
 an error in one does not stop the other:
@@ -221,6 +224,7 @@ an error in one does not stop the other:
 | `record-<app>` | none | `make bump-<app> STEPS=record`, through `scripts/run-unprivileged.sh` (below). No checkout (the tree comes from `plan-<app>`), no token, no secret, no cache. Hands on the work directory without the original |
 | `test-<app>` | none | the tree of `plan-<app>` as a local commit, `make upstream-assemble-<app>`, the other personality's web UI and `make bump-<app> STEPS=apply` as the runner's user (nothing of the new tarball runs); then, through `scripts/run-unprivileged.sh`, `cargo fetch` as a user of its own with the network and `make bump-<app> STEPS=test` as that user without it: the contract tests run the ffprobe the new original ships. Hands on `tests.json` and the logs, untrusted |
 | `publish-<app>` | `contents: write`, `pull-requests: read` | `make upstream-assemble-<app>` (with the tests' results, checked), `make upstream-apply-<app>` (the extracted original removed at once: nothing of it runs here) and `make bump-<app> STEPS=summary`, then `make upstream-pr-<app>`: the commit `Pin <App> <target>`, the branch `<app>/upstream-<target>`, and, with `UPSTREAM_TOKEN`, the draft PR into the default branch with the short body of `PORTING.md` (section 1, point 4), the label of the jump (`patch`, `minor`, `major`, created when missing) and the bump's summary as its first comment. Hands on the work directory as the artifact `bump-<app>` |
+| `loop-<app>` | `contents: write`, `pull-requests: write`, `issues: write`, the most the called jobs may ask for | only when `publish-<app>` opened the PR (`opened`): `upstream-loop.yml` on it, with `ANTHROPIC_API_KEY` passed by name. A major gets here only from a start by hand (on the schedule it is announced), and that start is the one issue #9 asks for: the agent goes on by itself |
 
 What `plan` decides (`scripts/upstream-workflow.py`, tested in
 `scripts/tests/test_upstream_workflow.py`), in this order:
@@ -280,9 +284,10 @@ says, with no trailer; the title and the body name no tool.
 **What the maintainer sets**: the table of "What the maintainer sets",
 below, for the three workflows.
 
-What a later step hooks on: the outputs of `publish-<app>` (`pr`,
-`branch`, `app`, `target`, `jump`, `url`) and the artifacts of the run
-(`plan-<app>`, `bump-<app>`).
+What `loop-<app>` hooks on: the outputs of `publish-<app>` (`pr`,
+`branch`, `app`, `target`, `jump`, `url`, and `opened`, `true` only when
+this run opened the PR). The artifacts of the run (`plan-<app>`,
+`bump-<app>`) stay for a person.
 
 Locally, with a releases file in place of the API and GitHub asked
 anonymously (the repository is public):
@@ -321,8 +326,8 @@ GITHUB_REPOSITORY=bateman/unarr EVENT=schedule make upstream-plan-radarr RELEASE
 
 Two workflows act on a port's PR (`<app>/upstream-<version>`), each
 started on request from the Actions tab with the PR's number
-(`workflow_dispatch`), or called by another workflow with the same inputs
-(`workflow_call`). The logic is in `scripts/upstream-checks.py` and
+(`workflow_dispatch`), or called by `upstream-loop.yml` with the same inputs
+(`workflow_call`; below). The logic is in `scripts/upstream-checks.py` and
 `scripts/upstream-port.py`, tested by `make test-scripts`; the YAML calls
 `make upstream-checks-*` and `make upstream-port-plan`.
 
@@ -336,8 +341,8 @@ started on request from the Actions tab with the PR's number
 | Job | Permissions | What it does |
 |-----|-------------|--------------|
 | `plan` | `contents: read`, `pull-requests: read` | refuses a PR that is not a port's of this repository into `main`, and inputs out of shape (`make upstream-checks-plan`) |
-| `run` | none | the PR's head, `make ui`, `make build`; then, through `scripts/run-unprivileged.sh` (as `upstream.yml` runs its recording), as the user `unarr-checks`: `make upstream-checks-prepare` with the network (Recyclarr 8.8.1, SHA-256 checked; TRaSH-Guides at its commit; `main` and the tarball of its pin, checked by its fixture script: nothing of these runs here), then `make upstream-checks-run` with no network but the loopback: the checks in the order of section 10, the originals started with `SHELL_VIA_MOCK=1`, so that the mock answers for the Servarr services as it does when recording. No secret, no credential left in git, caches restored and never saved. Hands `upstream-checks-results` (recordings, reports, `report.json`; links and special files dropped) and `upstream-checks-logs` on as artifacts |
-| `apply` | `contents: write`, `pull-requests: write` | refuses unless `main` is protected from its token (`make upstream-main-protected`, below); `main`'s script reads the results as untrusted (`make upstream-checks-apply`): only the files it expects, at their paths, regular, of a sane size, JSON where JSON, every value it prints checked (`checked_file` of `pin-bump.py`); commits a recording whose test compares answers (one commit each) and the comparison (one commit), on the commit the checks ran at; pushes without force; comments the report on the PR |
+| `run` | none | the PR's head, `make ui`, `make build`; then, through `scripts/run-unprivileged.sh` (as `upstream.yml` runs its recording), as the user `unarr-checks`: `make upstream-checks-prepare` with the network (Recyclarr 8.8.1, SHA-256 checked; TRaSH-Guides at its commit; `main` and the tarball of its pin, checked by its fixture script: nothing of these runs here), then `make upstream-checks-run` with no network but the loopback: the checks in the order of section 10, the originals started with `SHELL_VIA_MOCK=1`, so that the mock answers for the Servarr services as it does when recording. No secret, no credential left in git, caches restored and never saved. Hands `upstream-checks-results-<pr>-<commit>` (recordings, reports, `report.json`; links and special files dropped) and the same name with `-logs` on as artifacts: one name per PR and commit, since a run of `upstream.yml` may run the checks of both personalities, and one of `upstream-loop.yml` the checks twice on one PR |
+| `apply` | `contents: write`, `pull-requests: write` | refuses unless `main` is protected from its token (`make upstream-main-protected`, below); `main`'s script reads the results as untrusted (`make upstream-checks-apply`): only the files it expects, at their paths, regular, of a sane size, JSON where JSON, every value it prints checked (`checked_file` of `pin-bump.py`); commits a recording whose test compares answers (one commit each) when it says something the committed one does not, and the comparison (one commit), on the commit the checks ran at; pushes without force; comments the report on the PR |
 
 Why a user of its own: on a hosted runner the runner's user has `sudo`
 without a password and the docker socket, so it is root in all but name.
@@ -351,6 +356,24 @@ originals run as a user that is not root and cannot become it
 `no_new_privs`), and so cannot read another user's processes, the
 runner's among them; the runner's home is closed to it. Not verified on a
 hosted runner, only on a container of the same Ubuntu.
+
+Two recordings of the Recyclarr exchange with the same Recyclarr, guide,
+original and fixture are not the same bytes: Recyclarr sends a profile's
+`formatItems` in an order of its own, which the original stores and
+answers back, and lists names in its output in that order; `system/status`
+gives the paths, the OS and the start time of the machine. So `apply`
+commits a new exchange only when `differences` of
+`scripts/recyclarr-replay.py` (requests paired by method and path,
+`system/status`'s own values left out) finds something once those orders
+are sorted (`exchange_differences` in `scripts/upstream-checks.py`); the
+first run on #28 committed 3,500 lines that said nothing.
+
+The audit runs the original with the branch's own fixture script. On a
+port's branch opened before `main` had `SHELL_VIA_MOCK`, the original
+reaches no Servarr service, and a route they answer (`GET /api/v3/update`)
+fails there and not in Unarr: the report says so beside the audit's
+outcome, and the branch takes `main` before the audit is made again. The
+line make writes on the audit's exit status is left out of the report.
 
 What it leaves: the download clients' captures, whose test follows their
 sequence numbers and info hashes, and any recording a job could commit
@@ -366,7 +389,7 @@ number, its branch, the limits); the PR's own text never enters it.
 
 | Job | Permissions | What it does |
 |-----|-------------|--------------|
-| `plan` | `contents: read`, `pull-requests: read` | refuses what is not a port's draft PR; the run's limits by the jump (the label `major` gets the higher ones: `LIMITS` in `scripts/upstream-port.py`); the prompt (`make upstream-port-plan`) |
+| `plan` | `contents: read`, `pull-requests: read` | refuses what is not a port's draft PR, and a run without `ANTHROPIC_API_KEY`; the run's limits by the jump (the label `major` gets the higher ones: `LIMITS` in `scripts/upstream-port.py`), its spend cut to its share when `upstream-loop.yml` calls it (the input `round`); the prompt (`make upstream-port-plan`) |
 | `port` | `contents: write`, `pull-requests: write`, `issues: write` | the branch, `make ui` (the web UI alone), then the agent, with a deadline in its prompt and the job's stop 30 minutes later, `--max-turns`, `--max-budget-usd`; then `main`'s script checks what the run left |
 
 - **No original.** `UNARR_NO_ORIGINAL=1` in the job: the fixture scripts
@@ -415,19 +438,124 @@ number, its branch, the limits); the PR's own text never enters it.
   what was not pushed, and the next run starts from the PR's table and
   the log (`PORTING.md`, section 1, "Decisions without their log row").
 
+## The loop: the agent and the checks
+
+`.github/workflows/upstream-loop.yml` joins the two workflows above on one
+port's draft PR. `upstream.yml` calls it on the PR it has just opened
+(`loop-<app>`); started on request with a PR's number, it goes on where a
+run stopped. The agent cannot start a workflow (its token has no
+`actions: write`, and gets none); what it can do is write, at the end of
+the PR body, the block `upstream-next` (`PORTING.md`, section 7, "What
+comes next"), a fixed set of keys: `next` (`port`, `checks`, `done`), the
+commit it pushed last, and for `checks` the inputs of `upstream-checks.yml`.
+After each run of the agent, a job with a read token checks out `main` and
+runs `make upstream-loop-next` (`scripts/upstream-port.py next`), which
+reads that block alone, checks every key and value (the inputs as
+`upstream-checks.yml` checks them), and starts what it asks for:
+
+| Job | Permissions | What it does |
+|-----|-------------|--------------|
+| `ready` | `contents: read`, `pull-requests: read` | `make upstream-loop-ready`: a port's draft PR, the secret `ANTHROPIC_API_KEY` set (the job sees only whether it is), `main` protected from the workflows' token (`make upstream-main-protected`'s check). When one is missing, it says which in the run's summary, and the run ends green with nothing else started |
+| `port-1`, `port-2`, `port-3` | `contents: write`, `pull-requests: write`, `issues: write` (what `upstream-port.yml` asks for) | `upstream-port.yml` with the PR and the round; the key passed by name |
+| `next-1`, `next-2`, `next-3` | `contents: read`, `pull-requests: read` | after run *n* of the agent: `port` (run *n*+1), `checks` (the checks, then run *n*+1 on their report), or `stop`. After run 3, it only says what the block asks for |
+| `checks-1`, `checks-2` | `contents: write`, `pull-requests: write` (what `upstream-checks.yml` asks for) | `upstream-checks.yml` with the block's inputs; no secret |
+
+`next` stops the loop, green, when the agent's run did not succeed (its
+limit hit hard, a failure, a cancel: the run is red there already), when
+the PR is no longer a draft, on `next: done`, after the third run, and
+when the checks are asked again at a commit they already ran at in this
+run. It stops red when the body has no block, more than one, one out of
+shape, or one that names another commit than the branch's head (written
+before the last push, or by an earlier run): the loop never guesses what
+the agent meant. Either way the PR stays a draft with its body, table and
+log, and `upstream-loop` started by hand with its number goes on from
+there; so do `upstream-port.yml` and `upstream-checks.yml` started alone.
+A loop started by hand begins with a run of the agent: when the block
+already asks for the checks, start `upstream-checks.yml` with its inputs
+first, then the loop, so that no run of the agent only writes the block
+again.
+
+**The limits.** The rounds are written out in the YAML: at most three
+runs of the agent and two runs of the checks per run of the workflow
+(`ROUNDS` in `scripts/upstream-port.py`; a test holds the YAML to it).
+Nothing loops: no job starts a run of a workflow, and no push does (the
+job's token starts none). Each run of the agent keeps the minutes and
+turns of its jump (`LIMITS`) and spends at most its share of the loop's
+cap (`ROUND_BUDGETS`): the first, the port itself, the largest; the last,
+which settles what the checks found and moves the cursor, the smallest.
+
+| Jump | Runs of the agent, USD each | At most, per run of the loop and PR | Time, at most |
+|------|-----------------------------|--------------------------------------|---------------|
+| patch, minor | 20, 12, 8 | 40 USD | 3 jobs of 3 h 30 min (2 h of the agent each, 250 turns), and 2 runs of the checks (5 h 20 min each, the comparison included) |
+| major | 50, 30, 20 | 100 USD | 3 jobs of 5 h 30 min (4 h of the agent each, 500 turns), and the same checks |
+
+`upstream-port.yml` started alone is the first run: 20 USD for a patch or
+minor, 50 for a major. A run of `upstream.yml` may open the PRs of both
+personalities, and so spend up to twice the cap; a month with a patch or
+minor of each stays within 80 USD, and a major, which starts only by hand,
+within 100. Every job has its timeout, within GitHub's six hours; a whole
+run stays far under its limit of 35 days; each job has its own token,
+which lasts the job.
+
+**These limits are per run, not per month.** Nothing here counts what
+earlier runs spent: the true monthly cap is the one the maintainer sets on
+the key itself, in the Claude Console (below), and a run that reaches it
+stops there, its PR left as a stopped loop leaves it.
+
+**Concurrency.** One loop per PR (`upstream-loop-pr-<n>`); the called
+workflows keep their own groups (`upstream-port-pr-<n>`,
+`upstream-checks-pr-<n>`), never the caller's, and the jobs that call
+them hold none: a loop never waits on itself. A run of either started by
+hand on the same PR waits its turn; GitHub keeps one waiting per group
+and cancels an older one, which stops the loop where it was.
+
+**Security.** As in the workflows it calls: `permissions: {}` at the top
+and each job its own; the jobs that decide hold a read token, check out
+`main` and read the PR's body as data; the key goes by name, never
+`secrets: inherit`, to `upstream-port.yml` alone, which hands it to the
+agent's step; the checks get no secret; no `${{ }}` in a `run:`.
+
+**Majors.** On the schedule a major is announced, not bumped, so no PR and
+no agent. A bump of a major started by hand opens its PR, and the agent
+starts on it as on any other: issue #9 makes that start the one by hand.
+
+### Choices, and the alternatives left aside
+
+- **The signal is a block of fixed keys in the PR body**, read by `main`'s
+  script. Left aside: a label (it cannot carry the checks' inputs, nor
+  the commit they are for); free text read by another model; the agent
+  starting the workflow itself (`actions: write`, which also edits
+  workflows' runs).
+- **The rounds written out as jobs.** Left aside: a workflow that calls
+  itself or is started again by a push or a dispatch, which nothing
+  bounds but a counter kept somewhere the agent can write.
+- **Each round a share of a total**, decided before the run. Left aside:
+  reading what each run spent, which the agent's job reports and the
+  agent could change.
+- **A fourth file** for the loop, called by `upstream.yml` and started by
+  hand alike. Left aside: the rounds written twice in `upstream.yml`, once
+  per personality, with no way to go on by hand.
+
 ## What the maintainer sets
 
-For the three workflows (`upstream.yml`, `upstream-checks.yml`,
-`upstream-port.yml`). With nothing set, `upstream.yml` goes up to the
-branch of the port, pushed; `upstream-checks.yml` runs the checks and
-leaves their report and recordings in its artifact, committing nothing;
-`upstream-port.yml` does not start.
+For the four workflows (`upstream.yml`, `upstream-loop.yml`,
+`upstream-port.yml`, `upstream-checks.yml`). What runs by itself, for a new
+release found on Monday (or a start by hand), with each combination:
+
+| Set | `upstream.yml` | Then |
+|-----|----------------|------|
+| nothing | the bump, the branch pushed, green; the run's summary gives the link to open the PR by hand | nothing starts. Once the PR is open, `upstream-checks.yml` on request runs the checks and leaves their results in its artifact, committing nothing; `upstream-port.yml` and `upstream-loop.yml` refuse or stop, saying what is missing |
+| `UPSTREAM_TOKEN` only | the draft PR opened, labelled, CI on it | `upstream-loop.yml` starts on it and ends green at once, saying that `ANTHROPIC_API_KEY` is missing (or, with the key and no ruleset, that `main` is not protected): no agent, no checks |
+| all three | the draft PR opened | the loop: the agent, the checks when the port asks for them, the agent again on their report, within the limits above. It stops when the port is done or waits on someone, and the PR stays a draft until a person marks it ready or the port does (section 9) |
+
+With the key and the ruleset but no `UPSTREAM_TOKEN`, the PR is opened by
+hand and the loop is then started by hand with its number.
 
 | What | Where | For | Without it |
 |------|-------|-----|------------|
-| A ruleset on `main` with "Restrict updates" (steps below) | Settings, Rules, Rulesets | `upstream-port.yml` and `apply` of `upstream-checks.yml`: their token may write contents, and with it push to `main` or merge a PR through the API; the rule keeps it off `main`, and `make upstream-main-protected` checks it | the agent does not start; `apply` commits and pushes nothing (the report stays in the artifact) |
-| The secret `ANTHROPIC_API_KEY`: a key for this alone, in a workspace with a monthly spend limit (Claude Console), not the account's OAuth token | Settings, Secrets and variables, Actions | `upstream-port.yml`: the agent. It reads untrusted upstream text and its own process holds the key, so an injected instruction could get the key out: a key of its own with a limit bounds the cost, and is revoked alone | the agent does not start |
-| The secret `UPSTREAM_TOKEN` (optional): a fine-grained token for this repository only, *Contents* and *Pull requests* read and write | Settings, Secrets and variables, Actions | `upstream.yml`, in `publish-<app>` alone (no agent, nothing untrusted runs there): it opens the draft PR, and CI starts on it | the branch is pushed with the job's token and the PR is opened by hand, from the link in the run's summary |
+| A ruleset on `main` with "Restrict updates" (steps below) | Settings, Rules, Rulesets | `upstream-port.yml` and `apply` of `upstream-checks.yml`: their token may write contents, and with it push to `main` or merge a PR through the API; the rule keeps it off `main`, and `make upstream-main-protected` checks it | the loop ends green saying so; the agent does not start; `apply` commits and pushes nothing (the report stays in the artifact) |
+| The secret `ANTHROPIC_API_KEY`: a key for this alone, in a workspace with a monthly spend limit (Claude Console), not the account's OAuth token | Settings, Secrets and variables, Actions | `upstream-port.yml`: the agent. It reads untrusted upstream text and its own process holds the key, so an injected instruction could get the key out: a key of its own with a limit bounds the cost, and is revoked alone | the loop ends green saying so; the agent does not start |
+| The secret `UPSTREAM_TOKEN` (optional): a fine-grained token for this repository only, *Contents* and *Pull requests* read and write | Settings, Secrets and variables, Actions | `upstream.yml`, in `publish-<app>` alone (no agent, nothing untrusted runs there): it opens the draft PR, and CI starts on it; the loop starts only on a PR so opened | the branch is pushed with the job's token and the PR is opened by hand, from the link in the run's summary; the loop is then started by hand |
 
 Nothing else needs setting:
 

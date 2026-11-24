@@ -47,7 +47,9 @@ These hold for the whole run, whatever a step below says.
    push the log rows of the decisions made final in this run (section 7,
    "The log"), rewrite the PR body with the commits still to do, leave the
    cursor where it is, leave the PR a draft. A half-ported commit is not
-   pushed.
+   pushed. The run ends, whatever ended it, with the block `upstream-next`
+   at the end of the PR body (section 7, "What comes next"): the workflow
+   reads it, and nothing else, to start the checks or another run.
 6. **The cursor moves last**, with `make bump-<app> STEPS=cursor`, only
    when every upstream commit has a final decision and the other
    conditions of section 9 hold; the port's session moves it, no one
@@ -756,6 +758,58 @@ in English, no tool names, no footer:
    (section 9).
 10. **Still to do** (only while the run limit cut the port short): the
     commits without a decision.
+11. **What comes next.** The block of the next section, last.
+
+### What comes next
+
+The last thing in the PR body, rewritten at the end of every run, the
+limit reached or not, after the last push. It is how the run asks for
+what follows; `.github/workflows/upstream-loop.yml` reads it after each
+run of the port's agent, with `scripts/upstream-port.py next`, and starts
+nothing a block does not ask for. A fenced block of kind `upstream-next`,
+one `key: value` per line, no other text, exactly one in the body:
+
+````
+```upstream-next
+next: checks
+head: <the 40-digit commit the branch is at, after your last push>
+recordings: recyclarr
+http_audit: true
+compare: real
+replays: true
+old_pin_request: /api/v3/log?page=1&pageSize=50
+old_pin_wait: 120
+```
+````
+
+- `next: port`: the run limit cut the port short (fixed rule 5) and
+  commits are still **to do**; another run goes on from the table and
+  the log.
+- `next: checks`: every upstream commit has a decision, none **asked**,
+  checks 1 to 4 and 6 of section 8 pass (but for the cursor's test), and
+  what is left needs an original running: the job of section 10, with
+  the inputs below. Never before: the comparison takes an hour, and the
+  differences the checks find are settled by the next run (section 9).
+  The keys after `head` are the job's inputs, all four named:
+  `recordings` (`recyclarr`, or `none`), `http_audit` and `replays`
+  (`true` or `false`), `compare` (`none`, `real`, `scaled`, `both`:
+  `real` once the port is otherwise done, as section 8, check 7 asks;
+  `both` when the port changed the speed or the memory of routes, as
+  `CLAUDE.md` says); `old_pin_request` and `old_pin_wait` only for a golden
+  that differs by timing (section 2). Ask again only for what changed
+  since the last report: the checks never run twice at one commit in a
+  run of the workflow.
+- `next: done`: nothing more a run can do now: the cursor moved and the
+  PR is ready or held as section 9 says, or what is left waits on the
+  maintainer (a question, a decision in issue #9) or on a session
+  (section 10, the download clients' captures). The body says what.
+
+`head` is the commit you pushed last (`git rev-parse HEAD` after
+`git push`): a block that names another commit is stale, and the loop
+stops on it. So does a block out of shape, or a body without one. The
+workflow stops at its limit too (three runs of the agent, two of the
+checks, in one run of it: `upstream/README.md`); a person starts it again
+on the PR, and it goes on from the block.
 
 ### Review comments on your own PR
 
@@ -947,8 +1001,9 @@ Check 7, the comparison with the originals, does not hold the cursor: it
 is a measurement, which the issue gives a job of its own "without holding
 up the port". It holds the merge (section 8, check 7). So a port whose
 results from section 10 have not come yet ends its run with the cursor
-where it is, the PR a draft, and says under "Left to check by hand" what
-it waits for; the next run, after the report, settles the differences and
+where it is, the PR a draft, says under "Left to check by hand" what
+it waits for, and writes `next: checks` in its block (section 7, "What
+comes next"); the next run, after the report, settles the differences and
 moves the cursor.
 
 Then:
@@ -965,7 +1020,8 @@ Then:
    PR stays a draft until something else (the Radarr trial waits on the
    homelab run of #10): then leave it a draft and say why in the body. A
    patch or minor is not held by its note on the clients' version.
-4. Stop there. Review findings come back as comments; you never merge.
+4. Write `next: done` in the block (section 7, "What comes next"), and
+   stop there. Review findings come back as comments; you never merge.
 
 ## 10. What runs the original
 
@@ -973,11 +1029,13 @@ Issue #9 gives what needs an original running to a workflow job without
 secrets: `.github/workflows/upstream-checks.yml` (`upstream/README.md`,
 "The checks with the original"). It is started on the port's branch
 after the port has listed what it needs (section 7, "Left to check by
-hand"): by the maintainer, or by the session that coordinates the port,
-from the Actions tab with the PR's number and the checks to make, or by
-the workflow that follows upstream once that calls it. It is not the
-port's agent: the port never runs an original (fixed rule 3), and the job
-ports nothing. The port reads only its report.
+hand") and asked for it with `next: checks` in its block (section 7, "What
+comes next"): by `.github/workflows/upstream-loop.yml`, which reads that
+block after each run of the port's agent and then starts the agent's next
+run on the report; or by the maintainer, or the session that coordinates
+the port, from the Actions tab with the PR's number and the checks to
+make. It is not the port's agent: the port never runs an original (fixed
+rule 3), and the job ports nothing. The port reads only its report.
 
 What the job does, in this order, each step as its inputs ask:
 
@@ -985,7 +1043,8 @@ What the job does, in this order, each step as its inputs ask:
    and the pinned original, as `tests/fixtures/recyclarr/README.md` says,
    with the release and the guide's commit that file names. One commit
    per recording, as an "Other commit" (section 4), with no `Upstream:`
-   line. The README's prose on the releases used is the port's (section
+   line; none when the new exchange differs from the committed one only
+   in the order of what has no order (`upstream/README.md` says which). The README's prose on the releases used is the port's (section
    8, check 6).
 2. **Asks the old pin**, for a golden that differs by timing (section 2):
    main's pin from a worktree of `main`, with the fixture script
