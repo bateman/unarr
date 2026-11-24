@@ -76,15 +76,27 @@ die() { printf '\e[1;31m[fixture]\e[0m %s\n' "$*" >&2; exit 1; }
 download() {
     local tarball="$CACHE/Radarr.master.${RADARR_VERSION}.linux-core-x64.tar.gz"
     mkdir -p "$CACHE"
+    # UNARR_NO_ORIGINAL: the web UI alone is extracted, never the binary.
+    if [ -n "${UNARR_NO_ORIGINAL:-}" ]; then
+        fetch_tarball "$tarball"
+        rm -rf "$CACHE/Radarr"
+        log "extracting the web UI only (UNARR_NO_ORIGINAL)"
+        tar -xzf "$tarball" -C "$CACHE" Radarr/UI
+        return
+    fi
     if [ ! -x "$CACHE/Radarr/Radarr" ]; then
-        if [ ! -f "$tarball" ]; then
-            log "downloading Radarr $RADARR_VERSION"
-            curl -fsSL -o "$tarball" "$RADARR_URL"
-        fi
-        echo "$RADARR_SHA256  $tarball" | sha256sum -c - >/dev/null || die "checksum mismatch for $tarball"
+        fetch_tarball "$tarball"
         log "extracting"
         tar -xzf "$tarball" -C "$CACHE"
     fi
+}
+
+fetch_tarball() {
+    if [ ! -f "$1" ]; then
+        log "downloading Radarr $RADARR_VERSION"
+        curl -fsSL -o "$1" "$RADARR_URL"
+    fi
+    echo "$RADARR_SHA256  $1" | sha256sum -c - >/dev/null || die "checksum mismatch for $1"
 }
 
 MOCK_PORT="${MOCK_PORT:-18989}"
@@ -315,10 +327,23 @@ cmd_ui() {
 cmd_shell() {
     prepare_dirs
     start_mock
+    # SHELL_VIA_MOCK=1: the mock is the original's proxy, as in `golden`,
+    # for a run with no network (scripts/upstream-checks.py): the Servarr
+    # services answer from tests/fixtures/metadata instead of failing.
+    [ "${SHELL_VIA_MOCK:-0}" = 1 ] && MOCK_IS_PROXY=1
     start_on_fixture_copy
     log "Radarr running at http://127.0.0.1:$RADARR_PORT with API key $API_KEY; Ctrl-C to stop"
     wait "$RADARR_PID"
 }
+
+# UNARR_NO_ORIGINAL is set where no original may run: the job of the
+# port's agent (upstream/PORTING.md, fixed rule 3; issue #9). There `ui`
+# still copies the web UI, and `golden` and `shell` refuse.
+if [ -n "${UNARR_NO_ORIGINAL:-}" ]; then
+    case "${1:-}" in
+        golden|shell) die "UNARR_NO_ORIGINAL is set: no original runs here (upstream/PORTING.md, fixed rule 3)" ;;
+    esac
+fi
 
 case "${1:-}" in
     golden) cmd_golden ;;

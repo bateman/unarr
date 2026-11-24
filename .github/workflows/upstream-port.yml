@@ -1,0 +1,177 @@
+name: upstream-port
+
+# The port's agent (issue #9): it follows upstream/PORTING.md on a port's
+# draft PR (<app>/upstream-<version>), one run at a time, within the limit
+# the PR's jump gives it (scripts/upstream-port.py: minutes, turns, spend).
+# Started on request; the weekly workflow will call it.
+#
+# The agent never runs an original: UNARR_NO_ORIGINAL makes the fixture
+# scripts extract the web UI alone and refuse `golden` and `shell`, and the
+# comparison refuse to start; what needs an original is the upstream-checks
+# workflow's. The agent has the job's own token, never another: it can push
+# to the branch, edit the PR and open issues, and the job starts only when a
+# ruleset keeps it off main (it could otherwise push there, or merge a PR,
+# through the API). GitHub starts no CI on its pushes. After the agent,
+# main's script checks every commit it pushed and the PR's title and body
+# for authorship and tool names.
+#
+# The secret the maintainer sets (Settings > Secrets and variables >
+# Actions): ANTHROPIC_API_KEY, a key of its own with a spend limit
+# (upstream/README.md says why).
+
+on:
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: "The port's draft PR number"
+        required: true
+        type: number
+  workflow_call:
+    inputs:
+      pr: { required: true, type: number }
+    secrets:
+      ANTHROPIC_API_KEY: { required: true }
+
+permissions: {}
+
+concurrency:
+  group: upstream-port-pr-${{ inputs.pr }}
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions: { contents: read, pull-requests: read }
+    outputs:
+      app: ${{ steps.plan.outputs.app }}
+      branch: ${{ steps.plan.outputs.branch }}
+      minutes: ${{ steps.plan.outputs.minutes }}
+      step_minutes: ${{ steps.plan.outputs.step_minutes }}
+      job_minutes: ${{ steps.plan.outputs.job_minutes }}
+      turns: ${{ steps.plan.outputs.turns }}
+      budget: ${{ steps.plan.outputs.budget }}
+      prompt: ${{ steps.plan.outputs.prompt }}
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with: { ref: main, persist-credentials: false }
+      - name: The PR, the limits, the prompt
+        id: plan
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ inputs.pr }}
+          HELPER: ${{ runner.temp }}/upstream/upstream-port.py
+        run: |
+          gh pr view "$PR" --repo "$GITHUB_REPOSITORY" \
+            --json number,state,isDraft,baseRefName,headRefName,headRefOid,isCrossRepository,headRepository,headRepositoryOwner,labels \
+            > "$RUNNER_TEMP/pr.json"
+          PR_JSON="$RUNNER_TEMP/pr.json" make -s upstream-port-plan
+      - name: main is protected from the job's token
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: make -s upstream-main-protected
+
+  port:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: ${{ fromJSON(needs.plan.outputs.job_minutes) }}
+    permissions: { contents: write, pull-requests: write, issues: write }
+    env:
+      UNARR_NO_ORIGINAL: "1"
+      CARGO_BUILD_JOBS: "4"
+      GIT_AUTHOR_NAME: Fabio Calefato
+      GIT_AUTHOR_EMAIL: fcalefato@gmail.com
+      GIT_COMMITTER_NAME: Fabio Calefato
+      GIT_COMMITTER_EMAIL: fcalefato@gmail.com
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          ref: ${{ needs.plan.outputs.branch }}
+          fetch-depth: 0
+          persist-credentials: false
+      # main's helpers, out of the agent's tree: the commit-msg hook, the
+      # review comments, the check after the run, main's protection.
+      - name: Main's helpers and the commit-msg hook
+        id: start
+        run: |
+          git fetch -q origin main
+          mkdir -p "$RUNNER_TEMP/upstream"
+          for f in upstream-port.py upstream-checks.py; do
+            git show "origin/main:scripts/$f" > "$RUNNER_TEMP/upstream/$f"
+          done
+          # shellcheck disable=SC2016 # "$1" is the hook's own argument
+          printf '#!/bin/sh\nexec python3 -I "%s" commit-msg "$1"\n' "$RUNNER_TEMP/upstream/upstream-port.py" > .git/hooks/commit-msg
+          chmod +x .git/hooks/commit-msg
+          echo "base=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - uses: dtolnay/rust-toolchain@39008827e6b4319a349e9a42dfc90579dd25f1ca # stable
+        with: { toolchain: stable, components: "rustfmt, clippy" }
+      # Restored from what CI saved on main; never saved from here.
+      - uses: Swatinem/rust-cache@f13886b937689c021905a6b90929199931d60db1 # v2.8.1
+        with: { save-if: false }
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: .cache/sonarr/*.tar.gz
+          key: sonarr-release-${{ hashFiles('scripts/sonarr-fixture.sh', 'upstream/sonarr.pin') }}
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: .cache/radarr/*.tar.gz
+          key: radarr-release-${{ hashFiles('scripts/radarr-fixture.sh', 'upstream/radarr.pin') }}
+      # With this job's own token, the one the agent gets.
+      - name: main is protected from this token
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: python3 -I "$RUNNER_TEMP/upstream/upstream-checks.py" main-protected
+      # bubblewrap, for the agent's commands to run without the API key in
+      # their environment (CLAUDE_CODE_SUBPROCESS_ENV_SCRUB below); the
+      # user namespaces it needs; the disk.
+      - name: The machine
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends bubblewrap
+          sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
+          df -h /
+      # The web UIs (UNARR_NO_ORIGINAL: no original's binary on disk).
+      - run: make ui
+      - name: The deadline
+        id: prompt
+        env:
+          PROMPT: ${{ needs.plan.outputs.prompt }}
+          MINUTES: ${{ needs.plan.outputs.minutes }}
+        run: |
+          deadline=$(date -u -d "+${MINUTES} minutes" '+%Y-%m-%d %H:%M')
+          delim="EOF_$(openssl rand -hex 8)"
+          { echo "text<<$delim"; printf '%s\n' "${PROMPT//@DEADLINE@/$deadline}"; echo "$delim"; } >> "$GITHUB_OUTPUT"
+      - name: The agent
+        id: agent
+        timeout-minutes: ${{ fromJSON(needs.plan.outputs.step_minutes) }}
+        uses: anthropics/claude-code-action@4fa93a88de49bbef68b10eb15aabedf28ca0e1ed # v1.0.271
+        env:
+          GH_TOKEN: ${{ github.token }}
+          # The agent's commands run without the Anthropic key, the
+          # runtime token and the action's own in their environment.
+          CLAUDE_CODE_SUBPROCESS_ENV_SCRUB: "1"
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ github.token }}
+          prompt: ${{ steps.prompt.outputs.text }}
+          # No co-author and no line naming the tool, in commits and PRs.
+          settings: '{"attribution": {"commit": "", "pr": ""}, "includeCoAuthoredBy": false}'
+          claude_args: |
+            --model claude-opus-5-5
+            --max-turns ${{ needs.plan.outputs.turns }}
+            --max-budget-usd ${{ needs.plan.outputs.budget }}
+            --allowedTools "Read,Edit,Write,Glob,Grep,TodoWrite,Bash(git:*),Bash(cargo:*),Bash(make:*),Bash(python3:*),Bash(gh pr view:*),Bash(gh pr diff:*),Bash(gh pr checks:*),Bash(gh pr edit:*),Bash(gh pr comment:*),Bash(gh pr ready:*),Bash(gh issue view:*),Bash(gh issue list:*),Bash(gh issue create:*),Bash(gh release view:*),Bash(gh release list:*),Bash(ls:*),Bash(cat:*),Bash(head:*),Bash(tail:*),Bash(wc:*),Bash(sort:*),Bash(uniq:*),Bash(cut:*),Bash(tr:*),Bash(diff:*),Bash(find:*),Bash(grep:*),Bash(rg:*),Bash(sed:*),Bash(awk:*),Bash(jq:*),Bash(echo:*),Bash(printf:*),Bash(date:*),Bash(mkdir:*),Bash(cp:*),Bash(mv:*),Bash(rm:*),Bash(touch:*),Bash(sha256sum:*),Bash(file:*),Bash(stat:*),Bash(du:*),Bash(df:*),Bash(free:*),Bash(nproc:*),Bash(sleep:*),Bash(pwd),Bash(test:*)"
+            --disallowedTools "WebFetch,WebSearch,Bash(gh api:*),Bash(gh pr merge:*),Bash(gh pr review:*),Bash(gh pr close:*),Bash(gh workflow:*),Bash(gh run:*),Bash(gh secret:*),Bash(gh variable:*),Bash(gh auth:*),Bash(gh repo:*),Bash(git push --force:*),Bash(git push -f:*),Bash(git push --force-with-lease:*),Bash(git commit --no-verify:*),Bash(git commit -n:*),Bash(git config:*),Bash(make golden:*),Bash(make golden-radarr:*),Bash(make sonarr:*),Bash(make radarr:*),Bash(make compare-originals:*),Bash(make route-percentiles:*),Bash(make http-audit:*)"
+      # Whatever became of the agent (its limit included): what it left on
+      # the branch and on the PR, checked by main's script.
+      - name: What the run left
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ inputs.pr }}
+          BRANCH: ${{ needs.plan.outputs.branch }}
+          BASE: ${{ steps.start.outputs.base }}
+        run: |
+          git fetch -q origin "refs/heads/$BRANCH"
+          gh pr view "$PR" --repo "$GITHUB_REPOSITORY" --json title,body > "$RUNNER_TEMP/pr-after.json"
+          python3 -I "$RUNNER_TEMP/upstream/upstream-port.py" verify --repo . \
+            --base "$BASE" --head "$(git rev-parse FETCH_HEAD)" --pr-json "$RUNNER_TEMP/pr-after.json"

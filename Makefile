@@ -199,3 +199,32 @@ anonymize: ## Anonymised copy of a Sonarr or Radarr backup zip or config dir (FR
 
 check-name: ## Check a project name on crates.io, PyPI, npm, Docker Hub, brew, AUR, Repology, domains, GitHub (NAME=foo)
 	@scripts/check-name.sh $(NAME)
+
+# The workflows that follow upstream (issue #9): .github/workflows/upstream-checks.yml
+# and upstream-port.yml call these. Their values come from the environment and are
+# read by the shell ($$NAME), never expanded by make: a workflow input is data.
+.PHONY: upstream-checks-plan upstream-checks-prepare upstream-checks-run upstream-checks-apply upstream-port-plan upstream-main-protected
+
+upstream-main-protected: ## Refuse unless a ruleset on main restricts its updates to a bypass list the token GH_TOKEN is not in (GITHUB_REPOSITORY)
+	@python3 -I scripts/upstream-checks.py main-protected
+
+upstream-checks-plan: ## The port's PR and the checks asked for, as a job's outputs (PR_JSON from gh pr view, PR, RECORDINGS, HTTP_AUDIT, COMPARE, REPLAYS, OLD_PIN_REQUEST, OLD_PIN_WAIT)
+	@python3 -I scripts/upstream-checks.py plan --pr-json "$$PR_JSON" --pr "$$PR" --repository "$$GITHUB_REPOSITORY" \
+		--recordings "$$RECORDINGS" --http-audit "$$HTTP_AUDIT" --compare "$${COMPARE:-none}" --replays "$$REPLAYS" \
+		--old-pin-request "$$OLD_PIN_REQUEST" --old-pin-wait "$${OLD_PIN_WAIT:-0}"
+
+upstream-checks-prepare: ## What the checks need from the network (Recyclarr, TRaSH-Guides, main and its pin), before upstream-checks-run goes without it (WORK, CHECK_APP, CHECKS, CHECKS_OUT)
+	@python3 -I scripts/upstream-checks.py prepare --repo "$${WORK:-.}" --app "$$CHECK_APP" --checks "$$CHECKS" \
+		--out "$${CHECKS_OUT:-.cache/upstream-checks/out}"
+
+upstream-checks-run: ## Run the checks that need the original, on the checkout WORK (default this one; CHECK_APP, CHECKS from upstream-checks-plan, CHECKS_OUT; needs make ui and make build there)
+	@python3 -I scripts/upstream-checks.py run --repo "$${WORK:-.}" --app "$$CHECK_APP" --checks "$$CHECKS" \
+		--out "$${CHECKS_OUT:-.cache/upstream-checks/out}"
+
+upstream-checks-apply: ## Check the checks' artifact, commit what may be committed in WORK, write the PR comment (CHECK_APP, ARTIFACT, WORK, PR, HEAD_SHA, COMMENT, RUN_URL)
+	@python3 -I scripts/upstream-checks.py apply --artifact "$$ARTIFACT" --repo "$$WORK" --app "$$CHECK_APP" \
+		--pr "$$PR" --head "$$HEAD_SHA" --comment "$$COMMENT" --run-url "$$RUN_URL"
+
+upstream-port-plan: ## The port's draft PR, the run's limits and the agent's prompt, as a job's outputs (PR_JSON, PR, HELPER, GITHUB_OUTPUT)
+	@python3 -I scripts/upstream-port.py plan --pr-json "$$PR_JSON" --pr "$$PR" --repository "$$GITHUB_REPOSITORY" \
+		--helper "$$HELPER" $${GITHUB_OUTPUT:+--github-output "$$GITHUB_OUTPUT"}

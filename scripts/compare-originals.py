@@ -96,7 +96,10 @@ OPENER = urllib.request.build_opener(urllib.request.ProxyHandler({}))
 
 def original_binaries() -> tuple[Path, Path]:
     """Where make ui put the originals: UNARR_CACHE moves .cache/<app> as
-    in the fixture scripts."""
+    in the fixture scripts. Refused where no original may run: the job of
+    the port's agent sets UNARR_NO_ORIGINAL (upstream/PORTING.md, fixed rule 3)."""
+    if os.environ.get("UNARR_NO_ORIGINAL"):
+        raise SystemExit("UNARR_NO_ORIGINAL is set: no original runs here (upstream/PORTING.md, fixed rule 3)")
     cache = os.environ.get("UNARR_CACHE")
     if cache:
         return Path(cache) / "Sonarr/Sonarr", Path(cache) / "Radarr/Radarr"
