@@ -415,6 +415,76 @@ def recyclarr_ready(work: Path) -> Path:
     return binary
 
 
+# What changes in the Recyclarr exchange from one recording to the next with
+# the same Recyclarr, guide, original and fixture (two recordings of Radarr
+# 7.0.3.10918 on 2026-11-24): the order Recyclarr sends a profile's
+# `formatItems` in, which the original stores and answers back, and the order
+# of the names in a line of its output that lists them ("... replaced by
+# Recyclarr: MULTi, ... and 41 more"); and the paths, OS and start time of
+# `system/status`, which the replay's own comparison already leaves out.
+def steady_exchange(phases):
+    """The exchange with the order of what has no order sorted."""
+    def norm(v):
+        if isinstance(v, dict):
+            return {k: (sorted((norm(x) for x in w), key=lambda i: json.dumps(i, sort_keys=True))
+                        if k == "formatItems" and isinstance(w, list) else norm(w)) for k, w in v.items()}
+        if isinstance(v, list):
+            return [norm(x) for x in v]
+        return v
+
+    def line(text):
+        if not isinstance(text, str):
+            return text
+        head, sep, tail = text.rpartition(": ")
+        if not sep or ", " not in tail:
+            return text
+        cut = re.fullmatch(r"(.*) and (\d+) more", tail)
+        if cut:
+            return f"{head}: {len(cut[1].split(', '))} named and {cut[2]} more"
+        return f"{head}: " + ", ".join(sorted(tail.split(", ")))
+
+    out = norm(phases)
+    for phase in out:
+        if isinstance(phase.get("output"), list):
+            phase["output"] = [line(t) for t in phase["output"]]
+    return out
+
+
+def exchange_differences(old: bytes, new: bytes) -> list[str] | None:
+    """What differs between two recordings of the Recyclarr exchange, as the
+    replay compares them (`differences` of main's scripts/recyclarr-replay.py:
+    requests paired by method and path, `system/status`'s own values left
+    out), once `steady_exchange` has sorted what has no order. None when
+    either is not an exchange: then only bytes can be compared."""
+    try:
+        a, b = json.loads(old), json.loads(new)
+        shaped = all(isinstance(x, list) and x and all(isinstance(p, dict) and isinstance(p.get("exchange"), list)
+                                                       and "name" in p for p in x) for x in (a, b))
+        if not shaped:
+            return None
+        if [p["name"] for p in a] != [p["name"] for p in b]:
+            return ["the phases differ"]
+        rr = load_script("recyclarr_replay_for_checks", "recyclarr-replay.py")
+        return rr.differences(steady_exchange(a), steady_exchange(b))
+    except (ValueError, KeyError, TypeError, AttributeError, IndexError):
+        return None
+
+
+def same_recording(name: str, old: bytes | None, new: bytes) -> bool:
+    """Whether a recording made again says nothing the committed one does
+    not: for the Recyclarr exchange, no difference the replay would see
+    once the order of what has no order is set aside; otherwise the bytes."""
+    if old is None:
+        return False
+    if old == new:
+        return True
+    if name == "recyclarr":
+        found = exchange_differences(old, new)
+        if found is not None:
+            return not found
+    return False
+
+
 def record_recyclarr(app: str, out: Path, logs: Path) -> dict:
     work = recyclarr_dir()
     binary = recyclarr_ready(work)
@@ -429,7 +499,7 @@ def record_recyclarr(app: str, out: Path, logs: Path) -> dict:
     if code != 0 or not dest.is_file():
         return {"status": "failed", "exit": code}
     tracked = WORK / recording_path(RECORDINGS["recyclarr"], app)
-    same = tracked.is_file() and tracked.read_bytes() == dest.read_bytes()
+    same = same_recording("recyclarr", tracked.read_bytes() if tracked.is_file() else None, dest.read_bytes())
     return {"status": "ok", "exit": 0, "changed": not same,
             "tool": {"recyclarr": RECYCLARR_VERSION, "sha256": RECYCLARR_SHA256, "guide": TRASH_GUIDES_COMMIT}}
 
@@ -971,6 +1041,22 @@ def commit(repo: Path, paths: list[str], subject: str, body: str) -> str:
     return git(repo, "rev-parse", "HEAD").stdout.strip()
 
 
+def mock_answers_services(repo: Path, app: str) -> bool:
+    """Whether the fixture script of the branch at the commit checked lets
+    the mock answer for the Servarr services (`SHELL_VIA_MOCK`): a port's
+    branch opened before main had it starts the original without, and the
+    original then fails what asks those services."""
+    script = repo / "scripts" / f"{app}-fixture.sh"
+    return script.is_file() and "SHELL_VIA_MOCK" in script.read_text(errors="replace")
+
+
+def without_make_errors(text: str) -> str:
+    """The audit's report without make's own line on its exit status
+    (`make[1]: *** [...] Error 1`): the audit exits 1 when something
+    differs, and the outcome is said in the table."""
+    return "\n".join(line for line in text.split("\n") if not re.match(r"^make(\[\d+\])?: \*\*\* ", line))
+
+
 def fence(text: str, lines: int = 80, chars: int = 8000) -> str:
     """Text the originals or Unarr wrote, as data: in a code block that it
     cannot close, short enough for a comment."""
@@ -1013,8 +1099,12 @@ def cmd_apply(args) -> int:
             rows.append((f"{rec.what}, recorded again", "", f"failed (exit {c.get('exit', '?')}): see the logs"))
             continue
         target = repo / rel
-        if target.is_file() and target.read_bytes() == raw:
-            rows.append((f"{rec.what}, recorded again", "", "the same as the one committed: nothing to commit"))
+        if same_recording(name, target.read_bytes() if target.is_file() else None, raw):
+            same = target.read_bytes() == raw
+            rows.append((f"{rec.what}, recorded again", "", "the same as the one committed: nothing to commit"
+                         if same else "the same as the one committed but for what changes from one recording "
+                         "to the next (the order of a profile's formats, the paths and times of system/status): "
+                         "nothing to commit"))
             continue
         if rec.follows_ids:
             kept.append(rel)
@@ -1042,9 +1132,14 @@ def cmd_apply(args) -> int:
         c = checks["http-audit"]
         text = {"ok": f"{c.get('requests')} requests, no difference",
                 "differences": f"{c.get('requests')} requests, {c.get('different')} with a difference"}
-        rows.append(("`make http-audit`", "", text.get(c["status"], f"failed (exit {c.get('exit', '?')})")))
+        outcome = text.get(c["status"], f"failed (exit {c.get('exit', '?')})")
+        if c["status"] == "differences" and not mock_answers_services(repo, app):
+            outcome += (f"; the branch's scripts/{app}-fixture.sh predates SHELL_VIA_MOCK, so the original reached "
+                        "no Servarr service: a difference on a route they answer (as `GET /api/v3/update`, 500 "
+                        "where Unarr answers 200) is not Unarr's. Merge main into the branch and run the audit again")
+        rows.append(("`make http-audit`", "", outcome))
         if "http-audit.txt" in files:
-            details.append(("HTTP audit", files["http-audit.txt"].decode()))
+            details.append(("HTTP audit", without_make_errors(files["http-audit.txt"].decode())))
     reports = []
     for lib in LIBRARIES:
         c = checks.get(f"compare:{lib}")

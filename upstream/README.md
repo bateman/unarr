@@ -342,7 +342,7 @@ started on request from the Actions tab with the PR's number
 |-----|-------------|--------------|
 | `plan` | `contents: read`, `pull-requests: read` | refuses a PR that is not a port's of this repository into `main`, and inputs out of shape (`make upstream-checks-plan`) |
 | `run` | none | the PR's head, `make ui`, `make build`; then, through `scripts/run-unprivileged.sh` (as `upstream.yml` runs its recording), as the user `unarr-checks`: `make upstream-checks-prepare` with the network (Recyclarr 8.8.1, SHA-256 checked; TRaSH-Guides at its commit; `main` and the tarball of its pin, checked by its fixture script: nothing of these runs here), then `make upstream-checks-run` with no network but the loopback: the checks in the order of section 10, the originals started with `SHELL_VIA_MOCK=1`, so that the mock answers for the Servarr services as it does when recording. No secret, no credential left in git, caches restored and never saved. Hands `upstream-checks-results-<pr>-<commit>` (recordings, reports, `report.json`; links and special files dropped) and the same name with `-logs` on as artifacts: one name per PR and commit, since a run of `upstream.yml` may run the checks of both personalities, and one of `upstream-loop.yml` the checks twice on one PR |
-| `apply` | `contents: write`, `pull-requests: write` | refuses unless `main` is protected from its token (`make upstream-main-protected`, below); `main`'s script reads the results as untrusted (`make upstream-checks-apply`): only the files it expects, at their paths, regular, of a sane size, JSON where JSON, every value it prints checked (`checked_file` of `pin-bump.py`); commits a recording whose test compares answers (one commit each) and the comparison (one commit), on the commit the checks ran at; pushes without force; comments the report on the PR |
+| `apply` | `contents: write`, `pull-requests: write` | refuses unless `main` is protected from its token (`make upstream-main-protected`, below); `main`'s script reads the results as untrusted (`make upstream-checks-apply`): only the files it expects, at their paths, regular, of a sane size, JSON where JSON, every value it prints checked (`checked_file` of `pin-bump.py`); commits a recording whose test compares answers (one commit each) when it says something the committed one does not, and the comparison (one commit), on the commit the checks ran at; pushes without force; comments the report on the PR |
 
 Why a user of its own: on a hosted runner the runner's user has `sudo`
 without a password and the docker socket, so it is root in all but name.
@@ -356,6 +356,24 @@ originals run as a user that is not root and cannot become it
 `no_new_privs`), and so cannot read another user's processes, the
 runner's among them; the runner's home is closed to it. Not verified on a
 hosted runner, only on a container of the same Ubuntu.
+
+Two recordings of the Recyclarr exchange with the same Recyclarr, guide,
+original and fixture are not the same bytes: Recyclarr sends a profile's
+`formatItems` in an order of its own, which the original stores and
+answers back, and lists names in its output in that order; `system/status`
+gives the paths, the OS and the start time of the machine. So `apply`
+commits a new exchange only when `differences` of
+`scripts/recyclarr-replay.py` (requests paired by method and path,
+`system/status`'s own values left out) finds something once those orders
+are sorted (`exchange_differences` in `scripts/upstream-checks.py`); the
+first run on #28 committed 3,500 lines that said nothing.
+
+The audit runs the original with the branch's own fixture script. On a
+port's branch opened before `main` had `SHELL_VIA_MOCK`, the original
+reaches no Servarr service, and a route they answer (`GET /api/v3/update`)
+fails there and not in Unarr: the report says so beside the audit's
+outcome, and the branch takes `main` before the audit is made again. The
+line make writes on the audit's exit status is left out of the report.
 
 What it leaves: the download clients' captures, whose test follows their
 sequence numbers and info hashes, and any recording a job could commit

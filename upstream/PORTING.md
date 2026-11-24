@@ -1043,7 +1043,8 @@ What the job does, in this order, each step as its inputs ask:
    and the pinned original, as `tests/fixtures/recyclarr/README.md` says,
    with the release and the guide's commit that file names. One commit
    per recording, as an "Other commit" (section 4), with no `Upstream:`
-   line. The README's prose on the releases used is the port's (section
+   line; none when the new exchange differs from the committed one only
+   in the order of what has no order (`upstream/README.md` says which). The README's prose on the releases used is the port's (section
    8, check 6).
 2. **Asks the old pin**, for a golden that differs by timing (section 2):
    main's pin from a worktree of `main`, with the fixture script
