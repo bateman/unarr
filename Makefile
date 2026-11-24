@@ -6,7 +6,8 @@ TAG   ?= dev
 
 .PHONY: help build run run-both test panic-test fmt lint check deny release-notes clean docker check-name golden golden-radarr sonarr radarr ui ui-sonarr ui-radarr ui-present bazarr bazarr-radarr prowlarr prowlarr-radarr recyclarr recyclarr-radarr http-audit anonymize scale-fixture compare-originals route-percentiles test-scripts upstream-sonarr upstream-radarr bump-sonarr bump-radarr ui-smoke \
 	upstream-plan-sonarr upstream-plan-radarr upstream-announce-sonarr upstream-announce-radarr \
-	upstream-assemble-sonarr upstream-assemble-radarr upstream-pr-sonarr upstream-pr-radarr
+	upstream-assemble-sonarr upstream-assemble-radarr upstream-pr-sonarr upstream-pr-radarr \
+	upstream-apply-sonarr upstream-apply-radarr
 UNARR_URL ?= http://127.0.0.1:8989
 RADARR_URL ?= http://127.0.0.1:7878
 UNARR_API_KEY ?= 0123456789abcdef0123456789abcdef
@@ -148,11 +149,21 @@ upstream-announce-sonarr: ## Open the issue "Sonarr <version> is out" of the pla
 upstream-announce-radarr: ## Open the issue "Radarr <version> is out" of the plan's new major, unless it is open (the workflow, GITHUB_TOKEN)
 	@$(UPSTREAM_WORKFLOW) announce --app radarr --plan $(UPSTREAM_OUT)/radarr/plan.json
 
-upstream-assemble-sonarr: ## The bump's work directory from the workflow's two artifacts: the fetched files over the recorded ones
-	@$(UPSTREAM_WORKFLOW) assemble --trusted $(UPSTREAM_OUT)/sonarr/fetched --untrusted $(UPSTREAM_OUT)/sonarr/recorded --work $(UPSTREAM_WORK)/sonarr
+upstream-assemble-sonarr: ## The bump's work directory from the workflow's artifacts: the fetched files over the recorded ones, and the checked test results when there are
+	@$(UPSTREAM_WORKFLOW) assemble --trusted $(UPSTREAM_OUT)/sonarr/fetched --untrusted $(UPSTREAM_OUT)/sonarr/recorded --work $(UPSTREAM_WORK)/sonarr \
+		$(if $(wildcard $(UPSTREAM_OUT)/sonarr/tested),--tested $(UPSTREAM_OUT)/sonarr/tested)
 
-upstream-assemble-radarr: ## The bump's work directory from the workflow's two artifacts: the fetched files over the recorded ones
-	@$(UPSTREAM_WORKFLOW) assemble --trusted $(UPSTREAM_OUT)/radarr/fetched --untrusted $(UPSTREAM_OUT)/radarr/recorded --work $(UPSTREAM_WORK)/radarr
+upstream-apply-sonarr: ## The bump of Sonarr applied in the workflow's job that writes; the extracted new original removed at once, never run there
+	@$(MAKE) --no-print-directory bump-sonarr STEPS=apply
+	rm -rf $(or $(UNARR_CACHE),.cache/sonarr)/Sonarr
+
+upstream-assemble-radarr: ## The bump's work directory from the workflow's artifacts: the fetched files over the recorded ones, and the checked test results when there are
+	@$(UPSTREAM_WORKFLOW) assemble --trusted $(UPSTREAM_OUT)/radarr/fetched --untrusted $(UPSTREAM_OUT)/radarr/recorded --work $(UPSTREAM_WORK)/radarr \
+		$(if $(wildcard $(UPSTREAM_OUT)/radarr/tested),--tested $(UPSTREAM_OUT)/radarr/tested)
+
+upstream-apply-radarr: ## The bump of Radarr applied in the workflow's job that writes; the extracted new original removed at once, never run there
+	@$(MAKE) --no-print-directory bump-radarr STEPS=apply
+	rm -rf $(or $(UNARR_CACHE),.cache/radarr)/Radarr
 
 upstream-pr-sonarr: ## Commit the applied bump of Sonarr, push sonarr/upstream-<target>, open the draft PR (the workflow, UPSTREAM_TOKEN or GITHUB_TOKEN)
 	@$(UPSTREAM_WORKFLOW) pr --app sonarr --plan $(UPSTREAM_OUT)/sonarr/plan.json --work $(UPSTREAM_WORK)/sonarr --base "$${BASE:-main}"

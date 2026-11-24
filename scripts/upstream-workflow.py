@@ -34,21 +34,27 @@ GitHub::
 ``announce``
     Opens the issue of a major unless one with the same title is open.
 ``assemble``
-    The work directory of the job that writes, from the two artifacts:
+    The work directory of the job that writes, from the artifacts:
     what the job without secrets recorded (untrusted: copied as it is,
     links kept as links, for ``apply`` to refuse) and, over it, what the
     planning job fetched (``bump.json``, ``triage.json``, ``triage.md``),
     so that the release, its commit and its checksum are the ones fetched,
-    whatever the recording job left.
+    whatever the recording job left; with ``--tested``, the test job's
+    ``tests.json`` (untrusted too: the new original's ffprobe ran there),
+    every value the summary prints checked first.
 ``pr``
     After ``make bump-<app> STEPS=apply,test,summary``: checks that the
     pin is the plan's target and that only the files the bump writes have
     changed, commits them as ``Pin <App> <target>``, pushes the branch
-    ``<app>/upstream-<target>``, opens the draft PR into the base branch
-    with the short body of ``upstream/PORTING.md`` (section 1, point 4),
-    labels it with the kind of jump and posts the bump's summary as its
-    first comment. Its outputs (``pr``, ``branch``, ``app``, ``target``,
-    ``jump``, ``url``) are what a later workflow hooks on.
+    ``<app>/upstream-<target>``, and, with ``UPSTREAM_TOKEN``, opens the
+    draft PR into the base branch with the short body of
+    ``upstream/PORTING.md`` (section 1, point 4), labels it with the kind of
+    jump and posts the bump's summary as its first comment. Without that
+    token it stops after the push and leaves the title, the body and the
+    comment in the work directory: the job's own token does not open pull
+    requests (``upstream/README.md`` says why). Its outputs (``pr``,
+    ``branch``, ``app``, ``target``, ``jump``, ``url``) are what a later
+    workflow hooks on.
 
 Upstream text (commit subjects, what the original answered) is data: no
 subject reaches a title, a body or an issue; the summary that is posted
@@ -458,7 +464,68 @@ def cmd_assemble(args) -> int:
     # the original's tarball is not handed on.
     shutil.rmtree(work / "original", ignore_errors=True)
     log(f"work directory {work}: the recording, with {', '.join(TRUSTED)} from the planning job")
+    if args.tested:
+        tested = Path(args.tested) / "tests.json"
+        if not tested.is_file() or tested.is_symlink():
+            die(f"no {tested}: the test job handed nothing on")
+        bump.write_json(work / "tests.json", check_tests(json.loads(tested.read_text(encoding="utf-8"))))
+        log("tests.json from the test job, checked")
     return 0
+
+
+# What the summary prints of tests.json outside a code span: a test's name,
+# its target, cargo's arguments. Nothing that makes a link, a mention, HTML
+# or a table cell of its own.
+PLAIN = re.compile(r"^[A-Za-z0-9_ ()./:,=+-]{1,300}$")
+
+
+def check_tests(data) -> dict:
+    """tests.json of the test job, where the new original's ffprobe ran:
+    untrusted. Every value the summary reads has its type and shape checked;
+    one that has not stops here, before the summary quotes it in the PR."""
+    problems: list[str] = []
+
+    def need(ok, what: str) -> None:
+        if not ok:
+            problems.append(what)
+
+    def number(v) -> bool:
+        return isinstance(v, (int, float)) and not isinstance(v, bool)
+
+    def strings(v, limit: int) -> bool:
+        return isinstance(v, list) and len(v) <= limit and all(isinstance(s, str) and len(s) <= 2000 for s in v)
+
+    need(isinstance(data, dict), "not an object")
+    data = data if isinstance(data, dict) else {}
+    cargo, scripts = data.get("cargo"), data.get("scripts")
+    need(number(data.get("seconds")), "seconds")
+    need(isinstance(cargo, dict), "cargo")
+    cargo = cargo if isinstance(cargo, dict) else {}
+    for key in ("passed", "failed", "exit"):
+        need(as_int(cargo.get(key)) is not None, f"cargo.{key}")
+    need(strings(cargo.get("compile_errors", []), 20), "cargo.compile_errors")
+    need(strings(cargo.get("failed_targets", []), 200)
+         and all(PLAIN.match(t) for t in cargo.get("failed_targets", [])), "cargo.failed_targets")
+    failures = cargo.get("failures")
+    need(isinstance(failures, list) and len(failures) <= 2000, "cargo.failures")
+    for f in failures if isinstance(failures, list) else []:
+        ok = (isinstance(f, dict) and isinstance(f.get("name"), str) and PLAIN.match(f["name"])
+              and isinstance(f.get("target"), str) and PLAIN.match(f["target"])
+              and strings(f.get("args"), 20) and all(PLAIN.match(a) for a in f["args"])
+              and strings(f.get("output"), 60) and f.get("rerun") in (None, "passed", "failed"))
+        need(ok, f"cargo.failures: {str(f)[:80]}")
+    need(isinstance(scripts, dict), "scripts")
+    scripts = scripts if isinstance(scripts, dict) else {}
+    need(as_int(scripts.get("exit")) is not None, "scripts.exit")
+    sfail = scripts.get("failures")
+    need(isinstance(sfail, list) and len(sfail) <= 2000, "scripts.failures")
+    for f in sfail if isinstance(sfail, list) else []:
+        ok = isinstance(f, dict) and all(isinstance(f.get(k), str) and PLAIN.match(f[k])
+                                         for k in ("name", "target", "kind"))
+        need(ok, f"scripts.failures: {str(f)[:80]}")
+    if problems:
+        die("the test job's tests.json holds values the summary will not print: " + "; ".join(problems[:10]))
+    return data
 
 
 # --- pr ---------------------------------------------------------------------------
@@ -487,7 +554,7 @@ def as_int(value) -> int | None:
     return value if isinstance(value, int) and not isinstance(value, bool) else None
 
 
-def render_pr(plan: dict, summary: dict, old_migration: str | None, run_url: str, own_token: bool) -> tuple[str, str]:
+def render_pr(plan: dict, summary: dict, old_migration: str | None, run_url: str) -> tuple[str, str]:
     """The title and the short body of upstream/PORTING.md, section 1,
     point 4 (the Release section of section 7, point 1)."""
     app = APPS[plan["app"]]
@@ -528,10 +595,6 @@ def render_pr(plan: dict, summary: dict, old_migration: str | None, run_url: str
               f"{facts.get('commits', 0)} commits, and the checks of `upstream/PORTING.md`, section 8. The bump's "
               "summary is the first comment below; its work directory is the artifact "
               f"`bump-{plan['app']}` of the run."]
-    if not own_token:
-        lines += ["",
-                  "CI has not run: a pull request the workflow's own token opens starts no workflow. The first push "
-                  "to the branch starts it; before that, close and reopen this pull request."]
     return title, "\n".join(lines) + "\n"
 
 
@@ -626,10 +689,28 @@ def cmd_pr(args) -> int:
     log(f"pushed {branch}")
 
     run_url = ""
-    server, run_id = os.environ.get("GITHUB_SERVER_URL", ""), os.environ.get("GITHUB_RUN_ID", "")
+    run_id = os.environ.get("GITHUB_RUN_ID", "")
     if re.fullmatch(r"https://[A-Za-z0-9.-]+", server) and run_id.isdigit():
         run_url = f"{server}/{gh.repo}/actions/runs/{run_id}"
-    title, pr_body = render_pr(plan, summary, old_migration, run_url, write_token is not None)
+    title, pr_body = render_pr(plan, summary, old_migration, run_url)
+    comment = render_comment(plan, (work / "summary.md").read_text(encoding="utf-8"))
+    if write_token is None:
+        # The job's own token opens no pull request: that would need
+        # "Allow GitHub Actions to create and approve pull requests", which
+        # also lets a job's token approve one, and the port's workflow keeps
+        # it off. The branch is pushed; the PR is opened by hand from it.
+        (work / "pr-title.txt").write_text(title + "\n", encoding="utf-8")
+        (work / "pr-body.md").write_text(pr_body, encoding="utf-8")
+        (work / "pr-comment.md").write_text(comment, encoding="utf-8")
+        compare = f"{server}/{gh.repo}/compare/{args.base}...{branch}?expand=1"
+        msg = (f"pushed {branch}; no UPSTREAM_TOKEN, so no pull request: open it as a draft from {compare}, "
+               f"with the title, the body and the first comment in the artifact bump-{app_key} "
+               f"(pr-title.txt, pr-body.md, pr-comment.md) and the label {plan['jump']}")
+        print(msg)
+        append_summary(f"**{app}**: {msg}")
+        write_outputs(args.github_output, {"pr": "", "branch": branch, "app": app_key, "target": target,
+                                           "jump": plan["jump"], "url": compare})
+        return 0
     pr = gh.call("POST", "/pulls", {"title": title, "head": branch, "base": args.base, "body": pr_body,
                                      "draft": True, "maintainer_can_modify": True})
     number, url = pr.get("number"), pr.get("html_url", "")
@@ -639,8 +720,7 @@ def cmd_pr(args) -> int:
         gh.call("POST", "/labels", {"name": label, "color": LABEL_COLOURS[label],
                                      "description": f"An upstream port across a {label} release"})
     gh.call("POST", f"/issues/{number}/labels", {"labels": [label]})
-    summary_md = (work / "summary.md").read_text(encoding="utf-8")
-    gh.call("POST", f"/issues/{number}/comments", {"body": render_comment(plan, summary_md)})
+    gh.call("POST", f"/issues/{number}/comments", {"body": comment})
     msg = f"opened #{number} from {branch}, labelled {label}"
     print(msg)
     append_summary(f"**{app}**: {msg}: {url}")
@@ -670,6 +750,7 @@ def main(argv: list[str] | None = None) -> int:
     s.add_argument("--trusted", required=True)
     s.add_argument("--untrusted", required=True)
     s.add_argument("--work", required=True)
+    s.add_argument("--tested", help="the test job's results (tests.json), checked and added")
     r = sub.add_parser("pr", help="commit the bump, push the branch, open the draft PR")
     r.add_argument("--app", required=True, choices=sorted(APPS))
     r.add_argument("--plan", required=True)

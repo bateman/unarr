@@ -205,8 +205,7 @@ class Texts(unittest.TestCase):
                "importer": {"migration": 243, "known": 242}, "vectors": {"changed": 2, "deleted": []}}
 
     def test_the_pull_request_opens_with_the_short_body_of_porting(self):
-        title, body = wf.render_pr(self.plan(), self.SUMMARY, "242", "https://github.com/bateman/unarr/actions/runs/1",
-                                   own_token=True)
+        title, body = wf.render_pr(self.plan(), self.SUMMARY, "242", "https://github.com/bateman/unarr/actions/runs/1")
         self.assertEqual(title, "Radarr 6.4.4.10600 → 7.0.3.10950")
         self.assertTrue(body.startswith("## Release\n"))
         self.assertIn("a **major** jump. Tag `v7.0.3.10950` at `af772b051ac27a0615c7f8b7f78622b6dc183be0`.", body)
@@ -215,19 +214,14 @@ class Texts(unittest.TestCase):
         self.assertIn("`make test-scripts` failed on `test_the_shipped_cursors_are_at_the_pins`", body)
         self.assertIn("migration level 242 → 243", body)
         self.assertIn("comes with the first update", body)
-        self.assertNotIn("CI has not run", body)
         for word in ("Claude", "claude", "Co-authored", "Generated", "agent"):
             self.assertNotIn(word, title + body)
-
-    def test_with_the_job_token_the_body_says_ci_has_not_run(self):
-        _, body = wf.render_pr(self.plan(), self.SUMMARY, "242", "", own_token=False)
-        self.assertIn("CI has not run", body)
 
     def test_odd_values_of_the_summary_are_left_out(self):
         summary = dict(self.SUMMARY, recordings={"files": "[x](https://e.vil)", "changed": 1, "failed_lists": []},
                        tests={"passed": 1, "failed": 0, "scripts_failures": [{"name": "[a](b) @someone"}]},
                        to={"commit": "not a sha"})
-        _, body = wf.render_pr(self.plan(), summary, "242", "", own_token=True)
+        _, body = wf.render_pr(self.plan(), summary, "242", "")
         self.assertNotIn("e.vil", body)
         self.assertNotIn("@someone", body)
         self.assertNotIn("not a sha", body)
@@ -286,6 +280,52 @@ class Files(unittest.TestCase):
         self.assertTrue((work / "recorded" / "golden" / "link.json").is_symlink())
         self.assertTrue((work / "record.json").exists())
         self.assertFalse((work / "original").exists())
+
+    TESTS = {"seconds": 926.6,
+             "cargo": {"passed": 792, "failed": 1, "exit": 101, "compile_errors": [],
+                       "failed_targets": ["-p unarr-api --test contract_radarr"],
+                       "failures": [{"name": "radarr_golden_responses_match", "target": "unarr-api (contract_radarr)",
+                                     "args": ["-p", "unarr-api", "--test", "contract_radarr"],
+                                     "output": ["thread panicked at `x` | [a](b)"], "rerun": "failed"}]},
+             "scripts": {"exit": 1, "failures": [{"name": "test_the_shipped_cursors_are_at_the_pins", "kind": "FAIL",
+                                                  "target": "scripts (test_upstream_triage.Files.test_x)"}]}}
+
+    def test_the_test_jobs_results_are_taken_when_their_shape_is_right(self):
+        self.assertEqual(wf.check_tests(json.loads(json.dumps(self.TESTS))), self.TESTS)
+
+    def test_the_test_jobs_results_are_refused_when_they_could_reach_the_pr(self):
+        bad = [
+            ("cargo", "passed", "[792](https://e.vil)"),
+            ("cargo", "failed", True),
+            ("cargo", "failures", [{"name": "x", "target": "[t](https://e.vil)", "args": [], "output": []}]),
+            ("cargo", "failures", [{"name": "@someone", "target": "t", "args": [], "output": []}]),
+            ("cargo", "failures", [{"name": "x", "target": "t", "args": [], "output": [], "rerun": "maybe"}]),
+            ("cargo", "failed_targets", ["`x` | y"]),
+            ("scripts", "failures", [{"name": "x", "kind": "FAIL", "target": "<img src=x>"}]),
+            ("scripts", "exit", "1"),
+        ]
+        for part, key, value in bad:
+            data = json.loads(json.dumps(self.TESTS))
+            data[part][key] = value
+            with self.assertRaises(SystemExit, msg=f"{part}.{key}"):
+                wf.check_tests(data)
+        with self.assertRaises(SystemExit):
+            wf.check_tests([])
+
+    def test_assemble_adds_the_checked_results(self):
+        trusted, untrusted, tested, work = (self.tmp / n for n in ("fetched", "recorded", "tested", "work"))
+        for d in (trusted, untrusted, tested):
+            d.mkdir()
+        for name in wf.TRUSTED:
+            (trusted / name).write_text("{}")
+        (tested / "tests.json").write_text(json.dumps(self.TESTS))
+        wf.main(["assemble", "--trusted", str(trusted), "--untrusted", str(untrusted), "--work", str(work),
+                 "--tested", str(tested)])
+        self.assertEqual(json.loads((work / "tests.json").read_text()), self.TESTS)
+        (tested / "tests.json").write_text(json.dumps(dict(self.TESTS, seconds="[x](y)")))
+        with self.assertRaises(SystemExit):
+            wf.main(["assemble", "--trusted", str(trusted), "--untrusted", str(untrusted), "--work", str(work),
+                     "--tested", str(tested)])
 
     def test_the_pin_values_are_read_by_key(self):
         text = (REPO / "upstream" / "radarr.pin").read_text()

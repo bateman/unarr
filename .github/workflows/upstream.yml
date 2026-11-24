@@ -9,8 +9,11 @@
 #   announce-<app>  a new major on the schedule: the issue, and nothing else
 #   record-<app>    the new original records, in a job with no token, no
 #                   secret, no network but the loopback, as a user of its own
-#   publish-<app>   the bump applied and tested, the branch pushed, the draft
-#                   PR opened with its label and the summary (write token)
+#   test-<app>      the bump applied and the tests run, which run the new
+#                   tarball's ffprobe: no token, a user of its own, no network
+#   publish-<app>   the bump applied, the summary, the branch pushed, and with
+#                   UPSTREAM_TOKEN the draft PR opened with its label (write
+#                   token; nothing of the new tarball runs there)
 #
 # What decides is in scripts/upstream-workflow.py, through Make. The two
 # chains are the same steps (YAML anchors): an error in one does not stop
@@ -163,18 +166,92 @@ jobs:
           if-no-files-found: warn
           retention-days: 7
 
-  # The job that writes. It never runs the original: `apply` reads the
-  # recording as untrusted, and downloads the tarball again to check it
-  # against the checksum the planning job fetched (scripts/pin-bump.py).
-  publish-radarr:
-    name: bump and draft PR (radarr)
+  # The tests run the ffprobe of the new tarball (the contract tests use
+  # the one the original ships): a binary nobody vetted, so a job like the
+  # recording's, with no token and a user of its own. `apply` and the
+  # preparation run as the runner's user and run nothing of the tarball;
+  # the toolchain is installed by the runner's user and copied over, the
+  # crates fetched by the test user with the network, the tests run
+  # without it. What it hands on (tests.json) is untrusted.
+  test-radarr:
+    name: test (radarr)
     needs: [plan-radarr, record-radarr]
     if: needs.record-radarr.result == 'success'
     runs-on: ubuntu-24.04
     timeout-minutes: 120
-    permissions: { contents: write, pull-requests: write }
-    concurrency: { group: upstream-publish-radarr, cancel-in-progress: false }
+    permissions: {}
     env: { APP: radarr, OTHER: sonarr }
+    steps: &test-steps
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: fetched-${{ env.APP }}
+          path: ${{ runner.temp }}/fetched
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: recorded-${{ env.APP }}
+          path: ${{ runner.temp }}/recorded
+      - uses: dtolnay/rust-toolchain@39008827e6b4319a349e9a42dfc90579dd25f1ca # stable
+        with: { toolchain: stable }
+      # As the runner's user: the tree, the bump applied (it downloads and
+      # checks the tarball, extracts it, runs nothing of it), the other
+      # personality's web UI. Then everything goes to the test user.
+      - name: The tree with the bump applied, for a user of its own
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
+          sudo useradd --system --create-home --user-group --shell /usr/sbin/nologin unarr-tester
+          sudo install -d -o "$(id -u)" -g "$(id -g)" /srv/unarr-test
+          cd /srv/unarr-test
+          tar -xzf "$RUNNER_TEMP/fetched/source.tar.gz"
+          # `apply` compares with HEAD, the pins' test lists the tracked
+          # files: the planning job's tree as a local commit, never pushed.
+          git init -q && git add -A
+          git -c user.name=upstream -c user.email=upstream@localhost commit -q -m "The planning job's tree"
+          mkdir -p ".cache/upstream-workflow/$APP"
+          cp -a "$RUNNER_TEMP/fetched/fetched" ".cache/upstream-workflow/$APP/fetched"
+          cp -a "$RUNNER_TEMP/recorded" ".cache/upstream-workflow/$APP/recorded"
+          make upstream-assemble-"$APP"
+          make ui-"$OTHER"
+          make bump-"$APP" STEPS=apply
+          sudo cp -a "$HOME/.rustup" "$HOME/.cargo" /home/unarr-tester/
+          sudo chown -R unarr-tester: /srv/unarr-test /home/unarr-tester
+      - name: The crates, fetched by the test user
+        working-directory: /srv/unarr-test
+        run: sudo scripts/run-unprivileged.sh --network unarr-tester sh -c 'PATH="$HOME/.cargo/bin:$PATH" exec cargo fetch --locked'
+      - name: The tests, as a user of its own, with no network
+        working-directory: /srv/unarr-test
+        run: sudo scripts/run-unprivileged.sh unarr-tester sh -c 'PATH="$HOME/.cargo/bin:$PATH" CARGO_NET_OFFLINE=true exec make bump-"$1" STEPS=test' sh "$APP"
+      - name: The results, handed on
+        if: always()
+        run: |
+          mkdir -p "$RUNNER_TEMP/tested"
+          work="/srv/unarr-test/.cache/bump/$APP"
+          for f in tests.json logs/cargo-test.log logs/test-scripts.log logs/rerun.log; do
+            if sudo test -f "$work/$f" && ! sudo test -L "$work/$f"; then sudo cp "$work/$f" "$RUNNER_TEMP/tested/"; fi
+          done
+          sudo chown -R "$(id -u):$(id -g)" "$RUNNER_TEMP/tested"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: tested-${{ env.APP }}
+          path: ${{ runner.temp }}/tested
+          if-no-files-found: warn
+          retention-days: 7
+
+  # The job that writes. Nothing of the new tarball runs here: `apply`
+  # reads the recording as untrusted, downloads the tarball again to check
+  # it against the checksum the planning job fetched, and the extracted
+  # original is removed at once (make upstream-apply-<app>); the tests'
+  # results come from test-<app>, checked before the summary quotes them.
+  # The job's token pushes; the PR is opened only with UPSTREAM_TOKEN.
+  publish-radarr:
+    name: bump and draft PR (radarr)
+    needs: [plan-radarr, record-radarr, test-radarr]
+    if: needs.test-radarr.result == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions: { contents: write, pull-requests: read }
+    concurrency: { group: upstream-publish-radarr, cancel-in-progress: false }
+    env: { APP: radarr }
     # Where a later workflow hooks on: the draft PR this run opened.
     outputs:
       pr: ${{ steps.pr.outputs.pr }}
@@ -194,24 +271,22 @@ jobs:
         with:
           name: recorded-${{ env.APP }}
           path: .cache/upstream-workflow/${{ env.APP }}/recorded
-      - name: The work directory, the fetched files over the recorded ones
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: tested-${{ env.APP }}
+          path: .cache/upstream-workflow/${{ env.APP }}/tested
+      - name: The work directory, the fetched files over the recorded ones, the tests checked
         run: make upstream-assemble-"$APP"
-      - name: Room on / for the tests (as in ci.yml)
-        run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
-      - uses: dtolnay/rust-toolchain@39008827e6b4319a349e9a42dfc90579dd25f1ca # stable
-        with: { toolchain: stable }
-      - uses: Swatinem/rust-cache@2201cc584a476d1b508be977bbe4b7d1c7a52e9c # v2.9.3
-      # The other personality's web UI, which the tests need; `apply` takes
-      # this one's from the new tarball.
-      - name: The bump applied, tested and summed up
+      - name: The bump applied and summed up
         run: |
-          make ui-"$OTHER"
-          make bump-"$APP" STEPS=apply,test,summary
-      - name: The branch and the draft PR
+          make upstream-apply-"$APP"
+          make bump-"$APP" STEPS=summary
+      - name: The branch, and the draft PR
         id: pr
         env:
           GITHUB_TOKEN: ${{ github.token }}
-          # Optional: a token whose pull requests start CI (upstream/README.md).
+          # Opens the PR, so that CI starts on it; without it the branch is
+          # pushed and the job says how to open the PR (upstream/README.md).
           UPSTREAM_TOKEN: ${{ secrets.UPSTREAM_TOKEN }}
           BASE: ${{ github.event.repository.default_branch }}
         run: make upstream-pr-"$APP"
@@ -259,15 +334,25 @@ jobs:
     env: { APP: sonarr }
     steps: *record-steps
 
-  publish-sonarr:
-    name: bump and draft PR (sonarr)
+  test-sonarr:
+    name: test (sonarr)
     needs: [plan-sonarr, record-sonarr]
     if: needs.record-sonarr.result == 'success'
     runs-on: ubuntu-24.04
     timeout-minutes: 120
-    permissions: { contents: write, pull-requests: write }
-    concurrency: { group: upstream-publish-sonarr, cancel-in-progress: false }
+    permissions: {}
     env: { APP: sonarr, OTHER: radarr }
+    steps: *test-steps
+
+  publish-sonarr:
+    name: bump and draft PR (sonarr)
+    needs: [plan-sonarr, record-sonarr, test-sonarr]
+    if: needs.test-sonarr.result == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions: { contents: write, pull-requests: read }
+    concurrency: { group: upstream-publish-sonarr, cancel-in-progress: false }
+    env: { APP: sonarr }
     outputs:
       pr: ${{ steps.pr.outputs.pr }}
       branch: ${{ steps.pr.outputs.branch }}
