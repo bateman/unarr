@@ -164,15 +164,26 @@ port of Unarr's code, and keep the test red until they are settled:
   it answers.** Radarr 7's `log` golden held six error records of health
   checks that Radarr 6's had not; Radarr 6 writes the same six, about
   200 ms after the recording read `GET /api/v3/log`. Such a difference is
-  not ported. Show that it is one with a recording of the old pin: the
-  bump's own when it ran with `BASELINE=1` (the recording is then marked
-  *noisy*), otherwise ask for one in the PR under "Left to check by hand",
-  for the session of section 10 (the port never records: fixed rule 3).
-  Then how the test stops comparing it (a field left out, a list
-  recorded later, the setup changed) is the maintainer's: put it under
-  "Questions for the maintainer" (section "Stop and ask") with what the
-  old pin's recording showed. That is the one question this case always
-  asks; do not loosen the test yourself (section 8, "The test harness").
+  not ported. Show that it is one on the old pin, by one of two proofs:
+  - **the difference changes from one recording to the next** (it comes
+    and goes): the bump's own re-record of the old pin, when it ran with
+    `BASELINE=1`, marks the recording *noisy*, and that is the proof;
+  - **the difference is stable** (every recording of the old pin reads
+    before the original writes, as the `log` golden did, so a re-record
+    shows the same nothing and is not marked *noisy*): a re-record proves
+    nothing here. The proof is the same request asked of the old pin
+    **later**, after the original has had time to write (or its log
+    file read), showing the records the new golden has. Ask for it in
+    the PR under "Left to check by hand", with the request and how long
+    to wait, for the session of section 10 (the port runs no original:
+    fixed rule 3).
+  Without either proof, the difference is taken as real and is work of
+  the port, like any other. With one, how the test stops comparing it (a
+  field left out, a list recorded later, the setup changed) is the
+  maintainer's: put it under "Questions for the maintainer" (section
+  "Stop and ask") with what the old pin showed. That is the one question
+  this case always asks; do not loosen the test yourself (section 8,
+  "The test harness").
 - **A test, a replay or a capture that holds the old original's answers**
   and fails after a correct port. Tell first how the expectation was
   made:
@@ -444,8 +455,10 @@ Rules of a ported commit:
    another target, or of the other personality, that the commit's own
    tests do not reach, in any crate that depends on it (`unarr-core` is
    used by `unarr-import`, `unarr-mock`, `unarr-api` and `unarrd`). Before
-   committing one, run every test target of the workspace, both
-   personalities' included:
+   pushing one, run every test target of the workspace, both
+   personalities' included, on the branch's head (the commit itself is
+   made after its own checks, like any other: the run may cover it with
+   others, as the next paragraph says):
 
    ```sh
    cargo test --workspace         # make test: every crate, every tests/*.rs, the doc tests
@@ -456,7 +469,8 @@ Rules of a ported commit:
    output shows no new difference.
 
    **What may be tested together.** That run takes about 15 minutes. It
-   may cover several commits at once, on these terms:
+   may cover several commits at once, shared code or not, on these
+   terms:
    - each commit of the batch has passed, alone, the checks of the first
      paragraph of this rule (fmt, build, clippy, its own tests) before
      the next one is written;
@@ -735,7 +749,7 @@ in English, no tool names, no footer:
    `docs/originals-comparison.md` while the workflow has no job that
    measures it (section 8, check 7). What needs an original running is
    one list, in the order section 10 does it: each recording to record
-   again, with the test it holds red; a recording of the old pin asked
+   again, with the test it holds red; the request asked of the old pin
    for a golden that differs by timing (section 2); the HTTP audit; the
    comparison with the originals. Once the session of section 10 has
    reported, its results go under "Checks" and each difference it found
@@ -973,15 +987,21 @@ What it does, in this order, as it did on the Radarr 7 trial:
    the Recyclarr exchange (between the real Recyclarr and the original,
    as `tests/fixtures/recyclarr/README.md` says, which then names the
    releases used), the download clients' captures (between the original
-   and the real client, as their fixture's README says), a recording of
-   the old pin for a golden that differs by timing (section 2). One
-   commit per recording, as an "Other commit" (section 4), with no
+   and the real client, as their fixture's README says). One commit per
+   recording, as an "Other commit" (section 4), with no
    `Upstream:` line. When the new recording only moves what the test that
    reads it follows (sequence numbers, ids, an info hash), the test
    follows it in the same commit, comparing no less (section 8, "The test
    harness"); the Transmission capture of Radarr 7 changed only its test.
    When the test then fails on what Unarr answers, it does not touch
    Unarr: it reports the difference.
+
+   For a golden that differs by timing (section 2), it starts the old
+   pin from a worktree of `main` with the fixture script
+   (`scripts/<app>-fixture.sh shell`), asks the request the port named,
+   once at once and once after the wait the port named, and reads the
+   original's log file; it commits nothing for this and reports both
+   answers and what the log file holds.
 3. **Runs the HTTP audit**, the original and `unarrd` built from the
    branch each on a fresh copy of the fixture (`make http-audit
    ORIGINAL_URL=...`), and keeps its report.
@@ -1001,8 +1021,8 @@ Its limits:
 
 - It runs an original only from the repository's scripts and Make
   targets, never a binary or a command of its own making, and only the
-  originals of the pins on the branch, or of the pin on `main` for a
-  recording of the old pin.
+  originals of the pins on the branch, or of the pin on `main` for the
+  proof of section 2.
 - It never changes Unarr's code, nor a log row, nor the PR's table, nor
   the cursor; the only test it changes is one that reads a recording it
   made again, as point 2 says.
