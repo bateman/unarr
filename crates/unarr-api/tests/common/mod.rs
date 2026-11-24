@@ -31,6 +31,9 @@ pub enum Mode {
     Multiset(&'static [&'static str]),
     /// Key structure only.
     Shape,
+    /// `Shape`, with the keys of these names left out on both sides,
+    /// wherever they appear.
+    ShapeWithout(&'static [&'static str]),
     /// `Shape` of the original's installed release in its update list.
     /// The original lists what the Servarr update server answers, newest
     /// first, and omits `installedOn` from the releases it does not run;
@@ -498,10 +501,18 @@ pub fn compare(mode: Mode, want_body: &Value, got_body: &Value) -> Vec<String> {
             }
             problems.extend(compare(Mode::Shape, &want, &installed(got_body)));
         }
-        Mode::Shape => {
+        Mode::Shape | Mode::ShapeWithout(_) => {
             let (mut want, mut got) = (BTreeSet::new(), BTreeSet::new());
             shape(want_body, "", &mut want);
             shape(got_body, "", &mut got);
+            if let Mode::ShapeWithout(left_out) = mode {
+                let kept = |k: &String| {
+                    !k.split('/')
+                        .any(|part| left_out.contains(&part.trim_end_matches("[]")))
+                };
+                want.retain(kept);
+                got.retain(kept);
+            }
             for k in want.difference(&got) {
                 problems.push(format!("{k}: missing"));
             }

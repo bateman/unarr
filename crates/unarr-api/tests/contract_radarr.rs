@@ -297,7 +297,15 @@ fn mode(name: &str) -> Mode {
         n if n.starts_with("downloadclient-unreachable") || n == "downloadclient-testall" => {
             Mode::Exact(&["detailedDescription"])
         }
-        "diskspace" | "system-task" | "system-task-1" | "log" | "signalr-negotiate" => Mode::Shape,
+        "diskspace" | "system-task" | "system-task-1" | "signalr-negotiate" => Mode::Shape,
+        // Which records the first page holds depends on when the original's
+        // start-up health checks log their errors (with `exception` and
+        // `exceptionType`) against the moment the recording reads the log:
+        // Radarr 6.4.4 wrote them about 200 ms after, Radarr 7.0.3.10918
+        // before. The two fields do not count in this shape (decided by the
+        // maintainer on 2026-11-24, issue #9); that Unarr never writes
+        // `exceptionType` is followed in issue #33.
+        "log" => Mode::ShapeWithout(&["exception", "exceptionType"]),
         "update" => Mode::InstalledUpdate,
         // Radarr builds `contentsUrl` from a route that no longer exists
         // (`/api/v1//radarr.txt`); Unarr's names the route that answers.
