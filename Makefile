@@ -4,7 +4,10 @@ NAME  ?= unarr
 IMAGE ?= ghcr.io/bateman/unarr
 TAG   ?= dev
 
-.PHONY: help build run run-both test panic-test fmt lint check deny release-notes clean docker check-name golden golden-radarr sonarr radarr ui ui-sonarr ui-radarr ui-present bazarr bazarr-radarr prowlarr prowlarr-radarr recyclarr recyclarr-radarr http-audit anonymize scale-fixture compare-originals route-percentiles test-scripts upstream-sonarr upstream-radarr bump-sonarr bump-radarr ui-smoke
+.PHONY: help build run run-both test panic-test fmt lint check deny release-notes clean docker check-name golden golden-radarr sonarr radarr ui ui-sonarr ui-radarr ui-present bazarr bazarr-radarr prowlarr prowlarr-radarr recyclarr recyclarr-radarr http-audit anonymize scale-fixture compare-originals route-percentiles test-scripts upstream-sonarr upstream-radarr bump-sonarr bump-radarr ui-smoke \
+	upstream-plan-sonarr upstream-plan-radarr upstream-announce-sonarr upstream-announce-radarr \
+	upstream-assemble-sonarr upstream-assemble-radarr upstream-pr-sonarr upstream-pr-radarr \
+	upstream-apply-sonarr upstream-apply-radarr
 UNARR_URL ?= http://127.0.0.1:8989
 RADARR_URL ?= http://127.0.0.1:7878
 UNARR_API_KEY ?= 0123456789abcdef0123456789abcdef
@@ -123,6 +126,50 @@ bump-sonarr: ## Bump upstream/sonarr.pin to the triage's target and record again
 
 bump-radarr: ## Bump upstream/radarr.pin to the triage's target and record again from it; summary in .cache/bump/radarr (TARGET=, RELEASES=api|tags|file, STEPS=fetch,record,apply,test,summary or cursor at the end of the port, DRY_RUN=1, BASELINE=1, LISTS=)
 	@python3 -I scripts/pin-bump.py --app radarr $(BUMP_ARGS)
+
+# The workflow `upstream` (.github/workflows/upstream.yml; upstream/README.md, "The workflow: up to the
+# draft PR"). UPSTREAM_SCHEDULED: the personalities its weekly run follows; a manual start runs any.
+# The target and the event come from the environment (TARGET, EVENT) and reach the script quoted.
+UPSTREAM_SCHEDULED ?= radarr
+UPSTREAM_OUT = $(or $(UNARR_CACHE),.cache)/upstream-workflow
+UPSTREAM_WORK = $(or $(UNARR_CACHE),.cache)/bump
+UPSTREAM_WORKFLOW = python3 -I scripts/upstream-workflow.py
+UPSTREAM_PLAN = plan --event "$${EVENT:-workflow_dispatch}" --target "$$TARGET" --releases $(or $(RELEASES),api) \
+	--scheduled "$(UPSTREAM_SCHEDULED)"
+
+upstream-plan-sonarr: ## What the workflow does for Sonarr: the target, the jump, nothing when no release is new or a port is open (EVENT=schedule|workflow_dispatch, TARGET=, RELEASES=); plan.json in .cache/upstream-workflow/sonarr
+	@$(UPSTREAM_WORKFLOW) $(UPSTREAM_PLAN) --app sonarr --out $(UPSTREAM_OUT)/sonarr
+
+upstream-plan-radarr: ## What the workflow does for Radarr: the target, the jump, nothing when no release is new or a port is open (EVENT=schedule|workflow_dispatch, TARGET=, RELEASES=); plan.json in .cache/upstream-workflow/radarr
+	@$(UPSTREAM_WORKFLOW) $(UPSTREAM_PLAN) --app radarr --out $(UPSTREAM_OUT)/radarr
+
+upstream-announce-sonarr: ## Open the issue "Sonarr <version> is out" of the plan's new major, unless it is open (the workflow, GITHUB_TOKEN)
+	@$(UPSTREAM_WORKFLOW) announce --app sonarr --plan $(UPSTREAM_OUT)/sonarr/plan.json
+
+upstream-announce-radarr: ## Open the issue "Radarr <version> is out" of the plan's new major, unless it is open (the workflow, GITHUB_TOKEN)
+	@$(UPSTREAM_WORKFLOW) announce --app radarr --plan $(UPSTREAM_OUT)/radarr/plan.json
+
+upstream-assemble-sonarr: ## The bump's work directory from the workflow's artifacts: the fetched files over the recorded ones, and the checked test results when there are
+	@$(UPSTREAM_WORKFLOW) assemble --trusted $(UPSTREAM_OUT)/sonarr/fetched --untrusted $(UPSTREAM_OUT)/sonarr/recorded --work $(UPSTREAM_WORK)/sonarr \
+		$(if $(wildcard $(UPSTREAM_OUT)/sonarr/tested),--tested $(UPSTREAM_OUT)/sonarr/tested)
+
+upstream-apply-sonarr: ## The bump of Sonarr applied in the workflow's job that writes; the extracted new original removed at once, never run there
+	@$(MAKE) --no-print-directory bump-sonarr STEPS=apply
+	rm -rf $(or $(UNARR_CACHE),.cache/sonarr)/Sonarr
+
+upstream-assemble-radarr: ## The bump's work directory from the workflow's artifacts: the fetched files over the recorded ones, and the checked test results when there are
+	@$(UPSTREAM_WORKFLOW) assemble --trusted $(UPSTREAM_OUT)/radarr/fetched --untrusted $(UPSTREAM_OUT)/radarr/recorded --work $(UPSTREAM_WORK)/radarr \
+		$(if $(wildcard $(UPSTREAM_OUT)/radarr/tested),--tested $(UPSTREAM_OUT)/radarr/tested)
+
+upstream-apply-radarr: ## The bump of Radarr applied in the workflow's job that writes; the extracted new original removed at once, never run there
+	@$(MAKE) --no-print-directory bump-radarr STEPS=apply
+	rm -rf $(or $(UNARR_CACHE),.cache/radarr)/Radarr
+
+upstream-pr-sonarr: ## Commit the applied bump of Sonarr, push sonarr/upstream-<target>, open the draft PR (the workflow, UPSTREAM_TOKEN or GITHUB_TOKEN)
+	@$(UPSTREAM_WORKFLOW) pr --app sonarr --plan $(UPSTREAM_OUT)/sonarr/plan.json --work $(UPSTREAM_WORK)/sonarr --base "$${BASE:-main}"
+
+upstream-pr-radarr: ## Commit the applied bump of Radarr, push radarr/upstream-<target>, open the draft PR (the workflow, UPSTREAM_TOKEN or GITHUB_TOKEN)
+	@$(UPSTREAM_WORKFLOW) pr --app radarr --plan $(UPSTREAM_OUT)/radarr/plan.json --work $(UPSTREAM_WORK)/radarr --base "$${BASE:-main}"
 
 bazarr: ## Replay Bazarr's requests against a running unarrd (UNARR_URL, UNARR_API_KEY)
 	@python3 -I scripts/bazarr-replay.py --base-url $(UNARR_URL) --api-key $(UNARR_API_KEY)
