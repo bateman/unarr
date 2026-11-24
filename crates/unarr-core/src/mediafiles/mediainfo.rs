@@ -40,14 +40,6 @@ pub fn current_schema_revision(personality: Personality) -> i64 {
     }
 }
 
-/// The oldest revision a personality still reads without probing again.
-pub fn minimum_schema_revision(personality: Personality) -> i64 {
-    match personality {
-        Personality::Radarr => RADARR_MINIMUM_MEDIA_INFO_SCHEMA_REVISION,
-        Personality::Sonarr | Personality::Lidarr => MINIMUM_MEDIA_INFO_SCHEMA_REVISION,
-    }
-}
-
 const VALID_HDR_COLOUR_PRIMARIES: &[&str] = &["bt2020"];
 const HLG_TRANSFER_FUNCTIONS: &[&str] = &["arib-std-b67"];
 const PQ_TRANSFER_FUNCTIONS: &[&str] = &["smpte2084"];

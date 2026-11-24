@@ -3,7 +3,7 @@
 //! and to a bulk update (`Ok` where Sonarr says `Accepted`).
 
 use axum::extract::State;
-use axum::http::{header, HeaderMap, StatusCode, Uri};
+use axum::http::{header, StatusCode, Uri};
 use axum::response::{IntoResponse, Response};
 use axum::Json;
 use serde_json::Value;
@@ -18,7 +18,7 @@ use crate::state::AppState;
 /// Radarr 7's `Test` action answers `TypedResults.NoContent()`, where
 /// Radarr 6 returned the string `{}`. Neither Prowlarr nor the UI reads the
 /// body; both read the status.
-fn passed(_headers: &HeaderMap) -> Response {
+fn passed() -> Response {
     StatusCode::NO_CONTENT.into_response()
 }
 
@@ -32,35 +32,21 @@ fn ok_instead_of_accepted(mut response: Response) -> Response {
 }
 
 /// `POST /notification/test`.
-pub async fn notification_test(
-    state: State<AppState>,
-    uri: Uri,
-    headers: HeaderMap,
-    body: Json<Value>,
-) -> ApiResult<Response> {
+pub async fn notification_test(state: State<AppState>, uri: Uri, body: Json<Value>) -> ApiResult<Response> {
     let Json(_) = notification_writes::test(state, uri, body).await?;
-    Ok(passed(&headers))
+    Ok(passed())
 }
 
 /// `POST /importlist/test`.
-pub async fn import_list_test(
-    state: State<AppState>,
-    uri: Uri,
-    headers: HeaderMap,
-    body: Json<Value>,
-) -> ApiResult<Response> {
+pub async fn import_list_test(state: State<AppState>, uri: Uri, body: Json<Value>) -> ApiResult<Response> {
     let Json(_) = importlist_writes::test(state, uri, body).await?;
-    Ok(passed(&headers))
+    Ok(passed())
 }
 
 /// `POST /metadata/test`.
-pub async fn metadata_test(
-    state: State<AppState>,
-    headers: HeaderMap,
-    body: Json<Value>,
-) -> ApiResult<Response> {
+pub async fn metadata_test(state: State<AppState>, body: Json<Value>) -> ApiResult<Response> {
     let Json(_) = metadata_writes::test(state, body).await?;
-    Ok(passed(&headers))
+    Ok(passed())
 }
 
 /// `PUT /indexer/bulk`.
@@ -118,23 +104,17 @@ pub async fn localization() -> Response {
 }
 
 /// `POST /indexer/test`.
-pub async fn indexer_test(
-    state: State<AppState>,
-    uri: Uri,
-    headers: HeaderMap,
-    body: Json<Value>,
-) -> ApiResult<Response> {
+pub async fn indexer_test(state: State<AppState>, uri: Uri, body: Json<Value>) -> ApiResult<Response> {
     let Json(_) = indexer_writes::test(state, uri, body).await?;
-    Ok(passed(&headers))
+    Ok(passed())
 }
 
 /// `POST /downloadclient/test`.
 pub async fn download_client_test(
     state: State<AppState>,
     uri: Uri,
-    headers: HeaderMap,
     body: Json<Value>,
 ) -> ApiResult<Response> {
     let Json(_) = downloadclient_writes::test(state, uri, body).await?;
-    Ok(passed(&headers))
+    Ok(passed())
 }

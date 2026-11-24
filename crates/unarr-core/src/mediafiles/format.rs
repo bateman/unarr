@@ -53,11 +53,6 @@ impl<'a> AudioStream<'a> {
         }
     }
 
-    /// `FormatAudioCodec` of this stream, as Sonarr names it.
-    pub fn codec(&self) -> Option<String> {
-        self.codec_for(crate::Personality::Sonarr)
-    }
-
     /// `FormatAudioCodec` of this stream, as `personality`'s original names it.
     pub fn codec_for(&self, personality: crate::Personality) -> Option<String> {
         audio_codec_for(
@@ -428,7 +423,12 @@ mod tests {
             "subtitleStreams": [{"language": "eng"}],
         });
         for raw in [&flat, &streams] {
-            assert_eq!(primary_audio(raw).codec().as_deref(), Some("EAC3"));
+            assert_eq!(
+                primary_audio(raw)
+                    .codec_for(crate::Personality::Sonarr)
+                    .as_deref(),
+                Some("EAC3")
+            );
             assert_eq!(primary_audio(raw).bitrate, 256000);
             assert_eq!(audio_channels(raw), 5.1);
             assert_eq!(audio_languages(raw), vec!["eng", "ita"]);
