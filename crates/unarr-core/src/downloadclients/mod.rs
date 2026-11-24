@@ -59,6 +59,11 @@ pub struct App {
     /// the release instead of failing the client: Radarr 7 does, Sonarr's
     /// pin does not.
     pub qbittorrent_conflict_rejects: bool,
+    /// Transmission 4's labels stand for the category everywhere: no
+    /// category subfolder, a label-less torrent matched by its folder, and
+    /// a category with a directory refused by the client's test only, not
+    /// by its settings. Radarr 7 does; Sonarr's pin does not.
+    pub transmission_full_labels: bool,
 }
 
 impl App {
@@ -85,6 +90,7 @@ pub const SONARR: App = App {
     nzbget_category: "tv",
     torrent_category: "tv-sonarr",
     qbittorrent_conflict_rejects: false,
+    transmission_full_labels: false,
 };
 
 pub const RADARR: App = App {
@@ -100,6 +106,7 @@ pub const RADARR: App = App {
     nzbget_category: "Movies",
     torrent_category: "radarr",
     qbittorrent_conflict_rejects: true,
+    transmission_full_labels: true,
 };
 
 /// The implementations this phase drives.

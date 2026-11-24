@@ -487,7 +487,8 @@ impl TransmissionSettings {
                 json!(self.category),
             ));
         }
-        if !blank(&self.directory) && !blank(&self.category) {
+        // Radarr 7 leaves this to the client's test, where labels decide.
+        if !self.app.transmission_full_labels && !blank(&self.directory) && !blank(&self.category) {
             f.push(ValidationFailure::setting(
                 self.app.category_property,
                 "Cannot use Category and Directory",
@@ -597,7 +598,7 @@ fn category_recommended(app: App, value: &str) -> ValidationFailure {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::downloadclients::SONARR;
+    use crate::downloadclients::{RADARR, SONARR};
 
     #[test]
     fn sabnzbd_requires_a_key_or_credentials() {
@@ -664,6 +665,12 @@ mod tests {
                 "Cannot use Category and Directory"
             ]
         );
+        // Radarr 7 leaves a category with a directory to the client's test.
+        let t = TransmissionSettings::from_value(
+            RADARR,
+            &json!({"host": "t", "movieCategory": "radarr", "movieDirectory": "/x"}),
+        );
+        assert!(t.validate().is_empty(), "{:?}", t.validate());
         assert!(
             TransmissionSettings::from_value(SONARR, &json!({"host": "t", "tvCategory": ".tv-sonarr"}))
                 .validate()

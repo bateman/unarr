@@ -422,7 +422,16 @@ async fn transmission_as_radarr() {
         )
         .await
         .unwrap();
-    assert_sent_as_recorded(&mock, name, &[9, 10]);
+    // Radarr 7 (Radarr/Radarr@1b7edb3240): a Transmission with labels
+    // takes the category as a label alone, so the add asks no `session-get`
+    // for the download folder and names none. The capture is Radarr 6's:
+    // its add (seq 10) without the folder is what Radarr 7 sends, read from
+    // its source until the capture is recorded again from Radarr 7.
+    let mut expected = recorded(name, &[10]);
+    if let Body::Json(body) = &mut expected[0].body {
+        body["arguments"].as_object_mut().unwrap().remove("download-dir");
+    }
+    assert_eq!(sent(&mock), expected, "{name} [10] without download-dir");
 
     // Seeding with no ratio limit of its own (mode 2), the other at 0 %;
     // the second removed from the queue.
