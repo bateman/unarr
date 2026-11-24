@@ -479,20 +479,28 @@ again.
 runs of the agent and two runs of the checks per run of the workflow
 (`ROUNDS` in `scripts/upstream-port.py`; a test holds the YAML to it).
 Nothing loops: no job starts a run of a workflow, and no push does (the
-job's token starts none). Each run of the agent keeps the limits of its
-jump (`LIMITS`), its spend cut to what the runs before it leave of
-`TOTAL_BUDGET`:
+job's token starts none). Each run of the agent keeps the minutes and
+turns of its jump (`LIMITS`) and spends at most its share of the loop's
+cap (`ROUND_BUDGETS`): the first, the port itself, the largest; the last,
+which settles what the checks found and moves the cursor, the smallest.
 
-| Jump | Runs of the agent, USD each | At most, per run of the workflow and PR | Time, at most |
-|------|-----------------------------|------------------------------------------|---------------|
-| patch, minor | 40, 40, 20 | 100 USD | 3 jobs of 4 h, and 2 runs of the checks (5 h 20 min each, the comparison included) |
-| major | 100, 100, 50 | 250 USD | 3 jobs of 6 h, and the same checks |
+| Jump | Runs of the agent, USD each | At most, per run of the loop and PR | Time, at most |
+|------|-----------------------------|--------------------------------------|---------------|
+| patch, minor | 20, 12, 8 | 40 USD | 3 jobs of 3 h 30 min (2 h of the agent each, 250 turns), and 2 runs of the checks (5 h 20 min each, the comparison included) |
+| major | 50, 30, 20 | 100 USD | 3 jobs of 5 h 30 min (4 h of the agent each, 500 turns), and the same checks |
 
-A run of `upstream.yml` may open the PRs of both personalities, and so
-spend up to twice that. The key's own monthly limit (below) bounds every
-run together. Every job has its timeout, within GitHub's six hours; a whole
+`upstream-port.yml` started alone is the first run: 20 USD for a patch or
+minor, 50 for a major. A run of `upstream.yml` may open the PRs of both
+personalities, and so spend up to twice the cap; a month with a patch or
+minor of each stays within 80 USD, and a major, which starts only by hand,
+within 100. Every job has its timeout, within GitHub's six hours; a whole
 run stays far under its limit of 35 days; each job has its own token,
 which lasts the job.
+
+**These limits are per run, not per month.** Nothing here counts what
+earlier runs spent: the true monthly cap is the one the maintainer sets on
+the key itself, in the Claude Console (below), and a run that reaches it
+stops there, its PR left as a stopped loop leaves it.
 
 **Concurrency.** One loop per PR (`upstream-loop-pr-<n>`); the called
 workflows keep their own groups (`upstream-port-pr-<n>`,

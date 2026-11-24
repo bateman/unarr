@@ -47,8 +47,8 @@ the block ``upstream-next`` at the end of the PR's body (`upstream/PORTING.md`,
 section 7, "What comes next"), a fixed set of keys whose values are checked
 here, never free text. It gives the next round: ``checks`` (with the inputs
 of `upstream-checks.yml`, checked as that workflow checks them), ``port``, or
-``stop``. Each round's spend is its share of ``TOTAL_BUDGET``
-(``round_limits``), so that a run of the workflow never allows more than that.
+``stop``. Each round's spend is its share of the loop's cap
+(``ROUND_BUDGETS``, ``round_limits``), so that a run of the workflow never allows more.
 """
 
 from __future__ import annotations
@@ -71,20 +71,24 @@ AUTHOR = ("Fabio Calefato", "fcalefato@gmail.com")
 
 # The limit of a run (PORTING.md, fixed rule 5), by the kind of jump: the
 # agent's own minutes (the job adds its set-up: a hosted runner stops a job
-# at 360), its turns and its spend.
-# First values, to review after the first runs (issue #9).
+# at 360), its turns and its spend. A run started on its own (by hand) has
+# these; its spend is round 1's share of the loop's cap below.
+# The maintainer's key has 200 USD a month in all (decided 2026-11-24): a
+# patch or minor of each personality in a month stays within 80 USD, a
+# major, started by hand only, within 100.
 LIMITS = {
-    "minor": {"minutes": 150, "turns": 400, "budget": 40},
-    "major": {"minutes": 270, "turns": 800, "budget": 100},
+    "minor": {"minutes": 120, "turns": 250, "budget": 20},
+    "major": {"minutes": 240, "turns": 500, "budget": 50},
 }
 # upstream-loop.yml: the runs of the agent in one run of the workflow, and
-# what they may spend together. Round n gets the jump's limit, or what is
-# left of the total after the rounds before it if that is less: 40, 40 and
-# 20 USD for a patch or minor, 100, 100 and 50 for a major. The YAML writes
-# out ROUNDS jobs of the agent and ROUNDS - 1 of the checks
-# (scripts/tests/test_upstream_port.py checks it).
+# what each may spend. The first has the largest share (the port itself),
+# the last the smallest (the differences the checks found, the cursor).
+# Together they are the cap of a run of the loop, per PR: 40 USD for a patch
+# or minor, 100 for a major. The YAML writes out ROUNDS jobs of the agent
+# and ROUNDS - 1 of the checks (scripts/tests/test_upstream_port.py checks it).
 ROUNDS = 3
-TOTAL_BUDGET = {"minor": 100, "major": 250}
+ROUND_BUDGETS = {"minor": (20, 12, 8), "major": (50, 30, 20)}
+TOTAL_BUDGET = {jump: sum(shares) for jump, shares in ROUND_BUDGETS.items()}
 # Minutes between the deadline the agent is given and the job's stop: what
 # fixed rule 5 asks before the limit (push, log rows, PR body).
 MARGIN = 30
@@ -163,16 +167,13 @@ def outputs_text(values: dict) -> str:
 
 def round_limits(jump: str, round_: int) -> dict:
     """The limits of the agent's run `round_` (1 to ROUNDS) of a run of
-    upstream-loop.yml: the jump's, with the spend cut to what the rounds
-    before it leave of TOTAL_BUDGET. A run started on its own (by hand) is
-    round 1."""
+    upstream-loop.yml: the jump's minutes and turns, and the round's share
+    of the loop's cap (ROUND_BUDGETS). A run started on its own (by hand)
+    is round 1."""
     if not isinstance(round_, int) or isinstance(round_, bool) or not 1 <= round_ <= ROUNDS:
         die(f"the round is from 1 to {ROUNDS}, not {round_!r}")
     limits = dict(LIMITS[jump])
-    spent = sum(round_limits(jump, r)["budget"] for r in range(1, round_))
-    limits["budget"] = min(limits["budget"], TOTAL_BUDGET[jump] - spent)
-    if limits["budget"] <= 0:
-        die(f"round {round_} of a {jump} has nothing left of {TOTAL_BUDGET[jump]} USD")
+    limits["budget"] = ROUND_BUDGETS[jump][round_ - 1]
     return limits
 
 

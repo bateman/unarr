@@ -230,16 +230,25 @@ CHECKS_BLOCK = block("next: checks", f"head: {HEAD}", "recordings: recyclarr", "
 class Rounds(unittest.TestCase):
     """What the runs of the agent in one run of upstream-loop.yml may spend."""
 
-    def test_each_round_has_its_share_and_together_no_more_than_the_total(self):
+    def test_each_round_has_its_share_and_together_no_more_than_the_cap(self):
         for jump in ("minor", "major"):
             budgets = [port.round_limits(jump, r)["budget"] for r in range(1, port.ROUNDS + 1)]
             with self.subTest(jump=jump):
-                self.assertLessEqual(sum(budgets), port.TOTAL_BUDGET[jump])
-                self.assertTrue(all(0 < b <= port.LIMITS[jump]["budget"] for b in budgets))
-                self.assertEqual(budgets[0], port.LIMITS[jump]["budget"])
-        # The values upstream/README.md gives.
-        self.assertEqual([port.round_limits("minor", r)["budget"] for r in (1, 2, 3)], [40, 40, 20])
-        self.assertEqual([port.round_limits("major", r)["budget"] for r in (1, 2, 3)], [100, 100, 50])
+                self.assertEqual(len(port.ROUND_BUDGETS[jump]), port.ROUNDS)
+                self.assertEqual(sum(budgets), port.TOTAL_BUDGET[jump])
+                self.assertTrue(all(b > 0 for b in budgets))
+                # The first run, the port itself, has the largest share; the
+                # last, which settles the checks' differences, the smallest.
+                self.assertEqual(budgets, sorted(budgets, reverse=True))
+                # A run started alone never spends more than a whole loop.
+                self.assertEqual(port.LIMITS[jump]["budget"], budgets[0])
+                self.assertLessEqual(port.LIMITS[jump]["budget"], port.TOTAL_BUDGET[jump])
+        # The caps decided on 2026-11-24, and the values upstream/README.md gives.
+        self.assertEqual(port.TOTAL_BUDGET, {"minor": 40, "major": 100})
+        self.assertEqual([port.round_limits("minor", r)["budget"] for r in (1, 2, 3)], [20, 12, 8])
+        self.assertEqual([port.round_limits("major", r)["budget"] for r in (1, 2, 3)], [50, 30, 20])
+        # Two patches or minors and a major in one month stay within the key's 200 USD.
+        self.assertLessEqual(2 * port.TOTAL_BUDGET["minor"] + port.TOTAL_BUDGET["major"], 200)
         self.assertEqual(port.round_limits("major", 3)["minutes"], port.LIMITS["major"]["minutes"])
 
     def test_a_round_out_of_the_loop_is_refused(self):
@@ -254,7 +263,7 @@ class Rounds(unittest.TestCase):
             port.main(["plan", "--pr-json", str(path), "--pr", "28", "--repository", "bateman/unarr",
                        "--helper", "/h", "--round", "3", "--github-output", str(out)])
             text = out.read_text()
-        self.assertIn("\nbudget=50\n", text)
+        self.assertIn("\nbudget=20\n", text)
         self.assertIn("\nround=3\n", text)
 
     def test_the_plan_refuses_without_the_key(self):
