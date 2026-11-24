@@ -62,6 +62,12 @@ pub fn parse(xml: &str, default_port: u16) -> anyhow::Result<HostConfig> {
         launch_browser: boolean("LaunchBrowser", true)?,
         api_key: api_key.unwrap_or_default(),
         authentication_method: match text("AuthenticationMethod") {
+            // Radarr 7's OIDC sign-in is not supported yet (#30): refuse to
+            // start, and say what to do.
+            Some(v) if v.trim().eq_ignore_ascii_case("oidc") => anyhow::bail!(
+                "AuthenticationMethod {v:?} (OIDC sign-in) is not supported yet; \
+                 set <AuthenticationMethod> in config.xml to Forms, Basic, External or None"
+            ),
             Some(v) if !v.is_empty() => AuthenticationMethod::parse(&v)
                 .ok_or_else(|| anyhow::anyhow!("unknown AuthenticationMethod {v:?}"))?,
             // Sonarr v4 defaults to Forms; older files simply have no element.
@@ -235,6 +241,25 @@ mod tests {
         .unwrap();
         assert_eq!(cfg.effective_instance_name("Sonarr"), "Sonarr 4K");
         assert_eq!(cfg.normalized_url_base(), "/sonarr");
+    }
+
+    #[test]
+    fn an_oidc_sign_in_stops_the_start_and_says_what_to_do() {
+        let err = parse(
+            "<Config><ApiKey>k</ApiKey><AuthenticationMethod>Oidc</AuthenticationMethod></Config>",
+            7878,
+        )
+        .unwrap_err()
+        .to_string();
+        assert!(err.contains("not supported yet"), "{err}");
+        assert!(err.contains("Forms"), "{err}");
+        let err = parse(
+            "<Config><ApiKey>k</ApiKey><AuthenticationMethod>Ldap</AuthenticationMethod></Config>",
+            7878,
+        )
+        .unwrap_err()
+        .to_string();
+        assert!(err.contains("unknown AuthenticationMethod"), "{err}");
     }
 
     #[test]
