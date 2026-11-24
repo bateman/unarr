@@ -207,26 +207,27 @@ class TheComparison(unittest.TestCase):
 
 
 class MainIsProtected(unittest.TestCase):
-    RULE = {"type": "pull_request", "ruleset_id": 7, "ruleset_source_type": "Repository",
-            "parameters": {"required_approving_review_count": 1}}
+    RULE = {"type": "update", "ruleset_id": 7, "ruleset_source_type": "Repository", "parameters": {}}
+    NEVER = {7: {"name": "main", "current_user_can_bypass": "never"}}
 
-    def test_an_approved_pull_request_this_token_cannot_bypass(self):
-        self.assertEqual(checks.protection_problems([self.RULE], {7: {"name": "main",
-                                                                    "current_user_can_bypass": "never"}}), [])
+    def test_updates_restricted_to_a_bypass_list_this_token_is_not_in(self):
+        self.assertEqual(checks.protection_problems([self.RULE], self.NEVER), [])
+        self.assertEqual(checks.protection_problems([{"type": "deletion", "ruleset_id": 7}, self.RULE], self.NEVER), [])
 
     def test_what_leaves_main_open(self):
-        never = {7: {"name": "main", "current_user_can_bypass": "never"}}
         cases = {
-            "no rule": ([], never),
-            "rules not read": ({"message": "Not Found"}, never),
-            "a pull request without approval": ([{**self.RULE, "parameters": {"required_approving_review_count": 0}}],
-                                                never),
+            "no rule": ([], self.NEVER),
+            "rules not read": ({"message": "Not Found"}, self.NEVER),
+            "only a pull request asked": ([{"type": "pull_request", "ruleset_id": 7,
+                                            "parameters": {"required_approving_review_count": 1}}], self.NEVER),
+            "only other rules": ([{"type": "deletion", "ruleset_id": 7}, {"type": "non_fast_forward"}], self.NEVER),
             "a token that bypasses it": ([self.RULE], {7: {"name": "main", "current_user_can_bypass": "always"}}),
             "a token that bypasses it by a PR": ([self.RULE], {7: {"name": "main",
                                                                    "current_user_can_bypass": "pull_requests_only"}}),
+            "a token exempt": ([self.RULE], {7: {"name": "main", "current_user_can_bypass": "exempt"}}),
             "a bypass not said": ([self.RULE], {7: {"name": "main"}}),
             "a ruleset not read": ([self.RULE], {}),
-            "only other rules": ([{"type": "deletion", "ruleset_id": 7}], never),
+            "no ruleset id": ([{"type": "update"}], self.NEVER),
         }
         for what, (rules, rulesets) in cases.items():
             with self.subTest(what):

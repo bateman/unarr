@@ -316,7 +316,8 @@ def start_original(app: str, port: int, logfile: Path, repo: Path | None = None,
     """The pinned original of `repo`, on a copy of its fixture, through the
     fixture script (`shell`): the one way the repository runs an original."""
     repo = repo or WORK
-    env = dict(os.environ, **{f"{app.upper()}_PORT": str(port)})
+    # No network but the loopback: the mock answers for the Servarr services.
+    env = dict(os.environ, **{f"{app.upper()}_PORT": str(port)}, SHELL_VIA_MOCK="1")
     if cache is not None:
         env["UNARR_CACHE"] = str(cache)
     p = Process(["bash", str(repo / "scripts" / f"{app}-fixture.sh"), "shell"], logfile, env, repo)
@@ -347,8 +348,21 @@ def start_unarrd(unarrd: Path, data: Path, logfile: Path) -> Process:
     return p
 
 
-def fetch_recyclarr(work: Path) -> Path:
-    """Recyclarr's release, its SHA-256 checked, and TRaSH-Guides at its commit."""
+def recyclarr_dir() -> Path:
+    return cache_root() / "upstream-checks" / "recyclarr"
+
+
+def old_pin_tree() -> Path:
+    return cache_root() / "upstream-checks" / "main"
+
+
+def old_pin_cache(app: str) -> Path:
+    return cache_root() / "upstream-checks" / f"main-{app}"
+
+
+def prepare_recyclarr(work: Path) -> Path:
+    """`prepare`, with the network: Recyclarr's release, its SHA-256 checked,
+    and TRaSH-Guides at its commit."""
     work.mkdir(parents=True, exist_ok=True)
     tarball = work / RECYCLARR_ASSET
     if not tarball.exists() or sha256_file(tarball) != RECYCLARR_SHA256:
@@ -381,9 +395,20 @@ def fetch_recyclarr(work: Path) -> Path:
     return binary
 
 
+def recyclarr_ready(work: Path) -> Path:
+    """`run`, with no network: what `prepare` left, checked again."""
+    tarball, binary, guide = work / RECYCLARR_ASSET, work / "bin" / "recyclarr", work / "guide"
+    if not tarball.is_file() or sha256_file(tarball) != RECYCLARR_SHA256 or not binary.is_file():
+        die("Recyclarr is not prepared (make upstream-checks-prepare, with the network)")
+    head = subprocess.run(["git", "-C", str(guide), "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip()
+    if head != TRASH_GUIDES_COMMIT:
+        die("TRaSH-Guides is not prepared at its commit (make upstream-checks-prepare)")
+    return binary
+
+
 def record_recyclarr(app: str, out: Path, logs: Path) -> dict:
-    work = cache_root() / "upstream-checks" / "recyclarr"
-    binary = fetch_recyclarr(work)
+    work = recyclarr_dir()
+    binary = recyclarr_ready(work)
     dest = out / "recordings" / recording_path(RECORDINGS["recyclarr"], app)
     dest.parent.mkdir(parents=True, exist_ok=True)
     port = original_port(app)
@@ -403,15 +428,9 @@ def record_recyclarr(app: str, out: Path, logs: Path) -> dict:
 def old_pin(app: str, request: str, wait: int, out: Path, logs: Path) -> dict:
     """The request a port named, asked of main's pin at once and after the
     wait, and the original's log file (PORTING.md, sections 2 and 10)."""
-    tree = cache_root() / "upstream-checks" / "main"
-    subprocess.run(["git", "worktree", "remove", "--force", str(tree)], cwd=WORK, capture_output=True)
-    shutil.rmtree(tree, ignore_errors=True)
-    code = run_logged(["git", "fetch", "-q", "origin", "main"], logs / "old-pin.log")
-    if code == 0:
-        code = run_logged(["git", "worktree", "add", "-q", "--detach", str(tree), "FETCH_HEAD"], logs / "old-pin.log")
-    if code != 0:
-        return {"status": "failed", "exit": code}
-    cache = cache_root() / "upstream-checks" / f"main-{app}"
+    tree, cache = old_pin_tree(), old_pin_cache(app)
+    if not (tree / "upstream" / f"{app}.pin").is_file():
+        die("main's worktree is not prepared (make upstream-checks-prepare, with the network)")
     port = original_port(app)
     dest = out / "old-pin"
     dest.mkdir(parents=True, exist_ok=True)
@@ -428,6 +447,47 @@ def old_pin(app: str, request: str, wait: int, out: Path, logs: Path) -> dict:
     subprocess.run(["git", "worktree", "remove", "--force", str(tree)], cwd=WORK, capture_output=True)
     return {"status": "ok", "request": request, "wait": wait, "version": pinned,
             "statuses": [first[0], later[0]]}
+
+
+def prepare_old_pin(app: str, logs: Path) -> int:
+    """`prepare`, with the network: a worktree of main, and the tarball of
+    its pin, downloaded and checked by its fixture script (`ui`, which runs
+    nothing of it), so that `run` starts the old pin with no network."""
+    tree = old_pin_tree()
+    subprocess.run(["git", "worktree", "remove", "--force", str(tree)], cwd=WORK, capture_output=True)
+    shutil.rmtree(tree, ignore_errors=True)
+    code = run_logged(["git", "fetch", "-q", "origin", "main"], logs / "prepare-old-pin.log")
+    if code == 0:
+        code = run_logged(["git", "worktree", "add", "-q", "--detach", str(tree), "FETCH_HEAD"],
+                          logs / "prepare-old-pin.log")
+    if code == 0:
+        code = run_logged(["bash", str(tree / "scripts" / f"{app}-fixture.sh"), "ui"], logs / "prepare-old-pin.log",
+                          env=dict(os.environ, UNARR_CACHE=str(old_pin_cache(app))), cwd=tree)
+    return code
+
+
+def cmd_prepare(args) -> int:
+    """What `run` needs from the network, fetched first: `run` then goes
+    without it. A failure is logged, and `run` reports the check failed."""
+    global WORK
+    if os.environ.get("UNARR_NO_ORIGINAL"):
+        die("UNARR_NO_ORIGINAL is set: this job may not run an original")
+    WORK = Path(args.repo).resolve()
+    checks = json.loads(args.checks)
+    out = Path(args.out)
+    shutil.rmtree(out, ignore_errors=True)
+    logs = out / "logs"
+    logs.mkdir(parents=True)
+    if "recyclarr" in checks.get("recordings", []):
+        try:
+            prepare_recyclarr(recyclarr_dir())
+        except (ChecksError, OSError, subprocess.SubprocessError) as err:
+            log(f"prepare recyclarr: {err}")
+    if checks.get("old_pin"):
+        code = prepare_old_pin(args.app, logs)
+        if code != 0:
+            log(f"prepare old pin: exit {code}, see {logs / 'prepare-old-pin.log'}")
+    return 0
 
 
 def http_audit(app: str, unarrd: Path, out: Path, logs: Path) -> dict:
@@ -521,8 +581,7 @@ def cmd_run(args) -> int:
         die(f"unknown app {app!r}")
     unarrd = Path(args.unarrd) if args.unarrd else WORK / "target" / "release" / "unarrd"
     out, logs = Path(args.out), Path(args.out) / "logs"
-    shutil.rmtree(out, ignore_errors=True)
-    logs.mkdir(parents=True)
+    logs.mkdir(parents=True, exist_ok=True)
     head = subprocess.run(["git", "rev-parse", "HEAD"], cwd=WORK, capture_output=True, text=True).stdout.strip()
     pin = read_pin(WORK / "upstream" / f"{app}.pin")
     report = {"app": app, "head": head, "version": pin.get("version", ""), "checks": {}}
@@ -564,12 +623,12 @@ def cmd_run(args) -> int:
 
 # --- main is protected from the workflows' tokens -----------------------------
 
-# A token that may write contents can push to main and merge a PR through the
-# API unless a ruleset stops it. The workflows that write (the port's agent,
-# apply) start only when main has a rule that asks for a pull request with at
-# least one approval, in a ruleset that this token cannot bypass: the job's
-# token cannot approve a PR (Settings > Actions > General, "Allow GitHub
-# Actions to create and approve pull requests", off), so it can merge none.
+# A token that may write contents can push to main, and merge a PR, through
+# the API, unless a ruleset stops it. The workflows that write (the port's
+# agent, apply) start only when main has the rule "Restrict updates" (`update`:
+# only who is in the ruleset's bypass list updates the branch) in an active
+# ruleset that this token cannot bypass. The maintainer, in the bypass list,
+# merges as before; no approval is asked of anyone (decided 2026-11-24).
 
 
 def protection_problems(rules: list, rulesets: dict) -> list[str]:
@@ -579,23 +638,18 @@ def protection_problems(rules: list, rulesets: dict) -> list[str]:
         return ["the rules of main could not be read"]
     found = []
     for rule in rules:
-        if not isinstance(rule, dict) or rule.get("type") != "pull_request":
-            continue
-        params = rule.get("parameters") or {}
-        count = params.get("required_approving_review_count")
-        if not isinstance(count, int) or isinstance(count, bool) or count < 1:
-            found.append("a pull_request rule asks for no approval")
+        if not isinstance(rule, dict) or rule.get("type") != "update":
             continue
         ruleset = rulesets.get(rule.get("ruleset_id"))
         if not isinstance(ruleset, dict):
-            found.append(f"the ruleset {rule.get('ruleset_id')!r} of a pull_request rule could not be read")
+            found.append(f"the ruleset {rule.get('ruleset_id')!r} of the rule \"Restrict updates\" could not be read")
             continue
         bypass = ruleset.get("current_user_can_bypass")
         if bypass != "never":
             found.append(f"the ruleset {ruleset.get('name')!r}: this token can bypass it ({bypass!r})")
             continue
         return []
-    return found or ["no active ruleset asks for a pull request on main"]
+    return found or ["no active ruleset on main has the rule \"Restrict updates\""]
 
 
 def github_get(path: str, token: str) -> object:
@@ -614,7 +668,7 @@ def cmd_main_protected(args) -> int:
         die("GITHUB_REPOSITORY and GH_TOKEN are needed")
     try:
         rules = github_get(f"/repos/{repository}/rules/branches/main", token)
-        ids = {r.get("ruleset_id") for r in rules if isinstance(r, dict) and r.get("type") == "pull_request"} \
+        ids = {r.get("ruleset_id") for r in rules if isinstance(r, dict) and r.get("type") == "update"} \
             if isinstance(rules, list) else set()
         rulesets = {i: github_get(f"/repos/{repository}/rulesets/{int(i)}", token)
                     for i in ids if isinstance(i, int)}
@@ -623,12 +677,11 @@ def cmd_main_protected(args) -> int:
     problems = protection_problems(rules, rulesets)
     if problems:
         print("main is not protected from this workflow's token, which may write: "
-              + "; ".join(problems) + ". Set a ruleset on main (Settings > Rules > Rulesets) that requires a pull "
-              "request with at least one approval, with no bypass for GitHub Actions or this token, and keep "
-              "\"Allow GitHub Actions to create and approve pull requests\" off (Settings > Actions > General). "
-              "upstream/README.md says why.", file=sys.stderr)
+              + "; ".join(problems) + ". Add a branch ruleset on main with \"Restrict updates\", active, with "
+              "only the Repository admin role in its bypass list (upstream/README.md, \"What the maintainer "
+              "sets\").", file=sys.stderr)
         return 1
-    print("main asks for an approved pull request, and this token cannot bypass it")
+    print("main restricts updates to its bypass list, and this token cannot bypass it")
     return 0
 
 
@@ -1057,6 +1110,11 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--replays", default="false")
     p.add_argument("--old-pin-request", default="")
     p.add_argument("--old-pin-wait", default="0")
+    q = sub.add_parser("prepare", help="what the checks need from the network, before `run` goes without it")
+    q.add_argument("--repo", default=str(REPO), help="the checkout of the port's branch (default: this one)")
+    q.add_argument("--app", required=True)
+    q.add_argument("--checks", required=True, help="the JSON plan printed")
+    q.add_argument("--out", required=True)
     r = sub.add_parser("run", help="the job without secrets: run the checks")
     r.add_argument("--app", required=True)
     r.add_argument("--checks", required=True, help="the JSON plan printed")
@@ -1071,9 +1129,10 @@ def main(argv: list[str] | None = None) -> int:
     a.add_argument("--head", required=True, help="the commit the checks ran at")
     a.add_argument("--comment", required=True, help="where to write the PR comment")
     a.add_argument("--run-url", default="")
-    sub.add_parser("main-protected", help="refuse unless main is protected from this token (GH_TOKEN)")
+    sub.add_parser("main-protected", help="refuse unless main restricts updates to a bypass list this token "
+                   "(GH_TOKEN) is not in")
     args = ap.parse_args(argv)
-    return {"plan": cmd_plan, "run": cmd_run, "apply": cmd_apply,
+    return {"plan": cmd_plan, "prepare": cmd_prepare, "run": cmd_run, "apply": cmd_apply,
             "main-protected": cmd_main_protected}[args.cmd](args)
 
 

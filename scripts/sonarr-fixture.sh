@@ -317,6 +317,10 @@ cmd_ui() {
 cmd_shell() {
     prepare_dirs
     start_mock
+    # SHELL_VIA_MOCK=1: the mock is the original's proxy, as in `golden`,
+    # for a run with no network (scripts/upstream-checks.py): the Servarr
+    # services answer from tests/fixtures/metadata instead of failing.
+    [ "${SHELL_VIA_MOCK:-0}" = 1 ] && MOCK_IS_PROXY=1
     start_on_fixture_copy
     log "Sonarr running at http://127.0.0.1:$SONARR_PORT with API key $API_KEY; Ctrl-C to stop"
     wait "$SONARR_PID"

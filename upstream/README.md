@@ -277,24 +277,8 @@ other.
 **Authorship.** The commit is authored and committed as `CLAUDE.md`
 says, with no trailer; the title and the body name no tool.
 
-**What the maintainer sets in the repository:**
-
-- The secret `UPSTREAM_TOKEN`: a fine-grained personal access token (or
-  a GitHub App's) for this repository only, with *Contents* and *Pull
-  requests* read and write. `publish-<app>` pushes and opens the PR with
-  it, so CI starts on the PR; it reaches only that step. Without it the
-  job pushes the branch with its own token and stops there: the run's
-  summary gives the link to open the PR, and the title, the body and the
-  first comment are in the artifact `bump-<app>` (`pr-title.txt`,
-  `pr-body.md`, `pr-comment.md`); the next runs find the branch and do
-  nothing until its PR is open.
-- *Settings, Actions, General, Workflow permissions*: "Allow GitHub
-  Actions to create and approve pull requests" stays **off**. The job's
-  token never opens a PR, and with that setting on it could also approve
-  one, which the port's workflow must not be able to do. Each job asks
-  for its own permissions, so the token's default can stay read-only.
-- The labels `patch` and `minor` are created at their first use (with
-  `UPSTREAM_TOKEN`); `major` exists.
+**What the maintainer sets**: the table of "What the maintainer sets",
+below, for the three workflows.
 
 What a later step hooks on: the outputs of `publish-<app>` (`pr`,
 `branch`, `app`, `target`, `jump`, `url`) and the artifacts of the run
@@ -352,20 +336,21 @@ started on request from the Actions tab with the PR's number
 | Job | Permissions | What it does |
 |-----|-------------|--------------|
 | `plan` | `contents: read`, `pull-requests: read` | refuses a PR that is not a port's of this repository into `main`, and inputs out of shape (`make upstream-checks-plan`) |
-| `run` | none | the PR's head, `make ui`, `make build`, then the checks in the order of section 10 (`make upstream-checks-run`): the originals, Recyclarr 8.8.1 (SHA-256 checked) and TRaSH-Guides at its commit run here, as a user of their own (`originals`: no sudo, not in the `docker` group, the runner's home closed to it; the step checks it cannot read the runner's processes). No secret, no credential left in git, caches restored and never saved. Hands `upstream-checks-results` (recordings, reports, `report.json`, links and special files dropped) and `upstream-checks-logs` on as artifacts |
+| `run` | none | the PR's head, `make ui`, `make build`; then, through `scripts/run-unprivileged.sh` (as `upstream.yml` runs its recording), as the user `unarr-checks`: `make upstream-checks-prepare` with the network (Recyclarr 8.8.1, SHA-256 checked; TRaSH-Guides at its commit; `main` and the tarball of its pin, checked by its fixture script: nothing of these runs here), then `make upstream-checks-run` with no network but the loopback: the checks in the order of section 10, the originals started with `SHELL_VIA_MOCK=1`, so that the mock answers for the Servarr services as it does when recording. No secret, no credential left in git, caches restored and never saved. Hands `upstream-checks-results` (recordings, reports, `report.json`; links and special files dropped) and `upstream-checks-logs` on as artifacts |
 | `apply` | `contents: write`, `pull-requests: write` | refuses unless `main` is protected from its token (`make upstream-main-protected`, below); `main`'s script reads the results as untrusted (`make upstream-checks-apply`): only the files it expects, at their paths, regular, of a sane size, JSON where JSON, every value it prints checked (`checked_file` of `pin-bump.py`); commits a recording whose test compares answers (one commit each) and the comparison (one commit), on the commit the checks ran at; pushes without force; comments the report on the PR |
 
-Why a user of their own: on a hosted runner the runner's user has `sudo`
+Why a user of its own: on a hosted runner the runner's user has `sudo`
 without a password and the docker socket, so it is root in all but name.
 From root, the runtime token the runner holds for caches and artifacts
 can be read from its process even in a job with no permission, and a cache
 entry written with it in `main`'s scope would reach CI, which restores
 Rust's cache and builds the published image from GitHub's cache. What
 counts is who can write a cache, not which step saves one; so the
-originals run where they cannot reach that token. Not verified here: that
-a hosted runner keeps no other way from that user to the runner (the step
-checks the `environ` of the runner's processes, `sudo` and the docker
-socket, and prints `kernel.yama.ptrace_scope`).
+originals run as a user that is not root and cannot become it
+(`run-unprivileged.sh`: no `sudo`, `docker` or `adm` group,
+`no_new_privs`), and so cannot read another user's processes, the
+runner's among them; the runner's home is closed to it. Not verified on a
+hosted runner, only on a container of the same Ubuntu.
 
 What it leaves: the download clients' captures, whose test follows their
 sequence numbers and info hashes, and any recording a job could commit
@@ -417,12 +402,11 @@ number, its branch, the limits); the PR's own text never enters it.
 - **main.** A token with `contents: write` can push to `main` and merge a
   PR through the API. Before the agent starts, and in `apply` of the
   checks before any push, `make upstream-main-protected` asks GitHub for
-  the rules of `main` and refuses to go on unless a ruleset there
-  requires a pull request with at least one approval and the job's token
-  cannot bypass it (`current_user_can_bypass` is `never`). The job's
-  token cannot give that approval while "Allow GitHub Actions to create
-  and approve pull requests" is off, a setting a job cannot read: keep it
-  off.
+  the rules of `main` and refuses to go on unless an active ruleset there
+  has "Restrict updates" (only who is in its bypass list updates the
+  branch) and the job's token cannot bypass it (`current_user_can_bypass`
+  is `never`). No approval is asked of anyone: the maintainer, in the
+  bypass list, merges as before.
 - **CI.** Pushes made with the job's own token start no workflow: CI runs
   on the port's commits at the next push of a person (or "Update branch"
   on the PR). No stronger token is given to the agent for this.
@@ -431,24 +415,56 @@ number, its branch, the limits); the PR's own text never enters it.
   what was not pushed, and the next run starts from the PR's table and
   the log (`PORTING.md`, section 1, "Decisions without their log row").
 
-### What the maintainer sets
+## What the maintainer sets
 
-- **The secret** (Settings > Secrets and variables > Actions):
-  `ANTHROPIC_API_KEY`, a key made for this workflow alone, in a workspace
-  with a monthly spend limit (Claude Console). Not the account's OAuth
-  token: the agent reads untrusted upstream text, and its own process
-  holds the key, so an injected instruction could get the key out; a
-  dedicated key with a limit bounds what that costs, and can be revoked
-  alone.
-- **Settings > Actions > General:** "Allow GitHub Actions to create and
-  approve pull requests" off; workflow permissions "Read repository
-  contents" (each job asks for what it needs).
-- **A ruleset on `main`** (Settings > Rules > Rulesets), active:
-  "Require a pull request before merging" with at least one required
-  approval, and no bypass for GitHub Actions or a role the job's token
-  has. A single maintainer who merges their own PRs adds the Repository
-  admin role to the bypass list, in "pull requests only" mode: that
-  bypass is the maintainer's, not the job token's. Without such a
-  ruleset both workflows refuse to write.
-- **A ruleset on `sonarr/upstream-*` and `radarr/upstream-*`** that blocks
-  force pushes and deletion: `verify` sees a rewrite only after it.
+For the three workflows (`upstream.yml`, `upstream-checks.yml`,
+`upstream-port.yml`). With nothing set, `upstream.yml` goes up to the
+branch of the port, pushed; `upstream-checks.yml` runs the checks and
+leaves their report and recordings in its artifact, committing nothing;
+`upstream-port.yml` does not start.
+
+| What | Where | For | Without it |
+|------|-------|-----|------------|
+| A ruleset on `main` with "Restrict updates" (steps below) | Settings, Rules, Rulesets | `upstream-port.yml` and `apply` of `upstream-checks.yml`: their token may write contents, and with it push to `main` or merge a PR through the API; the rule keeps it off `main`, and `make upstream-main-protected` checks it | the agent does not start; `apply` commits and pushes nothing (the report stays in the artifact) |
+| The secret `ANTHROPIC_API_KEY`: a key for this alone, in a workspace with a monthly spend limit (Claude Console), not the account's OAuth token | Settings, Secrets and variables, Actions | `upstream-port.yml`: the agent. It reads untrusted upstream text and its own process holds the key, so an injected instruction could get the key out: a key of its own with a limit bounds the cost, and is revoked alone | the agent does not start |
+| The secret `UPSTREAM_TOKEN` (optional): a fine-grained token for this repository only, *Contents* and *Pull requests* read and write | Settings, Secrets and variables, Actions | `upstream.yml`, in `publish-<app>` alone (no agent, nothing untrusted runs there): it opens the draft PR, and CI starts on it | the branch is pushed with the job's token and the PR is opened by hand, from the link in the run's summary |
+
+Nothing else needs setting:
+
+- "Allow GitHub Actions to create and approve pull requests" (Settings,
+  Actions, General): leave it off. No workflow needs it, and on it would
+  let a job's token approve a PR; with "Restrict updates" on `main` an
+  approval opens no way to `main`.
+- The workflow permissions' default: each job asks for its own.
+- The labels `patch` and `minor`: created at their first use; `major`
+  exists.
+- Rules on the ports' branches: none needed. `verify`, after the agent,
+  fails the run on a branch rewritten.
+
+**The ruleset on `main`**, from the repository's page:
+
+1. *Settings*, then in the sidebar *Rules*, *Rulesets*; *New ruleset*,
+   *New branch ruleset*.
+2. *Ruleset name*: `main`. *Enforcement status*: *Active*.
+3. *Bypass list*: *Add bypass*, choose *Repository admin*, *Add
+   selected* (mode *Always allow*). Nothing else: not *Maintain*, not
+   *Write*, no app.
+4. *Target branches*: *Add target*, *Include default branch*.
+5. *Branch rules*: tick *Restrict updates*; leave *Restrict deletions*
+   and *Block force pushes* ticked. Nothing else.
+6. *Create*.
+
+The test after it: from a clone,
+`GITHUB_REPOSITORY=bateman/unarr GH_TOKEN=$(gh auth token) make upstream-main-protected`
+must refuse, naming the ruleset and the bypass `'always'`: that is the
+maintainer's own token, in the bypass list. The first run of either
+workflow must print, in its first steps, "main restricts updates to its
+bypass list, and this token cannot bypass it".
+
+Not verified: GitHub's page says that "Restrict updates" lets only those
+in the bypass list *push* to the branch; that it also refuses the merge
+of a PR through the API by the job's token is how a merge works (it
+updates the branch), not something the page says. Should it not, the
+alternative that asks no approval of anyone is the classic branch
+protection's "Lock branch" on `main` (the branch read-only), with
+administrators left free to bypass it.
