@@ -23,6 +23,10 @@ Two commands, run in this order:
 Then the port: [`PORTING.md`](PORTING.md) is where it starts, and says how
 it goes from there to the PR.
 
+The workflow `upstream` runs both every Monday and on request, and opens
+the draft PR the port starts from: see
+[The workflow: up to the draft PR](#the-workflow-up-to-the-draft-pr).
+
 ## `make bump-<app>`
 
 ```sh
@@ -199,6 +203,136 @@ log): try again later, nothing is made up in its place.
   and the contract tests compare only the installed release's shape
   (`Mode::InstalledUpdate`).
 
+## The workflow: up to the draft PR
+
+`.github/workflows/upstream.yml` runs every Monday morning and on request
+(*Run workflow*: the personality, and a target `X.Y.Z.BUILD` or nothing
+for the rule of issue #9). It ends with the draft PR open: the port's
+agent, and the checks that need the original running, are workflows of
+their own, joined to this one in a later step.
+
+Per personality, a chain of jobs; the two chains are the same steps and
+an error in one does not stop the other:
+
+| Job | Permissions | What it does |
+|-----|-------------|--------------|
+| `plan-<app>` | `contents: read`, `pull-requests: read` | `make upstream-plan-<app>`: the triage (the release flags from the API with the job's token), then what to do (below); when it is a bump, `make bump-<app> STEPS=fetch TARGET=<target>` downloads and checks the tarball, without running it. Hands on the plan, the fetched work directory and the tree (`git archive`) |
+| `announce-<app>` | `issues: write` | a new major on the schedule: `make upstream-announce-<app>` opens the issue "<App> <version> is out" with the triage's counts, unless it is open |
+| `record-<app>` | none | `make bump-<app> STEPS=record`, through `scripts/run-unprivileged.sh` (below). No checkout (the tree comes from `plan-<app>`), no token, no secret, no cache. Hands on the work directory without the original |
+| `test-<app>` | none | the tree of `plan-<app>` as a local commit, `make upstream-assemble-<app>`, the other personality's web UI and `make bump-<app> STEPS=apply` as the runner's user (nothing of the new tarball runs); then, through `scripts/run-unprivileged.sh`, `cargo fetch` as a user of its own with the network and `make bump-<app> STEPS=test` as that user without it: the contract tests run the ffprobe the new original ships. Hands on `tests.json` and the logs, untrusted |
+| `publish-<app>` | `contents: write`, `pull-requests: read` | `make upstream-assemble-<app>` (with the tests' results, checked), `make upstream-apply-<app>` (the extracted original removed at once: nothing of it runs here) and `make bump-<app> STEPS=summary`, then `make upstream-pr-<app>`: the commit `Pin <App> <target>`, the branch `<app>/upstream-<target>`, and, with `UPSTREAM_TOKEN`, the draft PR into the default branch with the short body of `PORTING.md` (section 1, point 4), the label of the jump (`patch`, `minor`, `major`, created when missing) and the bump's summary as its first comment. Hands on the work directory as the artifact `bump-<app>` |
+
+What `plan` decides (`scripts/upstream-workflow.py`, tested in
+`scripts/tests/test_upstream_workflow.py`), in this order:
+
+1. **Off for the schedule.** The weekly run follows the personalities of
+   `UPSTREAM_SCHEDULED` in the `Makefile`: Radarr alone, until the trial
+   on Radarr is merged (issue #9, "then enable Sonarr"); adding `sonarr`
+   there enables it. A manual start runs either.
+2. **No new release**: nothing, green.
+3. **A port already open**: an open PR of this repository from a
+   `<app>/upstream-*` branch, whatever its target: nothing, green, the
+   PR named ("port already open: #28"). Issue #9 never opens a second PR
+   for a personality; the newer release comes with the port or after it.
+4. **The branch `<app>/upstream-<target>` exists** with no open PR:
+   nothing pushed over it, green, named.
+5. **A new major on the schedule**: the issue, and nothing else; the port
+   of a major starts by hand. A manual start bumps a major as any other.
+6. Otherwise **the bump**, and the draft PR.
+
+`publish-<app>` asks 3 and 4 again just before it pushes, and pushes
+without force, so two runs never open two PRs for one personality; each
+`publish-<app>` and `announce-<app>` is one at a time per personality
+(`concurrency`).
+
+**The original runs alone.** `record-<app>` runs the binary the planning
+job fetched, and `test-<app>` the ffprobe it ships (the contract tests
+use it); both trust nothing that job does not hand them: `record` checks
+the tarball against `bump.json` before it starts, `apply` downloads it
+again and checks it. On a GitHub-hosted runner the job's user has sudo and the docker
+socket: what runs as that user is root, and can read from the runner's
+memory the token that saves caches and artifacts, which `permissions: {}`
+does not take away; a scheduled run writes the caches of the default
+branch, which `ci.yml` builds the published image from. So
+`sudo scripts/run-unprivileged.sh <user> <command>`, after every step
+that needs root, runs the recording and the tests as a user of its own (created when
+missing, refused when it is in `sudo`, `docker`, `adm` or another group
+that leads to root), with a clean environment and `no_new_privs` (no
+sudo, no setuid binary: it cannot become root again), in a network
+namespace where only the loopback is up (the mock answers there; neither
+needs the network); every process of that user is killed when it ends.
+`--network` keeps the runner's network, for a step that must reach a
+real service (`cargo fetch`, before anything of the tarball runs); the
+rest is the same. The job that writes runs nothing of the new tarball and
+reads what it is handed as untrusted: `assemble` puts `bump.json`,
+`triage.json` and `triage.md` of the planning job over whatever the
+recording left and checks every value of `tests.json` the summary prints,
+`apply` checks before it copies and downloads the tarball again (what it
+extracts is removed at once; the fixture scripts extract the whole
+tarball, and only the web UI is needed), `summary` checks every value it
+prints from the recording, and `pr` commits only the files the bump
+writes (the pin, the goldens, the schemas, the vectors), stopping on any
+other.
+
+**Authorship.** The commit is authored and committed as `CLAUDE.md`
+says, with no trailer; the title and the body name no tool.
+
+**What the maintainer sets in the repository:**
+
+- The secret `UPSTREAM_TOKEN`: a fine-grained personal access token (or
+  a GitHub App's) for this repository only, with *Contents* and *Pull
+  requests* read and write. `publish-<app>` pushes and opens the PR with
+  it, so CI starts on the PR; it reaches only that step. Without it the
+  job pushes the branch with its own token and stops there: the run's
+  summary gives the link to open the PR, and the title, the body and the
+  first comment are in the artifact `bump-<app>` (`pr-title.txt`,
+  `pr-body.md`, `pr-comment.md`); the next runs find the branch and do
+  nothing until its PR is open.
+- *Settings, Actions, General, Workflow permissions*: "Allow GitHub
+  Actions to create and approve pull requests" stays **off**. The job's
+  token never opens a PR, and with that setting on it could also approve
+  one, which the port's workflow must not be able to do. Each job asks
+  for its own permissions, so the token's default can stay read-only.
+- The labels `patch` and `minor` are created at their first use (with
+  `UPSTREAM_TOKEN`); `major` exists.
+
+What a later step hooks on: the outputs of `publish-<app>` (`pr`,
+`branch`, `app`, `target`, `jump`, `url`) and the artifacts of the run
+(`plan-<app>`, `bump-<app>`).
+
+Locally, with a releases file in place of the API and GitHub asked
+anonymously (the repository is public):
+
+```sh
+GITHUB_REPOSITORY=bateman/unarr EVENT=schedule make upstream-plan-radarr RELEASES=<releases.json>
+```
+
+### Choices, and the alternatives left aside
+
+- **Two chains of jobs written once, by YAML anchors.** A matrix shares
+  one set of job outputs between its legs and joins them at every
+  `needs`; a reusable workflow is a second file. Left aside: both.
+- **The tarball is fetched by the planning job**, with the job's read
+  token for the API, and handed on: the recording job has no token at all,
+  and the API's anonymous limit is shared by every job of the runner's
+  address.
+- **The recording runs with no network, not only with no secret.** The
+  job has nothing to steal, but a runner's caches are shared with the
+  other workflows of the branch: a binary that could reach the network
+  and the runner's credentials could poison them. Left aside: trusting
+  the mock as the original's proxy alone, which the original can ignore.
+- **The tests in a job without a token.** The contract tests run the
+  ffprobe of the new tarball. Left aside: running them in the job that
+  writes, as the runner's user (root, the write token, the default
+  branch's caches), or without that ffprobe, when the goldens were
+  recorded with it and the runner's own, if any, can read media apart.
+- **The PR opened only with `UPSTREAM_TOKEN`.** Left aside: the job's
+  own token, which needs the setting that also lets a job's token
+  approve a PR, and opens a PR on which CI does not start.
+- **Any open port of the personality stops the run**, not only one for
+  the same target: issue #9 ("A PR for that personality is still open:
+  add to it; do not open a second").
+
 ## The checks with the original, and the port's agent
 
 Two workflows act on a port's PR (`<app>/upstream-<version>`), each
@@ -318,4 +452,3 @@ number, its branch, the limits); the PR's own text never enters it.
   ruleset both workflows refuse to write.
 - **A ruleset on `sonarr/upstream-*` and `radarr/upstream-*`** that blocks
   force pushes and deletion: `verify` sees a rewrite only after it.
-
