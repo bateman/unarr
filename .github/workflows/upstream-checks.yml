@@ -1,0 +1,218 @@
+name: upstream-checks
+
+# What a port's PR needs an original running for (issue #9, section 4;
+# upstream/PORTING.md, section 10): the Recyclarr exchange recorded again,
+# the old pin asked for a golden that differs by timing, the HTTP audit,
+# the comparison with the originals, the replays. Started on request, on a
+# port's PR (<app>/upstream-<version>); the weekly workflow will call it.
+#
+# The originals are binaries nobody vetted: they run only in `run`, which
+# has no permission, no secret and no saved cache, and hands its results on
+# as an artifact. `apply`, which may write, runs main's scripts on that
+# artifact as untrusted data: only the files it expects, checked; one commit
+# per recording, one for the comparison; the report as a PR comment.
+
+on:
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: "The port's PR number"
+        required: true
+        type: number
+      recordings:
+        description: "Recordings to make again, comma-separated: recyclarr (transmission and sabnzbd are left to a session), or none"
+        type: string
+        default: recyclarr
+      http_audit:
+        description: "Run make http-audit"
+        type: boolean
+        default: true
+      compare:
+        description: "make compare-originals: none, real (about an hour), scaled, both"
+        type: choice
+        options: [none, real, scaled, both]
+        default: real
+      replays:
+        description: "Run the Bazarr, Prowlarr and Recyclarr replays against Unarr"
+        type: boolean
+        default: true
+      old_pin_request:
+        description: "A golden that differs by timing: the API request to ask of main's pin (/api/v3/...), or empty"
+        type: string
+        default: ""
+      old_pin_wait:
+        description: "Seconds between the two askings of that request"
+        type: number
+        default: 0
+  workflow_call:
+    inputs:
+      pr: { required: true, type: number }
+      recordings: { type: string, default: recyclarr }
+      http_audit: { type: boolean, default: true }
+      compare: { type: string, default: real }
+      replays: { type: boolean, default: true }
+      old_pin_request: { type: string, default: "" }
+      old_pin_wait: { type: number, default: 0 }
+    secrets:
+      UPSTREAM_BOT_TOKEN: { required: false }
+
+permissions: {}
+
+# One run of these checks per PR at a time; a port's run on the same PR is
+# not held: `apply` pushes only on the commit the checks ran at.
+concurrency:
+  group: upstream-checks-pr-${{ inputs.pr }}
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions: { contents: read, pull-requests: read }
+    outputs:
+      app: ${{ steps.plan.outputs.app }}
+      branch: ${{ steps.plan.outputs.branch }}
+      head: ${{ steps.plan.outputs.head }}
+      checks: ${{ steps.plan.outputs.checks }}
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with: { ref: main, persist-credentials: false }
+      - name: The PR and the checks
+        id: plan
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ inputs.pr }}
+          RECORDINGS: ${{ inputs.recordings }}
+          HTTP_AUDIT: ${{ inputs.http_audit }}
+          COMPARE: ${{ inputs.compare }}
+          REPLAYS: ${{ inputs.replays }}
+          OLD_PIN_REQUEST: ${{ inputs.old_pin_request }}
+          OLD_PIN_WAIT: ${{ inputs.old_pin_wait }}
+        run: |
+          gh pr view "$PR" --repo "$GITHUB_REPOSITORY" \
+            --json number,state,isDraft,baseRefName,headRefName,headRefOid,isCrossRepository,headRepository,headRepositoryOwner,labels \
+            > "$RUNNER_TEMP/pr.json"
+          PR_JSON="$RUNNER_TEMP/pr.json" make -s upstream-checks-plan | tee -a "$GITHUB_OUTPUT"
+
+  # The originals run here. No permission (the repository is public: the
+  # checkout needs none), no secret, no credential left in git, caches
+  # read and never saved, so nothing it touches reaches another job but
+  # the artifact.
+  run:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    permissions: {}
+    steps:
+      # main's script drives the branch's checkout: its pins, its fixture
+      # scripts, the unarrd built from it.
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with: { ref: main, path: trusted, persist-credentials: false }
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with: { ref: "${{ needs.plan.outputs.head }}", path: work, persist-credentials: false }
+      - uses: dtolnay/rust-toolchain@39008827e6b4319a349e9a42dfc90579dd25f1ca # stable
+        with: { toolchain: stable }
+      # The pinned tarballs, as ci.yml caches them; restored only: the
+      # fixture scripts check each against the pin's SHA-256.
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: work/.cache/sonarr/*.tar.gz
+          key: sonarr-release-${{ hashFiles('work/scripts/sonarr-fixture.sh', 'work/upstream/sonarr.pin') }}
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: work/.cache/radarr/*.tar.gz
+          key: radarr-release-${{ hashFiles('work/scripts/radarr-fixture.sh', 'work/upstream/radarr.pin') }}
+      # The fixtures' root folders, which the fixture scripts empty and
+      # mark as their own; the network namespace of compare-originals.py,
+      # which Ubuntu's AppArmor refuses to an unprivileged user by default;
+      # the disk the comparison's build needs.
+      - name: The machine
+        run: |
+          sudo install -d -o "$(id -u)" -g "$(id -g)" /movies /tv /downloads
+          sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
+          df -h /
+      - run: make -C work ui
+      - run: make -C work build
+      - name: The checks
+        env:
+          WORK: ${{ github.workspace }}/work
+          CHECK_APP: ${{ needs.plan.outputs.app }}
+          CHECKS: ${{ needs.plan.outputs.checks }}
+          CHECKS_OUT: ${{ runner.temp }}/checks
+        run: make -s -C trusted upstream-checks-run
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: upstream-checks-results
+          path: |
+            ${{ runner.temp }}/checks
+            !${{ runner.temp }}/checks/logs
+          if-no-files-found: error
+          retention-days: 30
+      - if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: upstream-checks-logs
+          path: ${{ runner.temp }}/checks/logs
+          if-no-files-found: ignore
+          retention-days: 30
+
+  # Writes: main's scripts read the artifact as untrusted, commit on the
+  # port's branch what may be committed, and report on the PR.
+  apply:
+    needs: [plan, run]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions: { contents: write, pull-requests: write }
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with: { ref: main, path: trusted, persist-credentials: false }
+      # The token that pushes: UPSTREAM_BOT_TOKEN when the maintainer set
+      # one, so that CI runs on the commits; else the job's, on whose
+      # pushes GitHub starts no workflow.
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          ref: ${{ needs.plan.outputs.branch }}
+          path: work
+          token: ${{ secrets.UPSTREAM_BOT_TOKEN || github.token }}
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: upstream-checks-results
+          path: ${{ runner.temp }}/artifact
+      - name: Check, commit, report
+        env:
+          CHECK_APP: ${{ needs.plan.outputs.app }}
+          HEAD_SHA: ${{ needs.plan.outputs.head }}
+          BRANCH: ${{ needs.plan.outputs.branch }}
+          PR: ${{ inputs.pr }}
+          ARTIFACT: ${{ runner.temp }}/artifact
+          COMMENT: ${{ runner.temp }}/comment.md
+          WORK: ${{ github.workspace }}/work
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # The checks ran at HEAD_SHA: on a branch that moved since, the
+          # results are only reported, and stay in the artifact.
+          git -C "$WORK" fetch -q --depth 1 origin "$HEAD_SHA"
+          git -C "$WORK" checkout -q --detach "$HEAD_SHA"
+          git -C "$WORK" config user.name "Fabio Calefato"
+          git -C "$WORK" config user.email "fcalefato@gmail.com"
+          make -s -C trusted upstream-checks-apply
+          if [ "$(git -C "$WORK" rev-parse HEAD)" != "$HEAD_SHA" ]; then
+            if git -C "$WORK" push origin "HEAD:refs/heads/$BRANCH"; then
+              echo "Pushed on \`$BRANCH\`." >> "$COMMENT"
+            else
+              # shellcheck disable=SC2016 # the backticks are Markdown
+              printf '\n**Not pushed:** the branch moved after the checks ran at `%s`. The recordings and the reports are in the artifact `upstream-checks-results` of this run.\n' "${HEAD_SHA:0:12}" >> "$COMMENT"
+            fi
+          fi
+          gh pr comment "$PR" --repo "$GITHUB_REPOSITORY" --body-file "$COMMENT"
+      # An artifact refused, or a step that broke: the PR is told where to look.
+      - if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ inputs.pr }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          gh pr comment "$PR" --repo "$GITHUB_REPOSITORY" \
+            --body "The checks with the original did not reach the PR: nothing was committed. The run says why: $RUN_URL"
