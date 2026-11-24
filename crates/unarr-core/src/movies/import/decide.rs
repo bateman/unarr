@@ -78,7 +78,20 @@ pub fn local_formats(catalog: &MovieCatalog, local: &LocalMovie, file_name_for_f
 /// naming cannot build leaves the file's own name.
 pub fn renamed_file_name(env: &MovieEnvironment, translations: &[(i64, String)], local: &LocalMovie) -> String {
     let movie = local.movie_ref();
-    let file = local.to_movie_file(env.now);
+    let mut file = local.to_movie_file(env.now);
+    // `UpdateMediaInfoIfNeeded`: a format with media info tokens has the
+    // file read first when nothing was read from it yet (a file the
+    // decision gave up on before its media info, or one evaluated again
+    // before its augmenting), media info permitting.
+    let wants_media_info = env.config.enable_media_info
+        && env.naming.standard_movie_format.to_ascii_lowercase().contains("mediainfo");
+    if file.media_info.is_none() && wants_media_info && !movie.path.trim().is_empty() {
+        file.media_info = crate::mediafiles::mediainfo::probe_for(
+            std::path::Path::new(&local.path),
+            crate::Personality::Radarr,
+        )
+        .map(|m| m.model);
+    }
     let formats = crate::movies::formats::file_formats(&env.catalog.base.formats, &file, movie);
     super::approve::build_file_name(env, movie, translations, &file, &local.path, &formats).unwrap_or_else(|e| {
         tracing::debug!("Unable to build the file name of {}: {e}", local.path);
