@@ -69,6 +69,9 @@ pub struct Torrent {
     pub label: String,
     pub category: String,
     pub save_path: String,
+    /// The torrent's top folder (qBittorrent 5, API 2.11.2); empty when it
+    /// has none.
+    pub root_path: String,
     pub content_path: String,
     pub ratio: f64,
     #[serde(default = "minus_two")]
@@ -775,8 +778,8 @@ impl<'a> QBittorrent<'a> {
                 }
             }
             if version >= Version::with_build(2, 6, 1) && item.status == DownloadItemStatus::Completed {
-                if t.content_path != t.save_path {
-                    item.output_path = Some(self.client.context.remap(&self.settings.host, &t.content_path));
+                if let Some(path) = completed_path(&t, version, self.settings.app.qbittorrent_root_path) {
+                    item.output_path = Some(self.client.context.remap(&self.settings.host, path));
                 } else {
                     item.status = DownloadItemStatus::Warning;
                     item.message = Some("Unable to Import. Path matches client base download directory, it's possible 'Keep top-level folder' is disabled for this torrent or 'Torrent Content Layout' is NOT set to 'Original' or 'Create Subfolder'?".into());
@@ -1084,8 +1087,56 @@ fn removes_completed_downloads(config: &Preferences) -> bool {
         && (config.max_ratio_act == 1 || config.max_ratio_act == 3)
 }
 
+/// The folder a completed torrent is imported from: its content path when
+/// that is not the save path; with `use_root_path` (Radarr 7) its root
+/// folder first, when qBittorrent 5 reports one other than the save path,
+/// for a single file qBittorrent wrapped in a folder an unpacker extracts
+/// into. `None` when the content sits in the save path itself.
+fn completed_path(t: &Torrent, version: Version, use_root_path: bool) -> Option<&str> {
+    if use_root_path
+        && version >= Version::with_build(2, 11, 2)
+        && !t.root_path.trim().is_empty()
+        && t.root_path != t.save_path
+    {
+        return Some(&t.root_path);
+    }
+    (t.content_path != t.save_path).then_some(t.content_path.as_str())
+}
+
 #[cfg(test)]
 mod tests {
+    /// Radarr 7: a single-file torrent wrapped in a folder is imported from
+    /// that folder (`root_path`) on qBittorrent 5; Sonarr's pin, an older
+    /// qBittorrent or no root folder keep the content path.
+    #[test]
+    fn a_completed_torrent_is_imported_from_its_root_folder() {
+        let t = Torrent {
+            save_path: "/downloads/".into(),
+            root_path: "/downloads/Movie.2024".into(),
+            content_path: "/downloads/Movie.2024/movie.rar".into(),
+            ..Default::default()
+        };
+        let v5 = Version::with_build(2, 11, 2);
+        assert_eq!(completed_path(&t, v5, true), Some("/downloads/Movie.2024"));
+        assert_eq!(completed_path(&t, v5, false), Some("/downloads/Movie.2024/movie.rar"));
+        assert_eq!(
+            completed_path(&t, Version::with_build(2, 11, 1), true),
+            Some("/downloads/Movie.2024/movie.rar")
+        );
+        let flat = Torrent {
+            save_path: "/downloads/".into(),
+            content_path: "/downloads/movie.mkv".into(),
+            ..Default::default()
+        };
+        assert_eq!(completed_path(&flat, v5, true), Some("/downloads/movie.mkv"));
+        let in_save_path = Torrent {
+            save_path: "/downloads/".into(),
+            content_path: "/downloads/".into(),
+            ..Default::default()
+        };
+        assert_eq!(completed_path(&in_save_path, v5, true), None);
+    }
+
     use super::*;
 
     #[test]

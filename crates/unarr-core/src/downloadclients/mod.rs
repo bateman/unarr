@@ -64,6 +64,9 @@ pub struct App {
     /// a category with a directory refused by the client's test only, not
     /// by its settings. Radarr 7 does; Sonarr's pin does not.
     pub transmission_full_labels: bool,
+    /// A completed qBittorrent torrent is imported from its `root_path`
+    /// when qBittorrent 5 reports one (Radarr 7; not Sonarr's pin).
+    pub qbittorrent_root_path: bool,
 }
 
 impl App {
@@ -91,6 +94,7 @@ pub const SONARR: App = App {
     torrent_category: "tv-sonarr",
     qbittorrent_conflict_rejects: false,
     transmission_full_labels: false,
+    qbittorrent_root_path: false,
 };
 
 pub const RADARR: App = App {
@@ -107,6 +111,7 @@ pub const RADARR: App = App {
     torrent_category: "radarr",
     qbittorrent_conflict_rejects: true,
     transmission_full_labels: true,
+    qbittorrent_root_path: true,
 };
 
 /// The implementations this phase drives.
