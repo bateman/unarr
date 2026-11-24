@@ -31,11 +31,14 @@ pub async fn refresh(downloads: &MovieDownloads, now: DateTime<Utc>) -> anyhow::
         DownloadClientItem,
         Option<DownloadClientItem>,
     )> = Vec::new();
+    // The clients that answered: only their downloads can be missing.
+    let mut answered: Vec<i64> = Vec::new();
     for definition in definitions {
         let client = Client::new(&definition, &context);
         match client.items().await {
             Ok(items) => {
                 clients.record_success(definition.id).await;
+                answered.push(definition.id);
                 for item in items {
                     let import_item = if item.status == DownloadItemStatus::Completed {
                         client.import_item(&item).await.ok()
@@ -113,11 +116,13 @@ pub async fn refresh(downloads: &MovieDownloads, now: DateTime<Utc>) -> anyhow::
     let before = downloads.queue();
     {
         let mut cache = downloads.tracked.lock().recover();
-        // Downloads no client reports any more are dropped rather than kept
-        // as not trackable, so the cache does not grow for the life of the
-        // process; a finished state comes back from the history.
+        // `StopTrackingMissing` (Radarr 7): the downloads a client that
+        // answered no longer reports are dropped rather than kept as not
+        // trackable, so the cache does not grow for the life of the
+        // process; a finished state comes back from the history. Those of
+        // a client that did not answer are kept.
         let seen: Vec<String> = processed.iter().map(|t| t.item.download_id.clone()).collect();
-        cache.retain(|id, _| seen.contains(id));
+        forget_missing(&mut cache, &seen, &answered);
         for mut t in processed {
             t.is_trackable = trackable(&t);
             cache.insert(t.item.download_id.clone(), t);
@@ -126,6 +131,23 @@ pub async fn refresh(downloads: &MovieDownloads, now: DateTime<Utc>) -> anyhow::
     downloads.rebuild_queue(now);
     downloads.raised.lock().recover().extend(raised);
     Ok(downloads.queue() != before)
+}
+
+/// `StopTrackingMissing` and `UpdateTrackable`: a tracked download of a
+/// client that answered and no longer reports it is forgotten; one of a
+/// client that did not answer is kept, no longer trackable, out of the
+/// queue until its client answers again.
+fn forget_missing(
+    cache: &mut std::collections::HashMap<String, TrackedMovieDownload>,
+    seen: &[String],
+    answered: &[i64],
+) {
+    cache.retain(|id, t| seen.contains(id) || !answered.contains(&t.download_client));
+    for t in cache.values_mut() {
+        if !seen.contains(&t.item.download_id) {
+            t.is_trackable = false;
+        }
+    }
 }
 
 /// `ParsingService.GetMovie(title)`.
@@ -232,4 +254,54 @@ fn completed_check(
     }
     t.state = TrackedDownloadState::ImportPending;
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /// `TrackedDownloadServiceFixture` (Radarr 7): the downloads a client
+    /// that answered no longer reports are forgotten; those of a client
+    /// that did not answer stay, out of the queue.
+    #[test]
+    fn a_download_gone_from_its_client_is_forgotten() {
+        let tracked = |client: i64, id: &str| {
+            let item = DownloadClientItem::new(
+                crate::downloadclients::ItemClientInfo {
+                    protocol: crate::model::Protocol::Usenet,
+                    kind: crate::downloadclients::ClientKind::Sabnzbd,
+                    id: client,
+                    name: "SABnzbd".into(),
+                    remove_completed_downloads: true,
+                    has_post_import_category: false,
+                },
+                id,
+                id,
+            );
+            let t = TrackedMovieDownload {
+                download_client: client,
+                item,
+                import_item: None,
+                state: TrackedDownloadState::Downloading,
+                status: crate::downloads::TrackedDownloadStatus::Ok,
+                remote: None,
+                status_messages: Vec::new(),
+                protocol: crate::model::Protocol::Usenet,
+                indexer: None,
+                added: None,
+                is_trackable: true,
+                has_notified_manual_interaction_required: false,
+                movie_by_id: false,
+            };
+            (id.to_string(), t)
+        };
+        let mut cache: std::collections::HashMap<String, TrackedMovieDownload> =
+            [tracked(1, "kept"), tracked(1, "gone"), tracked(2, "unanswered")].into_iter().collect();
+        forget_missing(&mut cache, &["kept".to_string()], &[1]);
+        let mut ids: Vec<&str> = cache.keys().map(String::as_str).collect();
+        ids.sort();
+        assert_eq!(ids, ["kept", "unanswered"]);
+        assert!(cache["kept"].is_trackable);
+        assert!(!cache["unanswered"].is_trackable);
+    }
 }
