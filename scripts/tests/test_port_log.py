@@ -22,6 +22,8 @@ REPO = SCRIPTS.parent
 HEADER = ["sha", "pr", "class", "decision", "unarr_commits", "tests", "issue", "reason", "review"]
 DECISIONS = {"ported", "not applicable", "deferred"}
 ALREADY_HAD_IT = "already had it:"  # behaviour Unarr had before the upstream commit (PORTING.md, section 4)
+# A ported commit with a part deferred names that part's issue in its reason and in `issue` (PORTING.md, section 4).
+DEFERRED_PART = re.compile(r"deferred to (#\d+):")
 
 
 def load_triage():
@@ -61,7 +63,11 @@ def problems(text: str) -> list[str]:
             out.append(f"line {n}: unarr_commits are not 12-digit commits")
         if r["decision"] == "deferred" and not re.fullmatch(r"#\d+", r["issue"]):
             out.append(f"line {n}: a deferred commit needs its issue (#<n>)")
-        if r["decision"] != "deferred" and r["issue"]:
+        parts = DEFERRED_PART.findall(r["reason"])
+        if r["decision"] == "ported" and (parts or r["issue"]):
+            if not re.fullmatch(r"#\d+", r["issue"]) or parts != [r["issue"]]:
+                out.append(f"line {n}: a ported commit with a part deferred has 'deferred to #<n>:' once in its reason, and the same #<n> as its issue")
+        elif r["decision"] == "not applicable" and r["issue"]:
             out.append(f"line {n}: an issue on a commit that is not deferred")
         if r["decision"] in ("not applicable", "deferred") and not r["reason"].strip():
             out.append(f"line {n}: {r['decision']} needs a reason")
@@ -88,6 +94,8 @@ class TheLogs(unittest.TestCase):
         self.assertEqual(problems(deferred), [])
         already = head + f'{sha},#30,routes,ported,,a_reset_api_key_takes_effect_at_once,,"already had it: read at each request",\n'
         self.assertEqual(problems(already), [])
+        in_part = head + f'{sha},#30,routes,ported,0123456789ab,unarr-api/http::a_test,#41,"statuses of typed results; deferred to #41: the negotiation",\n'
+        self.assertEqual(problems(in_part), [])
         for bad, says in (
             ("sha,decision\n", "header"),
             (head + f"{sha[:12]},#30,schema,ported,,,,,\n", "40 hex"),
@@ -97,7 +105,10 @@ class TheLogs(unittest.TestCase):
             (head + f"{sha},#30,schema,skipped,,,,,\n", "decision"),
             (head + f"{sha},#30,schema,ported,0123,,,,\n", "12-digit"),
             (head + f"{sha},#30,schema,deferred,,,,too big,\n", "needs its issue"),
-            (head + f"{sha},#30,schema,ported,,,#31,,\n", "not deferred"),
+            (head + f"{sha},#30,none,not applicable,,,#31,a project file,\n", "not deferred"),
+            (head + f"{sha},#30,schema,ported,,,#31,,\n", "part deferred"),
+            (head + f"{sha},#30,routes,ported,,,,statuses; deferred to #41: the negotiation,\n", "part deferred"),
+            (head + f"{sha},#30,routes,ported,,,#42,statuses; deferred to #41: the negotiation,\n", "part deferred"),
             (head + f"{sha},#30,none,not applicable,,,,,\n", "needs a reason"),
             (head + f"{sha},#30,none\n", "columns"),
             (head + f"{sha},#30,routes,ported,,,,already had it: read at each request,\n", "needs the test"),
