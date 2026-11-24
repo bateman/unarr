@@ -296,7 +296,9 @@ mod tests {
             (id.to_string(), t)
         };
         let mut cache: std::collections::HashMap<String, TrackedMovieDownload> =
-            [tracked(1, "kept"), tracked(1, "gone"), tracked(2, "unanswered")].into_iter().collect();
+            [tracked(1, "kept"), tracked(1, "gone"), tracked(2, "unanswered")]
+                .into_iter()
+                .collect();
         forget_missing(&mut cache, &["kept".to_string()], &[1]);
         let mut ids: Vec<&str> = cache.keys().map(String::as_str).collect();
         ids.sort();

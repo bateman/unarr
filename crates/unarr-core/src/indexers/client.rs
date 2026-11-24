@@ -485,21 +485,33 @@ mod tests {
     </item>
   </channel>
 </rss>"#;
-        let app = axum::Router::new().route("/api", axum::routing::get(|| async { ([("content-type", "application/rss+xml")], FEED) }));
+        let app = axum::Router::new().route(
+            "/api",
+            axum::routing::get(|| async { ([("content-type", "application/rss+xml")], FEED) }),
+        );
         let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
         let addr = listener.local_addr().unwrap();
         tokio::spawn(async move { axum::serve(listener, app).await.unwrap() });
         let url = format!("http://{addr}/api");
         let http = crate::http::build(std::time::Duration::from_secs(5));
         for (personality, title) in [
-            (Personality::Radarr, "Series.&.Title.S02E19.EAC3.5.1.1080p.WEBRip.x265-iVy"),
-            (Personality::Sonarr, "Series.&amp;.Title.S02E19.EAC3.5.1.1080p.WEBRip.x265-iVy"),
+            (
+                Personality::Radarr,
+                "Series.&.Title.S02E19.EAC3.5.1.1080p.WEBRip.x265-iVy",
+            ),
+            (
+                Personality::Sonarr,
+                "Series.&amp;.Title.S02E19.EAC3.5.1.1080p.WEBRip.x265-iVy",
+            ),
         ] {
             let client = IndexerClient::for_personality(http.clone(), personality);
             let releases = client.fetch_page(&url, IndexerKind::Newznab).await.unwrap();
             assert_eq!(releases.len(), 1, "{personality:?}");
             assert_eq!(releases[0].title, title, "{personality:?}");
         }
-        assert_eq!(super::super::rss::html_decode("a &#39;b&#x27; &lt;c&gt; &reg; &bogus;"), "a 'b' <c> ® &bogus;");
+        assert_eq!(
+            super::super::rss::html_decode("a &#39;b&#x27; &lt;c&gt; &reg; &bogus;"),
+            "a 'b' <c> ® &bogus;"
+        );
     }
 }

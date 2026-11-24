@@ -105,9 +105,10 @@ impl From<TransferError> for Failure {
 
 impl From<anyhow::Error> for Failure {
     fn from(e: anyhow::Error) -> Failure {
-        let denied = e
-            .chain()
-            .any(|c| c.downcast_ref::<std::io::Error>().is_some_and(|io| io.kind() == std::io::ErrorKind::PermissionDenied));
+        let denied = e.chain().any(|c| {
+            c.downcast_ref::<std::io::Error>()
+                .is_some_and(|io| io.kind() == std::io::ErrorKind::PermissionDenied)
+        });
         if denied {
             return Failure::PermissionDenied(format!("{e:#}"));
         }
@@ -593,7 +594,9 @@ pub fn import(
                     _ => {}
                 }
                 decision.local_movie = Some(local);
-                imported.results.push(MovieImportResult::new(decision, failure.errors()));
+                imported
+                    .results
+                    .push(MovieImportResult::new(decision, failure.errors()));
             }
         }
     }

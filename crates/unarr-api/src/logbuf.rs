@@ -206,8 +206,14 @@ mod tests {
     fn the_recent_lines_are_cleansed_as_their_personality_does() {
         use tracing_subscriber::layer::SubscriberExt;
         for (buffer, kept) in [
-            (LogBuffer::for_personality(unarr_core::Personality::Radarr), "Sending email to (removed)@example.com failed"),
-            (LogBuffer::for_personality(unarr_core::Personality::Sonarr), "Sending email to me@example.com failed"),
+            (
+                LogBuffer::for_personality(unarr_core::Personality::Radarr),
+                "Sending email to (removed)@example.com failed",
+            ),
+            (
+                LogBuffer::for_personality(unarr_core::Personality::Sonarr),
+                "Sending email to me@example.com failed",
+            ),
         ] {
             let subscriber = tracing_subscriber::registry().with(buffer.clone());
             tracing::subscriber::with_default(subscriber, || {

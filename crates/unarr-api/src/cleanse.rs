@@ -96,7 +96,10 @@ static RULES: LazyLock<Vec<Rule>> = LazyLock::new(|| {
         // Email: Radarr 7's; Sonarr's pin does not have it.
         Rule {
             only: Some(Personality::Radarr),
-            ..rule(&["@"], r"(?i)\b(?<secret>[a-z0-9._%+-]+)@[a-z0-9.-]+\.[a-z]{2,}\b")
+            ..rule(
+                &["@"],
+                r"(?i)\b(?<secret>[a-z0-9._%+-]+)@[a-z0-9.-]+\.[a-z]{2,}\b",
+            )
         },
         // NzbGet
         rule(

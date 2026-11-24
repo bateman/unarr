@@ -540,7 +540,9 @@ async fn radarr_takes_transmissions_category_as_a_label_only() {
     let both = radarr(json!({"movieCategory": "radarr", "movieDirectory": "/downloads/films"}));
     let failures = Client::new(&both, &context).test().await;
     assert!(
-        !failures.iter().any(|f| f.error_message == "Cannot use Category and Directory"),
+        !failures
+            .iter()
+            .any(|f| f.error_message == "Cannot use Category and Directory"),
         "{failures:?}"
     );
 }

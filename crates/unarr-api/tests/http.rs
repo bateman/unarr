@@ -2378,7 +2378,12 @@ async fn radarr_starts_a_command_whatever_its_body_field_says() {
         r#"{"name":"MessagingCleanup","body":{"sendUpdatesToClient":true,"name":"Other"}}"#,
     )
     .await;
-    assert_eq!(status, StatusCode::CREATED, "{}", String::from_utf8_lossy(&answer));
+    assert_eq!(
+        status,
+        StatusCode::CREATED,
+        "{}",
+        String::from_utf8_lossy(&answer)
+    );
     let answer: serde_json::Value = serde_json::from_slice(&answer).unwrap();
     assert_eq!(answer["name"], "MessagingCleanup");
     assert_eq!(answer["body"]["name"], "MessagingCleanup");
@@ -2419,7 +2424,11 @@ async fn radarr_refuses_a_bind_address_in_the_allowed_hosts() {
 #[tokio::test]
 async fn radarr_answers_compact_json() {
     let app = app_for(Personality::Radarr, "");
-    for path in ["/api/v3/system/status", "/api/v3/config/host", "/api/v3/qualityprofile"] {
+    for path in [
+        "/api/v3/system/status",
+        "/api/v3/config/host",
+        "/api/v3/qualityprofile",
+    ] {
         let (status, _, body) = ask(&app, "GET", path, &[("X-Api-Key", KEY)], "").await;
         assert_eq!(status, StatusCode::OK, "{path}");
         let text = String::from_utf8(body).unwrap();

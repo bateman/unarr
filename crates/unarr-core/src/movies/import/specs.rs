@@ -1290,7 +1290,8 @@ mod tests {
     /// Radarr 7: the name the file had scored above the existing file, the
     /// name the import gives it does not.
     #[test]
-    fn should_return_false_and_a_specific_reason_if_not_upgrade_to_custom_format_score_after_local_file_rename_but_was_before() {
+    fn should_return_false_and_a_specific_reason_if_not_upgrade_to_custom_format_score_after_local_file_rename_but_was_before(
+    ) {
         let mut h = Harness::new();
         let mut l = with_format_scores(&mut h, BLURAY1080P, 50);
         l.original_file_name_custom_formats = l.custom_formats.clone();

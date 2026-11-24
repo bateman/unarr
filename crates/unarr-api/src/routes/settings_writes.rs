@@ -900,7 +900,9 @@ pub async fn host(State(state): State<AppState>, Json(body): Json<Value>) -> Api
         }
         // Radarr 7 refuses a bind address; Sonarr's pin takes it.
         if state.personality() == unarr_core::Personality::Radarr
-            && parse_hosts(&hosts).iter().any(|h| crate::hosts::is_bind_address(h))
+            && parse_hosts(&hosts)
+                .iter()
+                .any(|h| crate::hosts::is_bind_address(h))
         {
             failures.push(rule(
                 "AllowedHosts",

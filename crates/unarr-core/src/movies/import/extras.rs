@@ -1529,7 +1529,6 @@ mod tests {
 
     // --- the consumers' `FindMetadataFileFixture`s
 
-
     #[test]
     fn roksbox_find_metadata_file() {
         let folder = "/Test/Movies/The.Movie.2011";
@@ -1773,12 +1772,30 @@ mod tests {
         lib.scan(&movie).unwrap();
         assert_eq!(
             lib.paths(),
-            ["Movie Title - 2022.en.srt", "Movie Title - 2022.nfo", "fanart.jpg"]
+            [
+                "Movie Title - 2022.en.srt",
+                "Movie Title - 2022.nfo",
+                "fanart.jpg"
+            ]
         );
-        let subtitle = lib.rows().into_iter().find(|e| e.kind == ExtraKind::Subtitle).unwrap();
+        let subtitle = lib
+            .rows()
+            .into_iter()
+            .find(|e| e.kind == ExtraKind::Subtitle)
+            .unwrap();
         assert_eq!(
-            (subtitle.language, subtitle.language_tags.clone(), subtitle.title.clone(), subtitle.copy),
-            (crate::movies::parser::language::lang::UNKNOWN, Vec::<String>::new(), None, 0)
+            (
+                subtitle.language,
+                subtitle.language_tags.clone(),
+                subtitle.title.clone(),
+                subtitle.copy
+            ),
+            (
+                crate::movies::parser::language::lang::UNKNOWN,
+                Vec::<String>::new(),
+                None,
+                0
+            )
         );
         assert!(lib.rows().iter().all(|e| e.movie_file_id == Some(0)));
     }

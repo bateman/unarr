@@ -46,7 +46,11 @@ impl MovieEnvironment {
 /// `ParseCustomFormat(LocalMovie, fileName)`: the scene name, else the
 /// file's own name, simplified, with what the aggregators settled on; the
 /// formats that look at a file's name read `file_name_for_formats`.
-pub fn local_formats(catalog: &MovieCatalog, local: &LocalMovie, file_name_for_formats: &str) -> Vec<CustomFormat> {
+pub fn local_formats(
+    catalog: &MovieCatalog,
+    local: &LocalMovie,
+    file_name_for_formats: &str,
+) -> Vec<CustomFormat> {
     let Some(movie) = &local.movie else {
         return Vec::new();
     };
@@ -76,7 +80,11 @@ pub fn local_formats(catalog: &MovieCatalog, local: &LocalMovie, file_name_for_f
 /// `BuildFileName(movie, localMovie.ToMovieFile())`: the name the import
 /// would give the file, without folder nor extension. A format the
 /// naming cannot build leaves the file's own name.
-pub fn renamed_file_name(env: &MovieEnvironment, translations: &[(i64, String)], local: &LocalMovie) -> String {
+pub fn renamed_file_name(
+    env: &MovieEnvironment,
+    translations: &[(i64, String)],
+    local: &LocalMovie,
+) -> String {
     let movie = local.movie_ref();
     let mut file = local.to_movie_file(env.now);
     // `UpdateMediaInfoIfNeeded`: a format with media info tokens has the
@@ -84,7 +92,11 @@ pub fn renamed_file_name(env: &MovieEnvironment, translations: &[(i64, String)],
     // decision gave up on before its media info, or one evaluated again
     // before its augmenting), media info permitting.
     let wants_media_info = env.config.enable_media_info
-        && env.naming.standard_movie_format.to_ascii_lowercase().contains("mediainfo");
+        && env
+            .naming
+            .standard_movie_format
+            .to_ascii_lowercase()
+            .contains("mediainfo");
     if file.media_info.is_none() && wants_media_info && !movie.path.trim().is_empty() {
         file.media_info = crate::mediafiles::mediainfo::probe_for(
             std::path::Path::new(&local.path),
@@ -93,10 +105,12 @@ pub fn renamed_file_name(env: &MovieEnvironment, translations: &[(i64, String)],
         .map(|m| m.model);
     }
     let formats = crate::movies::formats::file_formats(&env.catalog.base.formats, &file, movie);
-    super::approve::build_file_name(env, movie, translations, &file, &local.path, &formats).unwrap_or_else(|e| {
-        tracing::debug!("Unable to build the file name of {}: {e}", local.path);
-        crate::mediafiles::file_name(&local.path).to_string()
-    })
+    super::approve::build_file_name(env, movie, translations, &file, &local.path, &formats).unwrap_or_else(
+        |e| {
+            tracing::debug!("Unable to build the file name of {}: {e}", local.path);
+            crate::mediafiles::file_name(&local.path).to_string()
+        },
+    )
 }
 
 /// `UpdateMovieCustomFormats` (Radarr 7): the custom formats of a local
@@ -121,7 +135,11 @@ pub fn score_formats(catalog: &MovieCatalog, local: &mut LocalMovie, renamed: &s
 
 /// [`score_formats`] under the name [`renamed_file_name`] builds, the
 /// movie's translations read from `conn`.
-pub fn score_formats_renamed(conn: &Connection, env: &MovieEnvironment, local: &mut LocalMovie) -> anyhow::Result<()> {
+pub fn score_formats_renamed(
+    conn: &Connection,
+    env: &MovieEnvironment,
+    local: &mut LocalMovie,
+) -> anyhow::Result<()> {
     if local.movie.is_none() {
         score_formats(&env.catalog, local, "");
         return Ok(());

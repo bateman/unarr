@@ -1118,7 +1118,10 @@ mod tests {
         };
         let v5 = Version::with_build(2, 11, 2);
         assert_eq!(completed_path(&t, v5, true), Some("/downloads/Movie.2024"));
-        assert_eq!(completed_path(&t, v5, false), Some("/downloads/Movie.2024/movie.rar"));
+        assert_eq!(
+            completed_path(&t, v5, false),
+            Some("/downloads/Movie.2024/movie.rar")
+        );
         assert_eq!(
             completed_path(&t, Version::with_build(2, 11, 1), true),
             Some("/downloads/Movie.2024/movie.rar")
@@ -1249,7 +1252,10 @@ mod tests {
         // fails the grab as the client's error.
         let rejected = QBittorrent::new(&client, &settings).conflict_rejects(
             QBittorrent::new(&client, &settings)
-                .add_from_url("magnet:?xt=urn:btih:0123456789abcdef0123456789abcdef01234567", None)
+                .add_from_url(
+                    "magnet:?xt=urn:btih:0123456789abcdef0123456789abcdef01234567",
+                    None,
+                )
                 .await
                 .unwrap_err(),
             "magnet link",
@@ -1262,7 +1268,10 @@ mod tests {
         sonarr.app = super::super::SONARR;
         let kept = QBittorrent::new(&client, &sonarr).conflict_rejects(
             QBittorrent::new(&client, &sonarr)
-                .add_from_url("magnet:?xt=urn:btih:0123456789abcdef0123456789abcdef01234567", None)
+                .add_from_url(
+                    "magnet:?xt=urn:btih:0123456789abcdef0123456789abcdef01234567",
+                    None,
+                )
                 .await
                 .unwrap_err(),
             "magnet link",
