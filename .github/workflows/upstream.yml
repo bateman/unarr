@@ -85,6 +85,7 @@ jobs:
         with:
           name: fetched-${{ env.APP }}
           path: .cache/upstream-workflow/${{ env.APP }}
+          include-hidden-files: true
           if-no-files-found: error
           retention-days: 7
 
@@ -155,6 +156,7 @@ jobs:
         with:
           name: recorded-${{ env.APP }}
           path: ${{ runner.temp }}/recorded
+          include-hidden-files: true
           if-no-files-found: warn
           retention-days: 7
 
@@ -215,6 +217,7 @@ jobs:
         with:
           name: bump-${{ env.APP }}
           path: .cache/bump/${{ env.APP }}
+          include-hidden-files: true
           if-no-files-found: warn
           retention-days: 30
 

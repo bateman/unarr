@@ -48,7 +48,10 @@ unshare --net -- /bin/sh -ec '
     shift
     dir="$1"; uid="$2"; gid="$3"; shift 3
     cd "$dir"
-    exec setpriv --reuid="$uid" --regid="$gid" --init-groups --no-new-privs --reset-env -- "$@"
+    # --reset-env leaves PATH without the sbin directories, where ldconfig
+    # is: the fixture scripts look for libicu with it.
+    exec setpriv --reuid="$uid" --regid="$gid" --init-groups --no-new-privs --reset-env -- \
+        env PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin "$@"
 ' sh "$bring_lo_up" "$PWD" "$uid" "$gid" "$@" || code=$?
 
 for _ in $(seq 50); do
