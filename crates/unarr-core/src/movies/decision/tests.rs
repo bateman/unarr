@@ -115,11 +115,17 @@ fn ids_win_when_the_year_agrees() {
     // An indexer naming the wrong id: the year disagrees, the title too.
     assert_eq!(by("1001", 0, 1999, None), None);
     assert_eq!(by("0", 1001, 0, None), by_id);
-    // In a search the TMDB id of the movie searched for is believed even
-    // then; the IMDb number never equals the movie's `tt` id.
+    // In a search the ids of the movie searched for are believed even
+    // then: its TMDB id, and (Radarr 7, `MapFixture`) its IMDb id once
+    // the feed's number is normalised to the `tt` form.
     let criteria = search(&goethe);
     assert_eq!(by("0", 1001, 1999, Some(&criteria)), by_id);
-    assert_eq!(by("1001", 0, 1999, Some(&criteria)), None);
+    assert_eq!(by("1001", 0, 1999, Some(&criteria)), by_id);
+    // `should_not_match_search_criteria_movie_without_imdb_id_when_release_has_none`.
+    let mut no_imdb = goethe.clone();
+    no_imdb.movie.metadata.imdb_id = None;
+    let criteria = search(&no_imdb);
+    assert_eq!(by("0", 0, 1999, Some(&criteria)), None);
 }
 
 #[test]

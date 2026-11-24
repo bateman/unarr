@@ -92,9 +92,12 @@ fn by_search_criteria(
     if tmdb_id > 0 && tmdb_id == movie.metadata.tmdb_id {
         return Some((movie.clone(), MovieMatchType::Id));
     }
-    // The original compares the release's number with the movie's `tt` id.
-    if !imdb_id.trim().is_empty() && movie.metadata.imdb_id.as_deref() == Some(imdb_id) {
-        return Some((movie.clone(), MovieMatchType::Id));
+    // Radarr 7 normalises the release's id (`tt` and seven digits) before
+    // it compares it with the movie's.
+    if let Some(normalized) = normalize_imdb_id(imdb_id.trim()) {
+        if movie.metadata.imdb_id.as_deref() == Some(normalized.as_str()) {
+            return Some((movie.clone(), MovieMatchType::Id));
+        }
     }
     None
 }
