@@ -12,8 +12,8 @@ decoded C# literals; `Quality.X` and `Language.X` references are kept as
 |-----------|--------|-------------|
 | `parser/` | `src/NzbDrone.Core.Test/ParserTests/` at `v4.0.20.3014` | `crates/unarr-core/tests/parser_vectors.rs` |
 | `decisionengine/` | `src/NzbDrone.Core.Test/DecisionEngineTests/` at `v4.0.20.3014` (the `TestCase`-driven fixtures; the others assert on mocks and are ported as unit tests in `crates/unarr-core/src/decision/`) | `crates/unarr-core/tests/decision_vectors.rs` |
-| `radarr/decisionengine/` | Radarr's `src/NzbDrone.Core.Test/DecisionEngineTests/` at `v6.4.4.10685` (the `TestCase`-driven fixtures; the others, and `ParserTests/ParsingServiceTests`, assert on mocks and are ported as unit tests in `crates/unarr-core/src/movies/decision/tests.rs`) | `crates/unarr-core/tests/movie_decision_vectors.rs` |
-| `radarr/parser/` | Radarr's `src/NzbDrone.Core.Test/ParserTests/` at `v6.4.4.10685` | `crates/unarr-core/tests/movie_parser_vectors.rs` |
+| `radarr/decisionengine/` | Radarr's `src/NzbDrone.Core.Test/DecisionEngineTests/` at `v7.0.3.10918` (the `TestCase`-driven fixtures; the others, and `ParserTests/ParsingServiceTests`, assert on mocks and are ported as unit tests in `crates/unarr-core/src/movies/decision/tests.rs`) | `crates/unarr-core/tests/movie_decision_vectors.rs` |
+| `radarr/parser/` | Radarr's `src/NzbDrone.Core.Test/ParserTests/` at `v7.0.3.10918` | `crates/unarr-core/tests/movie_parser_vectors.rs` |
 
 The replay maps every test method to the assertion the original makes and
 fails on a method it does not know, so a fixture added upstream shows up as a
@@ -33,6 +33,6 @@ checkout was in. By hand, after bumping the pinned Sonarr release:
 And after bumping the pinned Radarr release (its vectors live in a folder of
 their own, since the fixtures carry the same names as Sonarr's):
 
-    git clone --depth 1 --branch v6.4.4.10685 https://github.com/Radarr/Radarr /tmp/radarr
+    git clone --depth 1 --branch v7.0.3.10918 https://github.com/Radarr/Radarr /tmp/radarr
     scripts/port-vectors.py --source /tmp/radarr --out tests/vectors/radarr --area ParserTests
     scripts/port-vectors.py --source /tmp/radarr --out tests/vectors/radarr --area DecisionEngineTests
