@@ -79,6 +79,16 @@ otherwise for that plan.
 8. **The user decides.** The main conversation tells the user what is left
    to do, or that the PRs can be merged. The user merges (see above); the
    next step starts from `main` only after the previous one is merged.
+9. **Archiving.** When a session the main conversation opened reports
+   that it has finished, and its PR is merged, its checks are green and it
+   has no pending task and no open question, the main conversation archives
+   it without asking the user.
+
+## Writing to the user
+
+Be concise, in the main conversation and in every session it opens: the
+outcome first, then only what the user needs to decide or to do. A handoff
+prompt says so, since it is all the new session knows.
 
 ## Commit authorship
 
