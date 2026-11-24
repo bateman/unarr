@@ -29,6 +29,13 @@ use crate::routes::{
 };
 use crate::state::AppState;
 
+/// `TypedResults.Ok`: what Radarr 7 answers where Radarr 6 said
+/// `Accepted` (a bulk update).
+fn typed_ok(body: serde_json::Value) -> axum::response::Response {
+    use axum::response::IntoResponse;
+    (axum::http::StatusCode::OK, axum::Json(body)).into_response()
+}
+
 /// Routes under `/api/v3`.
 pub fn api_router() -> Router<AppState> {
     Router::new()

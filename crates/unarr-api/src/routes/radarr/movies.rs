@@ -749,12 +749,6 @@ pub async fn rename_preview(State(state): State<AppState>, uri: Uri) -> ApiResul
 
 // --- movie file writes
 
-/// `TypedResults.Ok`: what Radarr 7 answers where Radarr 6 said
-/// `Accepted` (a bulk update).
-fn ok(body: Value) -> Response {
-    (StatusCode::OK, Json(body)).into_response()
-}
-
 fn accepted(body: Value) -> Response {
     (StatusCode::ACCEPTED, Json(body)).into_response()
 }
@@ -871,7 +865,9 @@ pub async fn file_editor(State(state): State<AppState>, Json(body): Json<Value>)
             Ok(())
         })
         .await?;
-    Ok(ok(Value::Array(file_resources_by_ids(&state, ids).await?)))
+    Ok(super::typed_ok(Value::Array(
+        file_resources_by_ids(&state, ids).await?,
+    )))
 }
 
 /// `PUT /moviefile/bulk`: `SetPropertiesBulk`.
@@ -891,7 +887,9 @@ pub async fn file_bulk_update(State(state): State<AppState>, Json(body): Json<Va
             Ok(())
         })
         .await?;
-    Ok(ok(Value::Array(file_resources_by_ids(&state, ids).await?)))
+    Ok(super::typed_ok(Value::Array(
+        file_resources_by_ids(&state, ids).await?,
+    )))
 }
 
 /// `MediaFileDeletionService.DeleteMovieFile` for one file, with the
