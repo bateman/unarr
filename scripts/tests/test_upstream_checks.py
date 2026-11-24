@@ -190,6 +190,12 @@ class TheComparison(unittest.TestCase):
         self.assertEqual(doc[doc.index("## History"):].count("\n") + 1, new[new.index("## History"):].count("\n"))
         self.assertEqual(new.count("| p50 / max, ms |"), doc.count("| p50 / max, ms |"))
 
+    def test_a_binary_given_by_path_is_named_by_its_commit(self):
+        text = REPORT.replace("Unarr `ff4c366, sha256", "Unarr `/srv/checks/target/release/unarrd, sha256")
+        named = checks.name_the_build(text, Path("/srv/checks/target/release/unarrd"), "f" * 40)
+        self.assertTrue(named.startswith("Library `real`; Unarr `fffffff, sha256 8b64ade6cabf`;"))
+        self.assertEqual(checks.parse_report(named, "real")["unarr"], "fffffff")
+
     def test_routes_where_unarr_is_slower(self):
         text = REPORT.replace("| 0.6 / 0.8 |", "| 1.5 / 0.8 |").replace("| 3.1 / 4.5 |", "| 3.1 / 16.0 |")
         r = checks.parse_report(text, "real")
@@ -198,6 +204,33 @@ class TheComparison(unittest.TestCase):
                                  "Radarr's `/queue` at p50 (1.5 ms against 1.2)"])
         self.assertTrue(checks.slower_sentence(r).startswith("On the real library, measured at `ff4c366`: Sonarr's"))
         self.assertIn("2 slower than the original's", checks.history_note(r, "radarr", "9.1.2.3456", 28))
+
+
+class MainIsProtected(unittest.TestCase):
+    RULE = {"type": "pull_request", "ruleset_id": 7, "ruleset_source_type": "Repository",
+            "parameters": {"required_approving_review_count": 1}}
+
+    def test_an_approved_pull_request_this_token_cannot_bypass(self):
+        self.assertEqual(checks.protection_problems([self.RULE], {7: {"name": "main",
+                                                                    "current_user_can_bypass": "never"}}), [])
+
+    def test_what_leaves_main_open(self):
+        never = {7: {"name": "main", "current_user_can_bypass": "never"}}
+        cases = {
+            "no rule": ([], never),
+            "rules not read": ({"message": "Not Found"}, never),
+            "a pull request without approval": ([{**self.RULE, "parameters": {"required_approving_review_count": 0}}],
+                                                never),
+            "a token that bypasses it": ([self.RULE], {7: {"name": "main", "current_user_can_bypass": "always"}}),
+            "a token that bypasses it by a PR": ([self.RULE], {7: {"name": "main",
+                                                                   "current_user_can_bypass": "pull_requests_only"}}),
+            "a bypass not said": ([self.RULE], {7: {"name": "main"}}),
+            "a ruleset not read": ([self.RULE], {}),
+            "only other rules": ([{"type": "deletion", "ruleset_id": 7}], never),
+        }
+        for what, (rules, rulesets) in cases.items():
+            with self.subTest(what):
+                self.assertTrue(checks.protection_problems(rules, rulesets))
 
 
 class TheAudit(unittest.TestCase):

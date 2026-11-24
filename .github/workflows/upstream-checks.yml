@@ -53,8 +53,6 @@ on:
       replays: { type: boolean, default: true }
       old_pin_request: { type: string, default: "" }
       old_pin_wait: { type: number, default: 0 }
-    secrets:
-      UPSTREAM_BOT_TOKEN: { required: false }
 
 permissions: {}
 
@@ -95,9 +93,12 @@ jobs:
           PR_JSON="$RUNNER_TEMP/pr.json" make -s upstream-checks-plan | tee -a "$GITHUB_OUTPUT"
 
   # The originals run here. No permission (the repository is public: the
-  # checkout needs none), no secret, no credential left in git, caches
-  # read and never saved, so nothing it touches reaches another job but
-  # the artifact.
+  # checkout needs none), no secret, no credential left in git, caches read
+  # and never saved. And they run as a user of their own, `originals`, with
+  # no sudo and outside the docker group: the runner's user is root in all
+  # but name, and could read the runtime token from the runner's process,
+  # with which a cache entry in main's scope can be written (ci.yml builds
+  # the image from such caches). The steps that need root come before.
   run:
     needs: plan
     runs-on: ubuntu-latest
@@ -122,25 +123,53 @@ jobs:
         with:
           path: work/.cache/radarr/*.tar.gz
           key: radarr-release-${{ hashFiles('work/scripts/radarr-fixture.sh', 'work/upstream/radarr.pin') }}
-      # The fixtures' root folders, which the fixture scripts empty and
-      # mark as their own; the network namespace of compare-originals.py,
-      # which Ubuntu's AppArmor refuses to an unprivileged user by default;
-      # the disk the comparison's build needs.
+      # The network namespace of compare-originals.py, which Ubuntu's
+      # AppArmor refuses to an unprivileged user by default; the disk.
       - name: The machine
         run: |
-          sudo install -d -o "$(id -u)" -g "$(id -g)" /movies /tv /downloads
           sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
           sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
           df -h /
+      # The web UIs and the originals out of the tarballs (nothing runs
+      # them yet); unarrd built from the branch, outside its tree.
       - run: make -C work ui
       - run: make -C work build
+        env: { CARGO_TARGET_DIR: "${{ runner.temp }}/target" }
+      # The user that runs the originals, with a copy of the two trees and
+      # the fixtures' root folders; the runner's home closed to it.
+      - name: The user that runs the originals
+        run: |
+          sudo useradd --create-home --shell /bin/bash originals
+          sudo install -d -o originals -g originals /movies /tv /downloads /srv/checks /srv/checks/out
+          sudo cp -a trusted work /srv/checks/
+          sudo install -D -m 755 "$RUNNER_TEMP/target/release/unarrd" /srv/checks/work/target/release/unarrd
+          sudo chown -R originals:originals /srv/checks
+          sudo chmod 700 "$HOME"
+          id originals
+          echo "kernel.yama.ptrace_scope = $(cat /proc/sys/kernel/yama/ptrace_scope)"
+          # What it must not have: sudo, the docker socket, the runner's processes.
+          if sudo -u originals sudo -n true 2>/dev/null; then echo "originals has sudo"; exit 1; fi
+          if sudo -u originals test -w /var/run/docker.sock; then echo "originals can use docker"; exit 1; fi
+          for pid in $(pgrep -f 'Runner\.(Worker|Listener)'); do
+            if sudo -u originals cat "/proc/$pid/environ" >/dev/null 2>&1; then echo "originals reads the runner's process $pid"; exit 1; fi
+          done
       - name: The checks
         env:
-          WORK: ${{ github.workspace }}/work
           CHECK_APP: ${{ needs.plan.outputs.app }}
           CHECKS: ${{ needs.plan.outputs.checks }}
-          CHECKS_OUT: ${{ runner.temp }}/checks
-        run: make -s -C trusted upstream-checks-run
+        run: |
+          sudo -u originals -H env -i PATH=/usr/local/bin:/usr/bin:/bin HOME=/home/originals LANG=C.UTF-8 \
+            WORK=/srv/checks/work CHECK_APP="$CHECK_APP" CHECKS="$CHECKS" CHECKS_OUT=/srv/checks/out \
+            make -s -C /srv/checks/trusted upstream-checks-run
+      # Its results, without what is not a plain file or folder (a link
+      # could name a file of the runner): apply checks them again.
+      - name: The results
+        if: always()
+        run: |
+          mkdir -p "$RUNNER_TEMP/checks"
+          sudo cp -R --no-dereference /srv/checks/out/. "$RUNNER_TEMP/checks/"
+          sudo find "$RUNNER_TEMP/checks" -mindepth 1 ! -type f ! -type d -delete
+          sudo chown -R "$(id -u):$(id -g)" "$RUNNER_TEMP/checks"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: upstream-checks-results
@@ -167,14 +196,16 @@ jobs:
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with: { ref: main, path: trusted, persist-credentials: false }
-      # The token that pushes: UPSTREAM_BOT_TOKEN when the maintainer set
-      # one, so that CI runs on the commits; else the job's, on whose
-      # pushes GitHub starts no workflow.
+      # This job's token may write contents: it goes on only when a
+      # ruleset keeps it off main (upstream/README.md).
+      - name: main is protected from this token
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: make -s -C trusted upstream-main-protected
+      # The job's own token pushes: GitHub starts no workflow on its pushes.
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
           ref: ${{ needs.plan.outputs.branch }}
           path: work
-          token: ${{ secrets.UPSTREAM_BOT_TOKEN || github.token }}
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           name: upstream-checks-results

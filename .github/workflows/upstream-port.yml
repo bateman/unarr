@@ -8,16 +8,16 @@ name: upstream-port
 # The agent never runs an original: UNARR_NO_ORIGINAL makes the fixture
 # scripts extract the web UI alone and refuse `golden` and `shell`, and the
 # comparison refuse to start; what needs an original is the upstream-checks
-# workflow's. Its token can push to the branch, edit the PR and open issues;
-# it cannot touch workflows or secrets, and the agent has no `gh api` to
-# approve or merge with. After the agent, main's script checks every commit
-# it pushed and the PR's title and body for authorship and tool names.
+# workflow's. The agent has the job's own token, never another: it can push
+# to the branch, edit the PR and open issues, and the job starts only when a
+# ruleset keeps it off main (it could otherwise push there, or merge a PR,
+# through the API). GitHub starts no CI on its pushes. After the agent,
+# main's script checks every commit it pushed and the PR's title and body
+# for authorship and tool names.
 #
-# Secrets the maintainer sets (Settings > Secrets and variables > Actions):
-# CLAUDE_CODE_OAUTH_TOKEN (or ANTHROPIC_API_KEY); UPSTREAM_BOT_TOKEN, a
-# fine-grained token on this repository only (contents, pull requests and
-# issues: read and write), optional: without it the job's own token pushes,
-# and GitHub starts no CI on its pushes.
+# The secret the maintainer sets (Settings > Secrets and variables >
+# Actions): ANTHROPIC_API_KEY, a key of its own with a spend limit
+# (upstream/README.md says why).
 
 on:
   workflow_dispatch:
@@ -30,9 +30,7 @@ on:
     inputs:
       pr: { required: true, type: number }
     secrets:
-      CLAUDE_CODE_OAUTH_TOKEN: { required: false }
-      ANTHROPIC_API_KEY: { required: false }
-      UPSTREAM_BOT_TOKEN: { required: false }
+      ANTHROPIC_API_KEY: { required: true }
 
 permissions: {}
 
@@ -68,6 +66,9 @@ jobs:
             --json number,state,isDraft,baseRefName,headRefName,headRefOid,isCrossRepository,headRepository,headRepositoryOwner,labels \
             > "$RUNNER_TEMP/pr.json"
           PR_JSON="$RUNNER_TEMP/pr.json" make -s upstream-port-plan
+      - name: main is protected from the job's token
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: make -s upstream-main-protected
 
   port:
     needs: plan
@@ -87,14 +88,16 @@ jobs:
           ref: ${{ needs.plan.outputs.branch }}
           fetch-depth: 0
           persist-credentials: false
-      # main's helper, out of the agent's tree: the commit-msg hook, the
-      # review comments, the check after the run.
-      - name: Main's helper and the commit-msg hook
+      # main's helpers, out of the agent's tree: the commit-msg hook, the
+      # review comments, the check after the run, main's protection.
+      - name: Main's helpers and the commit-msg hook
         id: start
         run: |
           git fetch -q origin main
           mkdir -p "$RUNNER_TEMP/upstream"
-          git show origin/main:scripts/upstream-port.py > "$RUNNER_TEMP/upstream/upstream-port.py"
+          for f in upstream-port.py upstream-checks.py; do
+            git show "origin/main:scripts/$f" > "$RUNNER_TEMP/upstream/$f"
+          done
           # shellcheck disable=SC2016 # "$1" is the hook's own argument
           printf '#!/bin/sh\nexec python3 -I "%s" commit-msg "$1"\n' "$RUNNER_TEMP/upstream/upstream-port.py" > .git/hooks/commit-msg
           chmod +x .git/hooks/commit-msg
@@ -112,8 +115,18 @@ jobs:
         with:
           path: .cache/radarr/*.tar.gz
           key: radarr-release-${{ hashFiles('scripts/radarr-fixture.sh', 'upstream/radarr.pin') }}
+      # With this job's own token, the one the agent gets.
+      - name: main is protected from this token
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: python3 -I "$RUNNER_TEMP/upstream/upstream-checks.py" main-protected
+      # bubblewrap, for the agent's commands to run without the API key in
+      # their environment (CLAUDE_CODE_SUBPROCESS_ENV_SCRUB below); the
+      # user namespaces it needs; the disk.
       - name: The machine
         run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends bubblewrap
+          sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
           sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
           df -h /
       # The web UIs (UNARR_NO_ORIGINAL: no original's binary on disk).
@@ -132,11 +145,13 @@ jobs:
         timeout-minutes: ${{ fromJSON(needs.plan.outputs.step_minutes) }}
         uses: anthropics/claude-code-action@4fa93a88de49bbef68b10eb15aabedf28ca0e1ed # v1.0.271
         env:
-          GH_TOKEN: ${{ secrets.UPSTREAM_BOT_TOKEN || github.token }}
+          GH_TOKEN: ${{ github.token }}
+          # The agent's commands run without the Anthropic key, the
+          # runtime token and the action's own in their environment.
+          CLAUDE_CODE_SUBPROCESS_ENV_SCRUB: "1"
         with:
-          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          github_token: ${{ secrets.UPSTREAM_BOT_TOKEN || github.token }}
+          github_token: ${{ github.token }}
           prompt: ${{ steps.prompt.outputs.text }}
           # No co-author and no line naming the tool, in commits and PRs.
           settings: '{"attribution": {"commit": "", "pr": ""}, "includeCoAuthoredBy": false}'
@@ -144,7 +159,7 @@ jobs:
             --model claude-opus-5-5
             --max-turns ${{ needs.plan.outputs.turns }}
             --max-budget-usd ${{ needs.plan.outputs.budget }}
-            --allowedTools "Read,Edit,Write,Glob,Grep,TodoWrite,Bash(git:*),Bash(cargo:*),Bash(make:*),Bash(python3:*),Bash(gh pr view:*),Bash(gh pr diff:*),Bash(gh pr checks:*),Bash(gh pr edit:*),Bash(gh pr comment:*),Bash(gh pr ready:*),Bash(gh issue view:*),Bash(gh issue list:*),Bash(gh issue create:*),Bash(gh release view:*),Bash(gh release list:*),Bash(curl:*),Bash(ls:*),Bash(cat:*),Bash(head:*),Bash(tail:*),Bash(wc:*),Bash(sort:*),Bash(uniq:*),Bash(cut:*),Bash(tr:*),Bash(diff:*),Bash(find:*),Bash(grep:*),Bash(rg:*),Bash(sed:*),Bash(awk:*),Bash(jq:*),Bash(echo:*),Bash(printf:*),Bash(date:*),Bash(mkdir:*),Bash(cp:*),Bash(mv:*),Bash(rm:*),Bash(touch:*),Bash(sha256sum:*),Bash(file:*),Bash(stat:*),Bash(du:*),Bash(df:*),Bash(free:*),Bash(nproc:*),Bash(sleep:*),Bash(pwd),Bash(test:*)"
+            --allowedTools "Read,Edit,Write,Glob,Grep,TodoWrite,Bash(git:*),Bash(cargo:*),Bash(make:*),Bash(python3:*),Bash(gh pr view:*),Bash(gh pr diff:*),Bash(gh pr checks:*),Bash(gh pr edit:*),Bash(gh pr comment:*),Bash(gh pr ready:*),Bash(gh issue view:*),Bash(gh issue list:*),Bash(gh issue create:*),Bash(gh release view:*),Bash(gh release list:*),Bash(ls:*),Bash(cat:*),Bash(head:*),Bash(tail:*),Bash(wc:*),Bash(sort:*),Bash(uniq:*),Bash(cut:*),Bash(tr:*),Bash(diff:*),Bash(find:*),Bash(grep:*),Bash(rg:*),Bash(sed:*),Bash(awk:*),Bash(jq:*),Bash(echo:*),Bash(printf:*),Bash(date:*),Bash(mkdir:*),Bash(cp:*),Bash(mv:*),Bash(rm:*),Bash(touch:*),Bash(sha256sum:*),Bash(file:*),Bash(stat:*),Bash(du:*),Bash(df:*),Bash(free:*),Bash(nproc:*),Bash(sleep:*),Bash(pwd),Bash(test:*)"
             --disallowedTools "WebFetch,WebSearch,Bash(gh api:*),Bash(gh pr merge:*),Bash(gh pr review:*),Bash(gh pr close:*),Bash(gh workflow:*),Bash(gh run:*),Bash(gh secret:*),Bash(gh variable:*),Bash(gh auth:*),Bash(gh repo:*),Bash(git push --force:*),Bash(git push -f:*),Bash(git push --force-with-lease:*),Bash(git commit --no-verify:*),Bash(git commit -n:*),Bash(git config:*),Bash(make golden:*),Bash(make golden-radarr:*),Bash(make sonarr:*),Bash(make radarr:*),Bash(make compare-originals:*),Bash(make route-percentiles:*),Bash(make http-audit:*)"
       # Whatever became of the agent (its limit included): what it left on
       # the branch and on the PR, checked by main's script.

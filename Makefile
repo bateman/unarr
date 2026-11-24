@@ -156,7 +156,10 @@ check-name: ## Check a project name on crates.io, PyPI, npm, Docker Hub, brew, A
 # The workflows that follow upstream (issue #9): .github/workflows/upstream-checks.yml
 # and upstream-port.yml call these. Their values come from the environment and are
 # read by the shell ($$NAME), never expanded by make: a workflow input is data.
-.PHONY: upstream-checks-plan upstream-checks-run upstream-checks-apply upstream-port-plan
+.PHONY: upstream-checks-plan upstream-checks-run upstream-checks-apply upstream-port-plan upstream-main-protected
+
+upstream-main-protected: ## Refuse unless a ruleset on main asks for an approved pull request that the token GH_TOKEN cannot bypass (GITHUB_REPOSITORY)
+	@python3 -I scripts/upstream-checks.py main-protected
 
 upstream-checks-plan: ## The port's PR and the checks asked for, as a job's outputs (PR_JSON from gh pr view, PR, RECORDINGS, HTTP_AUDIT, COMPARE, REPLAYS, OLD_PIN_REQUEST, OLD_PIN_WAIT)
 	@python3 -I scripts/upstream-checks.py plan --pr-json "$$PR_JSON" --pr "$$PR" --repository "$$GITHUB_REPOSITORY" \

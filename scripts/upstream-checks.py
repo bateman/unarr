@@ -450,7 +450,10 @@ def audit_result(code: int, text: str) -> dict:
             "requests": requests, "different": different}
 
 
-def compare(libraries: list[str], out: Path, logs: Path) -> dict:
+def compare(libraries: list[str], out: Path, logs: Path, unarrd: Path, head: str) -> dict:
+    """`make compare-originals`'s script with the unarrd the job built (the
+    user that runs the originals has no cargo), named in the report by the
+    commit it was built from, as a build by the script names it."""
     results = {}
     for lib in libraries:
         if lib == "scaled":
@@ -458,17 +461,24 @@ def compare(libraries: list[str], out: Path, logs: Path) -> dict:
             if code != 0:
                 results[lib] = {"status": "failed", "exit": code}
                 continue
-        code = run_logged(["make", "-s", "compare-originals", f"LIBRARY={lib}"], logs / f"compare-{lib}.log",
-                          timeout=3 * 3600)
+        code = run_logged([sys.executable, "-I", str(WORK / "scripts" / "compare-originals.py"), "--library", lib,
+                           "--repeat", "1", "--unarrd", str(unarrd)], logs / f"compare-{lib}.log", timeout=3 * 3600)
         report = cache_root() / "compare" / lib / "report.md"
         if code != 0 or not report.is_file():
             results[lib] = {"status": "failed", "exit": code}
             continue
         dest = out / "compare" / lib
         dest.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(report, dest / "report.md")
+        (dest / "report.md").write_text(name_the_build(report.read_text(), unarrd, head))
         results[lib] = {"status": "ok", "exit": 0}
     return results
+
+
+def name_the_build(report: str, unarrd: Path, head: str) -> str:
+    """The report names a binary given with --unarrd by its path: the job
+    built it from `head`, so the commit takes the path's place."""
+    path = str(unarrd.resolve())
+    return report.replace(f"Unarr `{path}, sha256 ", f"Unarr `{head[:7]}, sha256 ", 1)
 
 
 def replays(app: str, unarrd: Path, out: Path, logs: Path, exchange: Path | None) -> dict:
@@ -543,12 +553,82 @@ def cmd_run(args) -> int:
     if checks.get("http_audit"):
         step("http-audit", lambda: http_audit(app, unarrd, out, logs))
     for lib in checks.get("compare", []):
-        step(f"compare:{lib}", lambda lib=lib: compare([lib], out, logs)[lib])
+        step(f"compare:{lib}", lambda lib=lib: compare([lib], out, logs, unarrd, head)[lib])
     if checks.get("replays"):
         step("replays", lambda: replays(app, unarrd, out, logs, exchange))
     report["seconds"] = round(time.monotonic() - started)
     (out / "report.json").write_text(json.dumps(report, indent=1, sort_keys=True) + "\n")
     log(f"done in {report['seconds']} s; {out / 'report.json'}")
+    return 0
+
+
+# --- main is protected from the workflows' tokens -----------------------------
+
+# A token that may write contents can push to main and merge a PR through the
+# API unless a ruleset stops it. The workflows that write (the port's agent,
+# apply) start only when main has a rule that asks for a pull request with at
+# least one approval, in a ruleset that this token cannot bypass: the job's
+# token cannot approve a PR (Settings > Actions > General, "Allow GitHub
+# Actions to create and approve pull requests", off), so it can merge none.
+
+
+def protection_problems(rules: list, rulesets: dict) -> list[str]:
+    """Why main is not protected from the token that read `rulesets`
+    (`current_user_can_bypass` is the reader's own): an empty list when it is."""
+    if not isinstance(rules, list):
+        return ["the rules of main could not be read"]
+    found = []
+    for rule in rules:
+        if not isinstance(rule, dict) or rule.get("type") != "pull_request":
+            continue
+        params = rule.get("parameters") or {}
+        count = params.get("required_approving_review_count")
+        if not isinstance(count, int) or isinstance(count, bool) or count < 1:
+            found.append("a pull_request rule asks for no approval")
+            continue
+        ruleset = rulesets.get(rule.get("ruleset_id"))
+        if not isinstance(ruleset, dict):
+            found.append(f"the ruleset {rule.get('ruleset_id')!r} of a pull_request rule could not be read")
+            continue
+        bypass = ruleset.get("current_user_can_bypass")
+        if bypass != "never":
+            found.append(f"the ruleset {ruleset.get('name')!r}: this token can bypass it ({bypass!r})")
+            continue
+        return []
+    return found or ["no active ruleset asks for a pull request on main"]
+
+
+def github_get(path: str, token: str) -> object:
+    api = os.environ.get("GITHUB_API_URL", "https://api.github.com")
+    req = urllib.request.Request(f"{api}{path}", headers={
+        "Authorization": f"Bearer {token}", "Accept": "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28"})
+    with urllib.request.urlopen(req, timeout=60) as r:
+        return json.loads(r.read())
+
+
+def cmd_main_protected(args) -> int:
+    repository = os.environ.get("GITHUB_REPOSITORY", "")
+    token = os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN") or ""
+    if not re.match(r"^[\w.-]+/[\w.-]+$", repository) or not token:
+        die("GITHUB_REPOSITORY and GH_TOKEN are needed")
+    try:
+        rules = github_get(f"/repos/{repository}/rules/branches/main", token)
+        ids = {r.get("ruleset_id") for r in rules if isinstance(r, dict) and r.get("type") == "pull_request"} \
+            if isinstance(rules, list) else set()
+        rulesets = {i: github_get(f"/repos/{repository}/rulesets/{int(i)}", token)
+                    for i in ids if isinstance(i, int)}
+    except (OSError, ValueError) as err:
+        die(f"the rules of main could not be read: {err}")
+    problems = protection_problems(rules, rulesets)
+    if problems:
+        print("main is not protected from this workflow's token, which may write: "
+              + "; ".join(problems) + ". Set a ruleset on main (Settings > Rules > Rulesets) that requires a pull "
+              "request with at least one approval, with no bypass for GitHub Actions or this token, and keep "
+              "\"Allow GitHub Actions to create and approve pull requests\" off (Settings > Actions > General). "
+              "upstream/README.md says why.", file=sys.stderr)
+        return 1
+    print("main asks for an approved pull request, and this token cannot bypass it")
     return 0
 
 
@@ -951,8 +1031,8 @@ def render_comment(result: dict, app: str, version: str, head: str, run_url: str
         out += ["", "Recorded again but not committed, in the run's artifact `upstream-checks-results`: "
                 + ", ".join(f"`{k}`" for k in result["kept"]) + "."]
     if result["commits"]:
-        out += ["", "Pushed with the job's own token, the commits start no CI by themselves (they do with "
-                "`UPSTREAM_BOT_TOKEN` set): the next push to the branch runs it."]
+        out += ["", "Pushed with the job's own token, the commits start no CI by themselves: the next push of a "
+                "person to the branch runs it."]
     for title, text in result["details"]:
         block = ["", f"<details><summary>{title}</summary>", "", fence(text), "", "</details>"]
         # A comment holds 65536 characters at most: what does not fit is
@@ -991,8 +1071,10 @@ def main(argv: list[str] | None = None) -> int:
     a.add_argument("--head", required=True, help="the commit the checks ran at")
     a.add_argument("--comment", required=True, help="where to write the PR comment")
     a.add_argument("--run-url", default="")
+    sub.add_parser("main-protected", help="refuse unless main is protected from this token (GH_TOKEN)")
     args = ap.parse_args(argv)
-    return {"plan": cmd_plan, "run": cmd_run, "apply": cmd_apply}[args.cmd](args)
+    return {"plan": cmd_plan, "run": cmd_run, "apply": cmd_apply,
+            "main-protected": cmd_main_protected}[args.cmd](args)
 
 
 if __name__ == "__main__":
