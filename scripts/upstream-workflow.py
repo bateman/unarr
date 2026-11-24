@@ -226,7 +226,9 @@ def check_plan(plan: dict) -> dict:
 
 
 def counts_text(summary: dict) -> str:
-    return ", ".join(f"{n} {c}" for c, n in summary.items() if isinstance(n, int) and c in triage.CLASSES) or "none"
+    # In the order of the classes, whatever the order of the JSON it was read from.
+    return ", ".join(f"{summary[c]} {c}" for c in triage.CLASSES
+                     if isinstance(summary.get(c), int) and summary[c]) or "none"
 
 
 def compare_link(facts: dict) -> str:
@@ -620,7 +622,7 @@ def cmd_pr(args) -> int:
     auth = {"GIT_CONFIG_COUNT": "1", "GIT_CONFIG_KEY_0": f"http.{server}/.extraheader",
             "GIT_CONFIG_VALUE_0": f"AUTHORIZATION: basic {basic}"}
     # No force: a branch someone pushed in the meantime refuses this one.
-    git("push", "origin", f"HEAD:refs/heads/{branch}", env=auth)
+    git("push", args.remote, f"HEAD:refs/heads/{branch}", env=auth)
     log(f"pushed {branch}")
 
     run_url = ""
@@ -673,6 +675,7 @@ def main(argv: list[str] | None = None) -> int:
     r.add_argument("--plan", required=True)
     r.add_argument("--work", required=True)
     r.add_argument("--base", default="main")
+    r.add_argument("--remote", default="origin", help="where to push (default: origin)")
     r.add_argument("--github-output", default=os.environ.get("GITHUB_OUTPUT"))
     args = ap.parse_args(argv)
     try:

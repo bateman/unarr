@@ -34,7 +34,7 @@ wf = sys.modules.get("upstream_workflow") or load("upstream_workflow", "upstream
 REPO_SLUG = "bateman/unarr"
 
 
-def report(target="7.0.3.10918", jump="major", cursor="6.4.4.10600"):
+def report(target="7.0.3.10950", jump="major", cursor="6.4.4.10600"):
     """A triage report as scripts/upstream-triage.py makes it."""
     return {
         "app": "radarr", "branch": "master", "cursor": "a96bf7c3ecb23cb76993770727285dc17a613fbc",
@@ -54,8 +54,9 @@ def pull(number, ref, repo=REPO_SLUG, draft=True):
             "head": {"ref": ref, "repo": {"full_name": repo}}}
 
 
-# Today on main: the cursor at the 6.4.4 pin and #28 open from radarr/upstream-7.0.3.10918.
-PR_28 = pull(28, "radarr/upstream-7.0.3.10918")
+# The case of today on main, with made-up versions (a pinned one may be written only in its pin):
+# the cursor at 6.4 and #28 open from the branch of the release the triage chooses.
+PR_28 = pull(28, "radarr/upstream-7.0.3.10950")
 
 
 class Decide(unittest.TestCase):
@@ -66,7 +67,7 @@ class Decide(unittest.TestCase):
     def test_today_radarr_ends_on_the_port_already_open(self):
         for event in ("schedule", "workflow_dispatch"):
             plan = self.decide(report(), [PR_28, pull(43, "core/porting-after-radarr-trial")],
-                               ["radarr/upstream-7.0.3.10918"], event=event)
+                               ["radarr/upstream-7.0.3.10950"], event=event)
             self.assertEqual(plan["action"], "open")
             self.assertEqual(plan["pr"], 28)
             self.assertTrue(plan["message"].startswith("port already open: #28"), plan["message"])
@@ -114,7 +115,7 @@ class Decide(unittest.TestCase):
         self.assertEqual(self.decide(rep, app="sonarr", event="workflow_dispatch")["action"], "bump")
 
     def test_the_branch_name_follows_claude_md(self):
-        self.assertEqual(wf.branch_name("radarr", "7.0.3.10918"), "radarr/upstream-7.0.3.10918")
+        self.assertEqual(wf.branch_name("radarr", "7.0.3.10950"), "radarr/upstream-7.0.3.10950")
         for app, target in (("radarr", "7.0.3"), ("lidarr", "1.0.0.1"), ("radarr", "7.0.3.1; rm -rf /")):
             with self.assertRaises(SystemExit):
                 wf.branch_name(app, target)
@@ -143,10 +144,10 @@ class Plan(unittest.TestCase):
         return json.loads((self.tmp / "out" / "plan.json").read_text()), outputs, triage
 
     def test_today_on_radarr_the_run_is_green_and_says_28(self):
-        plan, outputs, _ = self.run_plan(report(), [PR_28], ["radarr/upstream-7.0.3.10918"])
+        plan, outputs, _ = self.run_plan(report(), [PR_28], ["radarr/upstream-7.0.3.10950"])
         self.assertEqual(outputs["action"], "open")
         self.assertEqual(outputs["pr"], "28")
-        self.assertEqual(outputs["message"], "port already open: #28 (radarr/upstream-7.0.3.10918)")
+        self.assertEqual(outputs["message"], "port already open: #28 (radarr/upstream-7.0.3.10950)")
         self.assertEqual(plan["triage"]["commits"], 109)
 
     def test_sonarr_off_for_the_schedule_runs_no_triage(self):
@@ -155,7 +156,7 @@ class Plan(unittest.TestCase):
         triage.assert_not_called()
 
     def test_a_target_by_hand_must_be_a_version(self):
-        for bad in ("7.0.3", "v7.0.3.10918", "7.0.3.1$(id)"):
+        for bad in ("7.0.3", "v7.0.3.10950", "7.0.3.1$(id)"):
             with self.assertRaises(SystemExit):
                 self.run_plan(report(), [], [], event="workflow_dispatch", target=bad)
 
@@ -181,20 +182,22 @@ class Texts(unittest.TestCase):
     def test_the_issue_of_a_major_names_the_release_and_counts_no_subject(self):
         plan = self.plan(action="announce", event="schedule")
         title, body = wf.render_issue(plan)
-        self.assertEqual(title, "Radarr 7.0.3.10918 is out")
+        self.assertEqual(title, "Radarr 7.0.3.10950 is out")
         self.assertIn("109 upstream commits", body)
         self.assertIn("8 schema, 17 routes, 47 backend, 15 ui, 2 test, 20 none", body)
+        plan["triage"]["summary"] = dict(sorted(plan["triage"]["summary"].items()))
+        self.assertIn("8 schema, 17 routes, 47 backend, 15 ui, 2 test, 20 none", wf.render_issue(plan)[1])
         self.assertIn("Migrations added: 243.", body)
-        self.assertIn("https://github.com/Radarr/Radarr/compare/a96bf7c3ecb2...v7.0.3.10918", body)
+        self.assertIn("https://github.com/Radarr/Radarr/compare/a96bf7c3ecb2...v7.0.3.10950", body)
         self.assertNotIn("@", body)
 
     def test_an_open_issue_of_the_same_title_is_not_opened_again(self):
-        issues = [{"number": 3, "title": "Radarr 7.0.3.10918 is out", "pull_request": {}},
-                  {"number": 50, "title": "Radarr 7.0.3.10918 is out"}]
-        self.assertEqual(wf.find_open_issue(issues, "Radarr 7.0.3.10918 is out"), 50)
-        self.assertIsNone(wf.find_open_issue(issues[:1], "Radarr 7.0.3.10918 is out"))
+        issues = [{"number": 3, "title": "Radarr 7.0.3.10950 is out", "pull_request": {}},
+                  {"number": 50, "title": "Radarr 7.0.3.10950 is out"}]
+        self.assertEqual(wf.find_open_issue(issues, "Radarr 7.0.3.10950 is out"), 50)
+        self.assertIsNone(wf.find_open_issue(issues[:1], "Radarr 7.0.3.10950 is out"))
 
-    SUMMARY = {"app": "radarr", "to": {"version": "7.0.3.10918", "tag": "v7.0.3.10918",
+    SUMMARY = {"app": "radarr", "to": {"version": "7.0.3.10950", "tag": "v7.0.3.10950",
                                        "commit": "af772b051ac27a0615c7f8b7f78622b6dc183be0"},
                "recordings": {"files": 908, "changed": 256, "failed_lists": []},
                "tests": {"passed": 792, "failed": 10, "failures": [],
@@ -204,9 +207,9 @@ class Texts(unittest.TestCase):
     def test_the_pull_request_opens_with_the_short_body_of_porting(self):
         title, body = wf.render_pr(self.plan(), self.SUMMARY, "242", "https://github.com/bateman/unarr/actions/runs/1",
                                    own_token=True)
-        self.assertEqual(title, "Radarr 6.4.4.10600 → 7.0.3.10918")
+        self.assertEqual(title, "Radarr 6.4.4.10600 → 7.0.3.10950")
         self.assertTrue(body.startswith("## Release\n"))
-        self.assertIn("a **major** jump. Tag `v7.0.3.10918` at `af772b051ac27a0615c7f8b7f78622b6dc183be0`.", body)
+        self.assertIn("a **major** jump. Tag `v7.0.3.10950` at `af772b051ac27a0615c7f8b7f78622b6dc183be0`.", body)
         self.assertIn("908 recordings, 256 changed beyond the instants", body)
         self.assertIn("`cargo test --workspace` 792 passed, 10 failed", body)
         self.assertIn("`make test-scripts` failed on `test_the_shipped_cursors_are_at_the_pins`", body)
@@ -235,7 +238,7 @@ class Texts(unittest.TestCase):
         self.assertIn("artifact `bump-radarr`", comment)
 
     def test_a_plan_with_odd_values_is_refused(self):
-        for over in ({"target": "7.0.3.10918; id"}, {"jump": "huge"}, {"branch": "main"}, {"app": "lidarr"},
+        for over in ({"target": "7.0.3.10950; id"}, {"jump": "huge"}, {"branch": "main"}, {"app": "lidarr"},
                      {"action": "merge"}):
             with self.assertRaises(SystemExit):
                 self.plan(**over)
