@@ -100,6 +100,9 @@ class TheInputs(unittest.TestCase):
         self.assertEqual(out["app"], "radarr")
         self.assertEqual(out["head"], HEAD)
         self.assertEqual(json.loads(out["checks"])["recordings"], ["recyclarr"])
+        # One name per PR and commit: two runs of the checks in one run of
+        # upstream-loop.yml, or of two personalities, never share one.
+        self.assertEqual(out["artifact"], f"upstream-checks-results-28-{HEAD[:12]}")
 
 
 class TheRecordings(unittest.TestCase):
@@ -325,9 +328,9 @@ class TheArtifact(unittest.TestCase):
     def test_the_comment_stays_within_githubs_limit(self):
         result = {"commits": [], "kept": [], "rows": [],
                   "details": [(f"part {i}", ("y" * 100 + "\n") * 79) for i in range(12)]}
-        text = checks.render_comment(result, "radarr", "9.1.2.3456", HEAD, "")
+        text = checks.render_comment(result, "radarr", "9.1.2.3456", HEAD, "", 28)
         self.assertLessEqual(len(text), checks.MAX_COMMENT + 200)
-        self.assertIn("in the artifact `upstream-checks-results` (too long", text)
+        self.assertIn(f"in the artifact `upstream-checks-results-28-{HEAD[:12]}` (too long", text)
 
 
 class Applying(unittest.TestCase):

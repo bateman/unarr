@@ -14,6 +14,10 @@
 #   publish-<app>   the bump applied, the summary, the branch pushed, and with
 #                   UPSTREAM_TOKEN the draft PR opened with its label (write
 #                   token; nothing of the new tarball runs there)
+#   loop-<app>      on the draft PR this run opened, and only on it: the
+#                   port's agent and the checks with the original, in rounds
+#                   (upstream-loop.yml); it ends green, saying what is
+#                   missing, without ANTHROPIC_API_KEY or main's ruleset
 #
 # What decides is in scripts/upstream-workflow.py, through Make. The two
 # chains are the same steps (YAML anchors): an error in one does not stop
@@ -252,7 +256,9 @@ jobs:
     permissions: { contents: write, pull-requests: read }
     concurrency: { group: upstream-publish-radarr, cancel-in-progress: false }
     env: { APP: radarr }
-    # Where a later workflow hooks on: the draft PR this run opened.
+    # What loop-<app> hooks on: `opened` is true only for the draft PR this
+    # run opened (not a port found open since the plan, not a branch pushed
+    # without UPSTREAM_TOKEN).
     outputs:
       pr: ${{ steps.pr.outputs.pr }}
       branch: ${{ steps.pr.outputs.branch }}
@@ -260,6 +266,7 @@ jobs:
       target: ${{ steps.pr.outputs.target }}
       jump: ${{ steps.pr.outputs.jump }}
       url: ${{ steps.pr.outputs.url }}
+      opened: ${{ steps.pr.outputs.opened }}
     steps: &publish-steps
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with: { persist-credentials: false }
@@ -298,6 +305,23 @@ jobs:
           include-hidden-files: true
           if-no-files-found: warn
           retention-days: 30
+
+  # The agent and the checks on the PR publish-radarr opened. A major gets here
+  # only from a start by hand (on the schedule it is announced): that start
+  # is the one issue #9 asks for, so the agent goes on by itself. The token's
+  # permissions are the most the called jobs may ask for; the key goes by
+  # name to the workflow that checks it is set and hands it to the agent's
+  # job alone.
+  loop-radarr:
+    name: the port's agent and the checks (radarr)
+    needs: publish-radarr
+    if: needs.publish-radarr.outputs.opened == 'true'
+    permissions: { contents: write, pull-requests: write, issues: write }
+    uses: ./.github/workflows/upstream-loop.yml
+    with:
+      pr: ${{ fromJSON(needs.publish-radarr.outputs.pr) }}
+    secrets:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 
   plan-sonarr:
     name: plan (sonarr)
@@ -360,4 +384,16 @@ jobs:
       target: ${{ steps.pr.outputs.target }}
       jump: ${{ steps.pr.outputs.jump }}
       url: ${{ steps.pr.outputs.url }}
+      opened: ${{ steps.pr.outputs.opened }}
     steps: *publish-steps
+
+  loop-sonarr:
+    name: the port's agent and the checks (sonarr)
+    needs: publish-sonarr
+    if: needs.publish-sonarr.outputs.opened == 'true'
+    permissions: { contents: write, pull-requests: write, issues: write }
+    uses: ./.github/workflows/upstream-loop.yml
+    with:
+      pr: ${{ fromJSON(needs.publish-sonarr.outputs.pr) }}
+    secrets:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}

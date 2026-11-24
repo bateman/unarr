@@ -211,13 +211,22 @@ def parse_checks(recordings: str, http_audit, compare: str, replays, old_pin_req
     return checks
 
 
+def artifact_name(pr: int, head: str) -> str:
+    """The name of the results' artifact: one per PR and commit checked, so
+    that two runs of the checks in one run of a calling workflow (two
+    personalities, or two rounds of upstream-loop.yml on one PR at two
+    commits) do not ask for the same name, which GitHub refuses."""
+    return f"upstream-checks-results-{int(pr)}-{head[:12]}"
+
+
 def cmd_plan(args) -> int:
     pr = check_port_pr(json.loads(Path(args.pr_json).read_text()), args.repository)
     if args.pr is not None and int(args.pr) != pr["number"]:
         die(f"asked for PR #{args.pr}, read #{pr['number']}")
     checks = parse_checks(args.recordings, args.http_audit, args.compare, args.replays,
                           args.old_pin_request, args.old_pin_wait)
-    out = {"app": pr["app"], "branch": pr["branch"], "head": pr["head"], "checks": json.dumps(checks)}
+    out = {"app": pr["app"], "branch": pr["branch"], "head": pr["head"], "checks": json.dumps(checks),
+           "artifact": artifact_name(pr["number"], pr["head"])}
     for k, v in out.items():
         print(f"{k}={v}")
     return 0
@@ -661,9 +670,13 @@ def github_get(path: str, token: str) -> object:
         return json.loads(r.read())
 
 
-def cmd_main_protected(args) -> int:
-    repository = os.environ.get("GITHUB_REPOSITORY", "")
-    token = os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN") or ""
+PROTECT_HINT = ("Add a branch ruleset on main with \"Restrict updates\", active, with only the Repository admin "
+                "role in its bypass list (upstream/README.md, \"What the maintainer sets\").")
+
+
+def main_protection(repository: str, token: str) -> list[str]:
+    """Why main is not protected from `token`, asked of GitHub: an empty
+    list when it is. Stops when the rules cannot be read."""
     if not re.match(r"^[\w.-]+/[\w.-]+$", repository) or not token:
         die("GITHUB_REPOSITORY and GH_TOKEN are needed")
     try:
@@ -674,12 +687,15 @@ def cmd_main_protected(args) -> int:
                     for i in ids if isinstance(i, int)}
     except (OSError, ValueError) as err:
         die(f"the rules of main could not be read: {err}")
-    problems = protection_problems(rules, rulesets)
+    return protection_problems(rules, rulesets)
+
+
+def cmd_main_protected(args) -> int:
+    problems = main_protection(os.environ.get("GITHUB_REPOSITORY", ""),
+                               os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN") or "")
     if problems:
         print("main is not protected from this workflow's token, which may write: "
-              + "; ".join(problems) + ". Add a branch ruleset on main with \"Restrict updates\", active, with "
-              "only the Repository admin role in its bypass list (upstream/README.md, \"What the maintainer "
-              "sets\").", file=sys.stderr)
+              + "; ".join(problems) + ". " + PROTECT_HINT, file=sys.stderr)
         return 1
     print("main restricts updates to its bypass list, and this token cannot bypass it")
     return 0
@@ -1065,12 +1081,13 @@ def cmd_apply(args) -> int:
         if "replays.txt" in files and c["status"] != "ok":
             details.append(("Replays", files["replays.txt"].decode()))
     result = {"commits": commits, "kept": kept, "rows": rows, "details": details}
-    Path(args.comment).write_text(render_comment(result, app, version, args.head, run_url))
+    Path(args.comment).write_text(render_comment(result, app, version, args.head, run_url, int(args.pr)))
     print(json.dumps({"commits": commits, "kept": kept}))
     return 0
 
 
-def render_comment(result: dict, app: str, version: str, head: str, run_url: str) -> str:
+def render_comment(result: dict, app: str, version: str, head: str, run_url: str, pr: int = 0) -> str:
+    artifact = artifact_name(pr, head) if pr else "upstream-checks-results"
     out = [f"### Checks with the original {app.capitalize()} {version} running",
            "",
            f"Made by the upstream-checks workflow on `{head[:12]}`"
@@ -1081,7 +1098,7 @@ def render_comment(result: dict, app: str, version: str, head: str, run_url: str
            "|---|---|---|"]
     out += [f"| {what} | {sha or ''} | {outcome} |" for what, sha, outcome in result["rows"]]
     if result["kept"]:
-        out += ["", "Recorded again but not committed, in the run's artifact `upstream-checks-results`: "
+        out += ["", f"Recorded again but not committed, in the run's artifact `{artifact}`: "
                 + ", ".join(f"`{k}`" for k in result["kept"]) + "."]
     if result["commits"]:
         out += ["", "Pushed with the job's own token, the commits start no CI by themselves: the next push of a "
@@ -1091,7 +1108,7 @@ def render_comment(result: dict, app: str, version: str, head: str, run_url: str
         # A comment holds 65536 characters at most: what does not fit is
         # in the artifact.
         if len("\n".join(out + block)) > MAX_COMMENT:
-            out += ["", f"{title}: in the artifact `upstream-checks-results` (too long for this comment)."]
+            out += ["", f"{title}: in the artifact `{artifact}` (too long for this comment)."]
             continue
         out += block
     return "\n".join(out) + "\n"

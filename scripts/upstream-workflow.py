@@ -53,8 +53,9 @@ GitHub::
     token it stops after the push and leaves the title, the body and the
     comment in the work directory: the job's own token does not open pull
     requests (``upstream/README.md`` says why). Its outputs (``pr``,
-    ``branch``, ``app``, ``target``, ``jump``, ``url``) are what a later
-    workflow hooks on.
+    ``branch``, ``app``, ``target``, ``jump``, ``url``, and ``opened``,
+    ``true`` only when this run opened the PR) are what
+    ``upstream-loop.yml`` hooks on: it starts on ``opened`` alone.
 
 Upstream text (commit subjects, what the original answered) is data: no
 subject reaches a title, a body or an issue; the summary that is posted
@@ -664,7 +665,7 @@ def cmd_pr(args) -> int:
         print(again["message"])
         append_summary(f"**{APPS[app_key]}**: nothing pushed, {again['message']}")
         write_outputs(args.github_output, {"pr": again.get("pr", ""), "branch": "", "app": app_key,
-                                           "target": target, "jump": plan["jump"], "url": ""})
+                                           "target": target, "jump": plan["jump"], "url": "", "opened": "false"})
         return 0
 
     name, email = AUTHOR
@@ -705,11 +706,12 @@ def cmd_pr(args) -> int:
         compare = f"{server}/{gh.repo}/compare/{args.base}...{branch}?expand=1"
         msg = (f"pushed {branch}; no UPSTREAM_TOKEN, so no pull request: open it as a draft from {compare}, "
                f"with the title, the body and the first comment in the artifact bump-{app_key} "
-               f"(pr-title.txt, pr-body.md, pr-comment.md) and the label {plan['jump']}")
+               f"(pr-title.txt, pr-body.md, pr-comment.md) and the label {plan['jump']}; the port's agent and "
+               "the checks do not start: once the PR is open, start upstream-loop by hand with its number")
         print(msg)
         append_summary(f"**{app}**: {msg}")
         write_outputs(args.github_output, {"pr": "", "branch": branch, "app": app_key, "target": target,
-                                           "jump": plan["jump"], "url": compare})
+                                           "jump": plan["jump"], "url": compare, "opened": "false"})
         return 0
     pr = gh.call("POST", "/pulls", {"title": title, "head": branch, "base": args.base, "body": pr_body,
                                      "draft": True, "maintainer_can_modify": True})
@@ -725,7 +727,7 @@ def cmd_pr(args) -> int:
     print(msg)
     append_summary(f"**{app}**: {msg}: {url}")
     write_outputs(args.github_output, {"pr": number, "branch": branch, "app": app_key, "target": target,
-                                       "jump": label, "url": url})
+                                       "jump": label, "url": url, "opened": "true"})
     return 0
 
 

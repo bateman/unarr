@@ -201,9 +201,10 @@ check-name: ## Check a project name on crates.io, PyPI, npm, Docker Hub, brew, A
 	@scripts/check-name.sh $(NAME)
 
 # The workflows that follow upstream (issue #9): .github/workflows/upstream-checks.yml
-# and upstream-port.yml call these. Their values come from the environment and are
-# read by the shell ($$NAME), never expanded by make: a workflow input is data.
-.PHONY: upstream-checks-plan upstream-checks-prepare upstream-checks-run upstream-checks-apply upstream-port-plan upstream-main-protected
+# upstream-port.yml and upstream-loop.yml call these. Their values come from the environment
+# and are read by the shell ($$NAME), never expanded by make: a workflow input is data.
+.PHONY: upstream-checks-plan upstream-checks-prepare upstream-checks-run upstream-checks-apply upstream-port-plan upstream-main-protected \
+	upstream-loop-ready upstream-loop-next
 
 upstream-main-protected: ## Refuse unless a ruleset on main restricts its updates to a bypass list the token GH_TOKEN is not in (GITHUB_REPOSITORY)
 	@python3 -I scripts/upstream-checks.py main-protected
@@ -225,6 +226,15 @@ upstream-checks-apply: ## Check the checks' artifact, commit what may be committ
 	@python3 -I scripts/upstream-checks.py apply --artifact "$$ARTIFACT" --repo "$$WORK" --app "$$CHECK_APP" \
 		--pr "$$PR" --head "$$HEAD_SHA" --comment "$$COMMENT" --run-url "$$RUN_URL"
 
-upstream-port-plan: ## The port's draft PR, the run's limits and the agent's prompt, as a job's outputs (PR_JSON, PR, HELPER, GITHUB_OUTPUT)
+upstream-port-plan: ## The port's draft PR, the run's limits and the agent's prompt, as a job's outputs (PR_JSON, PR, HELPER, ROUND, HAS_KEY, GITHUB_OUTPUT)
 	@python3 -I scripts/upstream-port.py plan --pr-json "$$PR_JSON" --pr "$$PR" --repository "$$GITHUB_REPOSITORY" \
-		--helper "$$HELPER" $${GITHUB_OUTPUT:+--github-output "$$GITHUB_OUTPUT"}
+		--helper "$$HELPER" --round "$${ROUND:-1}" $${GITHUB_OUTPUT:+--github-output "$$GITHUB_OUTPUT"}
+
+# .github/workflows/upstream-loop.yml: the agent and the checks on one PR, in rounds.
+upstream-loop-ready: ## Whether the port's agent may start on the PR: a draft, ANTHROPIC_API_KEY set, main protected; green with the reason when not (PR_JSON, PR, HAS_KEY, GH_TOKEN, GITHUB_OUTPUT)
+	@python3 -I scripts/upstream-port.py ready --pr-json "$$PR_JSON" --pr "$$PR" --repository "$$GITHUB_REPOSITORY" \
+		$${GITHUB_OUTPUT:+--github-output "$$GITHUB_OUTPUT"}
+
+upstream-loop-next: ## What follows run ROUND of the agent, from the block upstream-next of the PR's body: port, checks or stop (PR_JSON, PR, ROUND, PORT_RESULT, CHECKED, GITHUB_OUTPUT)
+	@python3 -I scripts/upstream-port.py next --pr-json "$$PR_JSON" --pr "$$PR" --repository "$$GITHUB_REPOSITORY" \
+		--round "$$ROUND" --port-result "$$PORT_RESULT" --checked "$$CHECKED" $${GITHUB_OUTPUT:+--github-output "$$GITHUB_OUTPUT"}

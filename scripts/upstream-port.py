@@ -9,6 +9,8 @@ this script, from `main`, never from the PR's branch::
     scripts/upstream-port.py commit-msg .git/COMMIT_EDITMSG     # the commit-msg hook
     scripts/upstream-port.py verify --base SHA --head SHA --pr-json pr.json
     scripts/upstream-port.py review --pr N --file comments.json # what the agent calls
+    scripts/upstream-port.py ready --pr-json pr.json ...         # upstream-loop.yml: may the agent start
+    scripts/upstream-port.py next --pr-json pr.json --round N ... # upstream-loop.yml: after a run of it
 
 ``plan`` refuses a PR that is not a port's draft (`<app>/upstream-<version>`
 of this repository, into `main`, open, a draft) and writes the job's
@@ -32,6 +34,21 @@ correct.
 ``review`` posts the agent's review comments on its own PR as one review of
 kind "comment", the only kind it can post, on the PR's head: the agent
 needs no `gh api`, which could also approve or merge.
+
+``ready`` and ``next`` are the decisions of `.github/workflows/upstream-loop.yml`,
+which joins the agent and the checks with the original on one PR, in at
+most ``ROUNDS`` runs of the agent per run of the workflow (the rounds are
+written out in the YAML, one job each: no job starts another run).
+``ready`` says whether the agent may start at all: a port's draft PR, the
+secret ``ANTHROPIC_API_KEY`` set, ``main`` protected from the job's token;
+when one is missing it says which and the run ends green. ``next`` reads,
+after each run of the agent, the one thing the agent hands the workflow:
+the block ``upstream-next`` at the end of the PR's body (`upstream/PORTING.md`,
+section 7, "What comes next"), a fixed set of keys whose values are checked
+here, never free text. It gives the next round: ``checks`` (with the inputs
+of `upstream-checks.yml`, checked as that workflow checks them), ``port``, or
+``stop``. Each round's spend is its share of ``TOTAL_BUDGET``
+(``round_limits``), so that a run of the workflow never allows more than that.
 """
 
 from __future__ import annotations
@@ -60,6 +77,14 @@ LIMITS = {
     "minor": {"minutes": 150, "turns": 400, "budget": 40},
     "major": {"minutes": 270, "turns": 800, "budget": 100},
 }
+# upstream-loop.yml: the runs of the agent in one run of the workflow, and
+# what they may spend together. Round n gets the jump's limit, or what is
+# left of the total after the rounds before it if that is less: 40, 40 and
+# 20 USD for a patch or minor, 100, 100 and 50 for a major. The YAML writes
+# out ROUNDS jobs of the agent and ROUNDS - 1 of the checks
+# (scripts/tests/test_upstream_port.py checks it).
+ROUNDS = 3
+TOTAL_BUDGET = {"minor": 100, "major": 250}
 # Minutes between the deadline the agent is given and the job's stop: what
 # fixed rule 5 asks before the limit (push, log rows, PR body).
 MARGIN = 30
@@ -136,6 +161,37 @@ def outputs_text(values: dict) -> str:
     return "\n".join(out) + "\n"
 
 
+def round_limits(jump: str, round_: int) -> dict:
+    """The limits of the agent's run `round_` (1 to ROUNDS) of a run of
+    upstream-loop.yml: the jump's, with the spend cut to what the rounds
+    before it leave of TOTAL_BUDGET. A run started on its own (by hand) is
+    round 1."""
+    if not isinstance(round_, int) or isinstance(round_, bool) or not 1 <= round_ <= ROUNDS:
+        die(f"the round is from 1 to {ROUNDS}, not {round_!r}")
+    limits = dict(LIMITS[jump])
+    spent = sum(round_limits(jump, r)["budget"] for r in range(1, round_))
+    limits["budget"] = min(limits["budget"], TOTAL_BUDGET[jump] - spent)
+    if limits["budget"] <= 0:
+        die(f"round {round_} of a {jump} has nothing left of {TOTAL_BUDGET[jump]} USD")
+    return limits
+
+
+def write_outputs(path: str | None, values: dict) -> None:
+    text = outputs_text(values)
+    if path:
+        with open(path, "a", encoding="utf-8") as f:
+            f.write(text)
+    else:
+        sys.stdout.write(text)
+
+
+def append_summary(text: str) -> None:
+    path = os.environ.get("GITHUB_STEP_SUMMARY")
+    if path:
+        with open(path, "a", encoding="utf-8") as f:
+            f.write(text + "\n")
+
+
 def cmd_plan(args) -> int:
     checks = load_checks()
     pr = checks.check_port_pr(json.loads(Path(args.pr_json).read_text()), args.repository)
@@ -145,20 +201,187 @@ def cmd_plan(args) -> int:
         die(f"PR #{pr['number']} is not a draft: the agent works only on a draft (issue #9, section 6)")
     if not re.match(r"^[\w.-]+/[\w.-]+$", args.repository):
         die("--repository is owner/name")
-    limits = LIMITS["major" if pr["major"] else "minor"]
+    if os.environ.get("HAS_KEY") == "false":
+        die("the secret ANTHROPIC_API_KEY is not set: the agent cannot start (upstream/README.md, "
+            "\"What the maintainer sets\")")
+    jump = "major" if pr["major"] else "minor"
+    limits = round_limits(jump, args.round)
     prompt = render_prompt(PROMPT.read_text(), pr, args.repository, limits, args.helper)
-    values = {"app": pr["app"], "branch": pr["branch"], "head": pr["head"],
-              "jump": "major" if pr["major"] else "minor",
-              "minutes": limits["minutes"], "step_minutes": limits["minutes"] + MARGIN,
+    values = {"app": pr["app"], "branch": pr["branch"], "head": pr["head"], "jump": jump,
+              "round": args.round, "minutes": limits["minutes"], "step_minutes": limits["minutes"] + MARGIN,
               "job_minutes": limits["minutes"] + MARGIN + SETUP,
               "turns": limits["turns"], "budget": limits["budget"], "margin": MARGIN, "prompt": prompt}
-    text = outputs_text(values)
-    if args.github_output:
-        with open(args.github_output, "a", encoding="utf-8") as f:
-            f.write(text)
-    else:
-        sys.stdout.write(text)
+    write_outputs(args.github_output, values)
     return 0
+
+
+# --- ready and next: upstream-loop.yml -------------------------------------
+
+NEXT_FENCE = "```upstream-next"
+NEXT_KEYS = {"next", "head"}
+CHECK_KEYS = {"recordings", "http_audit", "compare", "replays"}
+CHECK_OPTIONAL = {"old_pin_request", "old_pin_wait"}
+NEXT_LINE = re.compile(r"^(?P<key>[a-z_]+):(?: (?P<value>\S.*))?$")
+SHA = re.compile(r"^[0-9a-f]{40}$")
+
+
+def parse_next(body: str) -> dict | None:
+    """The block `upstream-next` of the PR's body (PORTING.md, section 7,
+    "What comes next"), checked: None when there is none. A block out of
+    shape stops: the loop never guesses what the agent meant."""
+    lines = [line.rstrip("\r") for line in (body or "").split("\n")]
+    starts = [i for i, line in enumerate(lines) if line.strip() == NEXT_FENCE]
+    if not starts:
+        return None
+    if len(starts) > 1:
+        die("the PR's body has more than one block upstream-next")
+    block = []
+    for line in lines[starts[0] + 1:]:
+        if line.strip() == "```":
+            break
+        block.append(line.strip())
+    else:
+        die("the block upstream-next is not closed")
+    if len(block) > 12:
+        die("the block upstream-next has more lines than it has keys")
+    values: dict[str, str] = {}
+    for line in filter(None, block):
+        m = NEXT_LINE.match(line)
+        if not m:
+            die(f"a line of the block upstream-next is not `key: value`: {line[:80]!r}")
+        key = m["key"]
+        if key in values:
+            die(f"the block upstream-next names {key} twice")
+        if key not in NEXT_KEYS | CHECK_KEYS | CHECK_OPTIONAL:
+            die(f"the block upstream-next has an unknown key {key!r}")
+        values[key] = (m["value"] or "").strip()
+    if not NEXT_KEYS <= set(values):
+        die("the block upstream-next needs next and head")
+    if values["next"] not in ("port", "checks", "done"):
+        die(f"next is port, checks or done, not {values['next'][:40]!r}")
+    if not SHA.match(values["head"]):
+        die("head is the full commit the agent left the branch at (40 hexadecimal digits)")
+    given = set(values) - NEXT_KEYS
+    if values["next"] == "checks":
+        missing = CHECK_KEYS - given
+        if missing:
+            die(f"next: checks names every check: {', '.join(sorted(missing))} missing")
+        c = load_checks().parse_checks(values["recordings"], values["http_audit"], values["compare"],
+                                       values["replays"], values.get("old_pin_request", ""),
+                                       values.get("old_pin_wait", "0"))
+        compare = next(k for k, v in load_checks().COMPARE_CHOICES.items() if list(v) == c["compare"])
+        old = c["old_pin"] or {"request": "", "wait": 0}
+        return {"next": "checks", "head": values["head"], "checks": {
+            "recordings": ",".join(c["recordings"]) or "none", "http_audit": str(c["http_audit"]).lower(),
+            "compare": compare, "replays": str(c["replays"]).lower(), "old_pin_request": old["request"],
+            "old_pin_wait": str(old["wait"])}}
+    if given:
+        die(f"next: {values['next']} takes no checks ({', '.join(sorted(given))})")
+    return {"next": values["next"], "head": values["head"]}
+
+
+def ready_decision(pr: dict, has_key: bool, protection) -> tuple[bool, str]:
+    """May the agent start on `pr` (check_port_pr's)? `protection` is called
+    only when the rest holds: it asks GitHub why main is not protected."""
+    n = pr["number"]
+    if not pr["draft"]:
+        return False, f"PR #{n} is not a draft: the agent works only on a draft, nothing to do"
+    if not has_key:
+        return False, (f"the secret ANTHROPIC_API_KEY is not set: the agent does not start on PR #{n}, nor the "
+                       "checks it would ask for; set it, then start upstream-loop by hand with the PR's number "
+                       "(upstream/README.md, \"What the maintainer sets\")")
+    problems = protection()
+    if problems:
+        return False, (f"main is not protected from the workflows' token ({'; '.join(problems)}): the agent "
+                       f"does not start on PR #{n}. " + load_checks().PROTECT_HINT
+                       + " Then start upstream-loop by hand with the PR's number.")
+    return True, f"PR #{n}: the agent starts"
+
+
+def cmd_ready(args) -> int:
+    checks = load_checks()
+    pr = checks.check_port_pr(json.loads(Path(args.pr_json).read_text()), args.repository)
+    if args.pr is not None and int(args.pr) != pr["number"]:
+        die(f"asked for PR #{args.pr}, read #{pr['number']}")
+    has_key = os.environ.get("HAS_KEY") == "true"
+    token = os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN") or ""
+    go, message = ready_decision(pr, has_key, lambda: checks.main_protection(args.repository, token))
+    print(message)
+    append_summary(f"**upstream-loop**, PR #{pr['number']}: {message}")
+    write_outputs(args.github_output, {"go": str(go).lower(), "message": message})
+    return 0
+
+
+def next_decision(pr: dict, body: str, round_: int, port_result: str, checked: list[str]) -> dict:
+    """What follows run `round_` of the agent on `pr` (check_port_pr's,
+    read after it): {"action": "port" | "checks" | "stop", "message",
+    "failed": bool, "head", "checks"}. `checked` holds the commits the
+    checks already ran at in this run of the workflow."""
+    n = pr["number"]
+    restart = f"start upstream-loop by hand with PR {n} to go on"
+    out = {"action": "stop", "failed": False, "head": pr["head"], "checks": None}
+    if port_result != "success":
+        out["message"] = (f"run {round_} of the agent ended {port_result or 'unknown'}: the loop stops here; "
+                          f"read that run, then {restart}")
+        return out
+    if not pr["draft"]:
+        out["message"] = f"PR #{n} is ready for review: the port is done, the loop stops"
+        return out
+    block = parse_next(body)
+    if block is None:
+        out.update(failed=True, message=(f"run {round_} of the agent left no block upstream-next in the body of "
+                                         f"PR #{n} (upstream/PORTING.md, section 7): the loop stops; {restart}"))
+        return out
+    if block["head"] != pr["head"]:
+        out.update(failed=True, message=(f"the block upstream-next names {block['head'][:12]}, the branch is at "
+                                         f"{pr['head'][:12]}: it was not written at the end of run {round_}; "
+                                         f"the loop stops; {restart}"))
+        return out
+    if block["next"] == "done":
+        out["message"] = (f"run {round_} of the agent says it is done for now (the PR's body says what it waits "
+                          "for): the loop stops")
+        return out
+    if round_ >= ROUNDS:
+        out["message"] = (f"run {round_} of the agent asks for {block['next']}, but {ROUNDS} runs of the agent is the "
+                          f"limit of one run of the workflow: the loop stops here; {restart}")
+        return out
+    if block["next"] == "port":
+        out.update(action="port", message=f"run {round_} of the agent asks for another run: run {round_ + 1} starts")
+        return out
+    if pr["head"] in checked:
+        out["message"] = (f"run {round_} of the agent asks for the checks again at {pr['head'][:12]}, where they "
+                          f"already ran in this run of the workflow: the loop stops; {restart}")
+        return out
+    asked = ", ".join(f"{k} {v}" for k, v in block["checks"].items() if v not in ("", "none", "false", "0"))
+    out.update(action="checks", checks=block["checks"],
+               message=(f"run {round_} of the agent asks for the checks with the original at {pr['head'][:12]} "
+                        f"({asked}); then run {round_ + 1} of the agent"))
+    return out
+
+
+def cmd_next(args) -> int:
+    checks = load_checks()
+    data = json.loads(Path(args.pr_json).read_text())
+    pr = checks.check_port_pr(data, args.repository)
+    if args.pr is not None and int(args.pr) != pr["number"]:
+        die(f"asked for PR #{args.pr}, read #{pr['number']}")
+    checked = [c for c in (args.checked or "").split(",") if c]
+    for c in checked:
+        if not SHA.match(c):
+            die(f"--checked holds commits, not {c[:40]!r}")
+    try:
+        got = next_decision(pr, data.get("body") or "", args.round, args.port_result, checked)
+    except SystemExit as err:  # a block out of shape: this script's, or the checks' own refusal
+        got = {"action": "stop", "failed": True, "head": pr["head"], "checks": None,
+               "message": f"{err}: the loop stops; start upstream-loop by hand with PR {pr['number']} to go on"}
+    print(got["message"])
+    append_summary(f"**upstream-loop**, PR #{pr['number']}, after run {args.round} of the agent: {got['message']}")
+    values = {"action": got["action"], "head": got["head"],
+              "checked": ",".join(checked + ([got["head"]] if got["action"] == "checks" else []))}
+    values.update(got["checks"] or {"recordings": "none", "http_audit": "false", "compare": "none",
+                                     "replays": "false", "old_pin_request": "", "old_pin_wait": "0"})
+    write_outputs(args.github_output, values)
+    return 1 if got["failed"] else 0
 
 
 # --- commit-msg and verify ----------------------------------------------------
@@ -289,6 +512,20 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--repository", required=True)
     p.add_argument("--helper", required=True, help="where the job puts this script for the agent")
     p.add_argument("--github-output", help="append the outputs here (default: print them)")
+    p.add_argument("--round", type=int, default=1, help=f"the run of the agent in upstream-loop.yml, 1 to {ROUNDS}")
+    y = sub.add_parser("ready", help="upstream-loop.yml: may the agent start on the PR (HAS_KEY, GH_TOKEN)")
+    y.add_argument("--pr-json", required=True)
+    y.add_argument("--pr", type=int)
+    y.add_argument("--repository", required=True)
+    y.add_argument("--github-output")
+    n = sub.add_parser("next", help="upstream-loop.yml: what follows a run of the agent, from the PR's body")
+    n.add_argument("--pr-json", required=True, help="gh pr view --json, with the body")
+    n.add_argument("--pr", type=int)
+    n.add_argument("--repository", required=True)
+    n.add_argument("--round", type=int, required=True)
+    n.add_argument("--port-result", required=True, help="the result of that run's job (success, failure, ...)")
+    n.add_argument("--checked", default="", help="the commits the checks already ran at in this run, comma-separated")
+    n.add_argument("--github-output")
     c = sub.add_parser("commit-msg", help="the commit-msg hook")
     c.add_argument("file")
     v = sub.add_parser("verify", help="check what the run left on the branch and the PR")
@@ -302,7 +539,8 @@ def main(argv: list[str] | None = None) -> int:
     r.add_argument("--file", required=True)
     r.add_argument("--body", default="")
     args = ap.parse_args(argv)
-    return {"plan": cmd_plan, "commit-msg": cmd_commit_msg, "verify": cmd_verify, "review": cmd_review}[args.cmd](args)
+    return {"plan": cmd_plan, "ready": cmd_ready, "next": cmd_next, "commit-msg": cmd_commit_msg,
+            "verify": cmd_verify, "review": cmd_review}[args.cmd](args)
 
 
 if __name__ == "__main__":

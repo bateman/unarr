@@ -347,6 +347,77 @@ class Files(unittest.TestCase):
             self.assertEqual(wf.changed_paths(), ["a.txt", "dir/new file.json"])
 
 
+class PullRequest(unittest.TestCase):
+    """`pr` on a throwaway repository and a made-up GitHub: its outputs, on
+    which upstream-loop.yml starts (`opened`), in its three endings."""
+
+    class FakeGitHub:
+        def __init__(self, pulls):
+            self.repo, self.token, self.pulls, self.calls = REPO_SLUG, "t", pulls, []
+
+        def open_pulls(self):
+            return self.pulls
+
+        def upstream_branches(self, app):
+            return []
+
+        def call(self, method, path, body=None, ok404=False):
+            self.calls.append((method, path))
+            if (method, path) == ("POST", "/pulls"):
+                return {"number": 51, "html_url": "https://github.com/bateman/unarr/pull/51"}
+            return {}
+
+    def setUp(self):
+        self.tmp = Path(tempfile.mkdtemp(prefix="upstream-workflow-pr-"))
+        self.addCleanup(shutil.rmtree, self.tmp)
+        self.repo, remote = self.tmp / "repo", self.tmp / "remote.git"
+        subprocess.run(["git", "init", "-q", "--bare", str(remote)], check=True)
+        (self.repo / "upstream").mkdir(parents=True)
+        pin = self.repo / "upstream" / "radarr.pin"
+        pin.write_text("version = 6.4.4.10600\nmigration = 242\n")
+        git = ["git", "-C", str(self.repo)]
+        subprocess.run(["git", "init", "-q", str(self.repo)], check=True)
+        subprocess.run(git + ["add", "-A"], check=True)
+        subprocess.run(git + ["-c", "user.name=t", "-c", "user.email=t@t", "commit", "-qm", "a"], check=True)
+        pin.write_text("version = 7.0.3.10950\nmigration = 243\n")
+        self.remote = str(remote)
+        plan = wf.decide("radarr", "workflow_dispatch", report(), [], [], REPO_SLUG, [], False)
+        plan["triage"] = wf.triage_facts(report())
+        (self.tmp / "plan.json").write_text(json.dumps(plan))
+        work = self.tmp / "work"
+        work.mkdir()
+        (work / "summary.json").write_text(json.dumps(Texts.SUMMARY))
+        (work / "summary.md").write_text("# summary\n")
+
+    def run_pr(self, pulls, token):
+        fake = self.FakeGitHub(pulls)
+        output = self.tmp / "github-output"
+        output.write_text("")
+        env = {"GITHUB_REPOSITORY": REPO_SLUG, "GITHUB_STEP_SUMMARY": "", "UPSTREAM_TOKEN": token}
+        with mock.patch.object(wf, "REPO", self.repo), mock.patch.object(wf, "UPSTREAM", self.repo / "upstream"), \
+                mock.patch.object(wf, "allowed_path", lambda app, path: True), \
+                mock.patch.object(wf, "github_from_env", lambda *a: fake), \
+                mock.patch.dict(os.environ, env), contextlib.redirect_stdout(io.StringIO()):
+            wf.main(["pr", "--app", "radarr", "--plan", str(self.tmp / "plan.json"), "--work", str(self.tmp / "work"),
+                     "--remote", self.remote, "--github-output", str(output)])
+        return dict(line.split("=", 1) for line in output.read_text().splitlines()), fake
+
+    def test_the_pr_opened_by_this_run_is_the_one_the_loop_starts_on(self):
+        out, fake = self.run_pr([], "a-token")
+        self.assertEqual((out["opened"], out["pr"], out["branch"]), ("true", "51", "radarr/upstream-7.0.3.10950"))
+        self.assertIn(("POST", "/pulls"), fake.calls)
+
+    def test_without_upstream_token_the_branch_is_pushed_and_nothing_starts(self):
+        out, fake = self.run_pr([], "")
+        self.assertEqual((out["opened"], out["pr"], out["branch"]), ("false", "", "radarr/upstream-7.0.3.10950"))
+        self.assertNotIn(("POST", "/pulls"), fake.calls)
+
+    def test_a_port_opened_since_the_plan_is_named_and_not_started_on(self):
+        out, fake = self.run_pr([PR_28], "a-token")
+        self.assertEqual((out["opened"], out["pr"], out["branch"]), ("false", "28", ""))
+        self.assertEqual(fake.calls, [])
+
+
 class Workflow(unittest.TestCase):
     """The workflow file keeps the rules of issue #9 it was written to."""
 
@@ -357,6 +428,8 @@ class Workflow(unittest.TestCase):
         uses = re.findall(r"uses:\s*([^\s#]+)", self.TEXT)
         self.assertTrue(uses)
         for ref in uses:
+            if ref.startswith("./.github/workflows/"):  # a workflow of this repository, at this commit
+                continue
             self.assertRegex(ref, r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+@[0-9a-f]{40}$", ref)
 
     def test_no_expression_inside_a_run_block(self):
@@ -380,8 +453,14 @@ class Workflow(unittest.TestCase):
         for job in jobs:
             name = job.split(":", 1)[0].strip()
             names.append(name)
-            self.assertIn("timeout-minutes:", job, name)
             self.assertIn("permissions:", job, name)
+            if "uses: ./.github/workflows/" in job:
+                # A job that calls a workflow takes no timeout: every job of
+                # the called one has its own. Secrets go to it by name.
+                self.assertNotIn("timeout-minutes:", job, name)
+                self.assertNotIn("secrets: inherit", job, name)
+                continue
+            self.assertIn("timeout-minutes:", job, name)
         self.assertIn("record-radarr", names)
         # The jobs that run something of the new tarball hold no token.
         for name in ("record-radarr", "test-radarr"):
