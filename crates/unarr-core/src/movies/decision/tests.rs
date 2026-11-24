@@ -590,6 +590,30 @@ mod what_the_library_already_has {
         assert!(decide_one(&c, &lookup, wanted()).approved());
     }
 
+    /// `DeletedMovieFileSpecificationFixture` (Radarr 7): with deleted
+    /// files unmonitoring their movie, a file gone from disk holds an RSS
+    /// release back, as if the movie were unmonitored; a file still there,
+    /// the setting off or a search let it through.
+    #[test]
+    fn a_file_deleted_from_disk_and_not_yet_scanned() {
+        let dir = std::env::temp_dir().join(format!("unarr_deleted_file_{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        std::fs::create_dir_all(&dir).unwrap();
+        let mut c = catalog();
+        c.base.profiles = vec![profile(&[WEBDL1080P, BLURAY1080P], BLURAY1080P, true)];
+        let mut lookup = with_file(file(WEBDL1080P, "GRP"));
+        lookup.movies[0].movie.path = dir.to_string_lossy().into_owned();
+        assert!(decide_one(&c, &lookup, wanted()).approved(), "the setting off");
+        c.auto_unmonitor_previously_downloaded_movies = true;
+        let d = decide_one(&c, &lookup, wanted());
+        assert_eq!(reasons(&d), vec![R::MovieNotMonitored]);
+        assert_eq!(d.rejections[0].message, "Movie is not monitored");
+        assert_eq!(d.rejections[0].kind, crate::decision::RejectionKind::Temporary);
+        std::fs::write(dir.join("The Holdovers (2023).mkv"), b"x").unwrap();
+        assert!(decide_one(&c, &lookup, wanted()).approved(), "the file is there");
+        std::fs::remove_dir_all(&dir).unwrap();
+    }
+
     #[test]
     fn a_file_on_disk_that_is_as_good() {
         let lookup = with_file(file(BLURAY1080P, "GRP"));

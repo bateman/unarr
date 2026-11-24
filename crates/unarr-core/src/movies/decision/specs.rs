@@ -106,6 +106,7 @@ pub const SPECIFICATIONS: &[(&str, Priority, Spec)] = &[
     // The original's `RssSync` and `Search` folders, after the rest.
     ("Availability", Priority::Default, availability),
     ("Delay", Priority::Default, delay),
+    ("DeletedMovieFile", Priority::Disk, deleted_movie_file),
     ("History", Priority::Default, history),
     ("IndexerTag", Priority::Default, indexer_tag),
     ("MonitoredMovie", Priority::Default, monitored_movie),
@@ -980,6 +981,30 @@ pub fn indexer_tag(ctx: &Context<'_>, s: &Subject<'_>) -> Option<MovieRejection>
         );
     }
     None
+}
+
+/// `DeletedMovieFileSpecification` (Radarr 7): with deleted files
+/// unmonitoring their movie, a movie whose file is gone from disk but not
+/// yet from the library is taken as unmonitored, so that an RSS release
+/// does not replace a file the next scan will unmonitor it for.
+pub fn deleted_movie_file(ctx: &Context<'_>, s: &Subject<'_>) -> Option<MovieRejection> {
+    if !ctx.catalog.auto_unmonitor_previously_downloaded_movies {
+        return None;
+    }
+    if s.search.is_some() {
+        tracing::debug!("Skipping deleted movie file check during search");
+        return None;
+    }
+    let file = s.file(ctx)?;
+    let full_path = std::path::Path::new(&s.movie.path).join(&file.relative_path);
+    if full_path.is_file() {
+        return None;
+    }
+    tracing::trace!("Movie file {} is missing from disk.", file.relative_path);
+    tracing::debug!(
+        "File for this movie exist in the database but not on disk, will be unmonitored on next diskscan. skipping."
+    );
+    temporary(R::MovieNotMonitored, "Movie is not monitored")
 }
 
 pub fn monitored_movie(_ctx: &Context<'_>, s: &Subject<'_>) -> Option<MovieRejection> {
