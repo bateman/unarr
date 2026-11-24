@@ -7,5 +7,5 @@
 # not finished (nor green) before it does.
 repo = https://github.com/Radarr/Radarr.git
 branch = master
-release = 6.4.4.10685
-commit = a96bf7c3ecb23cb76993770727285dc17a613fbc
+release = 7.0.3.10918
+commit = af772b051ac27a0615c7f8b7f78622b6dc183be0
