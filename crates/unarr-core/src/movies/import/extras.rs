@@ -215,7 +215,6 @@ enum Consumer {
     Wdtv,
     Roksbox,
     MediaBrowser,
-    Kometa,
 }
 
 const CONSUMERS: &[Consumer] = &[
@@ -223,7 +222,6 @@ const CONSUMERS: &[Consumer] = &[
     Consumer::Wdtv,
     Consumer::Roksbox,
     Consumer::MediaBrowser,
-    Consumer::Kometa,
 ];
 
 impl Consumer {
@@ -234,7 +232,6 @@ impl Consumer {
             Consumer::Wdtv => "WdtvMetadata",
             Consumer::Roksbox => "RoksboxMetadata",
             Consumer::MediaBrowser => "MediaBrowserMetadata",
-            Consumer::Kometa => "KometaMetadata",
         }
     }
 }
@@ -261,8 +258,6 @@ regex!(
     xbmc_movie_file_image,
     r"(?i)(?<type>-thumb|-poster|-banner|-fanart|-clearart|-discart|-keyart|-landscape|-logo|-backdrop|-clearlogo)\.(?:png|jpe?g)"
 );
-// `KometaMetadata.MovieImagesRegex`.
-regex!(kometa_movie_images, r"(?i)^(?:poster|background)\.(?:png|jpe?g)$");
 // `XbmcNfoDetector`.
 regex!(
     xbmc_nfo_content,
@@ -333,7 +328,6 @@ fn find_metadata_file(consumer: Consumer, path: &str) -> Option<i64> {
         Consumer::MediaBrowser => filename
             .eq_ignore_ascii_case("movie.xml")
             .then_some(MOVIE_METADATA),
-        Consumer::Kometa => matches(kometa_movie_images(), filename).then_some(MOVIE_IMAGE),
     }
 }
 
@@ -1530,20 +1524,6 @@ mod tests {
 
     // --- the consumers' `FindMetadataFileFixture`s
 
-    #[test]
-    fn kometa_find_metadata_file() {
-        let folder = "/Test/Movies/Movie.Title.2024";
-        let find = |name: &str| find_metadata_file(Consumer::Kometa, &join(folder, name));
-        // should_return_null_if_filename_is_not_handled
-        assert_eq!(find("file.jpg"), None);
-        // should_return_null_if_not_valid_file_for_movie
-        assert_eq!(find("movie.title.2024.jpg"), None);
-        // should_not_return_metadata_if_image_file_is_a_thumb
-        assert_eq!(find("movie.title.2024-thumb.jpg"), None);
-        // should_return_movie_image_for_images_in_movie_folder
-        assert_eq!(find("poster.jpg"), Some(MOVIE_IMAGE));
-        assert_eq!(find("background.jpg"), Some(MOVIE_IMAGE));
-    }
 
     #[test]
     fn roksbox_find_metadata_file() {
@@ -1683,9 +1663,9 @@ mod tests {
         ]);
         fs::write(join(&lib.movie.path, "movie.nfo"), "<movie></movie>").unwrap();
         let imported = lib.scan(&lib.movie).unwrap();
-        // Everything but the file without an extension; the poster twice,
-        // for the two consumers that take it.
-        assert_eq!(imported.len(), 7, "{imported:?}");
+        // Everything but the file without an extension; the poster once,
+        // Radarr 7 having no Kometa consumer to take it a second time.
+        assert_eq!(imported.len(), 6, "{imported:?}");
 
         let rows = lib.rows();
         let of = |kind: ExtraKind| -> Vec<(i64, &str, Option<&str>, Option<i64>)> {
@@ -1711,7 +1691,6 @@ mod tests {
                 (1, "fanart.jpg", Some("XbmcMetadata"), Some(MOVIE_IMAGE)),
                 (2, "movie.nfo", Some("XbmcMetadata"), Some(MOVIE_METADATA)),
                 (3, "poster.jpg", Some("XbmcMetadata"), Some(MOVIE_IMAGE)),
-                (4, "poster.jpg", Some("KometaMetadata"), Some(MOVIE_IMAGE)),
             ]
         );
         assert_eq!(
@@ -1738,8 +1717,7 @@ mod tests {
         assert_eq!(lib.scan(&lib.movie).unwrap().len(), 6);
         assert_eq!(lib.rows(), rows);
 
-        // A file removed by hand is forgotten at the next scan; of the two
-        // rows of the poster, one at each scan, as the original does.
+        // A file removed by hand is forgotten at the next scan.
         fs::remove_file(join(&lib.movie.path, "Movie Title - IMDb.URL")).unwrap();
         fs::remove_file(join(&lib.movie.path, "poster.jpg")).unwrap();
         lib.scan(&lib.movie).unwrap();
@@ -1750,7 +1728,6 @@ mod tests {
                 "Movie Title - 2022.nfo",
                 "fanart.jpg",
                 "movie.nfo",
-                "poster.jpg",
             ]
         );
         lib.scan(&lib.movie).unwrap();
