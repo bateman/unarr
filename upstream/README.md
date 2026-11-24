@@ -23,6 +23,10 @@ Two commands, run in this order:
 Then the port: [`PORTING.md`](PORTING.md) is where it starts, and says how
 it goes from there to the PR.
 
+The workflow `upstream` runs both every Monday and on request, and opens
+the draft PR the port starts from: see
+[The workflow: up to the draft PR](#the-workflow-up-to-the-draft-pr).
+
 ## `make bump-<app>`
 
 ```sh
@@ -198,3 +202,108 @@ log): try again later, nothing is made up in its place.
   is the one recorded, not what the hosts would say to the new version,
   and the contract tests compare only the installed release's shape
   (`Mode::InstalledUpdate`).
+
+## The workflow: up to the draft PR
+
+`.github/workflows/upstream.yml` runs every Monday morning and on request
+(*Run workflow*: the personality, and a target `X.Y.Z.BUILD` or nothing
+for the rule of issue #9). It ends with the draft PR open: the port's
+agent, and the checks that need the original running, are workflows of
+their own, joined to this one in a later step.
+
+Per personality, a chain of jobs; the two chains are the same steps and
+an error in one does not stop the other:
+
+| Job | Permissions | What it does |
+|-----|-------------|--------------|
+| `plan-<app>` | `contents: read`, `pull-requests: read` | `make upstream-plan-<app>`: the triage (the release flags from the API with the job's token), then what to do (below); when it is a bump, `make bump-<app> STEPS=fetch TARGET=<target>` downloads and checks the tarball, without running it. Hands on the plan, the fetched work directory and the tree (`git archive`) |
+| `announce-<app>` | `issues: write` | a new major on the schedule: `make upstream-announce-<app>` opens the issue "<App> <version> is out" with the triage's counts, unless it is open |
+| `record-<app>` | none | `make bump-<app> STEPS=record`, through `scripts/without-network.sh` (below). No checkout (the tree comes from `plan-<app>`), no token, no secret, no cache. Hands on the work directory without the original |
+| `publish-<app>` | `contents: write`, `pull-requests: write` | `make upstream-assemble-<app>`, the other personality's web UI, `make bump-<app> STEPS=apply,test,summary`, then `make upstream-pr-<app>`: the commit `Pin <App> <target>`, the branch `<app>/upstream-<target>`, the draft PR into the default branch with the short body of `PORTING.md` (section 1, point 4), the label of the jump (`patch`, `minor`, `major`, created when missing), and the bump's summary as its first comment. Hands on the work directory as the artifact `bump-<app>` |
+
+What `plan` decides (`scripts/upstream-workflow.py`, tested in
+`scripts/tests/test_upstream_workflow.py`), in this order:
+
+1. **Off for the schedule.** The weekly run follows the personalities of
+   `UPSTREAM_SCHEDULED` in the `Makefile`: Radarr alone, until the trial
+   on Radarr is merged (issue #9, "then enable Sonarr"); adding `sonarr`
+   there enables it. A manual start runs either.
+2. **No new release**: nothing, green.
+3. **A port already open**: an open PR of this repository from a
+   `<app>/upstream-*` branch, whatever its target: nothing, green, the
+   PR named ("port already open: #28"). Issue #9 never opens a second PR
+   for a personality; the newer release comes with the port or after it.
+4. **The branch `<app>/upstream-<target>` exists** with no open PR:
+   nothing pushed over it, green, named.
+5. **A new major on the schedule**: the issue, and nothing else; the port
+   of a major starts by hand. A manual start bumps a major as any other.
+6. Otherwise **the bump**, and the draft PR.
+
+`publish-<app>` asks 3 and 4 again just before it pushes, and pushes
+without force, so two runs never open two PRs for one personality; each
+`publish-<app>` and `announce-<app>` is one at a time per personality
+(`concurrency`).
+
+**The original runs alone.** `record-<app>` is the one job that runs the
+binary the planning job fetched, and it trusts nothing that job does not
+hand it: `record` checks the tarball against `bump.json` before it
+starts. `sudo scripts/without-network.sh <user> <command>` runs the
+recording in a network namespace where only the loopback is up (the mock
+answers there; the recording needs no network), as a user of its own
+that owns nothing of the runner, with a clean environment and
+`no_new_privs` (no sudo, no setuid binary: it cannot become root again
+to leave the namespace); every process of that user is killed when it
+ends. The job that writes reads its work directory as untrusted:
+`assemble` puts `bump.json`, `triage.json` and `triage.md` of the
+planning job over whatever the recording left, `apply` checks before it
+copies and downloads the tarball again, `summary` checks every value it
+prints, and `pr` commits only the files the bump writes (the pin, the
+goldens, the schemas, the vectors), stopping on any other.
+
+**Authorship.** The commit is authored and committed as `CLAUDE.md`
+says, with no trailer; the title and the body name no tool.
+
+**What the maintainer sets in the repository:**
+
+- *Settings, Actions, General, Workflow permissions*: "Allow GitHub
+  Actions to create and approve pull requests" on, or the job cannot open
+  the PR with the job's token (the token's default can stay read-only:
+  each job asks for its own permissions).
+- *CI on the PR.* A PR opened with the job's token starts no workflow.
+  With the optional secret `UPSTREAM_TOKEN` (a fine-grained token, or a
+  GitHub App's, for this repository only: contents and pull requests,
+  read and write), `publish-<app>` pushes and opens the PR with it and CI
+  starts; it reaches only the step that pushes. Without it, the PR says
+  that CI has not run, and the first push to the branch (the port's)
+  starts it, or closing and reopening the PR.
+- The labels `patch` and `minor` are created at their first use; `major`
+  exists.
+
+What a later step hooks on: the outputs of `publish-<app>` (`pr`,
+`branch`, `app`, `target`, `jump`, `url`) and the artifacts of the run
+(`plan-<app>`, `bump-<app>`).
+
+Locally, with a releases file in place of the API and GitHub asked
+anonymously (the repository is public):
+
+```sh
+GITHUB_REPOSITORY=bateman/unarr EVENT=schedule make upstream-plan-radarr RELEASES=<releases.json>
+```
+
+### Choices, and the alternatives left aside
+
+- **Two chains of jobs written once, by YAML anchors.** A matrix shares
+  one set of job outputs between its legs and joins them at every
+  `needs`; a reusable workflow is a second file. Left aside: both.
+- **The tarball is fetched by the planning job**, with the job's read
+  token for the API, and handed on: the recording job has no token at all,
+  and the API's anonymous limit is shared by every job of the runner's
+  address.
+- **The recording runs with no network, not only with no secret.** The
+  job has nothing to steal, but a runner's caches are shared with the
+  other workflows of the branch: a binary that could reach the network
+  and the runner's credentials could poison them. Left aside: trusting
+  the mock as the original's proxy alone, which the original can ignore.
+- **Any open port of the personality stops the run**, not only one for
+  the same target: issue #9 ("A PR for that personality is still open:
+  add to it; do not open a second").

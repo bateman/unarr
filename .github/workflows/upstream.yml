@@ -1,0 +1,272 @@
+# Follow the Sonarr and Radarr releases, up to the draft PR (issue #9;
+# upstream/README.md, "The workflow: up to the draft PR").
+#
+# Every Monday, and on request, per personality, one chain of jobs:
+#
+#   plan-<app>      the target release and the jump; nothing when no release
+#                   is new or a port is already open; the tarball fetched
+#                   (read-only token)
+#   announce-<app>  a new major on the schedule: the issue, and nothing else
+#   record-<app>    the new original records, in a job with no token, no
+#                   secret, no network but the loopback, as a user of its own
+#   publish-<app>   the bump applied and tested, the branch pushed, the draft
+#                   PR opened with its label and the summary (write token)
+#
+# What decides is in scripts/upstream-workflow.py, through Make. The two
+# chains are the same steps (YAML anchors): an error in one does not stop
+# the other. Upstream text is data: no expression of it reaches a `run:`.
+name: upstream
+
+on:
+  schedule:
+    # Monday morning (issue #9: weekly, a burst of weekend tags in one PR).
+    - cron: "23 5 * * 1"
+  workflow_dispatch:
+    inputs:
+      app:
+        description: The personality
+        type: choice
+        options: [radarr, sonarr]
+        required: true
+      target:
+        description: "The release to go to, X.Y.Z.BUILD (empty: the rule of issue #9)"
+        type: string
+        required: false
+
+permissions: {}
+
+jobs:
+  plan-radarr:
+    name: plan (radarr)
+    if: github.event_name == 'schedule' || inputs.app == 'radarr'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions: { contents: read, pull-requests: read }
+    env: { APP: radarr }
+    outputs:
+      action: ${{ steps.plan.outputs.action }}
+      target: ${{ steps.plan.outputs.target }}
+      jump: ${{ steps.plan.outputs.jump }}
+      pr: ${{ steps.plan.outputs.pr }}
+    steps: &plan-steps
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: { persist-credentials: false }
+      # The release flags from the API with the job's token (issue #9); the
+      # open pull requests and the upstream branches of this repository.
+      - name: The target, the jump, and whether there is anything to do
+        id: plan
+        env:
+          EVENT: ${{ github.event_name }}
+          TARGET: ${{ inputs.target }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: make upstream-plan-"$APP"
+      # Downloaded and checked (host, entries, SHA-256, the API's digest),
+      # never run here.
+      - name: The tarball of the target, fetched
+        if: steps.plan.outputs.action == 'bump'
+        env:
+          PLAN_TARGET: ${{ steps.plan.outputs.target }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          make bump-"$APP" STEPS=fetch TARGET="$PLAN_TARGET"
+          cp -a ".cache/bump/$APP" ".cache/upstream-workflow/$APP/fetched"
+          git archive --format=tar.gz -o ".cache/upstream-workflow/$APP/source.tar.gz" HEAD
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: plan-${{ env.APP }}
+          path: |
+            .cache/upstream-workflow/${{ env.APP }}/plan.json
+            .cache/upstream-workflow/${{ env.APP }}/triage.md
+          if-no-files-found: ignore
+          retention-days: 30
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: steps.plan.outputs.action == 'bump'
+        with:
+          name: fetched-${{ env.APP }}
+          path: .cache/upstream-workflow/${{ env.APP }}
+          if-no-files-found: error
+          retention-days: 7
+
+  announce-radarr:
+    name: announce a major (radarr)
+    needs: plan-radarr
+    if: needs.plan-radarr.outputs.action == 'announce'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions: { issues: write }
+    concurrency: { group: upstream-announce-radarr, cancel-in-progress: false }
+    env: { APP: radarr }
+    steps: &announce-steps
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: { persist-credentials: false }
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: plan-${{ env.APP }}
+          path: .cache/upstream-workflow/${{ env.APP }}
+      - name: The issue of the new major, unless it is open
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: make upstream-announce-"$APP"
+
+  # The only job that runs the new original, a binary nobody vetted: no
+  # token (no checkout: the tree comes from the planning job), no secret,
+  # no cache; the original runs with no network but the loopback, as a user
+  # that owns nothing of the runner and cannot become root again
+  # (scripts/without-network.sh). What it hands on is untrusted.
+  record-radarr:
+    name: record (radarr)
+    needs: plan-radarr
+    if: needs.plan-radarr.outputs.action == 'bump'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    permissions: {}
+    env: { APP: radarr }
+    steps: &record-steps
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: fetched-${{ env.APP }}
+          path: ${{ runner.temp }}/fetched
+      # The FreeSpace rule of the goldens wants room on / (as in ci.yml);
+      # /movies, /tv and /downloads with the fixture scripts' marker.
+      - name: The tree, a user of its own, and its folders
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
+          sudo useradd --create-home --shell /usr/sbin/nologin unarr-recorder
+          sudo mkdir -p /srv/unarr/.cache/bump
+          sudo tar -xzf "$RUNNER_TEMP/fetched/source.tar.gz" -C /srv/unarr
+          sudo cp -a "$RUNNER_TEMP/fetched/fetched" "/srv/unarr/.cache/bump/$APP"
+          for d in /movies /tv /downloads; do sudo mkdir -p "$d"; sudo touch "$d/.unarr-fixture"; done
+          sudo chown -R unarr-recorder: /srv/unarr /movies /tv /downloads
+      - name: The new original records, with no network
+        working-directory: /srv/unarr
+        run: sudo scripts/without-network.sh unarr-recorder make bump-"$APP" STEPS=record
+      - name: The work directory, without the original
+        if: always()
+        run: |
+          mkdir -p "$RUNNER_TEMP/recorded"
+          if [ -d "/srv/unarr/.cache/bump/$APP" ]; then
+            sudo cp -a "/srv/unarr/.cache/bump/$APP/." "$RUNNER_TEMP/recorded/"
+            sudo rm -rf "$RUNNER_TEMP/recorded/original"
+            sudo chown -R "$(id -u):$(id -g)" "$RUNNER_TEMP/recorded"
+          fi
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: recorded-${{ env.APP }}
+          path: ${{ runner.temp }}/recorded
+          if-no-files-found: warn
+          retention-days: 7
+
+  # The job that writes. It never runs the original: `apply` reads the
+  # recording as untrusted, and downloads the tarball again to check it
+  # against the checksum the planning job fetched (scripts/pin-bump.py).
+  publish-radarr:
+    name: bump and draft PR (radarr)
+    needs: [plan-radarr, record-radarr]
+    if: needs.record-radarr.result == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    permissions: { contents: write, pull-requests: write }
+    concurrency: { group: upstream-publish-radarr, cancel-in-progress: false }
+    env: { APP: radarr, OTHER: sonarr }
+    # Where a later workflow hooks on: the draft PR this run opened.
+    outputs:
+      pr: ${{ steps.pr.outputs.pr }}
+      branch: ${{ steps.pr.outputs.branch }}
+      app: ${{ steps.pr.outputs.app }}
+      target: ${{ steps.pr.outputs.target }}
+      jump: ${{ steps.pr.outputs.jump }}
+      url: ${{ steps.pr.outputs.url }}
+    steps: &publish-steps
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: { persist-credentials: false }
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: fetched-${{ env.APP }}
+          path: .cache/upstream-workflow/${{ env.APP }}
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: recorded-${{ env.APP }}
+          path: .cache/upstream-workflow/${{ env.APP }}/recorded
+      - name: The work directory, the fetched files over the recorded ones
+        run: make upstream-assemble-"$APP"
+      - name: Room on / for the tests (as in ci.yml)
+        run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
+      - uses: dtolnay/rust-toolchain@39008827e6b4319a349e9a42dfc90579dd25f1ca # stable
+        with: { toolchain: stable }
+      - uses: Swatinem/rust-cache@2201cc584a476d1b508be977bbe4b7d1c7a52e9c # v2.9.3
+      # The other personality's web UI, which the tests need; `apply` takes
+      # this one's from the new tarball.
+      - name: The bump applied, tested and summed up
+        run: |
+          make ui-"$OTHER"
+          make bump-"$APP" STEPS=apply,test,summary
+      - name: The branch and the draft PR
+        id: pr
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          # Optional: a token whose pull requests start CI (upstream/README.md).
+          UPSTREAM_TOKEN: ${{ secrets.UPSTREAM_TOKEN }}
+          BASE: ${{ github.event.repository.default_branch }}
+        run: make upstream-pr-"$APP"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: bump-${{ env.APP }}
+          path: .cache/bump/${{ env.APP }}
+          if-no-files-found: warn
+          retention-days: 30
+
+  plan-sonarr:
+    name: plan (sonarr)
+    if: github.event_name == 'schedule' || inputs.app == 'sonarr'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions: { contents: read, pull-requests: read }
+    env: { APP: sonarr }
+    outputs:
+      action: ${{ steps.plan.outputs.action }}
+      target: ${{ steps.plan.outputs.target }}
+      jump: ${{ steps.plan.outputs.jump }}
+      pr: ${{ steps.plan.outputs.pr }}
+    steps: *plan-steps
+
+  announce-sonarr:
+    name: announce a major (sonarr)
+    needs: plan-sonarr
+    if: needs.plan-sonarr.outputs.action == 'announce'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions: { issues: write }
+    concurrency: { group: upstream-announce-sonarr, cancel-in-progress: false }
+    env: { APP: sonarr }
+    steps: *announce-steps
+
+  record-sonarr:
+    name: record (sonarr)
+    needs: plan-sonarr
+    if: needs.plan-sonarr.outputs.action == 'bump'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    permissions: {}
+    env: { APP: sonarr }
+    steps: *record-steps
+
+  publish-sonarr:
+    name: bump and draft PR (sonarr)
+    needs: [plan-sonarr, record-sonarr]
+    if: needs.record-sonarr.result == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    permissions: { contents: write, pull-requests: write }
+    concurrency: { group: upstream-publish-sonarr, cancel-in-progress: false }
+    env: { APP: sonarr, OTHER: radarr }
+    outputs:
+      pr: ${{ steps.pr.outputs.pr }}
+      branch: ${{ steps.pr.outputs.branch }}
+      app: ${{ steps.pr.outputs.app }}
+      target: ${{ steps.pr.outputs.target }}
+      jump: ${{ steps.pr.outputs.jump }}
+      url: ${{ steps.pr.outputs.url }}
+    steps: *publish-steps
