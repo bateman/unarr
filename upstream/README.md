@@ -218,7 +218,7 @@ an error in one does not stop the other:
 |-----|-------------|--------------|
 | `plan-<app>` | `contents: read`, `pull-requests: read` | `make upstream-plan-<app>`: the triage (the release flags from the API with the job's token), then what to do (below); when it is a bump, `make bump-<app> STEPS=fetch TARGET=<target>` downloads and checks the tarball, without running it. Hands on the plan, the fetched work directory and the tree (`git archive`) |
 | `announce-<app>` | `issues: write` | a new major on the schedule: `make upstream-announce-<app>` opens the issue "<App> <version> is out" with the triage's counts, unless it is open |
-| `record-<app>` | none | `make bump-<app> STEPS=record`, through `scripts/without-network.sh` (below). No checkout (the tree comes from `plan-<app>`), no token, no secret, no cache. Hands on the work directory without the original |
+| `record-<app>` | none | `make bump-<app> STEPS=record`, through `scripts/run-unprivileged.sh` (below). No checkout (the tree comes from `plan-<app>`), no token, no secret, no cache. Hands on the work directory without the original |
 | `publish-<app>` | `contents: write`, `pull-requests: write` | `make upstream-assemble-<app>`, the other personality's web UI, `make bump-<app> STEPS=apply,test,summary`, then `make upstream-pr-<app>`: the commit `Pin <App> <target>`, the branch `<app>/upstream-<target>`, the draft PR into the default branch with the short body of `PORTING.md` (section 1, point 4), the label of the jump (`patch`, `minor`, `major`, created when missing), and the bump's summary as its first comment. Hands on the work directory as the artifact `bump-<app>` |
 
 What `plan` decides (`scripts/upstream-workflow.py`, tested in
@@ -247,13 +247,20 @@ without force, so two runs never open two PRs for one personality; each
 **The original runs alone.** `record-<app>` is the one job that runs the
 binary the planning job fetched, and it trusts nothing that job does not
 hand it: `record` checks the tarball against `bump.json` before it
-starts. `sudo scripts/without-network.sh <user> <command>` runs the
-recording in a network namespace where only the loopback is up (the mock
-answers there; the recording needs no network), as a user of its own
-that owns nothing of the runner, with a clean environment and
-`no_new_privs` (no sudo, no setuid binary: it cannot become root again
-to leave the namespace); every process of that user is killed when it
-ends. The job that writes reads its work directory as untrusted:
+starts. On a GitHub-hosted runner the job's user has sudo and the docker
+socket: what runs as that user is root, and can read from the runner's
+memory the token that saves caches and artifacts, which `permissions: {}`
+does not take away; a scheduled run writes the caches of the default
+branch, which `ci.yml` builds the published image from. So
+`sudo scripts/run-unprivileged.sh <user> <command>`, after every step
+that needs root, runs the recording as a user of its own (created when
+missing, refused when it is in `sudo`, `docker`, `adm` or another group
+that leads to root), with a clean environment and `no_new_privs` (no
+sudo, no setuid binary: it cannot become root again), in a network
+namespace where only the loopback is up (the mock answers there; the
+recording needs no network); every process of that user is killed when
+it ends. `--network` keeps the runner's network, for a job that must
+reach a real service; the rest is the same. The job that writes reads its work directory as untrusted:
 `assemble` puts `bump.json`, `triage.json` and `triage.md` of the
 planning job over whatever the recording left, `apply` checks before it
 copies and downloads the tarball again, `summary` checks every value it

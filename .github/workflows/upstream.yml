@@ -112,9 +112,11 @@ jobs:
 
   # The only job that runs the new original, a binary nobody vetted: no
   # token (no checkout: the tree comes from the planning job), no secret,
-  # no cache; the original runs with no network but the loopback, as a user
-  # that owns nothing of the runner and cannot become root again
-  # (scripts/without-network.sh). What it hands on is untrusted.
+  # no cache. The runner's own user has sudo and the docker socket, so it
+  # could read the runner's token for caches and artifacts, whatever
+  # `permissions:` says: the original runs as a user of its own, outside
+  # those groups, that cannot become root again, with no network but the
+  # loopback (scripts/run-unprivileged.sh). What it hands on is untrusted.
   record-radarr:
     name: record (radarr)
     needs: plan-radarr
@@ -130,10 +132,11 @@ jobs:
           path: ${{ runner.temp }}/fetched
       # The FreeSpace rule of the goldens wants room on / (as in ci.yml);
       # /movies, /tv and /downloads with the fixture scripts' marker.
+      # Everything that needs root comes first.
       - name: The tree, a user of its own, and its folders
         run: |
           sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
-          sudo useradd --create-home --shell /usr/sbin/nologin unarr-recorder
+          sudo useradd --system --create-home --user-group --shell /usr/sbin/nologin unarr-recorder
           sudo mkdir -p /srv/unarr/.cache/bump
           sudo tar -xzf "$RUNNER_TEMP/fetched/source.tar.gz" -C /srv/unarr
           sudo cp -a "$RUNNER_TEMP/fetched/fetched" "/srv/unarr/.cache/bump/$APP"
@@ -141,7 +144,7 @@ jobs:
           sudo chown -R unarr-recorder: /srv/unarr /movies /tv /downloads
       - name: The new original records, with no network
         working-directory: /srv/unarr
-        run: sudo scripts/without-network.sh unarr-recorder make bump-"$APP" STEPS=record
+        run: sudo scripts/run-unprivileged.sh unarr-recorder make bump-"$APP" STEPS=record
       - name: The work directory, without the original
         if: always()
         run: |
