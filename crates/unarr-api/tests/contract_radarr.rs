@@ -379,6 +379,12 @@ fn build_state(dirs: &ReplayDirs) -> AppState {
     let dir = fixture_dir();
     let db = Db::open_in_memory_for(Personality::Radarr).expect("in-memory db");
     unarr_import::radarr::import(&dir.join("radarr.db"), &db).expect("import fixture");
+    // What `unarrd` does with the metadata consumers at every start, as the
+    // original did when it recorded: Radarr 7 deleted the fixture's Kometa.
+    db.call_blocking(|conn| {
+        unarr_api::routes::metadata_writes::insert_missing_consumers(conn, Personality::Radarr)
+    })
+    .expect("the metadata consumers");
     let movies = dirs.movies.to_string_lossy().into_owned();
     db.call_blocking(move |conn| {
         conn.execute(
