@@ -283,8 +283,12 @@ fn decide_one(
                 // More than one movie answers to the title: the original
                 // throws, and the release comes out as an error.
                 tracing::error!("Couldn't process release {}: {error}", release.title);
+                // Radarr 7 keeps what the title parsed to, so the release
+                // still shows its quality and languages.
                 let mut failed = RemoteMovie::new(release.clone());
                 failed.release_source = source;
+                failed.parsed = Some(parsed.clone());
+                failed.languages = parsed.languages.clone();
                 return Some(MovieDecision {
                     remote: failed,
                     rejections: vec![MovieRejection::permanent(

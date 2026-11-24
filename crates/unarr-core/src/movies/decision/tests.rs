@@ -165,6 +165,28 @@ fn a_title_finds_one_movie_across_the_library() {
     assert_eq!(find("Nothing Like It", None), Ok(None));
 }
 
+/// `DownloadDecisionMakerFixture` (Radarr 7): a release that cannot be
+/// processed (two movies answer to its title) is an error that still
+/// carries what its title parsed to, so the interactive search can show
+/// it.
+#[test]
+fn a_release_that_cannot_be_processed_keeps_what_its_title_parsed_to() {
+    let lookup = MemoryMovieLookup {
+        movies: vec![
+            LibraryMovie::bare(movie(3, "The Thing", 1982)),
+            LibraryMovie::bare(movie(4, "The Thing", 1982)),
+        ],
+        ..MemoryMovieLookup::default()
+    };
+    let r = release("The.Thing.1982.1080p.BluRay.x264-GRP", now() - Duration::hours(3));
+    let d = decide(&catalog(), &lookup, &[r], None, false).remove(0);
+    assert_eq!(reasons(&d), vec![R::Error]);
+    assert_eq!(d.rejections[0].message, "Unexpected error processing release");
+    let parsed = d.remote.parsed.as_ref().expect("the parsed title is kept");
+    assert_eq!(parsed.quality.quality.quality_id, BLURAY1080P);
+    assert_eq!(d.remote.languages, parsed.languages);
+}
+
 #[test]
 fn original_stands_for_the_language_of_the_movie() {
     let catalog = catalog();
