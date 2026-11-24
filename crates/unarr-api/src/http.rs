@@ -576,12 +576,20 @@ pub fn negotiated_json(accept: Option<&str>, personality: Personality) -> Option
     })
 }
 
+/// Marks an answer an action writes as an ASP.NET `IResult` (Radarr 7's
+/// `TypedResults.Json`): it bypasses MVC's output formatters, so it is
+/// written as `application/json` whatever the request's `Accept`.
+#[derive(Debug, Clone, Copy)]
+pub struct NotNegotiated;
+
 /// [`negotiated_json`] applied to what an action answered: a JSON result
 /// the client does not take becomes an empty 406, its other headers kept.
 /// The action has run: a write is done all the same. What the exception
-/// handler writes is not negotiated.
+/// handler writes is not negotiated, nor an answer marked [`NotNegotiated`].
 pub fn negotiate(mut response: Response, accept: Option<&str>, personality: Personality) -> Response {
-    if response.extensions().get::<Thrown>().is_some() {
+    if response.extensions().get::<Thrown>().is_some()
+        || response.extensions().get::<NotNegotiated>().is_some()
+    {
         return response;
     }
     let essence = response
