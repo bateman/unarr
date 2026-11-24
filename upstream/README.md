@@ -8,7 +8,7 @@ personality:
 | `<app>.pin` | the release Unarr emulates: version, build time, migration level, SHA-256 of the tarball; the one place a pinned value is written (`scripts/tests/test_pins.py`) | `make bump-<app>` |
 | `<app>.lock` | the cursor: the last upstream commit handled, and its release | `make bump-<app> STEPS=cursor`, the last step of a port |
 | `<app>-wontport.md` | upstream changes Unarr does not take, so the triage does not assess them again | by hand |
-| `<app>-log.csv` | one row per upstream commit a port handled: its class, the decision, the Unarr commits, what a human changed in review (`scripts/tests/test_port_log.py`) | the port, at the end of each run: the decisions made final in it |
+| `<app>-log.csv` | one row per upstream commit a port handled: its class, the decision, the Unarr commits, the tests, the issue of what is deferred (of the whole commit, or of a part), what a human changed in review (`scripts/tests/test_port_log.py`) | the port, at the end of each run: the decisions made final in it |
 | `PORTING.md` | how a port is done, for both personalities: where it starts, the order, the decisions, the PR | by hand |
 
 Two commands, run in this order:
@@ -93,6 +93,12 @@ What the bump leaves to the port, and lists in the summary:
   the PR's branch (issue #9); until that job exists, the port lists it as
   left to check by hand and its PR is not merged without it
   (`PORTING.md`, section 8).
+
+Of these, what needs an original running (the recordings made again, the
+metadata answers, `scripts/http-audit.py`, the comparison) the port's
+agent never does: until the workflow has its job without secrets, a
+session of its own does it on the port's branch and reports the
+differences (`PORTING.md`, section 10).
 
 ### The recording reaches no host outside the machine
 

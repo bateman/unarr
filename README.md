@@ -5,27 +5,41 @@ Sonarr, Radarr and Lidarr that keeps their APIs, so Prowlarr, Bazarr, Overseerr,
 Recyclarr and your dashboards keep working unchanged. Drop it in, import your
 existing databases and config, free a few hundred megabytes of RAM.
 
-Status: the Sonarr personality is complete (phases 1 to 3b) and audited.
-Unarr imports `sonarr.db` and `config.xml`, serves `/api/v3` with the original
-JSON, runs the official Sonarr v4 web UI from the binary, searches Newznab and
-Torznab indexers (Prowlarr can manage them), decides with the originals'
-rules, hands releases to SABnzbd, NZBGet, qBittorrent or Transmission, imports
-and renames what they finish, notifies Discord, webhooks and Plex, looks up,
-adds and refreshes series, and saves every settings page (Recyclarr syncs
-through it). Radarr is under way ([docs/phase-4-radarr.md](docs/phase-4-radarr.md)):
-`--personalities sonarr,radarr` imports `radarr.db` and serves the official
-Radarr web UI, Bazarr and every read of the API next to Sonarr in one
-process, and since milestone 4b searches for movies, decides with Radarr's
-rules, grabs, and keeps the queue, the history and the pending releases
-(Prowlarr can manage its indexers). It does not import what the clients
-finish yet, so it cannot replace Radarr: importing, the library's commands
-and the settings writes for movies are the next milestone.
-`--personalities lidarr` starts but is not usable. See
-[docs/DESIGN.md](docs/DESIGN.md), the work orders of each phase under `docs/`,
-[docs/audit/README.md](docs/audit/README.md) and, for running it in place of
-Sonarr, [docs/homelab-compose.md](docs/homelab-compose.md). What it saves
-against the originals, in RAM, CPU and latency, is measured in
-[docs/originals-comparison.md](docs/originals-comparison.md).
+Status: **Sonarr and Radarr are complete**, audited against the originals'
+source, and have run in place of them on the maintainer's homelab since
+November 2026, both in one process and one container. No version is cut yet:
+the first will be a preview until the soak of
+[#10](https://github.com/bateman/unarr/issues/10) is over
+([CHANGELOG.md](CHANGELOG.md)).
+
+For each of the two, Unarr imports the original's database and `config.xml`,
+serves `/api/v3` with the original JSON and the SignalR feed, runs the
+official web UI from the binary, searches Newznab and Torznab indexers
+(Prowlarr manages them), decides with the originals' rules, hands releases to
+SABnzbd, NZBGet, qBittorrent or Transmission, imports and renames what they
+finish, notifies Discord, webhooks and Plex, looks up, adds and refreshes
+series and movies from the originals' metadata servers, and saves every
+settings page. Prowlarr, Bazarr and Recyclarr were run against both on the
+homelab and needed no change. A panic costs one request or one command, not
+the process.
+
+What is not there: notifications other than those three, import lists other
+than Simkl and the IMDb watchlist, download clients other than those four,
+metadata file writers, script import, HTTPS, and a UI language other than
+English. `--personalities lidarr` starts but is not usable.
+
+Next: Prowlarr as a fourth personality
+([#12](https://github.com/bateman/unarr/issues/12)), then Lidarr
+([#13](https://github.com/bateman/unarr/issues/13)). The versions of the
+originals Unarr answers as are pinned in `upstream/` and followed release by
+release ([#9](https://github.com/bateman/unarr/issues/9)).
+
+See [docs/DESIGN.md](docs/DESIGN.md) for the reasoning and every decision,
+the work orders of each phase under `docs/`,
+[docs/audit/README.md](docs/audit/README.md) for the audits,
+[docs/homelab-compose.md](docs/homelab-compose.md) for running it in place of
+the originals, and [docs/originals-comparison.md](docs/originals-comparison.md)
+for what it saves against them in RAM, CPU and latency.
 
 ## Goals
 
@@ -81,17 +95,19 @@ directory given to the daemon as `--data` must be given to the check too.
 `GET /ping` itself needs no key and answers `{"status":"OK"}`, for monitors
 such as Uptime Kuma.
 
-### Importing an existing Sonarr
+### Importing an existing Sonarr or Radarr
 
     unarrd --data /config --import-from /path/to/sonarr/config
+    unarrd --data /config --personalities sonarr,radarr \
+           --import-from /path/to/sonarr/config,/path/to/radarr/config
 
 `--data` (or `UNARR_CONFIG`, default `/config`) is where Unarr keeps its own
 files, one directory per personality. On first start, if that directory has no
-database, Unarr reads `config.xml` and `sonarr.db` from `--import-from`, keeps
-the port, URL base, API key and authentication settings, and reuses the
-`MediaCover` folder next to them for posters. The original files are not
-modified. Every client that held the Sonarr API key keeps working; the web UI
-login is the one configured in Sonarr.
+database, Unarr reads `config.xml` and `sonarr.db` (or `radarr.db`) from
+`--import-from`, keeps the port, URL base, API key and authentication
+settings, and reuses the `MediaCover` folder next to them for posters. The
+original files are not modified. Every client that held the original's API
+key keeps working; the web UI login is the one configured in the original.
 
 ### Web UI
 
