@@ -90,15 +90,15 @@ What the bump leaves to the port, and lists in the summary:
 - the Bazarr and Prowlarr replays, written from those projects' source;
 - the prose that names the old release;
 - `docs/originals-comparison.md`, which a job of the workflow measures on
-  the PR's branch (issue #9); until that job exists, the port lists it as
-  left to check by hand and its PR is not merged without it
-  (`PORTING.md`, section 8).
+  the PR's branch (issue #9; below, "The checks with the original"); until
+  it has, the port lists it as left to check by hand and its PR is not
+  merged without it (`PORTING.md`, section 8).
 
 Of these, what needs an original running (the recordings made again, the
 metadata answers, `scripts/http-audit.py`, the comparison) the port's
-agent never does: until the workflow has its job without secrets, a
-session of its own does it on the port's branch and reports the
-differences (`PORTING.md`, section 10).
+agent never does: the workflow's job without secrets does it on the
+port's branch and reports the differences, and a session of its own what
+the job does not do (`PORTING.md`, section 10; below).
 
 ### The recording reaches no host outside the machine
 
@@ -198,3 +198,86 @@ log): try again later, nothing is made up in its place.
   is the one recorded, not what the hosts would say to the new version,
   and the contract tests compare only the installed release's shape
   (`Mode::InstalledUpdate`).
+
+## The checks with the original, and the port's agent
+
+Two workflows act on a port's PR (`<app>/upstream-<version>`), each
+started on request from the Actions tab with the PR's number
+(`workflow_dispatch`), or called by another workflow with the same inputs
+(`workflow_call`). The logic is in `scripts/upstream-checks.py` and
+`scripts/upstream-port.py`, tested by `make test-scripts`; the YAML calls
+`make upstream-checks-*` and `make upstream-port-plan`.
+
+### `upstream-checks.yml`: what needs the original running
+
+`PORTING.md`, section 10. Inputs: `recordings` (`recyclarr`, or `none`;
+`transmission` and `sabnzbd` are named but left to a session),
+`http_audit`, `compare` (`none`, `real`, `scaled`, `both`), `replays`,
+`old_pin_request` and `old_pin_wait` (a golden that differs by timing).
+
+| Job | Permissions | What it does |
+|-----|-------------|--------------|
+| `plan` | `contents: read`, `pull-requests: read` | refuses a PR that is not a port's of this repository into `main`, and inputs out of shape (`make upstream-checks-plan`) |
+| `run` | none | the PR's head, `make ui`, `make build`, then the checks in the order of section 10 (`make upstream-checks-run`): the originals, Recyclarr 8.8.1 (SHA-256 checked) and TRaSH-Guides at its commit run here. No secret, no credential left in git, caches restored and never saved. Hands `upstream-checks-results` (recordings, reports, `report.json`) and `upstream-checks-logs` on as artifacts |
+| `apply` | `contents: write`, `pull-requests: write` | `main`'s script reads the results as untrusted (`make upstream-checks-apply`): only the files it expects, at their paths, regular, of a sane size, JSON where JSON, every value it prints checked (`checked_file` of `pin-bump.py`); commits a recording whose test compares answers (one commit each) and the comparison (one commit), on the commit the checks ran at; pushes without force; comments the report on the PR |
+
+What it leaves: the download clients' captures, whose test follows their
+sequence numbers and info hashes, and any recording a job could commit
+only by changing its test; the metadata answers (`RECORD_METADATA=1`); the
+prose of `tests/fixtures/recyclarr/README.md`. A session does them
+(`PORTING.md`, section 10).
+
+### `upstream-port.yml`: the port's agent
+
+The agent follows `PORTING.md` on a port's **draft** PR. Its prompt is
+`upstream/port-prompt.md`, filled from checked values only (the PR's
+number, its branch, the limits); the PR's own text never enters it.
+
+| Job | Permissions | What it does |
+|-----|-------------|--------------|
+| `plan` | `contents: read`, `pull-requests: read` | refuses what is not a port's draft PR; the run's limits by the jump (the label `major` gets the higher ones: `LIMITS` in `scripts/upstream-port.py`); the prompt (`make upstream-port-plan`) |
+| `port` | `contents: write`, `pull-requests: write`, `issues: write` | the branch, `make ui` (the web UI alone), then the agent, with a deadline in its prompt and the job's stop 30 minutes later, `--max-turns`, `--max-budget-usd`; then `main`'s script checks what the run left |
+
+- **No original.** `UNARR_NO_ORIGINAL=1` in the job: the fixture scripts
+  extract the web UI alone, never the binary, and refuse `golden` and
+  `shell`; `compare-originals.py` (and `route-percentiles.py`) refuse to
+  start; the agent's tool rules deny the Make targets that run one. The
+  rules (`--allowedTools`, `--disallowedTools`) match a command's prefix:
+  they keep an agent from a mistake, not from a way round, since
+  `python3` is allowed. The guard that holds is that no original is on
+  disk.
+- **Authorship.** `GIT_AUTHOR_*` and `GIT_COMMITTER_*` are the
+  maintainer's in the job's environment, which wins over the
+  `claude[bot]` identity the action writes in git's configuration; the
+  setting `attribution` is empty, so the agent adds no co-author and no
+  line naming the tool to commits and PRs; a `commit-msg` hook from
+  `main` refuses a trailer or a tool's name; after the run, `verify`
+  checks every commit added (author, committer, message), that the
+  branch only moved forward, and the PR's title and body.
+- **What it may do on GitHub.** `gh` for the PR (view, edit, comment,
+  ready) and for issues (view, list, create); review comments only
+  through `scripts/upstream-port.py review`, a review of kind "comment".
+  `gh api`, `gh pr merge`, `gh pr review`, workflows, secrets and force
+  pushes are denied to it.
+- **A run cut short.** The agent is told the deadline and does what
+  fixed rule 5 asks before it; a run stopped all the same loses only
+  what was not pushed, and the next run starts from the PR's table and
+  the log (`PORTING.md`, section 1, "Decisions without their log row").
+
+### What the maintainer sets
+
+- **Secrets** (Settings > Secrets and variables > Actions):
+  `CLAUDE_CODE_OAUTH_TOKEN` (from `claude setup-token`) or
+  `ANTHROPIC_API_KEY`, for the agent; optionally `UPSTREAM_BOT_TOKEN`, a
+  fine-grained token on this repository only with Contents, Pull requests
+  and Issues read and write. With it, the pushes of both workflows start
+  CI on the PR; without it they use the job's own token, on whose pushes
+  GitHub starts no workflow, and CI runs at the next push of a person.
+- **Settings > Actions > General:** "Allow GitHub Actions to create and
+  approve pull requests" off; workflow permissions "Read repository
+  contents" (each job asks for what it needs).
+- **A ruleset on `main`** that requires a pull request: a token with
+  `contents: write` could merge otherwise.
+- **A ruleset on `sonarr/upstream-*` and `radarr/upstream-*`** that blocks
+  force pushes and deletion: `verify` sees a rewrite only after it.
+
