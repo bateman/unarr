@@ -219,7 +219,8 @@ an error in one does not stop the other:
 | `plan-<app>` | `contents: read`, `pull-requests: read` | `make upstream-plan-<app>`: the triage (the release flags from the API with the job's token), then what to do (below); when it is a bump, `make bump-<app> STEPS=fetch TARGET=<target>` downloads and checks the tarball, without running it. Hands on the plan, the fetched work directory and the tree (`git archive`) |
 | `announce-<app>` | `issues: write` | a new major on the schedule: `make upstream-announce-<app>` opens the issue "<App> <version> is out" with the triage's counts, unless it is open |
 | `record-<app>` | none | `make bump-<app> STEPS=record`, through `scripts/run-unprivileged.sh` (below). No checkout (the tree comes from `plan-<app>`), no token, no secret, no cache. Hands on the work directory without the original |
-| `publish-<app>` | `contents: write`, `pull-requests: write` | `make upstream-assemble-<app>`, the other personality's web UI, `make bump-<app> STEPS=apply,test,summary`, then `make upstream-pr-<app>`: the commit `Pin <App> <target>`, the branch `<app>/upstream-<target>`, the draft PR into the default branch with the short body of `PORTING.md` (section 1, point 4), the label of the jump (`patch`, `minor`, `major`, created when missing), and the bump's summary as its first comment. Hands on the work directory as the artifact `bump-<app>` |
+| `test-<app>` | none | the tree of `plan-<app>` as a local commit, `make upstream-assemble-<app>`, the other personality's web UI and `make bump-<app> STEPS=apply` as the runner's user (nothing of the new tarball runs); then, through `scripts/run-unprivileged.sh`, `cargo fetch` as a user of its own with the network and `make bump-<app> STEPS=test` as that user without it: the contract tests run the ffprobe the new original ships. Hands on `tests.json` and the logs, untrusted |
+| `publish-<app>` | `contents: write`, `pull-requests: read` | `make upstream-assemble-<app>` (with the tests' results, checked), `make upstream-apply-<app>` (the extracted original removed at once: nothing of it runs here) and `make bump-<app> STEPS=summary`, then `make upstream-pr-<app>`: the commit `Pin <App> <target>`, the branch `<app>/upstream-<target>`, and, with `UPSTREAM_TOKEN`, the draft PR into the default branch with the short body of `PORTING.md` (section 1, point 4), the label of the jump (`patch`, `minor`, `major`, created when missing) and the bump's summary as its first comment. Hands on the work directory as the artifact `bump-<app>` |
 
 What `plan` decides (`scripts/upstream-workflow.py`, tested in
 `scripts/tests/test_upstream_workflow.py`), in this order:
@@ -244,47 +245,56 @@ without force, so two runs never open two PRs for one personality; each
 `publish-<app>` and `announce-<app>` is one at a time per personality
 (`concurrency`).
 
-**The original runs alone.** `record-<app>` is the one job that runs the
-binary the planning job fetched, and it trusts nothing that job does not
-hand it: `record` checks the tarball against `bump.json` before it
-starts. On a GitHub-hosted runner the job's user has sudo and the docker
+**The original runs alone.** `record-<app>` runs the binary the planning
+job fetched, and `test-<app>` the ffprobe it ships (the contract tests
+use it); both trust nothing that job does not hand them: `record` checks
+the tarball against `bump.json` before it starts, `apply` downloads it
+again and checks it. On a GitHub-hosted runner the job's user has sudo and the docker
 socket: what runs as that user is root, and can read from the runner's
 memory the token that saves caches and artifacts, which `permissions: {}`
 does not take away; a scheduled run writes the caches of the default
 branch, which `ci.yml` builds the published image from. So
 `sudo scripts/run-unprivileged.sh <user> <command>`, after every step
-that needs root, runs the recording as a user of its own (created when
+that needs root, runs the recording and the tests as a user of its own (created when
 missing, refused when it is in `sudo`, `docker`, `adm` or another group
 that leads to root), with a clean environment and `no_new_privs` (no
 sudo, no setuid binary: it cannot become root again), in a network
-namespace where only the loopback is up (the mock answers there; the
-recording needs no network); every process of that user is killed when
-it ends. `--network` keeps the runner's network, for a job that must
-reach a real service; the rest is the same. The job that writes reads its work directory as untrusted:
-`assemble` puts `bump.json`, `triage.json` and `triage.md` of the
-planning job over whatever the recording left, `apply` checks before it
-copies and downloads the tarball again, `summary` checks every value it
-prints, and `pr` commits only the files the bump writes (the pin, the
-goldens, the schemas, the vectors), stopping on any other.
+namespace where only the loopback is up (the mock answers there; neither
+needs the network); every process of that user is killed when it ends.
+`--network` keeps the runner's network, for a step that must reach a
+real service (`cargo fetch`, before anything of the tarball runs); the
+rest is the same. The job that writes runs nothing of the new tarball and
+reads what it is handed as untrusted: `assemble` puts `bump.json`,
+`triage.json` and `triage.md` of the planning job over whatever the
+recording left and checks every value of `tests.json` the summary prints,
+`apply` checks before it copies and downloads the tarball again (what it
+extracts is removed at once; the fixture scripts extract the whole
+tarball, and only the web UI is needed), `summary` checks every value it
+prints from the recording, and `pr` commits only the files the bump
+writes (the pin, the goldens, the schemas, the vectors), stopping on any
+other.
 
 **Authorship.** The commit is authored and committed as `CLAUDE.md`
 says, with no trailer; the title and the body name no tool.
 
 **What the maintainer sets in the repository:**
 
+- The secret `UPSTREAM_TOKEN`: a fine-grained personal access token (or
+  a GitHub App's) for this repository only, with *Contents* and *Pull
+  requests* read and write. `publish-<app>` pushes and opens the PR with
+  it, so CI starts on the PR; it reaches only that step. Without it the
+  job pushes the branch with its own token and stops there: the run's
+  summary gives the link to open the PR, and the title, the body and the
+  first comment are in the artifact `bump-<app>` (`pr-title.txt`,
+  `pr-body.md`, `pr-comment.md`); the next runs find the branch and do
+  nothing until its PR is open.
 - *Settings, Actions, General, Workflow permissions*: "Allow GitHub
-  Actions to create and approve pull requests" on, or the job cannot open
-  the PR with the job's token (the token's default can stay read-only:
-  each job asks for its own permissions).
-- *CI on the PR.* A PR opened with the job's token starts no workflow.
-  With the optional secret `UPSTREAM_TOKEN` (a fine-grained token, or a
-  GitHub App's, for this repository only: contents and pull requests,
-  read and write), `publish-<app>` pushes and opens the PR with it and CI
-  starts; it reaches only the step that pushes. Without it, the PR says
-  that CI has not run, and the first push to the branch (the port's)
-  starts it, or closing and reopening the PR.
-- The labels `patch` and `minor` are created at their first use; `major`
-  exists.
+  Actions to create and approve pull requests" stays **off**. The job's
+  token never opens a PR, and with that setting on it could also approve
+  one, which the port's workflow must not be able to do. Each job asks
+  for its own permissions, so the token's default can stay read-only.
+- The labels `patch` and `minor` are created at their first use (with
+  `UPSTREAM_TOKEN`); `major` exists.
 
 What a later step hooks on: the outputs of `publish-<app>` (`pr`,
 `branch`, `app`, `target`, `jump`, `url`) and the artifacts of the run
@@ -311,6 +321,14 @@ GITHUB_REPOSITORY=bateman/unarr EVENT=schedule make upstream-plan-radarr RELEASE
   other workflows of the branch: a binary that could reach the network
   and the runner's credentials could poison them. Left aside: trusting
   the mock as the original's proxy alone, which the original can ignore.
+- **The tests in a job without a token.** The contract tests run the
+  ffprobe of the new tarball. Left aside: running them in the job that
+  writes, as the runner's user (root, the write token, the default
+  branch's caches), or without that ffprobe, when the goldens were
+  recorded with it and the runner's own, if any, can read media apart.
+- **The PR opened only with `UPSTREAM_TOKEN`.** Left aside: the job's
+  own token, which needs the setting that also lets a job's token
+  approve a PR, and opens a PR on which CI does not start.
 - **Any open port of the personality stops the run**, not only one for
   the same target: issue #9 ("A PR for that personality is still open:
   add to it; do not open a second").

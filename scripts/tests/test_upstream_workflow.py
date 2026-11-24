@@ -383,10 +383,19 @@ class Workflow(unittest.TestCase):
             self.assertIn("timeout-minutes:", job, name)
             self.assertIn("permissions:", job, name)
         self.assertIn("record-radarr", names)
-        record = next(j for j in jobs if j.startswith("record-radarr"))
-        self.assertIn("permissions: {}", record)
-        self.assertNotIn("secrets.", record)
-        self.assertNotIn("github.token", record)
+        # The jobs that run something of the new tarball hold no token.
+        for name in ("record-radarr", "test-radarr"):
+            job = next(j for j in jobs if j.startswith(name))
+            self.assertIn("permissions: {}", job)
+            self.assertNotIn("secrets.", job)
+            self.assertNotIn("github.token", job)
+            self.assertNotIn("actions/checkout", job)
+        # The jobs with a token run nothing of it: no recording, no test.
+        for job in jobs:
+            if "permissions: {}" not in job:
+                self.assertNotIn("STEPS=record", job)
+                self.assertNotIn("test,", job)
+                self.assertNotIn("STEPS=test", job)
 
     def test_the_makefile_has_the_targets_the_workflow_calls(self):
         import re
