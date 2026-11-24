@@ -436,13 +436,6 @@ fn process_subtitle_files(
             tracing::debug!("Unable to parse extra file: {file}");
             continue;
         }
-        // The aggregator gave up on a movie without a file, and the
-        // original goes on to read what it did not set: the handler ends
-        // here, the rows of this kind unwritten and the other extras
-        // unread.
-        let Some(info) = local.subtitle_info else {
-            anyhow::bail!("Unable to read the subtitle file {file}: {NULL_REFERENCE}");
-        };
         let mut row = new_extra(
             ExtraKind::Subtitle,
             movie.id,
@@ -450,10 +443,22 @@ fn process_subtitle_files(
             relative_path(&movie.path, file).to_string(),
             extension,
         );
-        row.language = info.language;
-        row.language_tags = info.language_tags;
-        row.title = info.title;
-        row.copy = info.copy;
+        // The aggregator gives up on a movie without a file; Radarr 7 then
+        // writes the subtitle with an unknown language and no title.
+        match local.subtitle_info {
+            Some(info) => {
+                row.language = info.language;
+                row.language_tags = info.language_tags;
+                row.title = info.title;
+                row.copy = info.copy;
+            }
+            None => {
+                row.language = crate::movies::parser::language::lang::UNKNOWN;
+                row.language_tags = Vec::new();
+                row.title = None;
+                row.copy = 0;
+            }
+        }
         found.push(row);
     }
     tracing::info!("Found {} existing subtitle files", found.len());
@@ -1745,11 +1750,11 @@ mod tests {
         assert_eq!(other, [1, 3]);
     }
 
-    /// The subtitle of a movie that has no file stops the handler where the
-    /// original's stops: the metadata files are remembered, the subtitle
-    /// and the other extras are not.
+    /// Radarr 7: the subtitle of a movie that has no file is remembered
+    /// with an unknown language, and the other extras are read too (Radarr
+    /// 6 stopped the handler there).
     #[test]
-    fn a_subtitle_of_a_movie_without_a_file_ends_the_scan_of_its_extras() {
+    fn a_subtitle_of_a_movie_without_a_file_has_an_unknown_language() {
         let lib = library("no-file");
         lib.in_folder(&[
             "Movie Title - 2022.en.srt",
@@ -1765,12 +1770,16 @@ mod tests {
             .unwrap();
         let mut movie = lib.movie.clone();
         movie.movie_file_id = 0;
-        assert!(lib.scan(&movie).is_err());
-        assert_eq!(lib.paths(), ["fanart.jpg"]);
-        // Without the subtitle the others are read.
-        fs::remove_file(join(&lib.movie.path, "Movie Title - 2022.en.srt")).unwrap();
         lib.scan(&movie).unwrap();
-        assert_eq!(lib.paths(), ["Movie Title - 2022.nfo", "fanart.jpg"]);
+        assert_eq!(
+            lib.paths(),
+            ["Movie Title - 2022.en.srt", "Movie Title - 2022.nfo", "fanart.jpg"]
+        );
+        let subtitle = lib.rows().into_iter().find(|e| e.kind == ExtraKind::Subtitle).unwrap();
+        assert_eq!(
+            (subtitle.language, subtitle.language_tags.clone(), subtitle.title.clone(), subtitle.copy),
+            (crate::movies::parser::language::lang::UNKNOWN, Vec::<String>::new(), None, 0)
+        );
         assert!(lib.rows().iter().all(|e| e.movie_file_id == Some(0)));
     }
 
