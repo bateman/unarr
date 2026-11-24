@@ -190,7 +190,9 @@ Radarr (404) for want of the movie file name builder, since written;
 with the framework's 404 where the original throws its own ("Series with
 ID 50 does not exist"), since corrected; `GET
 /api/v3/manualimport?seriesId=1` on Sonarr is a 500 on the original when
-the series' folder is not on disk and an empty list here, left so.
+the series' folder is not on disk and an empty list here, left so; `GET
+/api/v3/manualimport?movieId=10` on Radarr 7.0.3.10918 is the same case
+for a movie's folder, left so as well (decided on 2026-11-24, issue #9).
 
 Seen with the probes and left as it is: static files (`/Content/…`) are
 `max-age=31536000, public` on the originals and `no-cache` here (row 4.9):
