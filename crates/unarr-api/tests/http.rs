@@ -2413,3 +2413,17 @@ async fn radarr_refuses_a_bind_address_in_the_allowed_hosts() {
         }
     }
 }
+
+/// Radarr 7 writes the API's answers compact, without indentation, as
+/// Unarr always has: an answer is one line.
+#[tokio::test]
+async fn radarr_answers_compact_json() {
+    let app = app_for(Personality::Radarr, "");
+    for path in ["/api/v3/system/status", "/api/v3/config/host", "/api/v3/qualityprofile"] {
+        let (status, _, body) = ask(&app, "GET", path, &[("X-Api-Key", KEY)], "").await;
+        assert_eq!(status, StatusCode::OK, "{path}");
+        let text = String::from_utf8(body).unwrap();
+        assert!(!text.contains('\n'), "{path}: {text}");
+        assert!(text.starts_with('{') || text.starts_with('['), "{path}");
+    }
+}
