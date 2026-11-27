@@ -8,7 +8,7 @@
           "name": "AAC"
         }
       ],
-      "dateAdded": "2026-11-12T14:23:23Z",
+      "dateAdded": "2026-11-23T17:48:26Z",
       "edition": "",
       "id": 410,
       "indexerFlags": 0,
@@ -28,9 +28,41 @@
         "audioCodec": "AAC",
         "audioLanguages": "eng/ita",
         "audioStreamCount": 2,
+        "audioStreams": [
+          {
+            "bitrate": 0,
+            "channelPositions": "mono",
+            "channels": 1,
+            "codec": "AAC",
+            "language": "eng",
+            "profile": "LC"
+          },
+          {
+            "bitrate": 0,
+            "channelPositions": "stereo",
+            "channels": 2,
+            "codec": "AAC",
+            "language": "ita",
+            "profile": "LC"
+          }
+        ],
         "resolution": "64x64",
         "runTime": "10:10",
         "scanType": "Progressive",
+        "subtitleStreams": [
+          {
+            "forced": false,
+            "format": "subrip",
+            "hearingImpaired": false,
+            "language": "eng"
+          },
+          {
+            "forced": false,
+            "format": "subrip",
+            "hearingImpaired": false,
+            "language": "ita"
+          }
+        ],
         "subtitles": "eng/ita",
         "videoBitDepth": 8,
         "videoBitrate": 0,
@@ -40,7 +72,7 @@
         "videoFps": 2
       },
       "movieId": 116,
-      "originalFilePath": "d94f74e9588477404bd8d34ffc605870/The.Holdovers.2023.iTA.ENG.1080p.BluRay.x264-MIRCrew.mkv",
+      "originalFilePath": "movies/d94f74e9588477404bd8d34ffc605870/The.Holdovers.2023.iTA.ENG.1080p.BluRay.x264-MIRCrew.mkv",
       "path": "/movies/The Holdovers (2023)/The Holdovers (2023) {tmdb-840430} - [Bluray-480p][AAC 1.0][x264]-MIRCrew.mkv",
       "quality": {
         "quality": {
@@ -63,7 +95,7 @@
       "size": 177860
     }
   ],
-  "recordedAt": "2026-11-12T14:23:35Z",
+  "recordedAt": "2026-11-23T17:48:38Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/moviefile?movieId=116"

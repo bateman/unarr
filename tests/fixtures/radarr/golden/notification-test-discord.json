@@ -1,10 +1,10 @@
 {
-  "body": {},
-  "recordedAt": "2026-11-12T14:21:05Z",
+  "body": null,
+  "recordedAt": "2026-11-23T17:46:10Z",
   "request": {
     "body": "bodies/notification-create-discord.json",
     "method": "POST",
     "path": "/api/v3/notification/test"
   },
-  "status": 200
+  "status": 204
 }

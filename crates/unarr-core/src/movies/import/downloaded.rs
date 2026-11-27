@@ -146,7 +146,7 @@ pub fn should_delete_folder(folder: &str, movie: &Movie) -> bool {
             tracing::warn!("Unable to parse file on import: [{video}]");
             return false;
         }
-        let probe = crate::mediafiles::mediainfo::probe(Path::new(video));
+        let probe = crate::mediafiles::mediainfo::probe_for(Path::new(video), crate::Personality::Radarr);
         if sample::is_sample(&movie.metadata, video, probe.as_ref()) != DetectSampleResult::Sample {
             tracing::warn!("Non-sample file detected: [{video}]");
             return false;
@@ -202,7 +202,7 @@ fn decide_and_import(
     tracked_flags: Option<i64>,
     now: DateTime<Utc>,
 ) -> ImportedMovies {
-    let probes = Probes::probe_all(&files);
+    let probes = Probes::probe_all_for(&files, crate::Personality::Radarr);
     let folder_info = folder_title.and_then(|t| parse_movie_title(t, false));
     let (env2, movie2, item2) = (env.clone(), movie.clone(), item.cloned());
     let decisions = db.call_blocking(move |conn| {

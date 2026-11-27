@@ -19,6 +19,11 @@
     "launchBrowser": true,
     "logLevel": "debug",
     "logSizeLimit": 1,
+    "oidcAuthority": "",
+    "oidcClientId": "",
+    "oidcClientSecret": "",
+    "oidcScopes": "openid profile email",
+    "oidcUserIdentifier": "",
     "password": "vpm0pzNQQ7u2LLK74gSs0drVR8CSDWLyjdxo8qvEL9k=",
     "passwordConfirmation": "",
     "port": 7878,
@@ -32,6 +37,7 @@
     "proxyUsername": "",
     "sslCertPassword": "",
     "sslCertPath": "",
+    "sslKeyPath": "",
     "sslPort": 9898,
     "trustCgnatIpAddresses": false,
     "trustedNetworks": "",
@@ -41,7 +47,7 @@
     "urlBase": "",
     "username": "unarr"
   },
-  "recordedAt": "2026-11-21T16:24:36Z",
+  "recordedAt": "2026-11-23T17:58:20Z",
   "request": {
     "body": "bodies/config-host-proxy.json",
     "method": "PUT",

@@ -61,7 +61,7 @@
         },
         "renamedMovieFiles": [
           {
-            "dateAdded": "2026-11-12T14:22:18.9118694Z",
+            "dateAdded": "2026-11-23T17:47:22.5360011Z",
             "id": 408,
             "indexerFlags": "0",
             "languages": [
@@ -118,7 +118,7 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685"
+        "X-Plex-Version": "7.0.3.10918"
       },
       "service": "plex"
     },
@@ -134,13 +134,13 @@
         "X-Plex-Platform-Version": "7",
         "X-Plex-Product": "Radarr",
         "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "6.4.4.10685",
+        "X-Plex-Version": "7.0.3.10918",
         "path": "/movies/Backcountry (2015)"
       },
       "service": "plex"
     }
   ],
-  "recordedAt": "2026-11-12T14:24:19Z",
+  "recordedAt": "2026-11-23T17:49:22Z",
   "request": {
     "method": "GET",
     "path": "/mock/notifications",

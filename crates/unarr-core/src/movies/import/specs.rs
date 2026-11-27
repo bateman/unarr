@@ -401,6 +401,20 @@ fn upgrade(
             format_names(&local.custom_formats),
             format_names(&current_formats)
         );
+        // Radarr 7: the name the file had did improve on the existing one;
+        // the name the import gives it does not.
+        let score_before_rename = local.original_file_name_custom_format_score;
+        if score_before_rename > current_score {
+            return reject(
+                R::NotCustomFormatUpgradeAfterRename,
+                format!(
+                    "Not a Custom Format upgrade for existing movie file(s). AfterRename: [{}] ({new_score}) do not improve on Existing: [{}] ({current_score}) even though BeforeRename: [{}] ({score_before_rename}) did.",
+                    format_names(&local.custom_formats),
+                    format_names(&current_formats),
+                    format_names(&local.original_file_name_custom_formats)
+                ),
+            );
+        }
         return reject(
             R::NotCustomFormatUpgrade,
             format!(
@@ -1271,6 +1285,23 @@ mod tests {
         let mut h = Harness::new();
         let l = with_format_scores(&mut h, BLURAY720P, 50);
         assert!(h.accepts(upgrade, &l, None));
+    }
+
+    /// Radarr 7: the name the file had scored above the existing file, the
+    /// name the import gives it does not.
+    #[test]
+    fn should_return_false_and_a_specific_reason_if_not_upgrade_to_custom_format_score_after_local_file_rename_but_was_before(
+    ) {
+        let mut h = Harness::new();
+        let mut l = with_format_scores(&mut h, BLURAY1080P, 50);
+        l.original_file_name_custom_formats = l.custom_formats.clone();
+        l.original_file_name_custom_format_score = 60;
+        let r = h.run(upgrade, &l, None).unwrap();
+        assert_eq!(r.reason, R::NotCustomFormatUpgradeAfterRename);
+        assert_eq!(
+            r.message,
+            "Not a Custom Format upgrade for existing movie file(s). AfterRename: [Name2] (20) do not improve on Existing: [Name1] (50) even though BeforeRename: [Name2] (60) did."
+        );
     }
 
     #[test]

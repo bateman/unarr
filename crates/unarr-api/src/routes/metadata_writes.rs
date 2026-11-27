@@ -193,8 +193,10 @@ const START_ORDER: &[&str] = &[
     "KometaMetadata",
 ];
 
-/// `MetadataFactory.InitializeProviders`, at every start: each consumer the
-/// application knows and the table lacks is inserted, disabled, named as
+/// `ProviderFactory.RemoveMissingImplementations` then
+/// `MetadataFactory.InitializeProviders`, at every start: a stored consumer
+/// the application no longer has is deleted (Radarr 7's Kometa); each
+/// consumer it knows and the table lacks is inserted, disabled, named as
 /// its implementation and with its default settings. A database started
 /// from nothing gets all of them; one where a consumer was deleted gets it
 /// back. Returns how many were added.
@@ -202,10 +204,19 @@ pub fn insert_missing_consumers(
     conn: &rusqlite::Connection,
     personality: unarr_core::Personality,
 ) -> anyhow::Result<usize> {
-    let existing = store::providers::list_providers(conn, KIND)?;
     let mut known: Vec<&'static Value> = schemas::all(personality, SchemaKind::Provider(KIND))
         .iter()
         .collect();
+    for stored in store::providers::list_providers(conn, KIND)? {
+        let has_it = known
+            .iter()
+            .any(|schema| schema["implementation"].as_str() == Some(stored.implementation.as_str()));
+        if !has_it {
+            tracing::warn!("Removing {}", stored.name);
+            store::providers::delete_provider(conn, KIND, stored.id)?;
+        }
+    }
+    let existing = store::providers::list_providers(conn, KIND)?;
     let place = |schema: &Value| {
         let implementation = schema["implementation"].as_str().unwrap_or("");
         START_ORDER
@@ -268,5 +279,36 @@ mod tests {
             Ok(())
         })
         .unwrap();
+    }
+
+    /// Radarr 7 has no Kometa consumer any more: the stored one goes at the
+    /// next start. Sonarr, at its pin, keeps it.
+    #[test]
+    fn a_consumer_the_original_no_longer_has_goes_at_the_next_start() {
+        for (personality, kept) in [(Personality::Radarr, false), (Personality::Sonarr, true)] {
+            let db = Db::open_in_memory_for(personality).unwrap();
+            db.call_blocking(move |conn| {
+                let kometa = Provider {
+                    kind: KIND,
+                    id: 1,
+                    name: "Kometa".into(),
+                    implementation: "KometaMetadata".into(),
+                    config_contract: "KometaMetadataSettings".into(),
+                    settings: json!({}),
+                    tags: Vec::new(),
+                    attributes: json!({"enable": true}),
+                };
+                store::providers::insert_provider(conn, &kometa)?;
+                insert_missing_consumers(conn, personality)?;
+                let stored = store::providers::list_providers(conn, KIND)?;
+                assert_eq!(
+                    stored.iter().any(|p| p.implementation == "KometaMetadata"),
+                    kept,
+                    "{personality:?}"
+                );
+                Ok(())
+            })
+            .unwrap();
+        }
     }
 }

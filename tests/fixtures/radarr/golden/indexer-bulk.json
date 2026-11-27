@@ -237,6 +237,12 @@
             },
             {
               "dividerAfter": false,
+              "name": "Irish",
+              "order": 0,
+              "value": 58
+            },
+            {
+              "dividerAfter": false,
               "name": "Italian",
               "order": 0,
               "value": 5
@@ -720,6 +726,12 @@
             },
             {
               "dividerAfter": false,
+              "name": "Irish",
+              "order": 0,
+              "value": 58
+            },
+            {
+              "dividerAfter": false,
               "name": "Italian",
               "order": 0,
               "value": 5
@@ -1084,11 +1096,11 @@
       ]
     }
   ],
-  "recordedAt": "2026-11-12T14:24:55Z",
+  "recordedAt": "2026-11-23T17:49:59Z",
   "request": {
     "body": "bodies/indexer-bulk.json",
     "method": "PUT",
     "path": "/api/v3/indexer/bulk"
   },
-  "status": 202
+  "status": 200
 }

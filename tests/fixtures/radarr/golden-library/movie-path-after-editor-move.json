@@ -1,6 +1,6 @@
 {
   "body": {
-    "added": "2026-11-13T12:39:38Z",
+    "added": "2026-11-23T17:54:16Z",
     "alternateTitles": [
       {
         "id": 2855,
@@ -170,7 +170,7 @@
     "year": 2014,
     "youTubeTrailerId": "Q7kZy3T6vRM"
   },
-  "recordedAt": "2026-11-13T12:40:30Z",
+  "recordedAt": "2026-11-23T17:55:09Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/movie/331"

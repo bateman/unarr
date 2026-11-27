@@ -114,7 +114,7 @@
     "minimumAvailability": "released",
     "monitored": true,
     "movieFile": {
-      "dateAdded": "2026-11-12T14:21:18Z",
+      "dateAdded": "2026-11-23T17:46:22Z",
       "edition": "",
       "id": 406,
       "indexerFlags": 0,
@@ -134,9 +134,41 @@
         "audioCodec": "AAC",
         "audioLanguages": "eng/ita",
         "audioStreamCount": 2,
+        "audioStreams": [
+          {
+            "bitrate": 0,
+            "channelPositions": "mono",
+            "channels": 1,
+            "codec": "AAC",
+            "language": "eng",
+            "profile": "LC"
+          },
+          {
+            "bitrate": 0,
+            "channelPositions": "stereo",
+            "channels": 2,
+            "codec": "AAC",
+            "language": "ita",
+            "profile": "LC"
+          }
+        ],
         "resolution": "64x64",
         "runTime": "10:10",
         "scanType": "Progressive",
+        "subtitleStreams": [
+          {
+            "forced": false,
+            "format": "subrip",
+            "hearingImpaired": false,
+            "language": "eng"
+          },
+          {
+            "forced": false,
+            "format": "subrip",
+            "hearingImpaired": false,
+            "language": "ita"
+          }
+        ],
         "subtitles": "eng/ita",
         "videoBitDepth": 8,
         "videoBitrate": 0,
@@ -238,7 +270,7 @@
     "year": 2018,
     "youTubeTrailerId": "7tgMuagdEhc"
   },
-  "recordedAt": "2026-11-12T14:21:54Z",
+  "recordedAt": "2026-11-23T17:46:58Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/movie/13"

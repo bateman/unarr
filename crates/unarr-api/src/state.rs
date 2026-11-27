@@ -47,6 +47,14 @@ impl Settings {
             tracing::info!("Basic authentication is not offered by Radarr, using Forms");
             host.authentication_method = unarr_core::config::AuthenticationMethod::Forms;
         }
+        // Radarr 7 says what it leaves out; Sonarr's pin says nothing.
+        let bind_addresses = crate::hosts::bind_addresses(&host.allowed_hosts);
+        if personality == Personality::Radarr && !bind_addresses.is_empty() {
+            tracing::warn!(
+                "Ignoring {} in Allowed Hosts, bind addresses are not host names",
+                bind_addresses.join(", ")
+            );
+        }
         let allowed_hosts = crate::hosts::AllowedHosts::parse(&host.allowed_hosts);
         if allowed_hosts.allows_everything() {
             tracing::info!("AllowedHosts is not configured, accepting requests for any host");

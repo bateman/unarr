@@ -36,6 +36,9 @@
     ],
     [
      "Movie.Title.2010.En.1080p.WEB.x264-GROUP"
+    ],
+    [
+     "The.Irishman.2019.1080p.WEB.x264-GROUP"
     ]
    ]
   },
@@ -856,6 +859,22 @@
     ],
     [
      "Movie.Title.2016.RU-KA.WEB-DL.h264"
+    ]
+   ]
+  },
+  "should_parse_language_irish": {
+   "params": [
+    "postTitle"
+   ],
+   "cases": [
+    [
+     "Movie.Title.2016.Irish.WEB-DL.h264"
+    ],
+    [
+     "Movie.Title.2016.Gaeilge.WEB-DL.h264"
+    ],
+    [
+     "Movie.Title.2016.EN-Irish.WEB-DL.h264"
     ]
    ]
   },

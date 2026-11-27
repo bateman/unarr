@@ -38,7 +38,7 @@
     "sortKey": "tmdbId",
     "totalRecords": 23
   },
-  "recordedAt": "2026-11-13T12:41:43Z",
+  "recordedAt": "2026-11-23T17:56:21Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/exclusions/paged?page=1&pageSize=5&sortKey=tmdbId&sortDirection=descending"

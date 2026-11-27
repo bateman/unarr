@@ -1,7 +1,7 @@
 {
   "body": [
     {
-      "added": "2026-11-13T13:34:08Z",
+      "added": "2026-11-23T17:57:13Z",
       "alternateTitles": [
         {
           "id": 2816,
@@ -137,7 +137,7 @@
         "tricks",
         "twist"
       ],
-      "lastSearchTime": "2026-11-13T13:34:08Z",
+      "lastSearchTime": "2026-11-23T17:57:13Z",
       "minimumAvailability": "released",
       "monitored": true,
       "movieFileId": 0,
@@ -203,7 +203,7 @@
       "youTubeTrailerId": "ObGVA1WOqyE"
     }
   ],
-  "recordedAt": "2026-11-13T13:34:40Z",
+  "recordedAt": "2026-11-23T17:57:44Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/movie?tmdbId=1124"

@@ -87,9 +87,27 @@
         "audioCodec": "DTS-HD MA",
         "audioLanguages": "eng",
         "audioStreamCount": 1,
+        "audioStreams": [
+          {
+            "bitrate": 3310698,
+            "channelPositions": "5.1(side)",
+            "channels": 5.1,
+            "codec": "DTS-HD MA",
+            "language": "eng",
+            "profile": "DTS-HD MA"
+          }
+        ],
         "resolution": "1920x1080",
         "runTime": "1:36:58",
         "scanType": "Progressive",
+        "subtitleStreams": [
+          {
+            "language": "eng"
+          },
+          {
+            "language": "eng"
+          }
+        ],
         "subtitles": "eng/eng",
         "videoBitDepth": 8,
         "videoBitrate": 33626396,
@@ -193,7 +211,7 @@
     "year": 2025,
     "youTubeTrailerId": "1aNywiElPSY"
   },
-  "recordedAt": "2026-11-12T14:19:08Z",
+  "recordedAt": "2026-11-23T17:44:13Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/movie/225"

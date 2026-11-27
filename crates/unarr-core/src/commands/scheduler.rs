@@ -90,6 +90,9 @@ fn radarr_tasks(conn: &Connection) -> anyhow::Result<Vec<(String, i64)>> {
     });
     Ok([
         ("NzbDrone.Core.Messaging.Commands.MessagingCleanupCommand", 5),
+        // Radarr 7 drops the expired entries of its in-memory caches every
+        // five minutes; listed, and not run: Unarr has no such caches.
+        ("NzbDrone.Core.Caching.ClearExpiredCacheCommand", 5),
         (super::RADARR_UPDATE_CHECK_TYPE, 6 * 60),
         ("NzbDrone.Core.HealthCheck.CheckHealthCommand", 6 * 60),
         ("NzbDrone.Core.Movies.Commands.RefreshMovieCommand", 24 * 60),
@@ -381,7 +384,13 @@ mod tests {
         db.call_blocking(move |conn| {
             ensure_defaults_for(conn, Personality::Radarr, now)?;
             let tasks = store::providers::list_scheduled_tasks(conn)?;
-            assert_eq!(tasks.len(), 11);
+            assert_eq!(tasks.len(), 12);
+            // Radarr 7's cache clean-up, every five minutes.
+            let clear = tasks
+                .iter()
+                .find(|t| t.type_name == "NzbDrone.Core.Caching.ClearExpiredCacheCommand")
+                .expect("ClearExpiredCache");
+            assert_eq!(clear.interval_minutes, 5);
             for name in [
                 "NzbDrone.Core.Movies.Commands.RefreshMovieCommand",
                 "NzbDrone.Core.Movies.Commands.RefreshCollectionsCommand",
@@ -404,7 +413,7 @@ mod tests {
             assert_eq!(task.last_execution, Some(later));
             // Running it again changes nothing.
             ensure_defaults_for(conn, Personality::Radarr, now)?;
-            assert_eq!(store::providers::list_scheduled_tasks(conn)?.len(), 11);
+            assert_eq!(store::providers::list_scheduled_tasks(conn)?.len(), 12);
             Ok(())
         })
         .unwrap();

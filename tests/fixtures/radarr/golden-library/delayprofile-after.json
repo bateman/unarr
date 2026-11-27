@@ -45,7 +45,7 @@
       "usenetDelay": 60
     }
   ],
-  "recordedAt": "2026-11-13T12:41:28Z",
+  "recordedAt": "2026-11-23T17:56:07Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/delayprofile"

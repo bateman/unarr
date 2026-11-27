@@ -80,6 +80,7 @@ APPS = {
         "categories": [5030, 5040, 5045],
         "extra": {"animeCategories": [5070]},
         "empty": None,
+        "test_status": 200,
         "test_answer": {},
     },
     "radarr": {
@@ -88,7 +89,10 @@ APPS = {
         "categories": [2000, 2010, 2020, 2030, 2040, 2045, 2050, 2060],
         "extra": {},
         "empty": "/movies/empty",
-        "test_answer": "{}",
+        # Radarr 7 answers a passed test 204 with no body (typed results);
+        # Radarr 6.4.4 answered 200 with the string `{}`.
+        "test_status": 204,
+        "test_answer": None,
     },
 }
 
@@ -170,14 +174,14 @@ class Replay:
     def test(self, body: dict, expect_ok: bool, what: str):
         code, headers, answer = self.api.call("POST", "indexer/test", body)
         if expect_ok:
-            # Radarr answers the string `{}`, which a client asking for JSON
-            # (as this replay and Prowlarr do) receives as `"{}"`; recorded
-            # from the real Radarr 6.4.4. Prowlarr reads the status only.
-            passed = self.app["test_answer"]
+            # Sonarr answers `{}`; Radarr 7 answers 204 with no body, as its
+            # recordings show (Radarr 6.4.4 answered the string `{}`).
+            # Prowlarr reads the status and the version header only.
+            status, passed = self.app["test_status"], self.app["test_answer"]
             self.check(
-                code == 200 and answer == passed,
-                f"POST indexer/test {what} answers 200 {json.dumps(passed)}"
-                + ("" if code == 200 and answer == passed else f" (got {code} {short(answer)})"),
+                code == status and answer == passed,
+                f"POST indexer/test {what} answers {status} {json.dumps(passed)}"
+                + ("" if code == status and answer == passed else f" (got {code} {short(answer)})"),
             )
             self.check(header(headers, "X-Application-Version") is not None, "the test answer carries X-Application-Version")
         else:

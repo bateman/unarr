@@ -5,7 +5,8 @@
 - `radarr.yml`: the `radarr:` section of the same configuration, as given
   on 11 November 2026, without `base_url` and `api_key`.
 - `radarr-exchange.json`: the same four phases against the original Radarr
-  6.4.4.10685 on the phase 4a fixture. Its `old-config` phase scores
+  7.0.3.10918 on the phase 4a fixture (recorded again on 24 November 2026;
+  the first recording was from Radarr 6.4.4.10685). Its `old-config` phase scores
   Radarr's FreeLeech (`0d91270a7255a1e388fa85e959f359d8`) in `HD Bluray +
   WEB`; `sync-1` deletes it again and leaves the `Language not Italian`
   the maintainer made by hand, which the configuration never names,

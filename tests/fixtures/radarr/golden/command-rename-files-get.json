@@ -16,22 +16,22 @@
       "updateScheduledTask": true
     },
     "commandName": "Rename Files",
-    "duration": "00:00:00.0543780",
-    "ended": "2026-11-12T14:23:55Z",
+    "duration": "00:00:00.0508671",
+    "ended": "2026-11-23T17:48:58Z",
     "id": 473010,
     "message": "1 selected movie files renamed for Backcountry",
     "name": "RenameFiles",
     "priority": "normal",
-    "queued": "2026-11-12T14:23:55Z",
+    "queued": "2026-11-23T17:48:58Z",
     "result": "successful",
     "sendUpdatesToClient": true,
-    "started": "2026-11-12T14:23:55Z",
-    "stateChangeTime": "2026-11-12T14:23:55Z",
+    "started": "2026-11-23T17:48:58Z",
+    "stateChangeTime": "2026-11-23T17:48:58Z",
     "status": "completed",
     "trigger": "manual",
     "updateScheduledTask": true
   },
-  "recordedAt": "2026-11-12T14:24:07Z",
+  "recordedAt": "2026-11-23T17:49:10Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/command/473010"

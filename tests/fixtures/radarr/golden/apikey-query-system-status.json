@@ -1,10 +1,10 @@
 {
   "body": {
-    "appData": "/home/user/unarr/.cache/radarr/golden-data",
+    "appData": "/config",
     "appName": "Radarr",
     "authentication": "forms",
     "branch": "master",
-    "buildTime": "2026-09-14T15:54:37Z",
+    "buildTime": "2026-11-15T19:19:14Z",
     "databaseType": "sqLite",
     "databaseVersion": "3.53.4",
     "instanceName": "Radarr",
@@ -18,19 +18,19 @@
     "isProduction": true,
     "isUserInteractive": true,
     "isWindows": false,
-    "migrationVersion": 242,
+    "migrationVersion": 243,
     "mode": "console",
     "osName": "ubuntu",
     "osVersion": "24.04",
     "packageUpdateMechanism": "builtIn",
     "runtimeName": "netcore",
-    "runtimeVersion": "8.0.27",
-    "startTime": "2026-11-12T14:19:04Z",
-    "startupPath": "/home/user/unarr/.cache/radarr/Radarr",
+    "runtimeVersion": "10.0.15",
+    "startTime": "2026-11-23T17:44:09Z",
+    "startupPath": "/home/user/unarr/.cache/bump/radarr/original/Radarr",
     "urlBase": "",
-    "version": "6.4.4.10685"
+    "version": "7.0.3.10918"
   },
-  "recordedAt": "2026-11-12T14:19:06Z",
+  "recordedAt": "2026-11-23T17:44:12Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/system/status?apikey=0123456789abcdef0123456789abcdef"

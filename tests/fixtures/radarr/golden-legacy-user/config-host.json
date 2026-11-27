@@ -19,7 +19,12 @@
     "launchBrowser": true,
     "logLevel": "debug",
     "logSizeLimit": 1,
-    "password": "wZJDWlFv5GHsYYSIlbsZnhTxmMvGCj8h6LkH9uImEAo=",
+    "oidcAuthority": "",
+    "oidcClientId": "",
+    "oidcClientSecret": "",
+    "oidcScopes": "openid profile email",
+    "oidcUserIdentifier": "",
+    "password": "o1UPpz4ndm4UoRCkg9MG6Eaq3a8/xtIL6Pl0/oJuCGc=",
     "passwordConfirmation": "",
     "port": 7878,
     "proxyBypassFilter": "",
@@ -32,6 +37,7 @@
     "proxyUsername": "",
     "sslCertPassword": "",
     "sslCertPath": "",
+    "sslKeyPath": "",
     "sslPort": 9898,
     "trustCgnatIpAddresses": false,
     "trustedNetworks": "",
@@ -41,7 +47,7 @@
     "urlBase": "",
     "username": "unarr"
   },
-  "recordedAt": "2026-11-19T21:46:55Z",
+  "recordedAt": "2026-11-23T17:52:24Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/config/host"

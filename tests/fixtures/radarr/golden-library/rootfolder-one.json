@@ -1,7 +1,7 @@
 {
   "body": {
     "accessible": true,
-    "freeSpace": 12120080384,
+    "freeSpace": 63281270784,
     "id": 2,
     "path": "/downloads/library",
     "unmappedFolders": [
@@ -12,7 +12,7 @@
       }
     ]
   },
-  "recordedAt": "2026-11-13T12:41:20Z",
+  "recordedAt": "2026-11-23T17:55:58Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/rootfolder/2"

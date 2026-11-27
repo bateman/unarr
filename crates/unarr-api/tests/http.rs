@@ -1230,16 +1230,12 @@ async fn radarr_answers_outside_the_body_as_measured() {
     let app = app_for(Personality::Radarr, "");
     let key = [("X-Api-Key", KEY)];
 
-    // An id that names nothing: the framework's problem details.
+    // An id that names nothing: Radarr 7's `TypedResults.NotFound()`, a
+    // 404 with no body (Radarr 6 answered the framework's problem details).
     let (status, headers, body) = ask(&app, "GET", "/api/v3/movie/999999", &key, "").await;
     assert_eq!(status, StatusCode::NOT_FOUND);
-    assert_eq!(
-        header(&headers, "content-type"),
-        Some("application/problem+json; charset=utf-8")
-    );
-    let problem: serde_json::Value = serde_json::from_slice(&body).unwrap();
-    assert_eq!(problem["status"], 404);
-    assert_eq!(problem["title"], "Not Found");
+    assert_eq!(header(&headers, "content-type"), None);
+    assert!(body.is_empty());
     assert_eq!(
         header(&headers, "x-application-version"),
         Some(unarr_core::pin::RADARR.version)
@@ -1256,10 +1252,15 @@ async fn radarr_answers_outside_the_body_as_measured() {
     let errors: serde_json::Value = serde_json::from_slice(&body).unwrap();
     assert_eq!(errors["errors"][""][0], "A non-empty request body is required.");
 
-    // A cover with the key: kept for a year, as the static files are.
+    // A cover with the key and no cache breaker: Radarr 7 no longer keeps
+    // it (Radarr 6 kept it for a year, as the static files are); with the
+    // breaker it does.
     let (status, headers, _) = ask(&app, "GET", "/api/v3/mediacover/6/poster.jpg", &key, "").await;
     assert_eq!(status, StatusCode::OK);
     assert_eq!(header(&headers, "content-type"), Some("image/jpeg"));
+    assert_eq!(header(&headers, "cache-control"), Some("no-cache, no-store"));
+    let (status, headers, _) = ask(&app, "GET", "/api/v3/mediacover/6/poster.jpg?h=0123", &key, "").await;
+    assert_eq!(status, StatusCode::OK);
     assert_eq!(
         header(&headers, "cache-control"),
         Some("max-age=31536000, public")
@@ -1482,9 +1483,16 @@ async fn what_no_mapper_takes_is_a_404_in_problem_details() {
                 Some("application/problem+json; charset=utf-8"),
                 "{path}"
             );
+            // Radarr 7 keeps a cover only with its cache breaker.
+            let kept = personality == Personality::Sonarr || !path.to_lowercase().starts_with("/mediacover/");
             assert_eq!(
                 header(&headers, "cache-control"),
-                Some("max-age=31536000, public")
+                Some(if kept {
+                    "max-age=31536000, public"
+                } else {
+                    "no-cache, no-store"
+                }),
+                "{personality:?} {path}"
             );
             let problem: serde_json::Value = serde_json::from_slice(&body).unwrap();
             assert_eq!(problem["type"], document);
@@ -2113,4 +2121,318 @@ async fn backups_and_failures_are_never_kept() {
     assert_eq!(status, StatusCode::CONFLICT);
     assert_eq!(header(&headers, "cache-control"), Some("no-cache,no-store"));
     assert_eq!(header(&headers, "last-modified"), None);
+}
+
+/// Radarr 7 (`TypedResults`): a missing backup is an empty 404, and an
+/// upload that is not a zip a 400 with `error`; Sonarr, at its pin, throws
+/// (`{"message": "NotFound"}`, and a 415 with `message`).
+#[tokio::test]
+async fn backup_errors_follow_each_original() {
+    let upload = "--XB\r\nContent-Disposition: form-data; name=\"restore\"; filename=\"backup.txt\"\r\n\
+                  Content-Type: text/plain\r\n\r\nnot a zip\r\n--XB--\r\n";
+    let form = [
+        ("X-Api-Key", KEY),
+        ("Content-Type", "multipart/form-data; boundary=XB"),
+    ];
+    let key = [("X-Api-Key", KEY)];
+    for (personality, missing, status, field) in [
+        (Personality::Radarr, "", StatusCode::BAD_REQUEST, "error"),
+        (
+            Personality::Sonarr,
+            r#"{"message":"NotFound"}"#,
+            StatusCode::UNSUPPORTED_MEDIA_TYPE,
+            "message",
+        ),
+    ] {
+        let app = app_edited(personality, "", |_| {});
+        let (got, _, body) = ask(&app, "DELETE", "/api/v3/system/backup/12345", &key, "").await;
+        assert_eq!(got, StatusCode::NOT_FOUND, "{personality:?}");
+        assert_eq!(String::from_utf8_lossy(&body), missing, "{personality:?}");
+        let (got, _, body) = ask(
+            &app,
+            "POST",
+            "/api/v3/system/backup/restore/upload",
+            &form,
+            upload,
+        )
+        .await;
+        assert_eq!(got, status, "{personality:?}");
+        let body: serde_json::Value = serde_json::from_slice(&body).unwrap();
+        assert_eq!(
+            body[field], "Invalid extension, must be one of: .zip",
+            "{personality:?}"
+        );
+    }
+}
+
+/// `DisabledForLocalhost` (Radarr 7): the UI asks no credentials of a
+/// client on the loopback, and asks them of one on the local network.
+#[tokio::test]
+async fn radarr_asks_no_credentials_of_localhost_when_so_set() {
+    let app = app_edited(Personality::Radarr, "", |host| {
+        host.authentication_method = unarr_core::config::AuthenticationMethod::Forms;
+        host.authentication_required = unarr_core::config::AuthenticationRequired::DisabledForLocalhost;
+    });
+    for (peer, expected) in [
+        (
+            std::net::SocketAddr::from(([127, 0, 0, 1], 50000)),
+            StatusCode::OK,
+        ),
+        (
+            std::net::SocketAddr::from(([0, 0, 0, 0, 0, 0, 0, 1], 50000)),
+            StatusCode::OK,
+        ),
+        (
+            std::net::SocketAddr::from(([192, 168, 1, 20], 50000)),
+            StatusCode::FOUND,
+        ),
+    ] {
+        let request = Request::builder()
+            .uri("/")
+            .extension(axum::extract::ConnectInfo(peer))
+            .body(Body::empty())
+            .unwrap();
+        let response = app.clone().oneshot(request).await.unwrap();
+        assert_eq!(response.status(), expected, "{peer}");
+    }
+}
+
+/// A key reset takes effect at once: the old key is refused and the new
+/// one accepted, without a restart (Radarr 7 reads the key at each
+/// request). The reset is what `ResetApiKey` stores.
+#[tokio::test]
+async fn a_reset_api_key_takes_effect_at_once() {
+    let (app, state) = app_and_state(Personality::Radarr, "", |_| {});
+    let new_key = "fedcba9876543210fedcba9876543210";
+    let writer = state.clone();
+    tokio::task::spawn_blocking(move || {
+        unarr_api::routes::settings_writes::set_host_override_blocking(
+            &writer,
+            "apiKey",
+            serde_json::json!(new_key),
+        )
+    })
+    .await
+    .unwrap()
+    .unwrap();
+    assert_eq!(state.settings().host.api_key, new_key);
+    let (status, _, _) = ask(&app, "GET", "/api/v3/system/status", &[("X-Api-Key", KEY)], "").await;
+    assert_eq!(status, StatusCode::UNAUTHORIZED);
+    let (status, _, _) = ask(
+        &app,
+        "GET",
+        "/api/v3/system/status",
+        &[("X-Api-Key", new_key)],
+        "",
+    )
+    .await;
+    assert_eq!(status, StatusCode::OK);
+}
+
+/// `PUT` of the host settings with `body` changed by `edit`, from what
+/// `GET` answers.
+async fn put_host(
+    app: &axum::Router,
+    edit: impl FnOnce(&mut serde_json::Value),
+) -> (StatusCode, serde_json::Value) {
+    let (_, _, current) = ask(app, "GET", "/api/v3/config/host", &[("X-Api-Key", KEY)], "").await;
+    let mut body: serde_json::Value = serde_json::from_slice(&current).unwrap();
+    // The fixture's file asks for no credentials and names no host, which
+    // a save refuses: the page as one that asks for them.
+    body["authenticationRequired"] = serde_json::json!("enabled");
+    body["allowedHosts"] = serde_json::json!("");
+    edit(&mut body);
+    let body: &'static str = Box::leak(body.to_string().into_boxed_str());
+    let json = [("X-Api-Key", KEY), ("Content-Type", "application/json")];
+    let (status, _, answer) = ask(app, "PUT", "/api/v3/config/host/1", &json, body).await;
+    let answer = serde_json::from_slice(&answer).unwrap_or(serde_json::Value::Null);
+    assert!(
+        status != StatusCode::BAD_REQUEST || answer[0]["propertyName"] != "AllowedHosts",
+        "{answer}"
+    );
+    (status, answer)
+}
+
+/// Radarr 7's `sslKeyPath`: answered, kept, and refused unless it names a
+/// file; Sonarr, at its pin, has no such setting.
+#[tokio::test]
+async fn radarr_keeps_the_key_of_a_pem_certificate() {
+    let app = app_edited(Personality::Radarr, "", |_| {});
+    let (status, answer) = put_host(&app, |b| b["sslKeyPath"] = serde_json::json!("/nowhere/key.pem")).await;
+    assert_eq!(status, StatusCode::BAD_REQUEST);
+    assert_eq!(answer[0]["propertyName"], "SslKeyPath");
+    assert_eq!(answer[0]["errorCode"], "FileExistsValidator");
+    assert_eq!(
+        answer[0]["errorMessage"],
+        "File '/nowhere/key.pem' does not exist"
+    );
+    let (status, answer) = put_host(&app, |b| b["sslKeyPath"] = serde_json::json!("key.pem")).await;
+    assert_eq!(status, StatusCode::BAD_REQUEST);
+    assert_eq!(answer[0]["errorMessage"], "Invalid Path: 'key.pem'");
+    let key = std::env::temp_dir().join(format!("unarr-key-{}.pem", std::process::id()));
+    std::fs::write(&key, "-----BEGIN PRIVATE KEY-----\n").unwrap();
+    let path = key.display().to_string();
+    let (status, answer) = put_host(&app, |b| b["sslKeyPath"] = serde_json::json!(path.clone())).await;
+    assert_eq!(status, StatusCode::ACCEPTED, "{answer}");
+    assert_eq!(answer["sslKeyPath"], path.as_str());
+    let (status, answer) = put_host(&app, |b| b["sslKeyPath"] = serde_json::json!("")).await;
+    assert_eq!(status, StatusCode::ACCEPTED, "{answer}");
+    assert_eq!(answer["sslKeyPath"], "");
+    std::fs::remove_file(&key).ok();
+
+    let sonarr = app_edited(Personality::Sonarr, "", |_| {});
+    let (_, _, host) = ask(&sonarr, "GET", "/api/v3/config/host", &[("X-Api-Key", KEY)], "").await;
+    let host: serde_json::Value = serde_json::from_slice(&host).unwrap();
+    assert!(host.get("sslKeyPath").is_none());
+}
+
+/// Radarr 7's OIDC settings: answered with the original's defaults, kept,
+/// the secret shown only as there or not; the OIDC sign-in itself is
+/// refused, as Unarr does not do it yet. Sonarr, at its pin, has none.
+#[tokio::test]
+async fn radarr_keeps_its_oidc_settings_and_refuses_the_oidc_sign_in() {
+    let app = app_edited(Personality::Radarr, "", |_| {});
+    let (_, _, host) = ask(&app, "GET", "/api/v3/config/host", &[("X-Api-Key", KEY)], "").await;
+    let host: serde_json::Value = serde_json::from_slice(&host).unwrap();
+    for (key, default) in [
+        ("oidcAuthority", ""),
+        ("oidcClientId", ""),
+        ("oidcClientSecret", ""),
+        ("oidcUserIdentifier", ""),
+        ("oidcScopes", "openid profile email"),
+    ] {
+        assert_eq!(host[key], default, "{key}");
+    }
+
+    let (status, answer) = put_host(&app, |b| {
+        b["oidcAuthority"] = serde_json::json!("https://id.example.com");
+        b["oidcClientId"] = serde_json::json!("radarr");
+        b["oidcClientSecret"] = serde_json::json!("s3cret");
+        b["oidcUserIdentifier"] = serde_json::json!("me@example.com");
+    })
+    .await;
+    assert_eq!(status, StatusCode::ACCEPTED, "{answer}");
+    assert_eq!(answer["oidcAuthority"], "https://id.example.com");
+    assert_eq!(answer["oidcClientSecret"], "********", "never shown");
+    // Sent back as shown, the secret stays.
+    let (status, answer) = put_host(&app, |b| b["oidcClientId"] = serde_json::json!("radarr-2")).await;
+    assert_eq!(status, StatusCode::ACCEPTED, "{answer}");
+    assert_eq!(answer["oidcClientSecret"], "********");
+    assert_eq!(answer["oidcClientId"], "radarr-2");
+
+    let (status, answer) = put_host(&app, |b| b["authenticationMethod"] = serde_json::json!("oidc")).await;
+    assert_eq!(status, StatusCode::BAD_REQUEST);
+    assert_eq!(answer[0]["propertyName"], "AuthenticationMethod");
+    assert_eq!(answer[0]["attemptedValue"], "oidc");
+    let (_, _, host) = ask(&app, "GET", "/api/v3/config/host", &[("X-Api-Key", KEY)], "").await;
+    let host: serde_json::Value = serde_json::from_slice(&host).unwrap();
+    assert_eq!(host["authenticationMethod"], "forms", "not switched");
+
+    let sonarr = app_edited(Personality::Sonarr, "", |_| {});
+    let (_, _, host) = ask(&sonarr, "GET", "/api/v3/config/host", &[("X-Api-Key", KEY)], "").await;
+    let host: serde_json::Value = serde_json::from_slice(&host).unwrap();
+    assert!(host.as_object().unwrap().keys().all(|k| !k.starts_with("oidc")));
+}
+
+/// "Remember me" as each original reads it: Radarr 7 a boolean (its page
+/// sends `true`), Sonarr the checkbox's `on`.
+#[tokio::test]
+async fn remember_me_is_read_as_each_original_reads_it() {
+    for (personality, remembered, forgotten) in [
+        (Personality::Radarr, "true", "on"),
+        (Personality::Sonarr, "on", "true"),
+    ] {
+        let app = app_edited(personality, "", |host| {
+            host.authentication_method = unarr_core::config::AuthenticationMethod::Forms;
+        });
+        for (value, persistent) in [(remembered, true), (forgotten, false), ("", false)] {
+            let body = format!("username=unarr&password=fixture&rememberMe={value}");
+            let body: &'static str = Box::leak(body.into_boxed_str());
+            let form = [("Content-Type", "application/x-www-form-urlencoded")];
+            let (status, headers, _) = ask(&app, "POST", "/login", &form, body).await;
+            assert_eq!(status, StatusCode::FOUND, "{personality:?} {value}");
+            let cookie = header(&headers, "set-cookie").expect("a session");
+            assert!(!cookie.is_empty());
+            assert_eq!(
+                cookie.to_ascii_lowercase().contains("max-age="),
+                persistent,
+                "{personality:?} rememberMe={value}: {cookie}"
+            );
+        }
+    }
+}
+
+/// Radarr 7 no longer binds the `body` of a posted command (a resource
+/// read back and sent again carries one): the command is read from the
+/// request's raw body, its name first. Unarr reads it that way already.
+#[tokio::test]
+async fn radarr_starts_a_command_whatever_its_body_field_says() {
+    let (app, state) = app_and_state(Personality::Radarr, "", |_| {});
+    state.start_runtime().await.expect("the runtime");
+    let json = [("X-Api-Key", KEY), ("Content-Type", "application/json")];
+    let (status, _, answer) = ask(
+        &app,
+        "POST",
+        "/api/v3/command",
+        &json,
+        r#"{"name":"MessagingCleanup","body":{"sendUpdatesToClient":true,"name":"Other"}}"#,
+    )
+    .await;
+    assert_eq!(
+        status,
+        StatusCode::CREATED,
+        "{}",
+        String::from_utf8_lossy(&answer)
+    );
+    let answer: serde_json::Value = serde_json::from_slice(&answer).unwrap();
+    assert_eq!(answer["name"], "MessagingCleanup");
+    assert_eq!(answer["body"]["name"], "MessagingCleanup");
+}
+
+/// Radarr 7 refuses a bind address in Allowed Hosts (`0.0.0.0`, `::`,
+/// `[::]`), which names no host; Sonarr, at its pin, takes it.
+#[tokio::test]
+async fn radarr_refuses_a_bind_address_in_the_allowed_hosts() {
+    for (personality, refused) in [(Personality::Radarr, true), (Personality::Sonarr, false)] {
+        let app = app_edited(personality, "", |_| {});
+        for hosts in ["0.0.0.0", "::", "[::]", "unarr.local, 0.0.0.0"] {
+            let (_, _, current) = ask(&app, "GET", "/api/v3/config/host", &[("X-Api-Key", KEY)], "").await;
+            let mut body: serde_json::Value = serde_json::from_slice(&current).unwrap();
+            body["authenticationRequired"] = serde_json::json!("enabled");
+            body["allowedHosts"] = serde_json::json!(hosts);
+            let body: &'static str = Box::leak(body.to_string().into_boxed_str());
+            let json = [("X-Api-Key", KEY), ("Content-Type", "application/json")];
+            let (status, _, answer) = ask(&app, "PUT", "/api/v3/config/host/1", &json, body).await;
+            let answer = serde_json::from_slice(&answer).unwrap_or(serde_json::Value::Null);
+            if refused {
+                assert_eq!(status, StatusCode::BAD_REQUEST, "{hosts}: {answer}");
+                assert_eq!(answer[0]["propertyName"], "AllowedHosts", "{hosts}");
+                assert_eq!(
+                    answer[0]["errorMessage"],
+                    "0.0.0.0 and [::] are not host names, leave empty to allow all hosts",
+                    "{hosts}"
+                );
+            } else {
+                assert!(status.is_success(), "{personality:?} {hosts}: {status} {answer}");
+            }
+        }
+    }
+}
+
+/// Radarr 7 writes the API's answers compact, without indentation, as
+/// Unarr always has: an answer is one line.
+#[tokio::test]
+async fn radarr_answers_compact_json() {
+    let app = app_for(Personality::Radarr, "");
+    for path in [
+        "/api/v3/system/status",
+        "/api/v3/config/host",
+        "/api/v3/qualityprofile",
+    ] {
+        let (status, _, body) = ask(&app, "GET", path, &[("X-Api-Key", KEY)], "").await;
+        assert_eq!(status, StatusCode::OK, "{path}");
+        let text = String::from_utf8(body).unwrap();
+        assert!(!text.contains('\n'), "{path}: {text}");
+        assert!(text.starts_with('{') || text.starts_with('['), "{path}");
+    }
 }

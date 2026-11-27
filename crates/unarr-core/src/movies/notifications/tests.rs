@@ -310,7 +310,8 @@ fn the_section_at_the_mapped_root_is_the_one_refreshed() {
             "/data/media/movies/Candyman (1992)",
             &sections,
             &roots,
-            "Movie"
+            "Movie",
+            true
         ),
         [(1, "/media/movies/Candyman (1992)".to_string())]
     );
@@ -321,7 +322,8 @@ fn the_section_at_the_mapped_root_is_the_one_refreshed() {
             "/data/media/movies/Candyman (1992)",
             &sections,
             &roots,
-            "Movie"
+            "Movie",
+            true
         ),
         [(1, "/media/movies/Candyman (1992)".to_string())]
     );
@@ -332,7 +334,8 @@ fn the_section_at_the_mapped_root_is_the_one_refreshed() {
             "/data/media/movies/Candyman (1992)",
             &sections,
             &roots,
-            "Movie"
+            "Movie",
+            true
         ),
         [(1, "/media/movies/Candyman (1992)".to_string())]
     );
@@ -343,9 +346,50 @@ fn the_section_at_the_mapped_root_is_the_one_refreshed() {
             "/data/media/movies/Candyman (1992)",
             &[section(2, &["/data/media/movies"])],
             &roots,
-            "Movie"
+            "Movie",
+            true
         ),
         [(2, "/data/media/movies/Candyman (1992)".to_string())]
+    );
+}
+
+/// `PlexServerServiceFixture` (Radarr 7): every section with a location
+/// at the mapped root is refreshed, once each; Sonarr, at its pin, stops
+/// at the first.
+#[test]
+fn every_section_at_the_mapped_root_is_refreshed() {
+    let roots = [RootFolder {
+        id: 1,
+        path: "/data/media/movies".into(),
+    }];
+    let settings = mapping("/data/media/movies", "/media/movies");
+    let path = "/data/media/movies/Candyman (1992)";
+    let at = |id| (id, "/media/movies/Candyman (1992)".to_string());
+    // should_update_all_sections_matching_the_movie_path
+    let both = [
+        section(1, &["/media/movies"]),
+        section(2, &["/media/movies"]),
+        section(3, &["/media/kids"]),
+    ];
+    assert_eq!(
+        section_updates(&settings, path, &both, &roots, "Movie", true),
+        [at(1), at(2)]
+    );
+    assert_eq!(
+        section_updates(&settings, path, &both, &roots, "TV", false),
+        [at(1)]
+    );
+    // should_update_only_the_matching_section_when_a_single_section_matches
+    let one = [section(1, &["/media/kids"]), section(2, &["/media/movies"])];
+    assert_eq!(
+        section_updates(&settings, path, &one, &roots, "Movie", true),
+        [at(2)]
+    );
+    // should_only_update_a_section_once_when_multiple_locations_match
+    let twice = [section(1, &["/media/movies", "/media/movies/"])];
+    assert_eq!(
+        section_updates(&settings, path, &twice, &roots, "Movie", true),
+        [at(1)]
     );
 }
 
@@ -365,7 +409,8 @@ fn every_location_is_refreshed_when_none_is_the_mapped_root() {
             "/data/media/movies/Candyman (1992)",
             &sections,
             &roots,
-            "Movie"
+            "Movie",
+            true
         ),
         [
             (1, "/elsewhere/movies/Candyman (1992)".to_string()),
@@ -394,7 +439,7 @@ fn covers_get_the_address_they_are_served_at() {
             url: None,
         },
     ];
-    convert_to_local_urls("/radarr", 20, &mut images);
+    convert_to_local_urls("/radarr", 20, &mut images, &|_| true);
     // The hash is the one the real Radarr sent for this cover.
     assert_eq!(
         images[0].url.as_deref(),
@@ -774,7 +819,7 @@ fn the_library_payloads_are_the_originals() {
     // The cover's local address, hashed as `covers_get_the_address_they_are_served_at` checks.
     let local = {
         let mut images = m.metadata.images.clone();
-        convert_to_local_urls("", 1, &mut images);
+        convert_to_local_urls("", 1, &mut images, &|_| true);
         images[0].url.clone().unwrap()
     };
     let expected_movie = json!({
@@ -869,4 +914,117 @@ fn the_library_payloads_are_the_originals() {
     assert_eq!(deleted.get("image"), None);
     let kept_embed = embed(discord::movie_delete_payload(&settings, &kept, &ctx));
     assert_eq!(kept_embed["description"], "Movie removed, files were not deleted");
+}
+
+/// `MediaCoverServiceFixture`, Radarr 7: a movie added within the day gets
+/// the cache breaker only once its cover is on disk; an older one always.
+#[test]
+fn a_recent_movie_gets_the_cache_breaker_once_its_cover_exists() {
+    use super::cover_exists;
+    let now = chrono::DateTime::parse_from_rfc3339("2026-11-23T12:00:00Z")
+        .unwrap()
+        .with_timezone(&chrono::Utc);
+    let root = std::env::temp_dir().join(format!("unarr-covers-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&root);
+    let recent = Some(now - chrono::Duration::hours(2));
+    let old = Some(now - chrono::Duration::days(2));
+    let convert = |added| {
+        let mut images = vec![Image {
+            cover_type: "poster".into(),
+            remote_url: Some("https://image.tmdb.org/t/p/original/poster.jpg".into()),
+            url: None,
+        }];
+        convert_to_local_urls("", 7, &mut images, &|t| {
+            cover_exists(Some(&root), 7, t, added, now)
+        });
+        images[0].url.clone().unwrap()
+    };
+    // should_convert_cover_urls_to_local_without_hash_if_cover_has_not_been_downloaded
+    assert_eq!(convert(recent), "/MediaCover/7/poster.jpg");
+    // should_not_check_if_cover_exists_for_movie_added_more_than_a_day_ago
+    assert!(convert(old).starts_with("/MediaCover/7/poster.jpg?h="));
+    assert!(convert(None).starts_with("/MediaCover/7/poster.jpg?h="));
+    // should_add_hash_to_cover_url_once_cover_exists
+    std::fs::create_dir_all(root.join("7")).unwrap();
+    std::fs::write(root.join("7").join("poster.jpg"), b"jpg").unwrap();
+    assert_eq!(convert(recent), convert(old));
+    assert!(
+        !cover_exists(None, 7, "poster", recent, now),
+        "no folder, no cover"
+    );
+    std::fs::remove_dir_all(&root).ok();
+}
+
+/// Radarr 7's `ShouldHandleMovie(definition, message.RemoteMovie?.Movie)`:
+/// a manual interaction for a release matched to no movie reaches a
+/// connection without tags, and a connection with tags skips it without a
+/// failure (Radarr 6 threw there, and recorded one).
+#[tokio::test]
+async fn a_manual_interaction_for_an_unknown_movie_skips_the_tagged_connections() {
+    use crate::downloadclients::{ClientKind, DownloadClientItem, ItemClientInfo};
+    use crate::downloads::{TrackedDownloadState, TrackedDownloadStatus};
+    use crate::movies::decision::testing::{release, remote};
+    use crate::movies::downloads::tracked::TrackedMovieDownload;
+    use crate::movies::import::events::MovieManualInteractionRequired;
+
+    let (url, seen) = receiver("nothing").await;
+    let mut tagged = webhook_provider(
+        1,
+        &format!("{url}/tagged"),
+        json!({"onManualInteractionRequired": true}),
+    );
+    tagged.tags = vec![1];
+    let open = webhook_provider(
+        2,
+        &format!("{url}/open"),
+        json!({"onManualInteractionRequired": true}),
+    );
+    let n = notifier(vec![tagged, open]);
+    let title = "Candyman.1992.1080p.BluRay.x264-GRP";
+    let mut unknown = remote(
+        release(title, now()),
+        &movie(1, "Candyman", 1992),
+        QualityModel::default(),
+    );
+    unknown.movie = None;
+    let item = DownloadClientItem::new(
+        ItemClientInfo {
+            protocol: crate::model::Protocol::Usenet,
+            kind: ClientKind::Sabnzbd,
+            id: 1,
+            name: "SABnzbd".into(),
+            remove_completed_downloads: true,
+            has_post_import_category: false,
+        },
+        "sab-1",
+        title,
+    );
+    let tracked = TrackedMovieDownload {
+        download_client: 1,
+        protocol: crate::model::Protocol::Usenet,
+        item,
+        import_item: None,
+        state: TrackedDownloadState::ImportBlocked,
+        status: TrackedDownloadStatus::Warning,
+        remote: Some(unknown),
+        status_messages: Vec::new(),
+        indexer: None,
+        added: None,
+        is_trackable: true,
+        has_notified_manual_interaction_required: false,
+        movie_by_id: false,
+    };
+    let event = MovieImportEvent::ManualInteractionRequired(Box::new(MovieManualInteractionRequired {
+        tracked,
+        release: None,
+    }));
+    n.on_import_events(&[event], now()).await;
+    let paths: Vec<String> = seen.lock().unwrap().iter().map(|(p, _)| p.clone()).collect();
+    assert_eq!(paths, ["open"]);
+    let status = n
+        .base()
+        .db()
+        .call_blocking(|c| store::provider_status::provider_status(c, ProviderKind::Notification, 1))
+        .unwrap();
+    assert_eq!(status.most_recent_failure, None, "skipped, not failed");
 }

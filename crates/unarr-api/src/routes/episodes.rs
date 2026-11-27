@@ -11,6 +11,7 @@ use unarr_core::model::{Episode, EpisodeFile, QualityProfile, Series};
 use unarr_core::profile;
 use unarr_core::store;
 use unarr_core::store::paging::Paging;
+use unarr_core::Personality;
 
 use crate::error::{found, ApiError, ApiResult};
 use crate::mediainfo;
@@ -131,7 +132,11 @@ pub fn episode_file_resource(catalog: &Catalog, file: &EpisodeFile, series: &Ser
         custom_format_score,
         indexer_flags: file.indexer_flags,
         release_type: file.release_type.as_str(),
-        media_info: mediainfo::resource(file.media_info.as_ref(), file.scene_name.as_deref()),
+        media_info: mediainfo::resource(
+            file.media_info.as_ref(),
+            file.scene_name.as_deref(),
+            Personality::Sonarr,
+        ),
         quality_cutoff_not_met: catalog
             .profile(series.quality_profile_id)
             .map(|p| profile::quality_cutoff_not_met(p, file.quality.quality_id))

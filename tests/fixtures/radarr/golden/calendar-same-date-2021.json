@@ -252,9 +252,41 @@
           "audioCodec": "EAC3",
           "audioLanguages": "ita/ita/eng",
           "audioStreamCount": 3,
+          "audioStreams": [
+            {
+              "bitrate": 640000,
+              "channelPositions": "5.1(side)",
+              "channels": 5.1,
+              "codec": "EAC3",
+              "language": "ita"
+            },
+            {
+              "bitrate": 0,
+              "channels": 0,
+              "codec": "",
+              "language": "ita"
+            },
+            {
+              "bitrate": 0,
+              "channels": 0,
+              "codec": "",
+              "language": "eng"
+            }
+          ],
           "resolution": "1920x1040",
           "runTime": "2:18:59",
           "scanType": "Progressive",
+          "subtitleStreams": [
+            {
+              "language": "ita"
+            },
+            {
+              "language": "ita"
+            },
+            {
+              "language": "eng"
+            }
+          ],
           "subtitles": "ita/ita/eng",
           "videoBitDepth": 8,
           "videoBitrate": 0,
@@ -358,7 +390,7 @@
       "youTubeTrailerId": "9cq1lPPeMUY"
     }
   ],
-  "recordedAt": "2026-11-12T14:19:13Z",
+  "recordedAt": "2026-11-23T17:44:18Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/calendar?start=2021-07-01T00:00:00Z&end=2021-08-31T00:00:00Z&unmonitored=true"

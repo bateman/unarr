@@ -8,7 +8,7 @@
         "monitor": "movieOnly",
         "searchForMovie": false
       },
-      "added": "2026-11-13T12:40:47Z",
+      "added": "2026-11-23T17:55:25Z",
       "alternateTitles": [
         {
           "movieMetadataId": 0,
@@ -195,7 +195,7 @@
         "monitor": "none",
         "searchForMovie": false
       },
-      "added": "2026-11-13T12:40:47Z",
+      "added": "2026-11-23T17:55:25Z",
       "alternateTitles": [
         {
           "movieMetadataId": 0,
@@ -346,7 +346,7 @@
       "youTubeTrailerId": "OiTiKOy59o4"
     }
   ],
-  "recordedAt": "2026-11-13T12:40:47Z",
+  "recordedAt": "2026-11-23T17:55:25Z",
   "request": {
     "body": "bodies/movie-import.json",
     "method": "POST",

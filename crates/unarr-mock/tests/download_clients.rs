@@ -256,6 +256,13 @@ async fn usenet_clients_take_an_nzb_and_report_it_through_the_queue() {
         assert_eq!(items[0].status, DownloadItemStatus::Completed, "{kind:?}");
         assert_eq!(items[0].output_path.as_deref(), Some(completed));
         assert_eq!(items[0].remaining_size, 0);
+        if kind == ClientKind::Nzbget {
+            // Each status fills its own token, the script's included: Radarr 7
+            // stopped leaving `{scriptStatus}` in the message.
+            let message = items[0].message.as_deref().unwrap_or_default();
+            assert!(message.contains("Script Status: NONE"), "{message}");
+            assert!(!message.contains('{'), "{message}");
+        }
         client.remove(&items[0], false).await.unwrap();
         assert!(client.items().await.unwrap().is_empty());
         // A failed download shows as failed.
@@ -493,5 +500,49 @@ async fn the_service_picks_clients_by_protocol_priority_tags_and_health() {
     assert_eq!(
         wrong.unwrap_err().0,
         "Indexer specified download client does not exist for Pinned"
+    );
+}
+
+/// Radarr 7 with a Transmission that has labels (the mock reports 4.0.6):
+/// the category is a label and no subfolder, a category and a directory
+/// together pass the test, and the client's folder is the default one.
+/// Sonarr's pin still puts the torrent in the category's subfolder.
+#[tokio::test]
+async fn radarr_takes_transmissions_category_as_a_label_only() {
+    let mock = Mock::start(fixtures_dir(), 0).await.unwrap();
+    let port = mock.port();
+    let context = ClientContext::new(http(), now());
+    let radarr = |fields: serde_json::Value| {
+        let mut p = provider(1, ClientKind::Transmission, port, fields);
+        p.settings.as_object_mut().unwrap().remove("tvCategory");
+        DownloadClientDefinition::from_provider(unarr_core::downloadclients::RADARR, &p).unwrap()
+    };
+    let def = radarr(json!({"movieCategory": "radarr"}));
+    let client = Client::new(&def, &context);
+    let remote_file = remote(
+        &mock,
+        "The.Pitt.S01E03",
+        Protocol::Torrent,
+        "/torznab/download/The.Pitt.S01E03.torrent",
+    );
+    let hash = download(&client, &remote_file, None, &[]).await.unwrap();
+    let added = mock.clients().transmission.clone();
+    let downloads = added[0].dir.clone();
+    assert!(!downloads.ends_with("/radarr"), "{downloads}");
+    assert_eq!(added[0].labels, ["radarr"]);
+    let items = client.items().await.unwrap();
+    assert!(items.iter().any(|i| i.download_id == hash), "{items:?}");
+    let status = client.status().await.unwrap();
+    assert_eq!(status.output_root_folders.len(), 1);
+    assert!(!status.output_root_folders[0].ends_with("radarr"), "{status:?}");
+    // A category with a directory: refused by the settings for Sonarr,
+    // accepted by the test for Radarr when the client has labels.
+    let both = radarr(json!({"movieCategory": "radarr", "movieDirectory": "/downloads/films"}));
+    let failures = Client::new(&both, &context).test().await;
+    assert!(
+        !failures
+            .iter()
+            .any(|f| f.error_message == "Cannot use Category and Directory"),
+        "{failures:?}"
     );
 }

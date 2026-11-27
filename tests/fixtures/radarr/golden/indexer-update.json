@@ -236,6 +236,12 @@
           },
           {
             "dividerAfter": false,
+            "name": "Irish",
+            "order": 0,
+            "value": 58
+          },
+          {
+            "dividerAfter": false,
             "name": "Italian",
             "order": 0,
             "value": 5
@@ -480,7 +486,7 @@
     "supportsSearch": true,
     "tags": []
   },
-  "recordedAt": "2026-11-12T14:24:55Z",
+  "recordedAt": "2026-11-23T17:49:59Z",
   "request": {
     "body": "bodies/indexer-update.json",
     "method": "PUT",

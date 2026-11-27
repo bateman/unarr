@@ -360,6 +360,11 @@ impl<'a> Transmission<'a> {
         if self.settings.category.trim().is_empty() {
             return Ok(None);
         }
+        // Radarr 7: a client with labels takes the category as a label and
+        // keeps its own folder.
+        if self.settings.app.transmission_full_labels && self.supports_labels().await? {
+            return Ok(None);
+        }
         let config = self.config().await?;
         Ok(Some(format!(
             "{}/{}",
@@ -406,6 +411,12 @@ impl<'a> Transmission<'a> {
         // `SupportsLabels`) and the session's limits are asked only when a
         // torrent needs them, the version from its cache.
         let torrents = self.torrents(None).await?;
+        // Radarr 7 filters on the download folder too.
+        let download_directory = if self.settings.app.transmission_full_labels {
+            self.download_directory().await?
+        } else {
+            None
+        };
         let mut config: Option<Config> = None;
         let mut labels_supported: Option<bool> = None;
         let s = self.settings;
@@ -417,7 +428,25 @@ impl<'a> Transmission<'a> {
                 labels_supported = Some(self.supports_labels().await?);
             }
             let supports_labels = labels_supported.unwrap_or(false);
-            if has_category && supports_labels && !t.labels.is_empty() {
+            if s.app.transmission_full_labels {
+                if has_category && supports_labels {
+                    // A torrent older than labels (Transmission 3 to 4) is
+                    // matched by its category subfolder.
+                    let matches = if t.labels.is_empty() {
+                        output_dir.split(['/', '\\']).any(|d| d == s.category)
+                    } else {
+                        t.labels.iter().any(|l| l.eq_ignore_ascii_case(&s.category))
+                    };
+                    if !matches {
+                        continue;
+                    }
+                }
+                if let Some(dir) = download_directory.as_deref().filter(|d| !d.trim().is_empty()) {
+                    if !remote_path::contains(dir, &output_dir) {
+                        continue;
+                    }
+                }
+            } else if has_category && supports_labels && !t.labels.is_empty() {
                 if !t.labels.iter().any(|l| l.eq_ignore_ascii_case(&s.category)) {
                     continue;
                 }
@@ -528,7 +557,12 @@ impl<'a> Transmission<'a> {
 
     pub async fn status(&self) -> ClientResult<DownloadClientInfo> {
         let s = self.settings;
-        let dest_dir = if !s.directory.trim().is_empty() {
+        let dest_dir = if s.app.transmission_full_labels {
+            match self.download_directory().await? {
+                Some(dir) => dir,
+                None => self.config().await?.download_dir,
+            }
+        } else if !s.directory.trim().is_empty() {
             s.directory.clone()
         } else {
             let config = self.config().await?;
@@ -551,6 +585,17 @@ impl<'a> Transmission<'a> {
         failures.extend(self.test_connection().await);
         if crate::validation::has_errors(failures) {
             return Ok(());
+        }
+        let s = self.settings;
+        if s.app.transmission_full_labels
+            && !s.category.trim().is_empty()
+            && !s.directory.trim().is_empty()
+            && !self.supports_labels().await?
+        {
+            failures.push(ValidationFailure::error(
+                s.app.category_property,
+                "Cannot use Category and Directory",
+            ));
         }
         failures.extend(self.test_get_torrents().await);
         Ok(())

@@ -3,7 +3,7 @@
     "content": "ids must be provided",
     "message": "BadRequest: ids must be provided"
   },
-  "recordedAt": "2026-11-12T14:24:55Z",
+  "recordedAt": "2026-11-23T17:49:59Z",
   "request": {
     "body": "bodies/indexer-bulk-empty.json",
     "method": "PUT",

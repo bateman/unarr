@@ -168,10 +168,11 @@ async fn each_personality_serves_its_own_routes_and_strings() {
         assert!(body.is_empty(), "{uri}: {body}");
     }
 
-    // A cover that is not on disk is a 404 naming each runtime's document.
+    // A cover that is not on disk: Radarr 7's empty 404, Sonarr's problem
+    // details naming its runtime's document.
     let (status, body) = get(&radarr, "/api/v3/mediacover/6/poster.jpg").await;
     assert_eq!(status, StatusCode::NOT_FOUND);
-    assert!(body.contains("rfc9110"), "{body}");
+    assert!(body.is_empty(), "{body}");
     let (status, body) = get(&sonarr, "/api/v3/mediacover/1/poster.jpg").await;
     assert_eq!(status, StatusCode::NOT_FOUND);
     assert!(body.contains("rfc7231"), "{body}");
@@ -267,4 +268,58 @@ async fn each_personality_serves_its_own_web_ui() {
         let page = String::from_utf8_lossy(&bytes);
         assert!(page.contains(&format!("<title>Login - {name}</title>")), "{name}");
     }
+}
+
+async fn content_type(app: &axum::Router, uri: &str, accept: Option<&str>) -> (StatusCode, String) {
+    let mut request = Request::builder().uri(uri).header("X-Api-Key", API_KEY);
+    if let Some(accept) = accept {
+        request = request.header("Accept", accept);
+    }
+    let response = app
+        .clone()
+        .oneshot(request.body(Body::empty()).unwrap())
+        .await
+        .unwrap();
+    let content_type = response
+        .headers()
+        .get("content-type")
+        .map(|v| v.to_str().unwrap().to_string())
+        .unwrap_or_default();
+    (response.status(), content_type)
+}
+
+/// Radarr 7 answers its strings with `TypedResults.Json`, which no `Accept`
+/// changes; Sonarr 4 returns a `LocalizationResource` through MVC, which
+/// negotiates it and refuses an `Accept` without JSON.
+#[tokio::test]
+async fn the_strings_are_json_as_each_original_answers_them() {
+    let sonarr = unarr_api::router(build_state(Personality::Sonarr));
+    let radarr = unarr_api::router(build_state(Personality::Radarr));
+    let json = "application/json; charset=utf-8".to_string();
+    for accept in [
+        None,
+        Some("*/*"),
+        Some("application/json"),
+        Some("text/plain"),
+        Some("text/html"),
+    ] {
+        assert_eq!(
+            content_type(&radarr, "/api/v3/localization", accept).await,
+            (StatusCode::OK, json.clone()),
+            "Radarr, Accept {accept:?}"
+        );
+    }
+    for accept in [None, Some("*/*"), Some("application/json")] {
+        assert_eq!(
+            content_type(&sonarr, "/api/v3/localization", accept).await,
+            (StatusCode::OK, json.clone()),
+            "Sonarr, Accept {accept:?}"
+        );
+    }
+    assert_eq!(
+        content_type(&sonarr, "/api/v3/localization", Some("text/html"))
+            .await
+            .0,
+        StatusCode::NOT_ACCEPTABLE
+    );
 }

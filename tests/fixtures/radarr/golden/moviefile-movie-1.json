@@ -36,9 +36,26 @@
         "audioCodec": "EAC3",
         "audioLanguages": "eng",
         "audioStreamCount": 1,
+        "audioStreams": [
+          {
+            "bitrate": 256000,
+            "channelPositions": "5.1(side)",
+            "channels": 5.1,
+            "codec": "EAC3",
+            "language": "eng"
+          }
+        ],
         "resolution": "3840x2160",
         "runTime": "1:47:06",
         "scanType": "Progressive",
+        "subtitleStreams": [
+          {
+            "language": "eng"
+          },
+          {
+            "language": "eng"
+          }
+        ],
         "subtitles": "eng/eng",
         "videoBitDepth": 10,
         "videoBitrate": 11935628,
@@ -71,7 +88,7 @@
       "size": 9795855896
     }
   ],
-  "recordedAt": "2026-11-12T14:19:08Z",
+  "recordedAt": "2026-11-23T17:44:13Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/moviefile?movieId=1"

@@ -472,7 +472,12 @@ pub async fn login(
         ));
     };
     log_auth(&state, remote, &headers, AuthOutcome::Success, &form.username);
-    let persistent = form.remember_me == "on";
+    // Sonarr's form sends the checkbox as `on`; Radarr 7 reads a boolean
+    // (`LoginResource.RememberMe`), which its page sends as `true`.
+    let persistent = match state.personality() {
+        unarr_core::Personality::Radarr => form.remember_me.trim().eq_ignore_ascii_case("true"),
+        unarr_core::Personality::Sonarr | unarr_core::Personality::Lidarr => form.remember_me == "on",
+    };
     let secure = over_https(&state, remote, &headers);
     let cookie = issue_cookie(&state, &user.identifier, persistent, secure);
     // Only a local path: not another host (`//host`), no backslash, which

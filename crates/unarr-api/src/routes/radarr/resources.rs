@@ -58,7 +58,15 @@ pub enum Covers {
     Remote,
 }
 
-pub fn images_resource(images: &[Image], movie_id: i64, url_base: &str, covers: Covers) -> Vec<Value> {
+/// `exists` says whether a cover's file is there, for the cache breaker of
+/// a local address (`MediaCoverService.CoverExists`); remote covers ignore it.
+pub fn images_resource(
+    images: &[Image],
+    movie_id: i64,
+    url_base: &str,
+    covers: Covers,
+    exists: &dyn Fn(&str) -> bool,
+) -> Vec<Value> {
     images
         .iter()
         .map(|i| {
@@ -74,11 +82,12 @@ pub fn images_resource(images: &[Image], movie_id: i64, url_base: &str, covers: 
                     } else {
                         ".jpg"
                     };
-                    out["url"] = json!(format!(
-                        "{url_base}/MediaCover/{movie_id}/{}{extension}?h={}",
-                        i.cover_type.to_lowercase(),
-                        cover_hash(remote)
-                    ));
+                    let cover_type = i.cover_type.to_lowercase();
+                    let mut url = format!("{url_base}/MediaCover/{movie_id}/{cover_type}{extension}");
+                    if exists(&cover_type) {
+                        url.push_str(&format!("?h={}", cover_hash(remote)));
+                    }
+                    out["url"] = json!(url);
                 }
             }
             out
@@ -114,6 +123,9 @@ fn ts(t: Option<DateTime<Utc>>) -> Option<Value> {
 /// What every movie resource of one answer is built from.
 pub struct MovieContext {
     pub url_base: String,
+    /// Where the covers are kept, to tell whether a recently added movie's
+    /// cover is downloaded yet.
+    pub media_cover_dir: Option<std::path::PathBuf>,
     pub roots: Vec<String>,
     pub profiles: Vec<QualityProfile>,
     pub formats: FormatSet,
@@ -162,6 +174,7 @@ impl MovieContext {
 #[derive(Clone)]
 pub struct ContextReader {
     url_base: String,
+    media_cover_dir: std::path::PathBuf,
     now: DateTime<Utc>,
 }
 
@@ -169,6 +182,7 @@ impl ContextReader {
     pub fn of(state: &AppState) -> ContextReader {
         ContextReader {
             url_base: state.settings().url_base.clone(),
+            media_cover_dir: state.runtime().media_cover_dir.clone(),
             now: state.now(),
         }
     }
@@ -197,6 +211,7 @@ impl ContextReader {
         };
         Ok(MovieContext {
             url_base: self.url_base.clone(),
+            media_cover_dir: Some(self.media_cover_dir.clone()),
             roots: store::catalog::list_root_folders(conn)?
                 .into_iter()
                 .map(|r| r.path)
@@ -252,8 +267,12 @@ pub fn movie_file_resource(ctx: &MovieContext, file: &MovieFile, movie: &Movie, 
     set(
         &mut out,
         "mediaInfo",
-        crate::mediainfo::resource(file.media_info.as_ref(), file.scene_name.as_deref())
-            .and_then(|m| serde_json::to_value(m).ok()),
+        crate::mediainfo::resource(
+            file.media_info.as_ref(),
+            file.scene_name.as_deref(),
+            unarr_core::Personality::Radarr,
+        )
+        .and_then(|m| serde_json::to_value(m).ok()),
     );
     out.insert(
         "qualityCutoffNotMet".into(),
@@ -348,7 +367,21 @@ pub fn movie_resource(ctx: &MovieContext, movie: &Movie, parts: &MovieParts) -> 
     set(&mut out, "releaseDate", ts(availability::release_date(movie)));
     out.insert(
         "images".into(),
-        json!(images_resource(&md.images, movie.id, &ctx.url_base, parts.covers)),
+        json!(images_resource(
+            &md.images,
+            movie.id,
+            &ctx.url_base,
+            parts.covers,
+            &|cover_type| {
+                unarr_core::movies::notifications::cover_exists(
+                    ctx.media_cover_dir.as_deref(),
+                    movie.id,
+                    cover_type,
+                    movie.added,
+                    ctx.now,
+                )
+            },
+        )),
     );
     set(&mut out, "website", md.website.as_ref().map(|s| json!(s)));
     out.insert("year".into(), json!(md.year));

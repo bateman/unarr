@@ -129,7 +129,7 @@ fn resource(
     set(&mut out, "digitalRelease", ts(md.digital_release));
     out.insert(
         "images".into(),
-        json!(images_resource(&md.images, 0, "", Covers::Remote)),
+        json!(images_resource(&md.images, 0, "", Covers::Remote, &|_| true)),
     );
     set(&mut out, "website", md.website.as_ref().map(|s| json!(s)));
     out.insert("year".into(), json!(md.year));

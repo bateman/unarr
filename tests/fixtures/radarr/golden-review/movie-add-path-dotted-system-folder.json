@@ -1,6 +1,6 @@
 {
   "body": {
-    "added": "2026-11-14T06:29:39Z",
+    "added": "2026-11-23T17:59:07Z",
     "alternateTitles": [],
     "certification": "PG-13",
     "cleanTitle": "interstellar",
@@ -17,12 +17,12 @@
       {
         "coverType": "poster",
         "remoteUrl": "https://image.tmdb.org/t/p/original/yQvGrMoipbRoddT0ZR8tPoR7NfX.jpg",
-        "url": "/MediaCover/328/poster.jpg?h=6ea857fa1664e710ba38"
+        "url": "/MediaCover/328/poster.jpg"
       },
       {
         "coverType": "fanart",
         "remoteUrl": "https://image.tmdb.org/t/p/original/8sNiAPPYU14PUepFNeSNGUTiHW.jpg",
-        "url": "/MediaCover/328/fanart.jpg?h=09050d90b1d43db56511"
+        "url": "/MediaCover/328/fanart.jpg"
       }
     ],
     "imdbId": "tt0816692",
@@ -121,7 +121,7 @@
     "year": 2014,
     "youTubeTrailerId": "LY19rHKAaAg"
   },
-  "recordedAt": "2026-11-14T06:29:39Z",
+  "recordedAt": "2026-11-23T17:59:07Z",
   "request": {
     "body": "bodies/movie-add-path-dotted-system-folder.json",
     "method": "POST",

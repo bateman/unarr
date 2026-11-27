@@ -10,7 +10,7 @@
     "rssSyncInterval": 60,
     "whitelistedHardcodedSubs": "ita"
   },
-  "recordedAt": "2026-11-13T12:41:12Z",
+  "recordedAt": "2026-11-23T17:55:50Z",
   "request": {
     "body": "bodies/config-indexer-put.json",
     "method": "PUT",

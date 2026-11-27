@@ -1,6 +1,6 @@
 {
   "body": {
-    "added": "2026-11-13T12:39:38Z",
+    "added": "2026-11-23T17:54:16Z",
     "alternateTitles": [
       {
         "id": 2855,
@@ -168,7 +168,7 @@
     "year": 2014,
     "youTubeTrailerId": "Q7kZy3T6vRM"
   },
-  "recordedAt": "2026-11-13T12:40:20Z",
+  "recordedAt": "2026-11-23T17:54:58Z",
   "request": {
     "body": "bodies/movie-put-path.json",
     "method": "PUT",

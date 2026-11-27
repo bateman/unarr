@@ -38,7 +38,7 @@
       "service": "discord"
     }
   ],
-  "recordedAt": "2026-11-21T16:24:53Z",
+  "recordedAt": "2026-11-23T17:58:36Z",
   "request": {
     "method": "GET",
     "path": "/mock/notifications",

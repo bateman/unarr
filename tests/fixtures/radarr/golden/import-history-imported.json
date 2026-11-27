@@ -22,7 +22,7 @@
           "releaseGroup": "MeM",
           "size": "177860"
         },
-        "date": "2026-11-12T14:21:18Z",
+        "date": "2026-11-23T17:46:22Z",
         "downloadId": "SABnzbd_nzo_mock6",
         "eventType": "downloadFolderImported",
         "id": 1022,
@@ -77,7 +77,7 @@
           "releaseGroup": "MeM",
           "size": "119980"
         },
-        "date": "2026-11-12T14:21:06Z",
+        "date": "2026-11-23T17:46:10Z",
         "downloadId": "SABnzbd_nzo_mock7",
         "eventType": "downloadFolderImported",
         "id": 1021,
@@ -577,7 +577,7 @@
     "sortKey": "date",
     "totalRecords": 144
   },
-  "recordedAt": "2026-11-12T14:21:54Z",
+  "recordedAt": "2026-11-23T17:46:58Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/history?page=1&pageSize=10&sortKey=date&sortDirection=descending&eventType=3"

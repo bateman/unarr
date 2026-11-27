@@ -610,7 +610,7 @@ pub async fn editor_update(State(state): State<AppState>, Json(body): Json<Value
             resource
         })
         .collect();
-    Ok(accepted(json!(resources)))
+    Ok(super::typed_ok(json!(resources)))
 }
 
 /// `DELETE /movie/editor`.

@@ -353,6 +353,35 @@ fn clean_xml(xml: &str) -> String {
     })
 }
 
+/// `WebUtility.HtmlDecode`: the character references and the named
+/// entities a text still holds once read from the XML, decoded.
+pub fn html_decode(text: &str) -> String {
+    if !text.contains('&') {
+        return text.to_string();
+    }
+    static REFERENCE_RE: crate::parser::netregex::Lazy =
+        crate::net_regex!(r"&(?:#[0-9]+|#[xX][0-9a-fA-F]+|[a-zA-Z]+);");
+    REFERENCE_RE.replace_all_with(text, |m| {
+        let whole = m.whole();
+        let body = &whole[1..whole.len() - 1];
+        let decoded = if let Some(hex) = body.strip_prefix("#x").or_else(|| body.strip_prefix("#X")) {
+            u32::from_str_radix(hex, 16).ok().and_then(char::from_u32)
+        } else if let Some(dec) = body.strip_prefix('#') {
+            dec.parse::<u32>().ok().and_then(char::from_u32)
+        } else {
+            match body {
+                "amp" => Some('&'),
+                "lt" => Some('<'),
+                "gt" => Some('>'),
+                "quot" => Some('"'),
+                "apos" => Some('\''),
+                _ => html_entity(whole),
+            }
+        };
+        decoded.map(String::from).unwrap_or_else(|| whole.to_string())
+    })
+}
+
 fn html_entity(name: &str) -> Option<char> {
     Some(match name {
         "&nbsp;" => '\u{a0}',

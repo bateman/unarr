@@ -705,6 +705,24 @@ pub fn apply_host_overrides(h: &mut unarr_core::config::HostConfig, o: &Map<Stri
     if let Some(v) = s("sslCertPassword") {
         h.ssl_cert_password = v;
     }
+    if let Some(v) = s("sslKeyPath") {
+        h.ssl_key_path = v;
+    }
+    if let Some(v) = s("oidcAuthority") {
+        h.oidc.authority = v;
+    }
+    if let Some(v) = s("oidcClientId") {
+        h.oidc.client_id = v;
+    }
+    if let Some(v) = s("oidcClientSecret") {
+        h.oidc.client_secret = v;
+    }
+    if let Some(v) = s("oidcUserIdentifier") {
+        h.oidc.user_identifier = v;
+    }
+    if let Some(v) = s("oidcScopes") {
+        h.oidc.scopes = v;
+    }
     if let Some(v) = s("urlBase") {
         h.url_base = v;
     }
@@ -823,6 +841,37 @@ fn valid_host(host: &str) -> bool {
     host.parse::<std::net::IpAddr>().is_ok() || dns(host)
 }
 
+/// Radarr 7's rules for `SslKeyPath`, when it is set: a valid path
+/// (`PathValidator`) to a file that exists (`FileExistsValidator`), both
+/// checked, as FluentValidation goes on after a failure.
+async fn ssl_key_path_failures(path: &str) -> Vec<ValidationFailure> {
+    if path.trim().is_empty() {
+        return Vec::new();
+    }
+    let mut failures = Vec::new();
+    if !path.starts_with('/') || path.contains('\0') {
+        let mut f = rule(
+            "SslKeyPath",
+            "PathValidator",
+            &format!("Invalid Path: '{path}'"),
+            json!(path),
+        );
+        f.placeholders = vec![("path".into(), json!(path))];
+        failures.push(f);
+    }
+    if !tokio::fs::metadata(path).await.is_ok_and(|m| m.is_file()) {
+        let mut f = rule(
+            "SslKeyPath",
+            "FileExistsValidator",
+            &format!("File '{path}' does not exist"),
+            json!(path),
+        );
+        f.placeholders = vec![("file".into(), json!(path))];
+        failures.push(f);
+    }
+    failures
+}
+
 /// `PUT /config/host/{id}`.
 pub async fn host(State(state): State<AppState>, Json(body): Json<Value>) -> ApiResult<Response> {
     object(&body)?;
@@ -846,6 +895,19 @@ pub async fn host(State(state): State<AppState>, Json(body): Json<Value>) -> Api
                 "AllowedHosts",
                 "PredicateValidator",
                 "Must be a comma separated list of host names or IP addresses only, without a protocol or port",
+                json!(hosts),
+            ));
+        }
+        // Radarr 7 refuses a bind address; Sonarr's pin takes it.
+        if state.personality() == unarr_core::Personality::Radarr
+            && parse_hosts(&hosts)
+                .iter()
+                .any(|h| crate::hosts::is_bind_address(h))
+        {
+            failures.push(rule(
+                "AllowedHosts",
+                "PredicateValidator",
+                "0.0.0.0 and [::] are not host names, leave empty to allow all hosts",
                 json!(hosts),
             ));
         }
@@ -904,6 +966,25 @@ pub async fn host(State(state): State<AppState>, Json(body): Json<Value>) -> Api
     if body.get("enableSsl").and_then(Value::as_bool).unwrap_or(false) {
         failures.extend(between("SslPort", int(&body, "sslPort"), 1, 65535));
     }
+    let radarr = state.personality() == unarr_core::Personality::Radarr;
+    if radarr {
+        failures.extend(ssl_key_path_failures(&text(&body, "sslKeyPath")).await);
+        // Radarr 7 signs in with OIDC; Unarr does not yet (deferred), and
+        // refuses the setting rather than keep a sign-in it would not do.
+        if method.eq_ignore_ascii_case("oidc") {
+            let mut f = rule(
+                "AuthenticationMethod",
+                "PredicateValidator",
+                "OIDC authentication is not supported by Unarr yet, use 'Forms' instead.",
+                json!(method),
+            );
+            f.placeholders = vec![
+                ("propertyName".into(), json!("Authentication Method")),
+                ("propertyValue".into(), json!(method)),
+            ];
+            failures.push(f);
+        }
+    }
     failures.extend(between("LogSizeLimit", int(&body, "logSizeLimit"), 1, 10));
     failures.extend(between("BackupInterval", int(&body, "backupInterval"), 1, 7));
     failures.extend(between("BackupRetention", int(&body, "backupRetention"), 1, 90));
@@ -954,6 +1035,27 @@ pub async fn host(State(state): State<AppState>, Json(body): Json<Value>) -> Api
     ] {
         if let Some(v) = body.get(key) {
             overrides.insert(key.into(), v.clone());
+        }
+    }
+    // Radarr 7's own settings, which Sonarr, at its pin, does not take.
+    let radarr_keys: &[&str] = if radarr {
+        &[
+            "sslKeyPath",
+            "oidcAuthority",
+            "oidcClientId",
+            "oidcClientSecret",
+            "oidcUserIdentifier",
+            "oidcScopes",
+        ]
+    } else {
+        &[]
+    };
+    for key in radarr_keys {
+        // The placeholder the secret is shown as keeps the stored one.
+        let placeholder = *key == "oidcClientSecret"
+            && body.get(*key).and_then(Value::as_str) == Some(crate::routes::config::OIDC_SECRET_PLACEHOLDER);
+        if let Some(v) = body.get(*key).filter(|_| !placeholder) {
+            overrides.insert((*key).into(), v.clone());
         }
     }
     save_host_overrides(&state, overrides).await?;

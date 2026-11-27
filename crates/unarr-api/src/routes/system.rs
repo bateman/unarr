@@ -55,16 +55,25 @@ pub struct SystemResource {
     pub database_type: &'static str,
 }
 
+/// The migration level `system/status` reports: the pinned original's
+/// when nothing was imported; else the imported database's, raised to the
+/// pinned original's, which migrates an older database at its first start
+/// (Radarr 7 takes a 6.4 database from 242 to 243). A newer database keeps
+/// its own level.
+fn reported_migration(source: Option<i64>, pinned: i64) -> i64 {
+    source.map_or(pinned, |level| level.max(pinned))
+}
+
 pub async fn status(State(state): State<AppState>) -> ApiResult<Json<SystemResource>> {
     let personality = state.personality();
     let settings = state.settings();
     let runtime = state.runtime();
-    let migration = state
+    let source = state
         .db()
         .call(|conn| store::config::meta(conn, "source.migration"))
         .await?
-        .and_then(|v| v.parse().ok())
-        .unwrap_or_else(|| compat::emulated_migration(personality));
+        .and_then(|v| v.parse().ok());
+    let migration = reported_migration(source, compat::emulated_migration(personality));
 
     Ok(Json(SystemResource {
         app_name: personality.app_name(),
@@ -384,6 +393,20 @@ pub async fn localization_language() -> Json<Value> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn the_reported_migration_is_where_the_original_would_be() {
+        // Radarr: a 6.4 database under Radarr 7; Sonarr: an older v4 one.
+        assert_eq!(reported_migration(Some(242), 243), 243);
+        assert_eq!(reported_migration(Some(215), 240), 240);
+        assert_eq!(reported_migration(Some(240), 240), 240);
+        assert_eq!(
+            reported_migration(Some(250), 243),
+            250,
+            "a newer database keeps its level"
+        );
+        assert_eq!(reported_migration(None, 243), 243);
+    }
 
     #[test]
     fn task_names_split_like_the_originals() {

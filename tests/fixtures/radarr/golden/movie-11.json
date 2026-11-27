@@ -166,9 +166,35 @@
         "audioCodec": "EAC3",
         "audioLanguages": "ita/eng",
         "audioStreamCount": 2,
+        "audioStreams": [
+          {
+            "bitrate": 320000,
+            "channelPositions": "5.1(side)",
+            "channels": 5.1,
+            "codec": "EAC3",
+            "language": "ita"
+          },
+          {
+            "bitrate": 0,
+            "channels": 0,
+            "codec": "",
+            "language": "eng"
+          }
+        ],
         "resolution": "1920x800",
         "runTime": "2:20:05",
         "scanType": "Progressive",
+        "subtitleStreams": [
+          {
+            "language": "ita"
+          },
+          {
+            "language": "ita"
+          },
+          {
+            "language": "eng"
+          }
+        ],
         "subtitles": "ita/ita/eng",
         "videoBitDepth": 8,
         "videoBitrate": 0,
@@ -269,7 +295,7 @@
     "year": 2005,
     "youTubeTrailerId": "lirBhHXvDSg"
   },
-  "recordedAt": "2026-11-12T14:19:08Z",
+  "recordedAt": "2026-11-23T17:44:13Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/movie/11"

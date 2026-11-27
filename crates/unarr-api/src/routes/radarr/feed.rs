@@ -5,8 +5,10 @@
 //!
 //! A movie with a cinema, digital or physical release in the range gets an
 //! all-day event for each of the three dates it has, in the range or not.
-//! The text is written as the series feed writes it (`routes::feed`): what
-//! the originals' library produces, line for line.
+//! The text is written as Radarr 7's library (Ical.Net 5) writes it: lines
+//! folded at 75 octets, the release day as both start and end, and the
+//! application's own product id. The series feed (`routes::feed`) keeps
+//! Sonarr's library, at its pin.
 
 use axum::extract::State;
 use axum::http::{header, Uri};
@@ -18,7 +20,33 @@ use unarr_core::store;
 
 use crate::error::ApiResult;
 use crate::query::Params;
-use crate::routes::feed::{escape, line, local_midnight, stamp, PRODUCT_ID};
+use crate::routes::feed::{escape, local_midnight, stamp};
+
+/// `ProductId` of the calendar, which Ical.Net 5 writes as set.
+const PRODUCT_ID: &str = "-//radarr.video//Radarr//EN";
+
+/// A content line, folded as Ical.Net 5 folds it: at most 75 octets a
+/// line, the leading space of a continuation included, never inside a
+/// character.
+fn line(out: &mut String, text: &str) {
+    const LIMIT: usize = 75;
+    let mut rest = text;
+    let mut room = LIMIT;
+    loop {
+        let mut take = rest.len().min(room);
+        while !rest.is_char_boundary(take) {
+            take -= 1;
+        }
+        out.push_str(&rest[..take]);
+        out.push_str("\r\n");
+        rest = &rest[take..];
+        if rest.is_empty() {
+            break;
+        }
+        out.push(' ');
+        room = LIMIT - 1;
+    }
+}
 use crate::state::AppState;
 
 const CALENDAR_NAME: &str = "Radarr Movies Calendar";
@@ -36,7 +64,7 @@ fn event(
         return;
     };
     let md = &movie.metadata;
-    // The day where the server is, and the day after it: an all-day event.
+    // The day where the server is, as a date: start and end alike.
     let day = date.with_timezone(&Local).date_naive();
     line(out, "BEGIN:VEVENT");
     if let Some(studio) = md.studio.as_deref() {
@@ -45,10 +73,7 @@ fn event(
     if let Some(overview) = md.overview.as_deref().filter(|o| !o.is_empty()) {
         line(out, &format!("DESCRIPTION:{}", escape(overview)));
     }
-    line(
-        out,
-        &format!("DTEND;VALUE=DATE:{}", (day + Duration::days(1)).format("%Y%m%d")),
-    );
+    line(out, &format!("DTEND;VALUE=DATE:{}", day.format("%Y%m%d")));
     line(out, &format!("DTSTAMP:{}", stamp(now)));
     line(out, &format!("DTSTART;VALUE=DATE:{}", day.format("%Y%m%d")));
     line(out, "SEQUENCE:0");
@@ -155,4 +180,28 @@ pub async fn calendar(State(state): State<AppState>, uri: Uri) -> ApiResult<Resp
         })
         .await?;
     Ok(([(header::CONTENT_TYPE, "text/calendar")], render(&found, now)).into_response())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::line;
+
+    /// Ical.Net 5 folds at 75 octets, the continuation's space included,
+    /// as the recorded feed shows; a character is never split.
+    #[test]
+    fn lines_fold_at_75_octets() {
+        let mut out = String::new();
+        let text = format!("DESCRIPTION:{}", "a".repeat(150));
+        line(&mut out, &text);
+        let lines: Vec<&str> = out.split("\r\n").filter(|l| !l.is_empty()).collect();
+        assert_eq!(lines.iter().map(|l| l.len()).collect::<Vec<_>>(), [75, 75, 14]);
+        assert!(lines[1].starts_with(' '));
+        let mut out = String::new();
+        line(&mut out, &format!("SUMMARY:{}", "é".repeat(40)));
+        assert!(out.split("\r\n").all(|l| l.len() <= 75));
+        assert_eq!(
+            out.replace("\r\n ", "").trim_end(),
+            format!("SUMMARY:{}", "é".repeat(40))
+        );
+    }
 }

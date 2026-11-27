@@ -15,25 +15,25 @@
       "updateScheduledTask": true
     },
     "commandName": "Rename Movie",
-    "duration": "00:00:00.0099453",
-    "ended": "2026-11-12T14:24:07Z",
-    "id": 473013,
+    "duration": "00:00:00.0071510",
+    "ended": "2026-11-23T17:49:10Z",
+    "id": 473011,
     "message": "0 movie files renamed for Candyman",
     "name": "RenameMovie",
     "priority": "normal",
-    "queued": "2026-11-12T14:24:07Z",
+    "queued": "2026-11-23T17:49:10Z",
     "result": "successful",
     "sendUpdatesToClient": true,
-    "started": "2026-11-12T14:24:07Z",
-    "stateChangeTime": "2026-11-12T14:24:07Z",
+    "started": "2026-11-23T17:49:10Z",
+    "stateChangeTime": "2026-11-23T17:49:10Z",
     "status": "completed",
     "trigger": "manual",
     "updateScheduledTask": true
   },
-  "recordedAt": "2026-11-12T14:24:19Z",
+  "recordedAt": "2026-11-23T17:49:22Z",
   "request": {
     "method": "GET",
-    "path": "/api/v3/command/473013"
+    "path": "/api/v3/command/473011"
   },
   "status": 200
 }

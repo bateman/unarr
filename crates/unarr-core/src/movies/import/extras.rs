@@ -215,7 +215,6 @@ enum Consumer {
     Wdtv,
     Roksbox,
     MediaBrowser,
-    Kometa,
 }
 
 const CONSUMERS: &[Consumer] = &[
@@ -223,7 +222,6 @@ const CONSUMERS: &[Consumer] = &[
     Consumer::Wdtv,
     Consumer::Roksbox,
     Consumer::MediaBrowser,
-    Consumer::Kometa,
 ];
 
 impl Consumer {
@@ -234,7 +232,6 @@ impl Consumer {
             Consumer::Wdtv => "WdtvMetadata",
             Consumer::Roksbox => "RoksboxMetadata",
             Consumer::MediaBrowser => "MediaBrowserMetadata",
-            Consumer::Kometa => "KometaMetadata",
         }
     }
 }
@@ -261,8 +258,6 @@ regex!(
     xbmc_movie_file_image,
     r"(?i)(?<type>-thumb|-poster|-banner|-fanart|-clearart|-discart|-keyart|-landscape|-logo|-backdrop|-clearlogo)\.(?:png|jpe?g)"
 );
-// `KometaMetadata.MovieImagesRegex`.
-regex!(kometa_movie_images, r"(?i)^(?:poster|background)\.(?:png|jpe?g)$");
 // `XbmcNfoDetector`.
 regex!(
     xbmc_nfo_content,
@@ -333,7 +328,6 @@ fn find_metadata_file(consumer: Consumer, path: &str) -> Option<i64> {
         Consumer::MediaBrowser => filename
             .eq_ignore_ascii_case("movie.xml")
             .then_some(MOVIE_METADATA),
-        Consumer::Kometa => matches(kometa_movie_images(), filename).then_some(MOVIE_IMAGE),
     }
 }
 
@@ -442,13 +436,6 @@ fn process_subtitle_files(
             tracing::debug!("Unable to parse extra file: {file}");
             continue;
         }
-        // The aggregator gave up on a movie without a file, and the
-        // original goes on to read what it did not set: the handler ends
-        // here, the rows of this kind unwritten and the other extras
-        // unread.
-        let Some(info) = local.subtitle_info else {
-            anyhow::bail!("Unable to read the subtitle file {file}: {NULL_REFERENCE}");
-        };
         let mut row = new_extra(
             ExtraKind::Subtitle,
             movie.id,
@@ -456,10 +443,22 @@ fn process_subtitle_files(
             relative_path(&movie.path, file).to_string(),
             extension,
         );
-        row.language = info.language;
-        row.language_tags = info.language_tags;
-        row.title = info.title;
-        row.copy = info.copy;
+        // The aggregator gives up on a movie without a file; Radarr 7 then
+        // writes the subtitle with an unknown language and no title.
+        match local.subtitle_info {
+            Some(info) => {
+                row.language = info.language;
+                row.language_tags = info.language_tags;
+                row.title = info.title;
+                row.copy = info.copy;
+            }
+            None => {
+                row.language = crate::movies::parser::language::lang::UNKNOWN;
+                row.language_tags = Vec::new();
+                row.title = None;
+                row.copy = 0;
+            }
+        }
         found.push(row);
     }
     tracing::info!("Found {} existing subtitle files", found.len());
@@ -912,7 +911,7 @@ pub fn import_movie(
     let files = files_in(source_folder, folder_search_option);
     let metadata = movie.metadata.clone();
     let is_sample = move |file: &str| {
-        let info = mediainfo::probe(Path::new(file));
+        let info = mediainfo::probe_for(Path::new(file), crate::Personality::Radarr);
         sample::is_sample(&metadata, file, info.as_ref())
     };
     import_listed_files(db, config, local, movie_file, &files, read_only, &is_sample, now)
@@ -1531,21 +1530,6 @@ mod tests {
     // --- the consumers' `FindMetadataFileFixture`s
 
     #[test]
-    fn kometa_find_metadata_file() {
-        let folder = "/Test/Movies/Movie.Title.2024";
-        let find = |name: &str| find_metadata_file(Consumer::Kometa, &join(folder, name));
-        // should_return_null_if_filename_is_not_handled
-        assert_eq!(find("file.jpg"), None);
-        // should_return_null_if_not_valid_file_for_movie
-        assert_eq!(find("movie.title.2024.jpg"), None);
-        // should_not_return_metadata_if_image_file_is_a_thumb
-        assert_eq!(find("movie.title.2024-thumb.jpg"), None);
-        // should_return_movie_image_for_images_in_movie_folder
-        assert_eq!(find("poster.jpg"), Some(MOVIE_IMAGE));
-        assert_eq!(find("background.jpg"), Some(MOVIE_IMAGE));
-    }
-
-    #[test]
     fn roksbox_find_metadata_file() {
         let folder = "/Test/Movies/The.Movie.2011";
         let find = |name: &str| find_metadata_file(Consumer::Roksbox, &join(folder, name));
@@ -1683,9 +1667,9 @@ mod tests {
         ]);
         fs::write(join(&lib.movie.path, "movie.nfo"), "<movie></movie>").unwrap();
         let imported = lib.scan(&lib.movie).unwrap();
-        // Everything but the file without an extension; the poster twice,
-        // for the two consumers that take it.
-        assert_eq!(imported.len(), 7, "{imported:?}");
+        // Everything but the file without an extension; the poster once,
+        // Radarr 7 having no Kometa consumer to take it a second time.
+        assert_eq!(imported.len(), 6, "{imported:?}");
 
         let rows = lib.rows();
         let of = |kind: ExtraKind| -> Vec<(i64, &str, Option<&str>, Option<i64>)> {
@@ -1711,7 +1695,6 @@ mod tests {
                 (1, "fanart.jpg", Some("XbmcMetadata"), Some(MOVIE_IMAGE)),
                 (2, "movie.nfo", Some("XbmcMetadata"), Some(MOVIE_METADATA)),
                 (3, "poster.jpg", Some("XbmcMetadata"), Some(MOVIE_IMAGE)),
-                (4, "poster.jpg", Some("KometaMetadata"), Some(MOVIE_IMAGE)),
             ]
         );
         assert_eq!(
@@ -1738,8 +1721,7 @@ mod tests {
         assert_eq!(lib.scan(&lib.movie).unwrap().len(), 6);
         assert_eq!(lib.rows(), rows);
 
-        // A file removed by hand is forgotten at the next scan; of the two
-        // rows of the poster, one at each scan, as the original does.
+        // A file removed by hand is forgotten at the next scan.
         fs::remove_file(join(&lib.movie.path, "Movie Title - IMDb.URL")).unwrap();
         fs::remove_file(join(&lib.movie.path, "poster.jpg")).unwrap();
         lib.scan(&lib.movie).unwrap();
@@ -1750,7 +1732,6 @@ mod tests {
                 "Movie Title - 2022.nfo",
                 "fanart.jpg",
                 "movie.nfo",
-                "poster.jpg",
             ]
         );
         lib.scan(&lib.movie).unwrap();
@@ -1768,11 +1749,11 @@ mod tests {
         assert_eq!(other, [1, 3]);
     }
 
-    /// The subtitle of a movie that has no file stops the handler where the
-    /// original's stops: the metadata files are remembered, the subtitle
-    /// and the other extras are not.
+    /// Radarr 7: the subtitle of a movie that has no file is remembered
+    /// with an unknown language, and the other extras are read too (Radarr
+    /// 6 stopped the handler there).
     #[test]
-    fn a_subtitle_of_a_movie_without_a_file_ends_the_scan_of_its_extras() {
+    fn a_subtitle_of_a_movie_without_a_file_has_an_unknown_language() {
         let lib = library("no-file");
         lib.in_folder(&[
             "Movie Title - 2022.en.srt",
@@ -1788,12 +1769,34 @@ mod tests {
             .unwrap();
         let mut movie = lib.movie.clone();
         movie.movie_file_id = 0;
-        assert!(lib.scan(&movie).is_err());
-        assert_eq!(lib.paths(), ["fanart.jpg"]);
-        // Without the subtitle the others are read.
-        fs::remove_file(join(&lib.movie.path, "Movie Title - 2022.en.srt")).unwrap();
         lib.scan(&movie).unwrap();
-        assert_eq!(lib.paths(), ["Movie Title - 2022.nfo", "fanart.jpg"]);
+        assert_eq!(
+            lib.paths(),
+            [
+                "Movie Title - 2022.en.srt",
+                "Movie Title - 2022.nfo",
+                "fanart.jpg"
+            ]
+        );
+        let subtitle = lib
+            .rows()
+            .into_iter()
+            .find(|e| e.kind == ExtraKind::Subtitle)
+            .unwrap();
+        assert_eq!(
+            (
+                subtitle.language,
+                subtitle.language_tags.clone(),
+                subtitle.title.clone(),
+                subtitle.copy
+            ),
+            (
+                crate::movies::parser::language::lang::UNKNOWN,
+                Vec::<String>::new(),
+                None,
+                0
+            )
+        );
         assert!(lib.rows().iter().all(|e| e.movie_file_id == Some(0)));
     }
 

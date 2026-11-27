@@ -7,7 +7,7 @@
       "monitor": "none",
       "searchForMovie": false
     },
-    "added": "2026-11-13T12:39:38Z",
+    "added": "2026-11-23T17:54:16Z",
     "alternateTitles": [],
     "certification": "R",
     "cleanTitle": "whiplash",
@@ -24,12 +24,12 @@
       {
         "coverType": "poster",
         "remoteUrl": "https://image.tmdb.org/t/p/original/7fn624j5lj3xTme2SgiLCeuedmO.jpg",
-        "url": "/MediaCover/331/poster.jpg?h=dc3230e5e17521242510"
+        "url": "/MediaCover/331/poster.jpg"
       },
       {
         "coverType": "fanart",
         "remoteUrl": "https://image.tmdb.org/t/p/original/fRGxZuo7jJUWQsVg9PREb98Aclp.jpg",
-        "url": "/MediaCover/331/fanart.jpg?h=1408d3155874e8e4bb8b"
+        "url": "/MediaCover/331/fanart.jpg"
       }
     ],
     "imdbId": "tt2582802",
@@ -120,7 +120,7 @@
     "year": 2014,
     "youTubeTrailerId": "Q7kZy3T6vRM"
   },
-  "recordedAt": "2026-11-13T12:39:38Z",
+  "recordedAt": "2026-11-23T17:54:16Z",
   "request": {
     "body": "bodies/movie-add-path.json",
     "method": "POST",

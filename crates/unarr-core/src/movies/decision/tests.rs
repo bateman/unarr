@@ -115,11 +115,17 @@ fn ids_win_when_the_year_agrees() {
     // An indexer naming the wrong id: the year disagrees, the title too.
     assert_eq!(by("1001", 0, 1999, None), None);
     assert_eq!(by("0", 1001, 0, None), by_id);
-    // In a search the TMDB id of the movie searched for is believed even
-    // then; the IMDb number never equals the movie's `tt` id.
+    // In a search the ids of the movie searched for are believed even
+    // then: its TMDB id, and (Radarr 7, `MapFixture`) its IMDb id once
+    // the feed's number is normalised to the `tt` form.
     let criteria = search(&goethe);
     assert_eq!(by("0", 1001, 1999, Some(&criteria)), by_id);
-    assert_eq!(by("1001", 0, 1999, Some(&criteria)), None);
+    assert_eq!(by("1001", 0, 1999, Some(&criteria)), by_id);
+    // `should_not_match_search_criteria_movie_without_imdb_id_when_release_has_none`.
+    let mut no_imdb = goethe.clone();
+    no_imdb.movie.metadata.imdb_id = None;
+    let criteria = search(&no_imdb);
+    assert_eq!(by("0", 0, 1999, Some(&criteria)), None);
 }
 
 #[test]
@@ -163,6 +169,28 @@ fn a_title_finds_one_movie_across_the_library() {
     assert_eq!(find("Fack Ju Goethe 2 Same same", Some(2015)), Ok(Some(1)));
     assert_eq!(find("Translated Title", None), Ok(Some(1)));
     assert_eq!(find("Nothing Like It", None), Ok(None));
+}
+
+/// `DownloadDecisionMakerFixture` (Radarr 7): a release that cannot be
+/// processed (two movies answer to its title) is an error that still
+/// carries what its title parsed to, so the interactive search can show
+/// it.
+#[test]
+fn a_release_that_cannot_be_processed_keeps_what_its_title_parsed_to() {
+    let lookup = MemoryMovieLookup {
+        movies: vec![
+            LibraryMovie::bare(movie(3, "The Thing", 1982)),
+            LibraryMovie::bare(movie(4, "The Thing", 1982)),
+        ],
+        ..MemoryMovieLookup::default()
+    };
+    let r = release("The.Thing.1982.1080p.BluRay.x264-GRP", now() - Duration::hours(3));
+    let d = decide(&catalog(), &lookup, &[r], None, false).remove(0);
+    assert_eq!(reasons(&d), vec![R::Error]);
+    assert_eq!(d.rejections[0].message, "Unexpected error processing release");
+    let parsed = d.remote.parsed.as_ref().expect("the parsed title is kept");
+    assert_eq!(parsed.quality.quality.quality_id, BLURAY1080P);
+    assert_eq!(d.remote.languages, parsed.languages);
 }
 
 #[test]
@@ -588,6 +616,30 @@ mod what_the_library_already_has {
         let mut c = catalog();
         c.base.config.skip_free_space_check_when_importing = true;
         assert!(decide_one(&c, &lookup, wanted()).approved());
+    }
+
+    /// `DeletedMovieFileSpecificationFixture` (Radarr 7): with deleted
+    /// files unmonitoring their movie, a file gone from disk holds an RSS
+    /// release back, as if the movie were unmonitored; a file still there,
+    /// the setting off or a search let it through.
+    #[test]
+    fn a_file_deleted_from_disk_and_not_yet_scanned() {
+        let dir = std::env::temp_dir().join(format!("unarr_deleted_file_{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        std::fs::create_dir_all(&dir).unwrap();
+        let mut c = catalog();
+        c.base.profiles = vec![profile(&[WEBDL1080P, BLURAY1080P], BLURAY1080P, true)];
+        let mut lookup = with_file(file(WEBDL1080P, "GRP"));
+        lookup.movies[0].movie.path = dir.to_string_lossy().into_owned();
+        assert!(decide_one(&c, &lookup, wanted()).approved(), "the setting off");
+        c.auto_unmonitor_previously_downloaded_movies = true;
+        let d = decide_one(&c, &lookup, wanted());
+        assert_eq!(reasons(&d), vec![R::MovieNotMonitored]);
+        assert_eq!(d.rejections[0].message, "Movie is not monitored");
+        assert_eq!(d.rejections[0].kind, crate::decision::RejectionKind::Temporary);
+        std::fs::write(dir.join("The Holdovers (2023).mkv"), b"x").unwrap();
+        assert!(decide_one(&c, &lookup, wanted()).approved(), "the file is there");
+        std::fs::remove_dir_all(&dir).unwrap();
     }
 
     #[test]

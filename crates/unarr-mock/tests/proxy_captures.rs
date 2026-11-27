@@ -3,7 +3,11 @@
 //! (SABnzbd 4.2.2, Transmission 4.0.5), recorded through
 //! `scripts/downloadclient-capture.py proxy` and anonymised:
 //! `tests/fixtures/downloadclients/{sabnzbd,transmission}` from Sonarr,
-//! `radarr-sabnzbd` and `radarr-transmission` from Radarr.
+//! `radarr-sabnzbd` and `radarr-transmission` from Radarr. `radarr-transmission`
+//! was recorded again from Radarr 7.0.3.10918 with the same Transmission;
+//! there the torrent's data was put in place after the add and verified,
+//! since Radarr 7 names no download folder and the torrent lands in
+//! Transmission's own.
 //!
 //! Unlike the captures taken from a trace log, these keep whole requests,
 //! so each test does what the original did at one moment of the recording
@@ -399,19 +403,19 @@ async fn transmission_stopped_at_its_ratio_and_removals_as_sonarr() {
 }
 
 const BACKCOUNTRY: &str = "Backcountry.2015.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR";
-const BACKCOUNTRY_HASH: &str = "f672aefdc079f84acc589280ab1e95316cdff48d";
+const BACKCOUNTRY_HASH: &str = "8b1592979f5a1477c1321b9fddcada738bf5c324";
 
 #[tokio::test]
 async fn transmission_as_radarr() {
     let mock = Mock::start(fixtures_dir(), 0).await.unwrap();
     let context = context();
     let name = "radarr-transmission";
-    let def = definition(RADARR, ClientKind::Transmission, mock.port(), name, "1-3,6,9-10");
+    let def = definition(RADARR, ClientKind::Transmission, mock.port(), name, "1-3,5,8");
     let client = Client::new(&def, &context);
     assert!(client.test().await.is_empty());
     assert_sent_as_recorded(&mock, name, &[1, 2, 3]);
     assert!(client.items().await.unwrap().is_empty());
-    assert_sent_as_recorded(&mock, name, &[6]);
+    assert_sent_as_recorded(&mock, name, &[5]);
     let release = release(BACKCOUNTRY, Protocol::Torrent);
     client
         .add_torrent(
@@ -422,34 +426,37 @@ async fn transmission_as_radarr() {
         )
         .await
         .unwrap();
-    assert_sent_as_recorded(&mock, name, &[9, 10]);
+    // Radarr 7 (Radarr/Radarr@1b7edb3240): a Transmission with labels
+    // takes the category as a label alone, so the add asks no `session-get`
+    // for the download folder and names none.
+    assert_sent_as_recorded(&mock, name, &[8]);
 
     // Seeding with no ratio limit of its own (mode 2), the other at 0 %;
     // the second removed from the queue.
-    let def = definition(RADARR, ClientKind::Transmission, mock.port(), name, "1-2,13,22");
+    let def = definition(RADARR, ClientKind::Transmission, mock.port(), name, "1-2,11,13");
     let client = Client::new(&def, &context);
     client.test().await;
     mock.clear();
     let items = client.items().await.unwrap();
-    assert_sent_as_recorded(&mock, name, &[13]);
+    assert_sent_as_recorded(&mock, name, &[11]);
     assert_eq!(items.len(), 2);
     assert_eq!(items[0].status, DownloadItemStatus::Completed);
     assert!(!items[0].can_be_removed);
     assert_eq!(items[0].category.as_deref(), Some("radarr"));
     client.remove(&items[1], true).await.unwrap();
-    assert_sent_as_recorded(&mock, name, &[22]);
+    assert_sent_as_recorded(&mock, name, &[13]);
 
     // Stopped at the global ratio: one `session-get`, then its removal.
-    let def = definition(RADARR, ClientKind::Transmission, mock.port(), name, "1,28-30");
+    let def = definition(RADARR, ClientKind::Transmission, mock.port(), name, "1,16-18");
     let client = Client::new(&def, &context);
     client.test().await;
     mock.clear();
     let items = client.items().await.unwrap();
-    assert_sent_as_recorded(&mock, name, &[28, 29]);
+    assert_sent_as_recorded(&mock, name, &[16, 17]);
     assert_eq!(items.len(), 1);
     assert!(items[0].can_be_removed);
     client.remove(&items[0], true).await.unwrap();
-    assert_sent_as_recorded(&mock, name, &[30]);
+    assert_sent_as_recorded(&mock, name, &[18]);
 }
 
 // --- SABnzbd

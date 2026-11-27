@@ -712,7 +712,7 @@
     "sortKey": "date",
     "totalRecords": 86
   },
-  "recordedAt": "2026-11-20T07:24:21Z",
+  "recordedAt": "2026-11-23T17:50:27Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/blocklist?page=1&pageSize=5"

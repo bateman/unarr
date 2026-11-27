@@ -1800,11 +1800,14 @@ impl Runtime {
             // The movie a webhook payload was built for is, for a tracked
             // download, the one the download holds: its covers carry
             // their local addresses from here on.
-            let url_base = &notifier.base().identity().url_base;
+            let identity = notifier.base().identity();
+            let url_base = &identity.url_base;
+            let cover_dir = identity.media_cover_dir.as_deref();
             let mut any = false;
             for c in &converted {
                 if c.by == ConvertedBy::ManualInteraction || imports_hold_tracked_movie {
-                    side.downloads.convert_covers_of(&c.download_id, url_base);
+                    side.downloads
+                        .convert_covers_of(&c.download_id, url_base, cover_dir, now);
                     any = true;
                 }
             }

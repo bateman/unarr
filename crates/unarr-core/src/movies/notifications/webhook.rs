@@ -53,7 +53,10 @@ fn release_date(movie: &Movie) -> String {
 fn movie_json(movie: &Movie, ctx: &Context<'_>) -> Value {
     let md = &movie.metadata;
     let mut images = md.images.clone();
-    convert_to_local_urls(&ctx.identity.url_base, movie.id, &mut images);
+    let root = ctx.identity.media_cover_dir.as_deref();
+    convert_to_local_urls(&ctx.identity.url_base, movie.id, &mut images, &|cover_type| {
+        super::cover_exists(root, movie.id, cover_type, movie.added, ctx.now)
+    });
     let images: Vec<Value> = images
         .iter()
         .map(|i| {
@@ -112,19 +115,12 @@ fn media_info_json(file: &MovieFile) -> Option<Value> {
     );
     o.opt(
         "audioCodec",
-        format::audio_codec(
-            format::str(raw, "audioFormat"),
-            format::str(raw, "audioCodecID").unwrap_or(""),
-            format::str(raw, "audioProfile").unwrap_or(""),
-        ),
+        format::primary_audio(raw).codec_for(crate::Personality::Radarr),
     );
-    o.set(
-        "audioLanguages",
-        json!(distinct(format::list(raw, "audioLanguages"))),
-    );
+    o.set("audioLanguages", json!(distinct(format::audio_languages(raw))));
     o.set("height", json!(format::int(raw, "height")));
     o.set("width", json!(format::int(raw, "width")));
-    o.set("subtitles", json!(distinct(format::list(raw, "subtitles"))));
+    o.set("subtitles", json!(distinct(format::subtitle_languages(raw))));
     o.opt(
         "videoCodec",
         format::video_codec(
@@ -423,8 +419,9 @@ pub async fn on_rename(
 pub(crate) fn manual_interaction_payload(m: &ManualInteractionMessage<'_>, ctx: &Context<'_>) -> Value {
     let item = &m.tracked.item;
     let mut info = Object::new();
-    info.set("quality", json!(quality_name(&m.quality)));
-    info.set("qualityVersion", json!(m.quality.version));
+    let quality = m.quality.unwrap_or_default();
+    info.set("quality", json!(quality_name(&quality)));
+    info.set("qualityVersion", json!(quality.version));
     info.set("title", json!(item.title));
     info.set("size", json!(item.total_size));
     let messages: Vec<Value> = m
@@ -443,7 +440,10 @@ pub(crate) fn manual_interaction_payload(m: &ManualInteractionMessage<'_>, ctx: 
     o.set("downloadStatusMessages", Value::Array(messages));
     o.set(
         "customFormatInfo",
-        custom_format_info(&m.remote.custom_formats, m.remote.custom_format_score),
+        // Called with a release only (`on_manual_interaction_required`).
+        m.remote
+            .map(|r| custom_format_info(&r.custom_formats, r.custom_format_score))
+            .unwrap_or(Value::Null),
     );
     o.set("release", grabbed_release_json(m.release));
     o.done()
@@ -455,6 +455,11 @@ pub async fn on_manual_interaction_required(
     m: &ManualInteractionMessage<'_>,
     ctx: &Context<'_>,
 ) -> Result<(), String> {
+    // The payload reads the release's custom formats: without a release
+    // the original throws there, which the handler records as a failure.
+    if m.remote.is_none() {
+        return Err("Object reference not set to an instance of an object.".to_string());
+    }
     let settings = Settings::from_value(&def.settings);
     post(http, &settings, &manual_interaction_payload(m, ctx)).await
 }

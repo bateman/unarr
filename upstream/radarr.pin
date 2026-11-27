@@ -11,7 +11,7 @@
 # build_time  its `buildTime`, also the `Last-Modified` of what clients keep
 # migration   its migration level, reported when nothing was imported
 # sha256      of Radarr.master.<version>.linux-core-x64.tar.gz, the tarball pinned
-version = 6.4.4.10685
-build_time = 2026-09-14T15:54:37Z
-migration = 242
-sha256 = a1d726129535e739d4efaf93b5fdd771bb1c78349f55ceac70e365e37b5a12a3
+version = 7.0.3.10918
+build_time = 2026-11-15T19:19:14Z
+migration = 243
+sha256 = 1737e72150ea991c8f224fcf529c419b7e6c567ba672cbf27a61f11c9a51fe8e

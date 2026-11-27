@@ -268,7 +268,7 @@ async fn method_not_taken(
     // The cache headers come after the authentication in the originals.
     http::apply_cache_headers(
         refused,
-        http::cacheable(&path, query.as_deref()),
+        http::cacheable(&path, query.as_deref(), state.personality()),
         state.personality(),
     )
 }
@@ -511,19 +511,16 @@ async fn reject_put_without_id(
     next.run(request).await
 }
 
-/// Radarr's 404 problem details name RFC 9110 where Sonarr's name RFC
-/// 7231, and say so as `application/problem+json`: the handlers both share
-/// answer Sonarr's, replaced here.
+/// A controller's `NotFound()` is Radarr 7's `TypedResults.NotFound()`: a
+/// 404 with no body, where Sonarr, at its pin, answers ASP.NET's problem
+/// details. The handlers both share answer Sonarr's, replaced here.
 async fn radarr_problem_details(
     request: axum::extract::Request,
     next: axum::middleware::Next,
 ) -> axum::response::Response {
     let response = next.run(request).await;
     if response.extensions().get::<error::NotFoundProblem>().is_some() {
-        return error::not_found_problem(
-            error::NOT_FOUND_TYPE_RFC9110,
-            "application/problem+json; charset=utf-8",
-        );
+        return axum::http::StatusCode::NOT_FOUND.into_response();
     }
     response
 }

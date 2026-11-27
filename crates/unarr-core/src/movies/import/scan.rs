@@ -101,7 +101,7 @@ fn update_media_info(
         return Ok(false);
     }
     let path = join(&movie.path, &file.relative_path);
-    match mediainfo::probe(Path::new(&path)) {
+    match mediainfo::probe_for(Path::new(&path), crate::Personality::Radarr) {
         Some(info) => {
             file.media_info = Some(info.model);
             let file2 = file.clone();
@@ -169,16 +169,14 @@ pub fn backfill_media_info(
     updated
 }
 
-/// No media info, or one older than the least the probe's own schema
-/// still reads. The probe is one for both applications and stamps what it
-/// writes with Sonarr's revision (11), below Radarr's minimum (14): held
-/// to Radarr's number, every file Unarr probed would be probed again at
-/// each scan.
+/// No media info, or one older than the least Radarr still reads
+/// (revision 16 since Radarr 7 keeps every stream): such a file is probed
+/// again, as the original does after its migration 243.
 fn media_info_is_stale(info: Option<&serde_json::Value>) -> bool {
     let revision = info
         .filter(|info| !info.is_null())
         .map(|info| info.get("schemaRevision").and_then(|r| r.as_i64()).unwrap_or(0));
-    revision.is_none_or(|r| r < mediainfo::MINIMUM_MEDIA_INFO_SCHEMA_REVISION)
+    revision.is_none_or(|r| r < mediainfo::RADARR_MINIMUM_MEDIA_INFO_SCHEMA_REVISION)
 }
 
 /// `Scan(movie)`. File work: call it off the async runtime.
@@ -256,7 +254,7 @@ pub fn scan(
     // The movie as the cleanup left it: no longer pointing at a file gone.
     let movie = fresh.as_ref().unwrap_or(movie);
     let unmapped = decide::filter_existing(&media_files, &movie_files, movie);
-    let probes = Probes::probe_all(&unmapped);
+    let probes = Probes::probe_all_for(&unmapped, crate::Personality::Radarr);
     let (env2, movie2, unmapped2) = (env.clone(), movie.clone(), unmapped.clone());
     let decisions = db.call_blocking(move |conn| {
         decide::get_import_decisions(
@@ -319,12 +317,16 @@ mod tests {
         assert!(media_info_is_stale(Some(&json!(null))));
         assert!(media_info_is_stale(Some(&json!({"videoFormat": "h264"}))));
         assert!(media_info_is_stale(Some(&json!({
-            "schemaRevision": mediainfo::MINIMUM_MEDIA_INFO_SCHEMA_REVISION - 1
+            "schemaRevision": mediainfo::RADARR_MINIMUM_MEDIA_INFO_SCHEMA_REVISION - 1
         }))));
-        // What the probe writes, and what the original's database holds.
+        // What the probe writes, and what Radarr 7 writes.
         assert!(!media_info_is_stale(Some(&json!({
-            "schemaRevision": mediainfo::CURRENT_MEDIA_INFO_SCHEMA_REVISION
+            "schemaRevision": mediainfo::RADARR_CURRENT_MEDIA_INFO_SCHEMA_REVISION
         }))));
-        assert!(!media_info_is_stale(Some(&json!({"schemaRevision": 14}))));
+        assert!(!media_info_is_stale(Some(&json!({"schemaRevision": 16}))));
+        // Radarr 6's revision, and Unarr's before Radarr 7: probed again,
+        // as the original probes its files again after migration 243.
+        assert!(media_info_is_stale(Some(&json!({"schemaRevision": 14}))));
+        assert!(media_info_is_stale(Some(&json!({"schemaRevision": 11}))));
     }
 }

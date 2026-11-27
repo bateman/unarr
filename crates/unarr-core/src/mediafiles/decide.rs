@@ -52,9 +52,14 @@ impl Probes {
     /// Probe `files` (those that are media files; disk images and stream
     /// files yield nothing, as the originals' reader returns null).
     pub fn probe_all(files: &[String]) -> Probes {
+        Self::probe_all_for(files, crate::Personality::Sonarr)
+    }
+
+    /// Each file probed in the shape of `personality`'s original.
+    pub fn probe_all_for(files: &[String], personality: crate::Personality) -> Probes {
         let mut by_path = HashMap::new();
         for f in files {
-            let info = mediainfo::probe(std::path::Path::new(f));
+            let info = mediainfo::probe_for(std::path::Path::new(f), personality);
             by_path.insert(f.clone(), info);
         }
         Probes { by_path }

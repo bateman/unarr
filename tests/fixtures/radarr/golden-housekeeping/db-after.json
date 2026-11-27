@@ -7,6 +7,11 @@
   },
   {
    "inTheFuture": false,
+   "interval": 5,
+   "typeName": "NzbDrone.Core.Caching.ClearExpiredCacheCommand"
+  },
+  {
+   "inTheFuture": false,
    "interval": 1,
    "typeName": "NzbDrone.Core.Download.RefreshMonitoredDownloadsCommand"
   },

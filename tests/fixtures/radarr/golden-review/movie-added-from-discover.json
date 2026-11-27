@@ -1,7 +1,7 @@
 {
   "body": [
     {
-      "added": "2026-11-14T06:29:39Z",
+      "added": "2026-11-23T17:59:07Z",
       "alternateTitles": [
         {
           "id": 2804,
@@ -376,7 +376,7 @@
       "youTubeTrailerId": "LY19rHKAaAg"
     }
   ],
-  "recordedAt": "2026-11-14T06:29:49Z",
+  "recordedAt": "2026-11-23T17:59:18Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/movie?tmdbId=157336"

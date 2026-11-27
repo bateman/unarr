@@ -43,18 +43,22 @@ impl MovieEnvironment {
     }
 }
 
-/// `ParseCustomFormat(LocalMovie)`: the scene name, else the file's name,
-/// simplified, with what the aggregators settled on.
-pub fn local_formats(catalog: &MovieCatalog, local: &LocalMovie) -> Vec<CustomFormat> {
+/// `ParseCustomFormat(LocalMovie, fileName)`: the scene name, else the
+/// file's own name, simplified, with what the aggregators settled on; the
+/// formats that look at a file's name read `file_name_for_formats`.
+pub fn local_formats(
+    catalog: &MovieCatalog,
+    local: &LocalMovie,
+    file_name_for_formats: &str,
+) -> Vec<CustomFormat> {
     let Some(movie) = &local.movie else {
         return Vec::new();
     };
-    let file_name = file_name(&local.path);
     let scene_name = local.scene_name.as_deref().filter(|s| !s.trim().is_empty());
-    let title = parser::simplify_release_title(scene_name.unwrap_or(file_name));
+    let title = parser::simplify_release_title(scene_name.unwrap_or(file_name(&local.path)));
     let input = Input {
         release_title: &title,
-        filename: Some(file_name),
+        filename: Some(file_name_for_formats),
         release_group: local.release_group.as_deref(),
         quality: local.quality,
         languages: &local.languages,
@@ -73,16 +77,77 @@ pub fn local_formats(catalog: &MovieCatalog, local: &LocalMovie) -> Vec<CustomFo
         .collect()
 }
 
-/// The custom formats of a local movie and their score under its movie's
-/// profile.
-pub fn score_formats(catalog: &MovieCatalog, local: &mut LocalMovie) {
-    local.custom_formats = local_formats(catalog, local);
-    local.custom_format_score = local
-        .movie
-        .as_ref()
-        .and_then(|m| catalog.base.profile(m.quality_profile_id))
-        .map(|p| upgradable::format_score(p, &local.custom_formats))
-        .unwrap_or(0);
+/// `BuildFileName(movie, localMovie.ToMovieFile())`: the name the import
+/// would give the file, without folder nor extension. A format the
+/// naming cannot build leaves the file's own name.
+pub fn renamed_file_name(
+    env: &MovieEnvironment,
+    translations: &[(i64, String)],
+    local: &LocalMovie,
+) -> String {
+    let movie = local.movie_ref();
+    let mut file = local.to_movie_file(env.now);
+    // `UpdateMediaInfoIfNeeded`: a format with media info tokens has the
+    // file read first when nothing was read from it yet (a file the
+    // decision gave up on before its media info, or one evaluated again
+    // before its augmenting), media info permitting.
+    let wants_media_info = env.config.enable_media_info
+        && env
+            .naming
+            .standard_movie_format
+            .to_ascii_lowercase()
+            .contains("mediainfo");
+    if file.media_info.is_none() && wants_media_info && !movie.path.trim().is_empty() {
+        file.media_info = crate::mediafiles::mediainfo::probe_for(
+            std::path::Path::new(&local.path),
+            crate::Personality::Radarr,
+        )
+        .map(|m| m.model);
+    }
+    let formats = crate::movies::formats::file_formats(&env.catalog.base.formats, &file, movie);
+    super::approve::build_file_name(env, movie, translations, &file, &local.path, &formats).unwrap_or_else(
+        |e| {
+            tracing::debug!("Unable to build the file name of {}: {e}", local.path);
+            crate::mediafiles::file_name(&local.path).to_string()
+        },
+    )
+}
+
+/// `UpdateMovieCustomFormats` (Radarr 7): the custom formats of a local
+/// movie under the name the import will give it (`renamed`) and under
+/// the name it has now, each with its score under the movie's profile.
+pub fn score_formats(catalog: &MovieCatalog, local: &mut LocalMovie, renamed: &str) {
+    let score = |local: &LocalMovie, formats: &[CustomFormat]| {
+        local
+            .movie
+            .as_ref()
+            .and_then(|m| catalog.base.profile(m.quality_profile_id))
+            .map(|p| upgradable::format_score(p, formats))
+            .unwrap_or(0)
+    };
+    local.custom_formats = local_formats(catalog, local, renamed);
+    local.file_name_used_for_custom_format_calculation = Some(renamed.to_string());
+    local.custom_format_score = score(local, &local.custom_formats);
+    let own_name = file_name(&local.path).to_string();
+    local.original_file_name_custom_formats = local_formats(catalog, local, &own_name);
+    local.original_file_name_custom_format_score = score(local, &local.original_file_name_custom_formats);
+}
+
+/// [`score_formats`] under the name [`renamed_file_name`] builds, the
+/// movie's translations read from `conn`.
+pub fn score_formats_renamed(
+    conn: &Connection,
+    env: &MovieEnvironment,
+    local: &mut LocalMovie,
+) -> anyhow::Result<()> {
+    if local.movie.is_none() {
+        score_formats(&env.catalog, local, "");
+        return Ok(());
+    }
+    let translations = store::translation_titles(conn, local.movie_ref().metadata.id)?;
+    let renamed = renamed_file_name(env, &translations, local);
+    score_formats(&env.catalog, local, &renamed);
+    Ok(())
 }
 
 /// `GetImportDecisions(videoFiles, movie, downloadClientItem, folderInfo, sceneSource, filterExistingFiles)`.
@@ -199,7 +264,13 @@ fn decide(
                     if let (true, Some(flags)) = (has_download_id, tracked_flags) {
                         local.indexer_flags = flags;
                     }
-                    score_formats(&env.catalog, &mut local);
+                    if let Err(e) = score_formats_renamed(conn, env, &mut local) {
+                        tracing::error!("Couldn't import file. {}: {e:#}", local.path);
+                        return MovieImportDecision::rejected(
+                            Some(local),
+                            MovieImportRejection::new(R::Error, "Unexpected error processing file"),
+                        );
+                    }
                     let lookup = StoreMovieLookup { conn };
                     let sources = StoreImportSources { conn };
                     specs_only(&lookup, &sources, env, local, item)
@@ -560,6 +631,75 @@ mod tests {
         );
     }
 
+    /// Without a scene name, the release title is still the file's own
+    /// name: a format on the title matches it under either name.
+    #[test]
+    fn the_release_title_stays_the_files_own_name() {
+        let mut catalog = MovieCatalog::default();
+        let format = |id: i64, name: &str| CustomFormat {
+            id,
+            name: name.into(),
+            include_when_renaming: false,
+            specifications: json!([{"type": "ReleaseTitleSpecification", "body": {"value": name, "negate": false, "required": false}}]),
+        };
+        catalog.base.formats = vec![format(1, "English"), format(2, "Spanish")].into();
+        let mut local = LocalMovie {
+            path: "/C/Test/Unsorted/The.Movie.2026.DVDRip.Spanish.XviD-OSiTV.avi".into(),
+            movie: Some(movie()),
+            ..Default::default()
+        };
+        score_formats(&catalog, &mut local, "The Movie 2018 DVDRip English XviD-OSiTV");
+        let names = |formats: &[CustomFormat]| formats.iter().map(|f| f.name.clone()).collect::<Vec<_>>();
+        assert_eq!(names(&local.custom_formats), vec!["English", "Spanish"]);
+        assert_eq!(names(&local.original_file_name_custom_formats), vec!["Spanish"]);
+    }
+
+    /// `LocalMovieCustomFormatCalculationServiceFixture.should_update_custom_formats_on_local_movie`
+    /// (Radarr 7): the formats under the name the import gives the file,
+    /// and those under the name it has, each with its score.
+    #[test]
+    fn custom_formats_are_read_from_the_name_the_import_gives_the_file() {
+        let db = Db::open_in_memory_for(Personality::Radarr).unwrap();
+        let local = db
+            .call_blocking(move |conn| {
+                let mut env = MovieEnvironment::load(conn, Utc::now())?;
+                env.naming.rename_movies = true;
+                env.naming.standard_movie_format = "{Movie Title} {Release Year} DVDRip English XviD-OSiTV".into();
+                env.catalog.base.profiles = vec![testing::profile(&[], BLURAY1080P, true)];
+                env.catalog.base.profiles[0].format_items = vec![
+                    crate::model::ProfileFormatItem { format: 1, score: 10 },
+                    crate::model::ProfileFormatItem { format: 2, score: 2 },
+                ];
+                let format = |id: i64, name: &str| CustomFormat {
+                    id,
+                    name: name.into(),
+                    include_when_renaming: false,
+                    specifications: json!([{"type": "ReleaseTitleSpecification", "body": {"value": name, "negate": false, "required": false}}]),
+                };
+                env.catalog.base.formats = vec![format(1, "English"), format(2, "Spanish")].into();
+                let mut local = LocalMovie {
+                    path: "/C/Test/Unsorted/The.Movie.2026.DVDRip.Spanish.XviD-OSiTV.avi".into(),
+                    scene_name: Some("The.Movie.2026.DVDRip.XviD-OSiTV".into()),
+                    movie: Some(movie()),
+                    quality: testing::quality(DVD, 1),
+                    languages: vec![lang::SPANISH],
+                    ..Default::default()
+                };
+                score_formats_renamed(conn, &env, &mut local)?;
+                Ok(local)
+            })
+            .unwrap();
+        let names = |formats: &[CustomFormat]| formats.iter().map(|f| f.name.clone()).collect::<Vec<_>>();
+        assert_eq!(
+            local.file_name_used_for_custom_format_calculation.as_deref(),
+            Some("The Movie 2018 DVDRip English XviD-OSiTV")
+        );
+        assert_eq!(names(&local.custom_formats), vec!["English"]);
+        assert_eq!(local.custom_format_score, 10);
+        assert_eq!(names(&local.original_file_name_custom_formats), vec!["Spanish"]);
+        assert_eq!(local.original_file_name_custom_format_score, 2);
+    }
+
     #[test]
     fn custom_formats_are_read_from_the_scene_name_or_the_file_name() {
         let mut catalog = MovieCatalog::default();
@@ -579,19 +719,23 @@ mod tests {
             languages: vec![lang::ENGLISH],
             ..Default::default()
         };
-        score_formats(&catalog, &mut local);
+        let own = file_name(&local.path).to_string();
+        score_formats(&catalog, &mut local, &own);
         assert!(local.custom_formats.is_empty());
         assert_eq!(local.custom_format_score, 0);
         local.scene_name = Some("The.Movie.2018.1080p.BluRay.x264-GRP".into());
-        score_formats(&catalog, &mut local);
+        let own = file_name(&local.path).to_string();
+        score_formats(&catalog, &mut local, &own);
         assert_eq!(local.custom_formats.len(), 1);
         assert_eq!(local.custom_format_score, 25);
         local.scene_name = None;
         local.path = "/C/Test/Unsorted/The.Movie.2018.1080p.BluRay.x264-GRP.mkv".into();
-        score_formats(&catalog, &mut local);
+        let own = file_name(&local.path).to_string();
+        score_formats(&catalog, &mut local, &own);
         assert_eq!(local.custom_format_score, 25);
         local.movie = None;
-        score_formats(&catalog, &mut local);
+        let own = file_name(&local.path).to_string();
+        score_formats(&catalog, &mut local, &own);
         assert_eq!(local.custom_format_score, 0);
     }
 }

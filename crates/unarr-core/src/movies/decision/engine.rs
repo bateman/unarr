@@ -42,6 +42,8 @@ pub struct MovieCatalog {
     /// Days after its release date before a movie counts as available.
     pub availability_delay: i64,
     pub prefer_indexer_flags: bool,
+    /// `AutoUnmonitorPreviouslyDownloadedMovies`.
+    pub auto_unmonitor_previously_downloaded_movies: bool,
     pub queue: Vec<QueuedMovie>,
 }
 
@@ -66,6 +68,7 @@ impl MovieCatalog {
                 .and_then(|v| v.trim().parse().ok())
                 .unwrap_or(0),
             prefer_indexer_flags: flag("PreferIndexerFlags")?,
+            auto_unmonitor_previously_downloaded_movies: flag("AutoUnmonitorPreviouslyDownloadedMovies")?,
             queue: Vec::new(),
         })
     }
@@ -280,8 +283,12 @@ fn decide_one(
                 // More than one movie answers to the title: the original
                 // throws, and the release comes out as an error.
                 tracing::error!("Couldn't process release {}: {error}", release.title);
+                // Radarr 7 keeps what the title parsed to, so the release
+                // still shows its quality and languages.
                 let mut failed = RemoteMovie::new(release.clone());
                 failed.release_source = source;
+                failed.parsed = Some(parsed.clone());
+                failed.languages = parsed.languages.clone();
                 return Some(MovieDecision {
                     remote: failed,
                     rejections: vec![MovieRejection::permanent(

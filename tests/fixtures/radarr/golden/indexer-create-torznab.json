@@ -236,6 +236,12 @@
           },
           {
             "dividerAfter": false,
+            "name": "Irish",
+            "order": 0,
+            "value": 58
+          },
+          {
+            "dividerAfter": false,
             "name": "Italian",
             "order": 0,
             "value": 5
@@ -597,7 +603,7 @@
     "supportsSearch": true,
     "tags": []
   },
-  "recordedAt": "2026-11-12T14:19:16Z",
+  "recordedAt": "2026-11-23T17:44:21Z",
   "request": {
     "body": "bodies/indexer-create-torznab.json",
     "method": "POST",

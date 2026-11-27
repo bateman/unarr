@@ -12,21 +12,21 @@
       "updateScheduledTask": true
     },
     "commandName": "Housekeeping",
-    "duration": "00:00:00.1476912",
-    "ended": "2026-11-12T14:23:35Z",
+    "duration": "00:00:00.1388192",
+    "ended": "2026-11-23T17:48:38Z",
     "id": 473007,
     "name": "Housekeeping",
     "priority": "normal",
-    "queued": "2026-11-12T14:23:35Z",
+    "queued": "2026-11-23T17:48:38Z",
     "result": "successful",
     "sendUpdatesToClient": true,
-    "started": "2026-11-12T14:23:35Z",
-    "stateChangeTime": "2026-11-12T14:23:35Z",
+    "started": "2026-11-23T17:48:38Z",
+    "stateChangeTime": "2026-11-23T17:48:38Z",
     "status": "completed",
     "trigger": "manual",
     "updateScheduledTask": true
   },
-  "recordedAt": "2026-11-12T14:23:43Z",
+  "recordedAt": "2026-11-23T17:48:46Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/command/473007"

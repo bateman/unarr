@@ -1,7 +1,7 @@
 {
   "body": [
     {
-      "added": "2026-11-13T12:39:08Z",
+      "added": "2026-11-23T17:53:46Z",
       "alternateTitles": [
         {
           "id": 2833,
@@ -194,7 +194,7 @@
         "tech noir",
         "unicorn"
       ],
-      "lastSearchTime": "2026-11-13T12:39:08Z",
+      "lastSearchTime": "2026-11-23T17:53:46Z",
       "minimumAvailability": "inCinemas",
       "monitored": true,
       "movieFileId": 0,
@@ -258,7 +258,7 @@
       "youTubeTrailerId": "qoEyZoOTtss"
     }
   ],
-  "recordedAt": "2026-11-13T12:39:38Z",
+  "recordedAt": "2026-11-23T17:54:16Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/movie?tmdbId=78"

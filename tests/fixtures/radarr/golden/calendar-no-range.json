@@ -1,6 +1,108 @@
 {
-  "body": [],
-  "recordedAt": "2026-11-12T14:19:13Z",
+  "body": [
+    {
+      "added": "2026-05-02T19:29:33Z",
+      "alternateTitles": [
+        {
+          "id": 1570,
+          "movieMetadataId": 315,
+          "sourceType": "tmdb",
+          "title": "Meet the Parents 4"
+        },
+        {
+          "id": 1664,
+          "movieMetadataId": 315,
+          "sourceType": "tmdb",
+          "title": "Zor Baba 4"
+        },
+        {
+          "id": 1921,
+          "movieMetadataId": 315,
+          "sourceType": "tmdb",
+          "title": "Entrando Na Maior Fria"
+        },
+        {
+          "id": 1922,
+          "movieMetadataId": 315,
+          "sourceType": "tmdb",
+          "title": "Entrando Numa Fria 4"
+        }
+      ],
+      "certification": "PG-13",
+      "cleanTitle": "fockerinlaw",
+      "collection": {
+        "title": "Meet the Parents Collection",
+        "tmdbId": 51509
+      },
+      "folderName": "/movies/Focker-In-Law (2026) {tmdb-1400336}",
+      "genres": [
+        "Comedy",
+        "Romance"
+      ],
+      "hasFile": false,
+      "id": 199,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/gPdzdeehaoaYqxH2rA6yayEDSsS.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/6IfsmHoVWwgJwzxA9DLim2XZbSn.jpg"
+        }
+      ],
+      "imdbId": "tt34966140",
+      "inCinemas": "2026-11-25T00:00:00Z",
+      "isAvailable": false,
+      "keywords": [
+        "daughter–in–law father–in–law relationship",
+        "overbearing father",
+        "sequel"
+      ],
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Focker-in-Law",
+      "overview": "Henry, son of Greg and Pam Focker, faces family chaos when he decides to marry a strong-willed woman who appears to be his complete mismatch.",
+      "path": "/movies/Focker-In-Law (2026) {tmdb-1400336}",
+      "popularity": 13.4571,
+      "qualityProfileId": 11,
+      "ratings": {
+        "tmdb": {
+          "type": "user",
+          "value": 0,
+          "votes": 0
+        }
+      },
+      "releaseDate": "2027-02-23T00:00:00Z",
+      "runtime": 105,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 0,
+      "sortTitle": "fockerinlaw",
+      "statistics": {
+        "movieFileCount": 0,
+        "movieFileQualities": [],
+        "releaseGroups": [],
+        "sizeOnDisk": 0
+      },
+      "status": "announced",
+      "studio": "Universal Pictures",
+      "tags": [
+        1
+      ],
+      "title": "Focker-in-Law",
+      "titleSlug": "1400336",
+      "tmdbId": 1400336,
+      "website": "https://www.universalpictures.com/movies/focker-in-law/",
+      "year": 2026,
+      "youTubeTrailerId": "9CKu3WoMYCg"
+    }
+  ],
+  "recordedAt": "2026-11-23T17:44:18Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/calendar"

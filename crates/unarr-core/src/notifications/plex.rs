@@ -788,28 +788,49 @@ async fn update_sections(
     sections: &[Section],
     root_folders: &[RootFolder],
 ) -> Result<(), PlexError> {
-    update_sections_for(notifier, settings, &series.path, sections, root_folders, "TV").await
+    update_sections_for(
+        notifier,
+        settings,
+        &series.path,
+        sections,
+        root_folders,
+        "TV",
+        false,
+    )
+    .await
 }
 
 /// What `UpdateSections` asks Plex for: the section and the path of every
-/// refresh, the one matching location first when there is one.
+/// refresh. A location at the mapped root is refreshed alone: the first one
+/// (Sonarr, at its pin), or the first of every section that has one
+/// (`every_match`, Radarr 7); with none, every location is.
 pub(crate) fn section_updates(
     settings: &Settings,
     path: &str,
     sections: &[Section],
     root_folders: &[RootFolder],
     library: &str,
+    every_match: bool,
 ) -> Vec<(i64, String)> {
     let root = crate::mediafiles::approve::best_root_folder_path(root_folders, path);
     let relative = crate::mediafiles::relative_path(&root, path).to_string();
     let mapped = mapped_root(&root, settings);
+    let mut matched = Vec::new();
     for section in sections {
-        for location in &section.locations {
-            if crate::mediafiles::path_equals(location, &mapped) {
-                tracing::debug!(location, "updating matching section location");
-                return vec![(section.id, section_path(&relative, location))];
+        if let Some(location) = section
+            .locations
+            .iter()
+            .find(|l| crate::mediafiles::path_equals(l, &mapped))
+        {
+            tracing::debug!(location, "updating matching section location");
+            matched.push((section.id, section_path(&relative, location)));
+            if !every_match {
+                return matched;
             }
         }
+    }
+    if !matched.is_empty() {
+        return matched;
     }
     tracing::debug!("unable to find matching section location, updating all {library} sections");
     sections
@@ -832,8 +853,9 @@ pub(crate) async fn update_sections_for(
     sections: &[Section],
     root_folders: &[RootFolder],
     library: &str,
+    every_match: bool,
 ) -> Result<(), PlexError> {
-    for (section, path) in section_updates(settings, path, sections, root_folders, library) {
+    for (section, path) in section_updates(settings, path, sections, root_folders, library, every_match) {
         tracing::debug!(path, "updating section location");
         refresh(notifier, settings, section, &path).await?;
     }

@@ -12,7 +12,7 @@
     "torrentDelay": 525600,
     "usenetDelay": 525600
   },
-  "recordedAt": "2026-11-12T14:20:47Z",
+  "recordedAt": "2026-11-23T17:45:51Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/delayprofile/1"

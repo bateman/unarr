@@ -133,7 +133,7 @@ pub async fn quality_definition_update_many(
         })
         .await?;
     let Json(out) = super::catalog::quality_definitions(State(state)).await?;
-    Ok(accepted(Value::Array(out)))
+    Ok(super::typed_ok(Value::Array(out)))
 }
 
 // --- quality profiles
@@ -592,5 +592,5 @@ pub async fn collection_update_many(
         })
         .collect();
     out.sort_by_key(|c| c["id"].as_i64());
-    Ok(accepted(Value::Array(out)))
+    Ok(super::typed_ok(Value::Array(out)))
 }

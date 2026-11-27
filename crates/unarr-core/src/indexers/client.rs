@@ -173,14 +173,22 @@ impl IndexerClient {
                 "Indexer responded with html content. Site is likely blocked or unavailable.".into(),
             ));
         }
-        parse_feed(&body, kind, url)
+        let mut releases = parse_feed(&body, kind, url)?;
+        // Radarr 7 decodes the HTML entities left in a title; Sonarr's pin
+        // does not.
+        if self.personality == Personality::Radarr {
+            for r in &mut releases {
+                r.title = super::rss::html_decode(&r.title);
+            }
+        }
+        Ok(releases)
     }
 
     fn generator<'a>(&self, settings: &'a NewznabSettings, caps: &'a Capabilities) -> RequestGenerator<'a> {
         RequestGenerator {
             settings,
             caps,
-            page_size: caps.page_size(),
+            page_size: caps.page_size_for(self.personality),
             max_pages: MAX_PAGES,
         }
     }
@@ -368,8 +376,14 @@ impl IndexerClient {
         let caps = self.capabilities(&definition.settings).await?;
         let generator = self.generator(&definition.settings, &caps);
         let chain = self.recent_requests(&generator);
-        self.fetch_chain(definition, &chain, caps.page_size(), last_rss, true)
-            .await
+        self.fetch_chain(
+            definition,
+            &chain,
+            caps.page_size_for(self.personality),
+            last_rss,
+            true,
+        )
+        .await
     }
 
     /// `Fetch(MovieSearchCriteria)`: Radarr's search.
@@ -382,7 +396,13 @@ impl IndexerClient {
         let generator = self.generator(&definition.settings, &caps);
         let chain = crate::movies::request::search_requests(&generator, criteria);
         Ok(self
-            .fetch_chain(definition, &chain, caps.page_size(), None, false)
+            .fetch_chain(
+                definition,
+                &chain,
+                caps.page_size_for(self.personality),
+                None,
+                false,
+            )
             .await?
             .releases)
     }
@@ -397,7 +417,13 @@ impl IndexerClient {
         let generator = self.generator(&definition.settings, &caps);
         let chain = generator.search_requests(criteria);
         Ok(self
-            .fetch_chain(definition, &chain, caps.page_size(), None, false)
+            .fetch_chain(
+                definition,
+                &chain,
+                caps.page_size_for(self.personality),
+                None,
+                false,
+            )
             .await?
             .releases)
     }
@@ -437,4 +463,55 @@ fn jackett_all(settings: &NewznabSettings) -> Option<ValidationFailure> {
         ));
     }
     None
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /// `BasicRssParserFixture.should_decode_html_entities_in_item_title`
+    /// (Radarr 7): an entity left in a title once the XML is read is
+    /// decoded for Radarr; Sonarr's pin keeps it.
+    #[tokio::test]
+    async fn radarr_decodes_the_html_entities_of_a_title() {
+        const FEED: &str = r#"<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:newznab="http://www.newznab.com/DTD/2010/feeds/attributes/">
+  <channel>
+    <item>
+      <title>Series.&amp;amp;.Title.S02E19.EAC3.5.1.1080p.WEBRip.x265-iVy</title>
+      <guid>1</guid>
+      <pubDate>Mon, 02 Mar 2026 17:40:06 +0000</pubDate>
+      <enclosure url="http://my.indexer.com/get/1.nzb" length="1000" type="application/x-nzb" />
+    </item>
+  </channel>
+</rss>"#;
+        let app = axum::Router::new().route(
+            "/api",
+            axum::routing::get(|| async { ([("content-type", "application/rss+xml")], FEED) }),
+        );
+        let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
+        let addr = listener.local_addr().unwrap();
+        tokio::spawn(async move { axum::serve(listener, app).await.unwrap() });
+        let url = format!("http://{addr}/api");
+        let http = crate::http::build(std::time::Duration::from_secs(5));
+        for (personality, title) in [
+            (
+                Personality::Radarr,
+                "Series.&.Title.S02E19.EAC3.5.1.1080p.WEBRip.x265-iVy",
+            ),
+            (
+                Personality::Sonarr,
+                "Series.&amp;.Title.S02E19.EAC3.5.1.1080p.WEBRip.x265-iVy",
+            ),
+        ] {
+            let client = IndexerClient::for_personality(http.clone(), personality);
+            let releases = client.fetch_page(&url, IndexerKind::Newznab).await.unwrap();
+            assert_eq!(releases.len(), 1, "{personality:?}");
+            assert_eq!(releases[0].title, title, "{personality:?}");
+        }
+        assert_eq!(
+            super::super::rss::html_decode("a &#39;b&#x27; &lt;c&gt; &reg; &bogus;"),
+            "a 'b' <c> ® &bogus;"
+        );
+    }
 }

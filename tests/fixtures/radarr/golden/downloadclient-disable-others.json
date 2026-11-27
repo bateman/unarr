@@ -886,11 +886,11 @@
       "tags": []
     }
   ],
-  "recordedAt": "2026-11-12T14:19:47Z",
+  "recordedAt": "2026-11-23T17:44:51Z",
   "request": {
     "body": "bodies/downloadclient-disable-others.json",
     "method": "PUT",
     "path": "/api/v3/downloadclient/bulk"
   },
-  "status": 202
+  "status": 200
 }

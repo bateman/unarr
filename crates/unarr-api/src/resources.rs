@@ -424,6 +424,12 @@ pub struct MediaInfoResource {
     pub run_time: String,
     pub scan_type: Option<String>,
     pub subtitles: Option<String>,
+    /// Radarr 7's `audioStreams` and `subtitleStreams`: absent for Sonarr,
+    /// whose original at its pin has neither.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub audio_streams: Option<Vec<serde_json::Value>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub subtitle_streams: Option<Vec<serde_json::Value>>,
 }
 
 #[derive(Serialize, Clone)]

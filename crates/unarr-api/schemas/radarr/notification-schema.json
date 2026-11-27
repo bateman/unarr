@@ -1576,6 +1576,16 @@
     "placeholder": "https://myserver.example.com/radarr",
     "privacy": "normal",
     "type": "url"
+   },
+   {
+    "advanced": true,
+    "isFloat": false,
+    "label": "Headers",
+    "name": "headers",
+    "order": 8,
+    "privacy": "normal",
+    "type": "keyValueList",
+    "value": []
    }
   ],
   "implementation": "Ntfy",

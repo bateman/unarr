@@ -288,8 +288,10 @@ impl MovieDeleteMessage<'_> {
 /// Radarr's `ManualInteractionRequiredMessage`.
 pub struct ManualInteractionMessage<'a> {
     pub movie: Option<&'a Movie>,
-    pub remote: &'a RemoteMovie,
-    pub quality: QualityModel,
+    /// `RemoteMovie`: none for a download no release was matched to.
+    pub remote: Option<&'a RemoteMovie>,
+    /// `RemoteMovie?.ParsedMovieInfo?.Quality`.
+    pub quality: Option<QualityModel>,
     pub tracked: &'a TrackedMovieDownload,
     pub release: Option<&'a GrabbedMovieRelease>,
 }
@@ -310,12 +312,43 @@ pub(crate) fn quality_name(q: &QualityModel) -> &'static str {
     crate::movies::quality::MovieQuality::by_id(q.quality_id).name
 }
 
-/// `MediaCoverService.ConvertToLocalUrls(movieId, covers)`: every cover
-/// gets the address it is served at, with the first twenty hex digits of
-/// its remote URL's SHA-256 when it has one. The original writes this into
-/// the movie object it is handed, which is why a movie a tracked download
-/// holds shows the addresses afterwards.
-pub fn convert_to_local_urls(url_base: &str, movie_id: i64, images: &mut [Image]) {
+/// `MediaCoverService.CoverExistsCheckWindow`: how long after a movie was
+/// added its covers are checked on disk before they get a cache breaker.
+pub const COVER_EXISTS_CHECK_WINDOW_DAYS: i64 = 1;
+
+/// `MediaCoverService.CoverExists`: a movie added more than a day ago is
+/// taken to have its covers; a more recent one has a cover when its file
+/// is under `root` (no folder: none is). The original remembers the
+/// answer; a look at the disk costs as little for a movie this recent.
+pub fn cover_exists(
+    root: Option<&std::path::Path>,
+    movie_id: i64,
+    cover_type: &str,
+    added: Option<chrono::DateTime<chrono::Utc>>,
+    now: chrono::DateTime<chrono::Utc>,
+) -> bool {
+    let recent = added.is_some_and(|a| a > now - chrono::Duration::days(COVER_EXISTS_CHECK_WINDOW_DAYS));
+    if !recent {
+        return true;
+    }
+    root.is_some_and(|root| {
+        crate::tv::covers::cover_path(root, movie_id, &cover_type.to_lowercase(), None).is_file()
+    })
+}
+
+/// `MediaCoverService.ConvertToLocalUrls(movieId, covers, added)`: every
+/// cover gets the address it is served at, with the first twenty hex
+/// digits of its remote URL's SHA-256 when it has one and its file exists
+/// (`exists`, from [`cover_exists`]): a cover not downloaded yet gets no
+/// cache breaker, so a client does not keep its absence for a year. The
+/// original writes this into the movie object it is handed, which is why
+/// a movie a tracked download holds shows the addresses afterwards.
+pub fn convert_to_local_urls(
+    url_base: &str,
+    movie_id: i64,
+    images: &mut [Image],
+    exists: &dyn Fn(&str) -> bool,
+) {
     for image in images {
         if image.cover_type.eq_ignore_ascii_case("unknown") {
             continue;
@@ -323,7 +356,11 @@ pub fn convert_to_local_urls(url_base: &str, movie_id: i64, images: &mut [Image]
         let cover_type = image.cover_type.to_lowercase();
         let extension = if cover_type == "clearlogo" { ".png" } else { ".jpg" };
         let mut url = format!("{url_base}/MediaCover/{movie_id}/{cover_type}{extension}");
-        if let Some(remote) = image.remote_url.as_deref().filter(|r| !r.trim().is_empty()) {
+        if let Some(remote) = image
+            .remote_url
+            .as_deref()
+            .filter(|r| !r.trim().is_empty() && exists(&cover_type))
+        {
             let digest = ring::digest::digest(&ring::digest::SHA256, remote.as_bytes());
             let hash: String = digest
                 .as_ref()
@@ -747,13 +784,13 @@ impl MovieNotifier {
         let remote = tracked.remote.as_ref();
         let movie = remote.and_then(|r| r.movie.as_ref());
         // The message is the movie's or, failing that, the download's
-        // title; nothing is sent when both are blank. With a release but
-        // nothing parsed from it the original dereferences a null before
-        // it reaches any connection.
+        // title; nothing is sent when both are blank. With a movie but
+        // nothing parsed from its release the original dereferences a null
+        // (`GetMessage`) before it reaches any connection.
         if movie.is_none() && tracked.item.title.trim().is_empty() {
             return false;
         }
-        if remote.is_some_and(|r| r.parsed.is_none()) {
+        if movie.is_some() && remote.is_some_and(|r| r.parsed.is_none()) {
             tracing::error!("Object reference not set to an instance of an object.");
             return false;
         }
@@ -769,21 +806,16 @@ impl MovieNotifier {
             if !def.on_manual_interaction_required {
                 continue;
             }
-            // `ShouldHandleMovie(definition, message.RemoteMovie.Movie)`:
-            // without a release, or with tags to compare and no movie, the
-            // original throws, which the handler's catch records as a
-            // failure of the connection.
-            let null = || Err("Object reference not set to an instance of an object.".to_string());
-            let Some(remote) = remote else {
-                self.deliver(&def, "OnManualInteractionRequired", now, null())
-                    .await;
-                continue;
-            };
+            // `ShouldHandleMovie(definition, message.RemoteMovie?.Movie)`
+            // (Radarr 7): a connection with tags skips a movie it does not
+            // know, and one without tags is sent the download alone.
             match movie {
                 Some(m) if !def.handles(m) => continue,
                 None if !def.tags.is_empty() => {
-                    self.deliver(&def, "OnManualInteractionRequired", now, null())
-                        .await;
+                    tracing::debug!(
+                        "{} has tags but the movie is unknown. Notification will not be sent",
+                        def.name
+                    );
                     continue;
                 }
                 _ => {}
@@ -791,11 +823,7 @@ impl MovieNotifier {
             let message = ManualInteractionMessage {
                 movie,
                 remote,
-                quality: remote
-                    .parsed
-                    .as_ref()
-                    .map(|p| p.quality.quality)
-                    .unwrap_or_default(),
+                quality: remote.and_then(|r| r.parsed.as_ref()).map(|p| p.quality.quality),
                 tracked,
                 release,
             };

@@ -24,12 +24,21 @@ use crate::legacy::{
 use crate::shared::{provider_sequences, SharedTables};
 
 /// Oldest migration level accepted: 208 is where `MovieMetadata` and
-/// `Collections` have the shape read here. Only 242 (Radarr 6.4) was
-/// checked against a real database; the levels in between are best effort,
+/// `Collections` have the shape read here. Only 242 (Radarr 6.4) and 243
+/// (Radarr 7.0, built from the 242 fixture as the original migrates it)
+/// were checked against a real database; the levels in between are best effort,
 /// columns a later migration added being defaulted when absent.
 pub const MIN_MIGRATION: i64 = 208;
-/// Newest migration level the mapping was written against (Radarr 6.4.4).
-pub const MAX_KNOWN_MIGRATION: i64 = 242;
+/// Newest migration level the mapping was written against (Radarr 7.0.3):
+/// 243 reshapes `MovieFiles.MediaInfo` into streams, which a database
+/// below it gets at import.
+pub const MAX_KNOWN_MIGRATION: i64 = 243;
+
+/// The migration that gave the media info one entry per audio and
+/// subtitle stream (`mediainfo_multiple_streams`): a database below it
+/// holds the older shape, which the import migrates as Unarr's own
+/// databases are (`migrations/radarr/0002_media_info_streams.sql`).
+const MEDIA_INFO_STREAMS_MIGRATION: i64 = 243;
 
 /// Legacy tables the importer reads. Anything else with rows is logged.
 const HANDLED_TABLES: &[&str] = &[
@@ -725,6 +734,13 @@ pub fn import(legacy_db: &std::path::Path, db: &Db) -> anyhow::Result<ImportRepo
         for (kind, last_id) in &sequences {
             store::providers::set_provider_sequence(&tx, *kind, *last_id)?;
         }
+        // Radarr's migration 243 reshapes the media info of the movie
+        // files: the original would run it on such a database at its first
+        // start, so the import does, in the same transaction.
+        if migration_version < MEDIA_INFO_STREAMS_MIGRATION {
+            tx.execute_batch(unarr_core::db::RADARR_MEDIA_INFO_STREAMS)
+                .context("migrating the media info to Radarr 7's streams")?;
+        }
         store::config::set_meta(&tx, "source.app", "Radarr")?;
         store::config::set_meta(&tx, "source.path", &source)?;
         store::config::set_meta(&tx, "source.migration", &migration_version.to_string())?;
@@ -761,6 +777,105 @@ mod tests {
 
     fn fixture() -> std::path::PathBuf {
         std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../tests/fixtures/radarr/radarr.db")
+    }
+
+    /// The fixture as Radarr 7 leaves it after its migration 243: built
+    /// from the committed fixture (at 242) by doing what the migration
+    /// does, on the original's tables and spelling.
+    fn fixture_at_243(name: &str) -> std::path::PathBuf {
+        let dir = std::env::temp_dir().join(format!("unarr-import-243-{name}-{}", std::process::id()));
+        std::fs::create_dir_all(&dir).unwrap();
+        let path = dir.join("radarr.db");
+        std::fs::copy(fixture(), &path).unwrap();
+        let conn = rusqlite::Connection::open(&path).unwrap();
+        let sql = unarr_core::db::RADARR_MEDIA_INFO_STREAMS
+            .replace("movie_files.media_info", "\"MovieFiles\".\"MediaInfo\"")
+            .replace("movie_files", "\"MovieFiles\"")
+            .replace("media_info", "\"MediaInfo\"")
+            .replace("movie_metadata", "\"MovieMetadata\"")
+            .replace("last_info_sync", "\"LastInfoSync\"")
+            .replace("2026-01-01T00:00:00Z", "2026-01-01 00:00:00");
+        conn.execute_batch(&sql).unwrap();
+        conn.execute(
+            "INSERT INTO VersionInfo (Version, AppliedOn, Description) VALUES (243, '2026-11-23 00:00:00', 'mediainfo_multiple_streams')",
+            [],
+        )
+        .unwrap();
+        path
+    }
+
+    fn media_info_of(db: &Db, id: i64) -> Value {
+        db.call_blocking(move |c| {
+            Ok(movies::list_movie_files(c)?
+                .into_iter()
+                .find(|f| f.id == id)
+                .and_then(|f| f.media_info))
+        })
+        .unwrap()
+        .unwrap()
+    }
+
+    /// Movie file 2 of the fixture has two audio languages and no
+    /// subtitles; Radarr 7 migrated it to these streams
+    /// (`migrated/radarr.db` of the bump's work directory).
+    fn migrated_file_2() -> Value {
+        json!([
+            {"language": "ita", "format": "ac3", "codecId": "[0][0][0][0]", "profile": null,
+             "bitrate": 448000, "channels": 6, "channelPositions": "5.1(side)"},
+            {"language": "per"}
+        ])
+    }
+
+    /// A database at 242 holds the flat media info: the import migrates it
+    /// as Radarr 7 does at its first start, and marks the metadata stale.
+    #[test]
+    fn a_database_before_243_gets_the_streams_at_import() {
+        let db = Db::open_in_memory_for(Personality::Radarr).unwrap();
+        import(&fixture(), &db).unwrap();
+        let m = media_info_of(&db, 2);
+        assert_eq!(m["audioStreams"], migrated_file_2());
+        assert_eq!(m["subtitleStreams"], json!([]));
+        assert!(m.get("audioLanguages").is_none() && m.get("audioFormat").is_none());
+        assert_eq!(m["audioStreamCount"], 2, "kept, as the original keeps it");
+        let synced = db
+            .call_blocking(|c| Ok(movies::get_metadata(c, 1)?.and_then(|m| m.last_info_sync)))
+            .unwrap();
+        assert_eq!(
+            synced.map(time::format_utc).as_deref(),
+            Some("2026-01-01T00:00:00Z")
+        );
+    }
+
+    /// A database at 243 already has the streams: they are read as they
+    /// are, and its sync times are left alone.
+    #[test]
+    fn a_database_at_243_is_imported_with_its_streams() {
+        let path = fixture_at_243("streams");
+        let legacy = rusqlite::Connection::open(&path).unwrap();
+        legacy
+            .execute(
+                "UPDATE MovieMetadata SET LastInfoSync = '2026-11-20 10:00:00Z' WHERE Id = 1",
+                [],
+            )
+            .unwrap();
+        drop(legacy);
+        let db = Db::open_in_memory_for(Personality::Radarr).unwrap();
+        let report = import(&path, &db).unwrap();
+        assert_eq!(report.migration_version, 243);
+        assert!(
+            report.notes.iter().all(|n| !n.contains("newer than")),
+            "{:?}",
+            report.notes
+        );
+        assert_eq!(media_info_of(&db, 2)["audioStreams"], migrated_file_2());
+        let synced = db
+            .call_blocking(|c| Ok(movies::get_metadata(c, 1)?.and_then(|m| m.last_info_sync)))
+            .unwrap();
+        assert_eq!(
+            synced.map(time::format_utc).as_deref(),
+            Some("2026-11-20T10:00:00Z")
+        );
+        std::fs::remove_dir_all(path.parent().unwrap()).ok();
     }
 
     #[test]

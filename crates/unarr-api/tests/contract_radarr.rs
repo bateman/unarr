@@ -297,7 +297,15 @@ fn mode(name: &str) -> Mode {
         n if n.starts_with("downloadclient-unreachable") || n == "downloadclient-testall" => {
             Mode::Exact(&["detailedDescription"])
         }
-        "diskspace" | "system-task" | "system-task-1" | "log" | "signalr-negotiate" => Mode::Shape,
+        "diskspace" | "system-task" | "system-task-1" | "signalr-negotiate" => Mode::Shape,
+        // Which records the first page holds depends on when the original's
+        // start-up health checks log their errors (with `exception` and
+        // `exceptionType`) against the moment the recording reads the log:
+        // Radarr 6.4.4 wrote them about 200 ms after, Radarr 7.0.3.10918
+        // before. The two fields do not count in this shape (decided by the
+        // maintainer on 2026-11-24, issue #9); that Unarr never writes
+        // `exceptionType` is followed in issue #33.
+        "log" => Mode::ShapeWithout(&["exception", "exceptionType"]),
         "update" => Mode::InstalledUpdate,
         // Radarr builds `contentsUrl` from a route that no longer exists
         // (`/api/v1//radarr.txt`); Unarr's names the route that answers.
@@ -379,6 +387,12 @@ fn build_state(dirs: &ReplayDirs) -> AppState {
     let dir = fixture_dir();
     let db = Db::open_in_memory_for(Personality::Radarr).expect("in-memory db");
     unarr_import::radarr::import(&dir.join("radarr.db"), &db).expect("import fixture");
+    // What `unarrd` does with the metadata consumers at every start, as the
+    // original did when it recorded: Radarr 7 deleted the fixture's Kometa.
+    db.call_blocking(|conn| {
+        unarr_api::routes::metadata_writes::insert_missing_consumers(conn, Personality::Radarr)
+    })
+    .expect("the metadata consumers");
     let movies = dirs.movies.to_string_lossy().into_owned();
     db.call_blocking(move |conn| {
         conn.execute(
@@ -801,23 +815,15 @@ async fn radarr_golden_responses_match() {
         assert_eq!(asked, expected, "the requests to the mock indexers");
     }
 
-    // Outside the goldens' bodies: a test that passes answers the string
-    // `{}`, as plain text, or as a JSON string to a client that asks for
-    // JSON (Prowlarr). Probed on the real Radarr; the recorder asks for
-    // neither and decodes both to the same golden.
+    // Outside the goldens' bodies: a test that passes answers Radarr 7's
+    // `TypedResults.NoContent()`, whatever the client accepts, with the
+    // version header Prowlarr reads (Radarr 6 answered the string `{}`).
     if only.is_empty() {
         let test = goldens
             .iter()
             .find(|g| g.name == "indexer-test")
             .expect("indexer-test");
-        for (accept, content_type, text) in [
-            (None, "text/plain; charset=utf-8", "{}"),
-            (
-                Some("application/json"),
-                "application/json; charset=utf-8",
-                "\"{}\"",
-            ),
-        ] {
+        for accept in [None, Some("application/json"), Some("text/plain")] {
             let mut request = Request::builder()
                 .method("POST")
                 .uri("/api/v3/indexer/test")
@@ -828,10 +834,17 @@ async fn radarr_golden_responses_match() {
             }
             let body = Body::from(test.request_body.clone().expect("a body"));
             let response = app.clone().oneshot(request.body(body).unwrap()).await.unwrap();
-            assert_eq!(response.status(), StatusCode::OK);
-            assert_eq!(response.headers()["content-type"], content_type);
+            assert_eq!(response.status(), StatusCode::NO_CONTENT, "Accept: {accept:?}");
+            assert!(
+                response.headers().get("content-type").is_none(),
+                "Accept: {accept:?}"
+            );
+            assert!(
+                response.headers().contains_key("x-application-version"),
+                "Prowlarr reads it"
+            );
             let bytes = response.into_body().collect().await.unwrap().to_bytes();
-            assert_eq!(bytes, text.as_bytes(), "Accept: {accept:?}");
+            assert!(bytes.is_empty(), "Accept: {accept:?}");
         }
     }
 

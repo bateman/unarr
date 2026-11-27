@@ -3,7 +3,7 @@
     "id": 1,
     "listSyncLevel": "nonsense"
   },
-  "recordedAt": "2026-11-13T12:41:12Z",
+  "recordedAt": "2026-11-23T17:55:50Z",
   "request": {
     "body": "bodies/config-importlist-put-level.json",
     "method": "PUT",

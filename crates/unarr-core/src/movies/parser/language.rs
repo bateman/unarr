@@ -67,12 +67,13 @@ pub mod lang {
     pub const ROMANSH: i64 = 55;
     pub const MONGOLIAN: i64 = 56;
     pub const GEORGIAN: i64 = 57;
+    pub const IRISH: i64 = 58;
 }
 
 use lang::*;
 
 static LANGUAGE_RE: Lazy = net_regex!(
-    r"(?:\W|_|^)(?<english>\beng\b)|(?<italian>\b(?:ita|italian)\b)|(?<german>(?:swiss)?german\b|videomann|ger[. ]dub|\bger\b)|(?<flemish>flemish)|(?<bulgarian>bgaudio)|(?<romanian>rodubbed)|(?<brazilian>\b(dublado|pt-BR)\b)|(?<greek>greek)|(?<french>\b(?:FR|VO|VF|VFF|VFQ|VFI|VF2|TRUEFRENCH|FRENCH|FRE|FRA)\b)|(?<russian>\b(?:rus|ru)\b)|(?<hungarian>\b(?:HUNDUB|HUN)\b)|(?<hebrew>\b(?:HebDub|HebDubbed)\b)|(?<polish>\b(?:PL\W?DUB|DUB\W?PL|LEK\W?PL|PL\W?LEK)\b)|(?<chinese>\[(?:CH[ST]|BIG5|GB)\]|简|繁|字幕)|(?<ukrainian>(?:(?:\dx)?UKR))|(?<spanish>\b(?:español|castellano)\b)|(?<catalan>\b(?:catalan?|catalán|català)\b)|(?<latvian>\b(?:lat|lav|lv)\b)|(?<telugu>\btel\b)|(?<vietnamese>\bVIE\b)|(?<japanese>\bJAP\b)|(?<korean>\bKOR\b)|(?<urdu>\burdu\b)|(?<romansh>\b(?:romansh|rumantsch|romansch)\b)|(?<mongolian>\b(?:mongolian|khalkha)\b)|(?<georgian>\b(?:georgian|geo|ka|kat)\b)|(?<original>\b(?:orig|original)\b)"
+    r"(?:\W|_|^)(?<english>\beng\b)|(?<italian>\b(?:ita|italian)\b)|(?<german>(?:swiss)?german\b|videomann|ger[. ]dub|\bger\b)|(?<flemish>flemish)|(?<bulgarian>bgaudio)|(?<romanian>rodubbed)|(?<brazilian>\b(dublado|pt-BR)\b)|(?<greek>greek)|(?<french>\b(?:FR|VO|VF|VFF|VFQ|VFI|VF2|TRUEFRENCH|FRENCH|FRE|FRA)\b)|(?<russian>\b(?:rus|ru)\b)|(?<hungarian>\b(?:HUNDUB|HUN)\b)|(?<hebrew>\b(?:HebDub|HebDubbed)\b)|(?<polish>\b(?:PL\W?DUB|DUB\W?PL|LEK\W?PL|PL\W?LEK)\b)|(?<chinese>\[(?:CH[ST]|BIG5|GB)\]|简|繁|字幕)|(?<ukrainian>(?:(?:\dx)?UKR))|(?<spanish>\b(?:español|castellano)\b)|(?<catalan>\b(?:catalan?|catalán|català)\b)|(?<latvian>\b(?:lat|lav|lv)\b)|(?<telugu>\btel\b)|(?<vietnamese>\bVIE\b)|(?<japanese>\bJAP\b)|(?<korean>\bKOR\b)|(?<urdu>\burdu\b)|(?<romansh>\b(?:romansh|rumantsch|romansch)\b)|(?<mongolian>\b(?:mongolian|khalkha)\b)|(?<georgian>\b(?:georgian|geo|ka|kat)\b)|(?<irish>\b(?:irish|gaeilge)\b)|(?<original>\b(?:orig|original)\b)"
 );
 
 static CASE_SENSITIVE_LANGUAGE_RE: Lazy = net_regex!(
@@ -180,6 +181,7 @@ pub fn parse_languages(title: &str) -> Vec<i64> {
             ("romansh", ROMANSH),
             ("mongolian", MONGOLIAN),
             ("georgian", GEORGIAN),
+            ("irish", IRISH),
             ("original", ORIGINAL),
         ] {
             if m.success(group) {

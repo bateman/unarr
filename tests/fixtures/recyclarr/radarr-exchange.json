@@ -7,11 +7,11 @@
     "method": "GET",
     "path": "system/status",
     "response": {
-     "appData": "/home/user/unarr/.cache/radarr/golden-data",
+     "appData": "/srv/checks/work/.cache/radarr/golden-data",
      "appName": "Radarr",
      "authentication": "forms",
      "branch": "master",
-     "buildTime": "2026-09-14T15:54:37Z",
+     "buildTime": "2026-11-15T19:19:14Z",
      "databaseType": "sqLite",
      "databaseVersion": "3.53.4",
      "instanceName": "Radarr",
@@ -25,17 +25,17 @@
      "isProduction": true,
      "isUserInteractive": true,
      "isWindows": false,
-     "migrationVersion": 242,
+     "migrationVersion": 243,
      "mode": "console",
      "osName": "ubuntu",
-     "osVersion": "24.04",
+     "osVersion": "26.04",
      "packageUpdateMechanism": "builtIn",
      "runtimeName": "netcore",
-     "runtimeVersion": "8.0.27",
-     "startTime": "2026-11-13T13:23:48Z",
-     "startupPath": "/home/user/unarr/.cache/radarr/Radarr",
+     "runtimeVersion": "10.0.15",
+     "startTime": "2026-11-24T20:37:19Z",
+     "startupPath": "/srv/checks/work/.cache/radarr/Radarr",
      "urlBase": "",
-     "version": "6.4.4.10685"
+     "version": "7.0.3.10918"
     },
     "status": 200
    },
@@ -13786,6 +13786,12 @@
            },
            {
             "dividerAfter": false,
+            "name": "Irish",
+            "order": 0,
+            "value": 58
+           },
+           {
+            "dividerAfter": false,
             "name": "Italian",
             "order": 0,
             "value": 5
@@ -15563,11 +15569,11 @@
     "method": "GET",
     "path": "system/status",
     "response": {
-     "appData": "/home/user/unarr/.cache/radarr/golden-data",
+     "appData": "/srv/checks/work/.cache/radarr/golden-data",
      "appName": "Radarr",
      "authentication": "forms",
      "branch": "master",
-     "buildTime": "2026-09-14T15:54:37Z",
+     "buildTime": "2026-11-15T19:19:14Z",
      "databaseType": "sqLite",
      "databaseVersion": "3.53.4",
      "instanceName": "Radarr",
@@ -15581,17 +15587,17 @@
      "isProduction": true,
      "isUserInteractive": true,
      "isWindows": false,
-     "migrationVersion": 242,
+     "migrationVersion": 243,
      "mode": "console",
      "osName": "ubuntu",
-     "osVersion": "24.04",
+     "osVersion": "26.04",
      "packageUpdateMechanism": "builtIn",
      "runtimeName": "netcore",
-     "runtimeVersion": "8.0.27",
-     "startTime": "2026-11-13T13:23:48Z",
-     "startupPath": "/home/user/unarr/.cache/radarr/Radarr",
+     "runtimeVersion": "10.0.15",
+     "startTime": "2026-11-24T20:37:19Z",
+     "startupPath": "/srv/checks/work/.cache/radarr/Radarr",
      "urlBase": "",
-     "version": "6.4.4.10685"
+     "version": "7.0.3.10918"
     },
     "status": 200
    },
@@ -15804,6 +15810,11 @@
       "id": 44,
       "name": "Indonesian",
       "nameLower": "indonesian"
+     },
+     {
+      "id": 58,
+      "name": "Irish",
+      "nameLower": "irish"
      },
      {
       "id": 5,
@@ -25012,9 +25023,24 @@
        "score": 7
       },
       {
-       "format": 18,
-       "name": "x265 (HD)",
-       "score": -10000
+       "format": 22,
+       "name": "BCORE",
+       "score": 15
+      },
+      {
+       "format": 23,
+       "name": "CRiT",
+       "score": 20
+      },
+      {
+       "format": 62,
+       "name": "IMF",
+       "score": 20
+      },
+      {
+       "format": 29,
+       "name": "MA",
+       "score": 20
       },
       {
        "format": 14,
@@ -25077,24 +25103,9 @@
        "score": -10000
       },
       {
-       "format": 22,
-       "name": "BCORE",
-       "score": 15
-      },
-      {
-       "format": 23,
-       "name": "CRiT",
-       "score": 20
-      },
-      {
-       "format": 62,
-       "name": "IMF",
-       "score": 20
-      },
-      {
-       "format": 29,
-       "name": "MA",
-       "score": 20
+       "format": 18,
+       "name": "x265 (HD)",
+       "score": -10000
       },
       {
        "format": 58,
@@ -25704,9 +25715,24 @@
        "score": 7
       },
       {
-       "format": 18,
-       "name": "x265 (HD)",
-       "score": -10000
+       "format": 22,
+       "name": "BCORE",
+       "score": 15
+      },
+      {
+       "format": 23,
+       "name": "CRiT",
+       "score": 20
+      },
+      {
+       "format": 62,
+       "name": "IMF",
+       "score": 20
+      },
+      {
+       "format": 29,
+       "name": "MA",
+       "score": 20
       },
       {
        "format": 14,
@@ -25769,24 +25795,9 @@
        "score": -10000
       },
       {
-       "format": 22,
-       "name": "BCORE",
-       "score": 15
-      },
-      {
-       "format": 23,
-       "name": "CRiT",
-       "score": 20
-      },
-      {
-       "format": 62,
-       "name": "IMF",
-       "score": 20
-      },
-      {
-       "format": 29,
-       "name": "MA",
-       "score": 20
+       "format": 18,
+       "name": "x265 (HD)",
+       "score": -10000
       },
       {
        "format": 58,
@@ -26342,7 +26353,7 @@
    "[INF] Initializing provider: guide (type: trash-guides)",
    "[INF] Initializing provider: templates (type: config-templates)",
    "[INF] movies: Processing Radarr server movies",
-   "[WRN] movies: 61 custom format(s) already existed in the service and were replaced by Recyclarr: MULTi, HD Bluray Tier 01, HD Bluray Tier 02, HD Bluray Tier 03, WEB Tier 01, WEB Tier 02, WEB Tier 03, Repack/Proper, Repack2, Repack3, UHD Bluray Tier 01, UHD Bluray Tier 02, UHD Bluray Tier 03, x265 (HD), 3D, AV1, Bad Dual Groups, Black and White Editions, BR-DISK, Extras and 41 more",
+   "[WRN] movies: 61 custom format(s) already existed in the service and were replaced by Recyclarr: MULTi, HD Bluray Tier 01, HD Bluray Tier 02, HD Bluray Tier 03, WEB Tier 01, WEB Tier 02, WEB Tier 03, Repack/Proper, Repack2, Repack3, UHD Bluray Tier 01, UHD Bluray Tier 02, UHD Bluray Tier 03, x265 (no HDR/DV), AMZN, ATV, ATVP, BCORE, CRiT, DSNP and 41 more",
    "[INF] movies: Created 1 New Custom Formats",
    "[INF] movies: Skipped 61 Custom Formats that did not change",
    "[INF] movies: Total of 1 custom formats were synced",
@@ -40105,6 +40116,12 @@
            },
            {
             "dividerAfter": false,
+            "name": "Irish",
+            "order": 0,
+            "value": 58
+           },
+           {
+            "dividerAfter": false,
             "name": "Italian",
             "order": 0,
             "value": 5
@@ -43422,7 +43439,7 @@
       "weight": 26
      }
     ],
-    "status": 202
+    "status": 200
    },
    {
     "body": null,
@@ -47677,9 +47694,24 @@
         "score": 7
        },
        {
-        "format": 18,
-        "name": "x265 (HD)",
-        "score": -10000
+        "format": 22,
+        "name": "BCORE",
+        "score": 15
+       },
+       {
+        "format": 23,
+        "name": "CRiT",
+        "score": 20
+       },
+       {
+        "format": 62,
+        "name": "IMF",
+        "score": 20
+       },
+       {
+        "format": 29,
+        "name": "MA",
+        "score": 20
        },
        {
         "format": 14,
@@ -47742,24 +47774,9 @@
         "score": -10000
        },
        {
-        "format": 22,
-        "name": "BCORE",
-        "score": 15
-       },
-       {
-        "format": 23,
-        "name": "CRiT",
-        "score": 20
-       },
-       {
-        "format": 62,
-        "name": "IMF",
-        "score": 20
-       },
-       {
-        "format": 29,
-        "name": "MA",
-        "score": 20
+        "format": 18,
+        "name": "x265 (HD)",
+        "score": -10000
        },
        {
         "format": 58,
@@ -66863,6 +66880,12 @@
           },
           {
            "dividerAfter": false,
+           "name": "Irish",
+           "order": 0,
+           "value": 58
+          },
+          {
+           "dividerAfter": false,
            "name": "Italian",
            "order": 0,
            "value": 5
@@ -72708,9 +72731,24 @@
        "score": 7
       },
       {
-       "format": 18,
-       "name": "x265 (HD)",
-       "score": -10000
+       "format": 22,
+       "name": "BCORE",
+       "score": 15
+      },
+      {
+       "format": 23,
+       "name": "CRiT",
+       "score": 20
+      },
+      {
+       "format": 62,
+       "name": "IMF",
+       "score": 20
+      },
+      {
+       "format": 29,
+       "name": "MA",
+       "score": 20
       },
       {
        "format": 14,
@@ -72773,24 +72811,9 @@
        "score": -10000
       },
       {
-       "format": 22,
-       "name": "BCORE",
-       "score": 15
-      },
-      {
-       "format": 23,
-       "name": "CRiT",
-       "score": 20
-      },
-      {
-       "format": 62,
-       "name": "IMF",
-       "score": 20
-      },
-      {
-       "format": 29,
-       "name": "MA",
-       "score": 20
+       "format": 18,
+       "name": "x265 (HD)",
+       "score": -10000
       },
       {
        "format": 58,
@@ -73393,6 +73416,36 @@
        "score": 1700
       },
       {
+       "format": 56,
+       "name": "x265 (no HDR/DV)",
+       "score": -10000
+      },
+      {
+       "format": 22,
+       "name": "BCORE",
+       "score": 15
+      },
+      {
+       "format": 23,
+       "name": "CRiT",
+       "score": 20
+      },
+      {
+       "format": 62,
+       "name": "IMF",
+       "score": 20
+      },
+      {
+       "format": 29,
+       "name": "MA",
+       "score": 20
+      },
+      {
+       "format": 55,
+       "name": "HDR",
+       "score": 500
+      },
+      {
        "format": 14,
        "name": "3D",
        "score": -10000
@@ -73451,36 +73504,6 @@
        "format": 40,
        "name": "Upscaled",
        "score": -10000
-      },
-      {
-       "format": 56,
-       "name": "x265 (no HDR/DV)",
-       "score": -10000
-      },
-      {
-       "format": 55,
-       "name": "HDR",
-       "score": 500
-      },
-      {
-       "format": 22,
-       "name": "BCORE",
-       "score": 15
-      },
-      {
-       "format": 23,
-       "name": "CRiT",
-       "score": 20
-      },
-      {
-       "format": 62,
-       "name": "IMF",
-       "score": 20
-      },
-      {
-       "format": 29,
-       "name": "MA",
-       "score": 20
       },
       {
        "format": 41,
@@ -76771,11 +76794,11 @@
     "method": "GET",
     "path": "system/status",
     "response": {
-     "appData": "/home/user/unarr/.cache/radarr/golden-data",
+     "appData": "/srv/checks/work/.cache/radarr/golden-data",
      "appName": "Radarr",
      "authentication": "forms",
      "branch": "master",
-     "buildTime": "2026-09-14T15:54:37Z",
+     "buildTime": "2026-11-15T19:19:14Z",
      "databaseType": "sqLite",
      "databaseVersion": "3.53.4",
      "instanceName": "Radarr",
@@ -76789,17 +76812,17 @@
      "isProduction": true,
      "isUserInteractive": true,
      "isWindows": false,
-     "migrationVersion": 242,
+     "migrationVersion": 243,
      "mode": "console",
      "osName": "ubuntu",
-     "osVersion": "24.04",
+     "osVersion": "26.04",
      "packageUpdateMechanism": "builtIn",
      "runtimeName": "netcore",
-     "runtimeVersion": "8.0.27",
-     "startTime": "2026-11-13T13:23:48Z",
-     "startupPath": "/home/user/unarr/.cache/radarr/Radarr",
+     "runtimeVersion": "10.0.15",
+     "startTime": "2026-11-24T20:37:19Z",
+     "startupPath": "/srv/checks/work/.cache/radarr/Radarr",
      "urlBase": "",
-     "version": "6.4.4.10685"
+     "version": "7.0.3.10918"
     },
     "status": 200
    },
@@ -90440,6 +90463,12 @@
            },
            {
             "dividerAfter": false,
+            "name": "Irish",
+            "order": 0,
+            "value": 58
+           },
+           {
+            "dividerAfter": false,
             "name": "Italian",
             "order": 0,
             "value": 5
@@ -93189,11 +93218,11 @@
     "method": "GET",
     "path": "system/status",
     "response": {
-     "appData": "/home/user/unarr/.cache/radarr/golden-data",
+     "appData": "/srv/checks/work/.cache/radarr/golden-data",
      "appName": "Radarr",
      "authentication": "forms",
      "branch": "master",
-     "buildTime": "2026-09-14T15:54:37Z",
+     "buildTime": "2026-11-15T19:19:14Z",
      "databaseType": "sqLite",
      "databaseVersion": "3.53.4",
      "instanceName": "Radarr",
@@ -93207,17 +93236,17 @@
      "isProduction": true,
      "isUserInteractive": true,
      "isWindows": false,
-     "migrationVersion": 242,
+     "migrationVersion": 243,
      "mode": "console",
      "osName": "ubuntu",
-     "osVersion": "24.04",
+     "osVersion": "26.04",
      "packageUpdateMechanism": "builtIn",
      "runtimeName": "netcore",
-     "runtimeVersion": "8.0.27",
-     "startTime": "2026-11-13T13:23:48Z",
-     "startupPath": "/home/user/unarr/.cache/radarr/Radarr",
+     "runtimeVersion": "10.0.15",
+     "startTime": "2026-11-24T20:37:19Z",
+     "startupPath": "/srv/checks/work/.cache/radarr/Radarr",
      "urlBase": "",
-     "version": "6.4.4.10685"
+     "version": "7.0.3.10918"
     },
     "status": 200
    },
@@ -93676,7 +93705,7 @@
       "weight": 26
      }
     ],
-    "status": 202
+    "status": 200
    },
    {
     "body": null,
@@ -93940,6 +93969,11 @@
       "id": 44,
       "name": "Indonesian",
       "nameLower": "indonesian"
+     },
+     {
+      "id": 58,
+      "name": "Irish",
+      "nameLower": "irish"
      },
      {
       "id": 5,
@@ -98274,9 +98308,24 @@
         "score": 7
        },
        {
-        "format": 18,
-        "name": "x265 (HD)",
-        "score": -10000
+        "format": 22,
+        "name": "BCORE",
+        "score": 15
+       },
+       {
+        "format": 23,
+        "name": "CRiT",
+        "score": 20
+       },
+       {
+        "format": 62,
+        "name": "IMF",
+        "score": 20
+       },
+       {
+        "format": 29,
+        "name": "MA",
+        "score": 20
        },
        {
         "format": 14,
@@ -98339,24 +98388,9 @@
         "score": -10000
        },
        {
-        "format": 22,
-        "name": "BCORE",
-        "score": 15
-       },
-       {
-        "format": 23,
-        "name": "CRiT",
-        "score": 20
-       },
-       {
-        "format": 62,
-        "name": "IMF",
-        "score": 20
-       },
-       {
-        "format": 29,
-        "name": "MA",
-        "score": 20
+        "format": 18,
+        "name": "x265 (HD)",
+        "score": -10000
        },
        {
         "format": 58,
@@ -103078,9 +103112,24 @@
        "score": 7
       },
       {
-       "format": 18,
-       "name": "x265 (HD)",
-       "score": -10000
+       "format": 22,
+       "name": "BCORE",
+       "score": 15
+      },
+      {
+       "format": 23,
+       "name": "CRiT",
+       "score": 20
+      },
+      {
+       "format": 62,
+       "name": "IMF",
+       "score": 20
+      },
+      {
+       "format": 29,
+       "name": "MA",
+       "score": 20
       },
       {
        "format": 14,
@@ -103143,24 +103192,9 @@
        "score": -10000
       },
       {
-       "format": 22,
-       "name": "BCORE",
-       "score": 15
-      },
-      {
-       "format": 23,
-       "name": "CRiT",
-       "score": 20
-      },
-      {
-       "format": 62,
-       "name": "IMF",
-       "score": 20
-      },
-      {
-       "format": 29,
-       "name": "MA",
-       "score": 20
+       "format": 18,
+       "name": "x265 (HD)",
+       "score": -10000
       },
       {
        "format": 58,
@@ -103765,9 +103799,24 @@
        "score": 7
       },
       {
-       "format": 18,
-       "name": "x265 (HD)",
-       "score": -10000
+       "format": 22,
+       "name": "BCORE",
+       "score": 15
+      },
+      {
+       "format": 23,
+       "name": "CRiT",
+       "score": 20
+      },
+      {
+       "format": 62,
+       "name": "IMF",
+       "score": 20
+      },
+      {
+       "format": 29,
+       "name": "MA",
+       "score": 20
       },
       {
        "format": 14,
@@ -103830,24 +103879,9 @@
        "score": -10000
       },
       {
-       "format": 22,
-       "name": "BCORE",
-       "score": 15
-      },
-      {
-       "format": 23,
-       "name": "CRiT",
-       "score": 20
-      },
-      {
-       "format": 62,
-       "name": "IMF",
-       "score": 20
-      },
-      {
-       "format": 29,
-       "name": "MA",
-       "score": 20
+       "format": 18,
+       "name": "x265 (HD)",
+       "score": -10000
       },
       {
        "format": 58,
@@ -104453,6 +104487,36 @@
        "score": 1700
       },
       {
+       "format": 56,
+       "name": "x265 (no HDR/DV)",
+       "score": -10000
+      },
+      {
+       "format": 22,
+       "name": "BCORE",
+       "score": 15
+      },
+      {
+       "format": 23,
+       "name": "CRiT",
+       "score": 20
+      },
+      {
+       "format": 62,
+       "name": "IMF",
+       "score": 20
+      },
+      {
+       "format": 29,
+       "name": "MA",
+       "score": 20
+      },
+      {
+       "format": 55,
+       "name": "HDR",
+       "score": 500
+      },
+      {
        "format": 14,
        "name": "3D",
        "score": -10000
@@ -104511,36 +104575,6 @@
        "format": 40,
        "name": "Upscaled",
        "score": -10000
-      },
-      {
-       "format": 56,
-       "name": "x265 (no HDR/DV)",
-       "score": -10000
-      },
-      {
-       "format": 55,
-       "name": "HDR",
-       "score": 500
-      },
-      {
-       "format": 22,
-       "name": "BCORE",
-       "score": 15
-      },
-      {
-       "format": 23,
-       "name": "CRiT",
-       "score": 20
-      },
-      {
-       "format": 62,
-       "name": "IMF",
-       "score": 20
-      },
-      {
-       "format": 29,
-       "name": "MA",
-       "score": 20
       },
       {
        "format": 41,
@@ -105140,6 +105174,36 @@
        "score": 1700
       },
       {
+       "format": 56,
+       "name": "x265 (no HDR/DV)",
+       "score": -10000
+      },
+      {
+       "format": 22,
+       "name": "BCORE",
+       "score": 15
+      },
+      {
+       "format": 23,
+       "name": "CRiT",
+       "score": 20
+      },
+      {
+       "format": 62,
+       "name": "IMF",
+       "score": 20
+      },
+      {
+       "format": 29,
+       "name": "MA",
+       "score": 20
+      },
+      {
+       "format": 55,
+       "name": "HDR",
+       "score": 500
+      },
+      {
        "format": 14,
        "name": "3D",
        "score": -10000
@@ -105198,36 +105262,6 @@
        "format": 40,
        "name": "Upscaled",
        "score": -10000
-      },
-      {
-       "format": 56,
-       "name": "x265 (no HDR/DV)",
-       "score": -10000
-      },
-      {
-       "format": 55,
-       "name": "HDR",
-       "score": 500
-      },
-      {
-       "format": 22,
-       "name": "BCORE",
-       "score": 15
-      },
-      {
-       "format": 23,
-       "name": "CRiT",
-       "score": 20
-      },
-      {
-       "format": 62,
-       "name": "IMF",
-       "score": 20
-      },
-      {
-       "format": 29,
-       "name": "MA",
-       "score": 20
       },
       {
        "format": 41,
@@ -129165,6 +129199,12 @@
           },
           {
            "dividerAfter": false,
+           "name": "Irish",
+           "order": 0,
+           "value": 58
+          },
+          {
+           "dividerAfter": false,
            "name": "Italian",
            "order": 0,
            "value": 5
@@ -135010,9 +135050,24 @@
        "score": 7
       },
       {
-       "format": 18,
-       "name": "x265 (HD)",
-       "score": -10000
+       "format": 22,
+       "name": "BCORE",
+       "score": 15
+      },
+      {
+       "format": 23,
+       "name": "CRiT",
+       "score": 20
+      },
+      {
+       "format": 62,
+       "name": "IMF",
+       "score": 20
+      },
+      {
+       "format": 29,
+       "name": "MA",
+       "score": 20
       },
       {
        "format": 14,
@@ -135075,24 +135130,9 @@
        "score": -10000
       },
       {
-       "format": 22,
-       "name": "BCORE",
-       "score": 15
-      },
-      {
-       "format": 23,
-       "name": "CRiT",
-       "score": 20
-      },
-      {
-       "format": 62,
-       "name": "IMF",
-       "score": 20
-      },
-      {
-       "format": 29,
-       "name": "MA",
-       "score": 20
+       "format": 18,
+       "name": "x265 (HD)",
+       "score": -10000
       },
       {
        "format": 58,
@@ -135695,6 +135735,36 @@
        "score": 1700
       },
       {
+       "format": 56,
+       "name": "x265 (no HDR/DV)",
+       "score": -10000
+      },
+      {
+       "format": 22,
+       "name": "BCORE",
+       "score": 15
+      },
+      {
+       "format": 23,
+       "name": "CRiT",
+       "score": 20
+      },
+      {
+       "format": 62,
+       "name": "IMF",
+       "score": 20
+      },
+      {
+       "format": 29,
+       "name": "MA",
+       "score": 20
+      },
+      {
+       "format": 55,
+       "name": "HDR",
+       "score": 500
+      },
+      {
        "format": 14,
        "name": "3D",
        "score": -10000
@@ -135753,36 +135823,6 @@
        "format": 40,
        "name": "Upscaled",
        "score": -10000
-      },
-      {
-       "format": 56,
-       "name": "x265 (no HDR/DV)",
-       "score": -10000
-      },
-      {
-       "format": 55,
-       "name": "HDR",
-       "score": 500
-      },
-      {
-       "format": 22,
-       "name": "BCORE",
-       "score": 15
-      },
-      {
-       "format": 23,
-       "name": "CRiT",
-       "score": 20
-      },
-      {
-       "format": 62,
-       "name": "IMF",
-       "score": 20
-      },
-      {
-       "format": 29,
-       "name": "MA",
-       "score": 20
       },
       {
        "format": 41,
@@ -139073,11 +139113,11 @@
     "method": "GET",
     "path": "system/status",
     "response": {
-     "appData": "/home/user/unarr/.cache/radarr/golden-data",
+     "appData": "/srv/checks/work/.cache/radarr/golden-data",
      "appName": "Radarr",
      "authentication": "forms",
      "branch": "master",
-     "buildTime": "2026-09-14T15:54:37Z",
+     "buildTime": "2026-11-15T19:19:14Z",
      "databaseType": "sqLite",
      "databaseVersion": "3.53.4",
      "instanceName": "Radarr",
@@ -139091,17 +139131,17 @@
      "isProduction": true,
      "isUserInteractive": true,
      "isWindows": false,
-     "migrationVersion": 242,
+     "migrationVersion": 243,
      "mode": "console",
      "osName": "ubuntu",
-     "osVersion": "24.04",
+     "osVersion": "26.04",
      "packageUpdateMechanism": "builtIn",
      "runtimeName": "netcore",
-     "runtimeVersion": "8.0.27",
-     "startTime": "2026-11-13T13:23:48Z",
-     "startupPath": "/home/user/unarr/.cache/radarr/Radarr",
+     "runtimeVersion": "10.0.15",
+     "startTime": "2026-11-24T20:37:19Z",
+     "startupPath": "/srv/checks/work/.cache/radarr/Radarr",
      "urlBase": "",
-     "version": "6.4.4.10685"
+     "version": "7.0.3.10918"
     },
     "status": 200
    },
@@ -152824,6 +152864,12 @@
            },
            {
             "dividerAfter": false,
+            "name": "Irish",
+            "order": 0,
+            "value": 58
+           },
+           {
+            "dividerAfter": false,
             "name": "Italian",
             "order": 0,
             "value": 5
@@ -154516,11 +154562,11 @@
     "method": "GET",
     "path": "system/status",
     "response": {
-     "appData": "/home/user/unarr/.cache/radarr/golden-data",
+     "appData": "/srv/checks/work/.cache/radarr/golden-data",
      "appName": "Radarr",
      "authentication": "forms",
      "branch": "master",
-     "buildTime": "2026-09-14T15:54:37Z",
+     "buildTime": "2026-11-15T19:19:14Z",
      "databaseType": "sqLite",
      "databaseVersion": "3.53.4",
      "instanceName": "Radarr",
@@ -154534,17 +154580,17 @@
      "isProduction": true,
      "isUserInteractive": true,
      "isWindows": false,
-     "migrationVersion": 242,
+     "migrationVersion": 243,
      "mode": "console",
      "osName": "ubuntu",
-     "osVersion": "24.04",
+     "osVersion": "26.04",
      "packageUpdateMechanism": "builtIn",
      "runtimeName": "netcore",
-     "runtimeVersion": "8.0.27",
-     "startTime": "2026-11-13T13:23:48Z",
-     "startupPath": "/home/user/unarr/.cache/radarr/Radarr",
+     "runtimeVersion": "10.0.15",
+     "startTime": "2026-11-24T20:37:19Z",
+     "startupPath": "/srv/checks/work/.cache/radarr/Radarr",
      "urlBase": "",
-     "version": "6.4.4.10685"
+     "version": "7.0.3.10918"
     },
     "status": 200
    },
@@ -159473,9 +159519,24 @@
         "score": 7
        },
        {
-        "format": 18,
-        "name": "x265 (HD)",
-        "score": -10000
+        "format": 22,
+        "name": "BCORE",
+        "score": 15
+       },
+       {
+        "format": 23,
+        "name": "CRiT",
+        "score": 20
+       },
+       {
+        "format": 62,
+        "name": "IMF",
+        "score": 20
+       },
+       {
+        "format": 29,
+        "name": "MA",
+        "score": 20
        },
        {
         "format": 14,
@@ -159538,24 +159599,9 @@
         "score": -10000
        },
        {
-        "format": 22,
-        "name": "BCORE",
-        "score": 15
-       },
-       {
-        "format": 23,
-        "name": "CRiT",
-        "score": 20
-       },
-       {
-        "format": 62,
-        "name": "IMF",
-        "score": 20
-       },
-       {
-        "format": 29,
-        "name": "MA",
-        "score": 20
+        "format": 18,
+        "name": "x265 (HD)",
+        "score": -10000
        },
        {
         "format": 58,
@@ -160158,6 +160204,36 @@
         "score": 1700
        },
        {
+        "format": 56,
+        "name": "x265 (no HDR/DV)",
+        "score": -10000
+       },
+       {
+        "format": 22,
+        "name": "BCORE",
+        "score": 15
+       },
+       {
+        "format": 23,
+        "name": "CRiT",
+        "score": 20
+       },
+       {
+        "format": 62,
+        "name": "IMF",
+        "score": 20
+       },
+       {
+        "format": 29,
+        "name": "MA",
+        "score": 20
+       },
+       {
+        "format": 55,
+        "name": "HDR",
+        "score": 500
+       },
+       {
         "format": 14,
         "name": "3D",
         "score": -10000
@@ -160216,36 +160292,6 @@
         "format": 40,
         "name": "Upscaled",
         "score": -10000
-       },
-       {
-        "format": 56,
-        "name": "x265 (no HDR/DV)",
-        "score": -10000
-       },
-       {
-        "format": 55,
-        "name": "HDR",
-        "score": 500
-       },
-       {
-        "format": 22,
-        "name": "BCORE",
-        "score": 15
-       },
-       {
-        "format": 23,
-        "name": "CRiT",
-        "score": 20
-       },
-       {
-        "format": 62,
-        "name": "IMF",
-        "score": 20
-       },
-       {
-        "format": 29,
-        "name": "MA",
-        "score": 20
        },
        {
         "format": 41,
@@ -163675,6 +163721,11 @@
       "id": 44,
       "name": "Indonesian",
       "nameLower": "indonesian"
+     },
+     {
+      "id": 58,
+      "name": "Irish",
+      "nameLower": "irish"
      },
      {
       "id": 5,

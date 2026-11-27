@@ -1,6 +1,6 @@
 {
   "body": {
-    "added": "2026-11-21T16:24:50Z",
+    "added": "2026-11-23T17:58:33Z",
     "alternateTitles": [],
     "certification": "R",
     "cleanTitle": "bladerunner2049",
@@ -20,12 +20,12 @@
       {
         "coverType": "poster",
         "remoteUrl": "https://image.tmdb.org/t/p/original/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg",
-        "url": "/MediaCover/329/poster.jpg?h=ad244719f1b6472728d2"
+        "url": "/MediaCover/329/poster.jpg"
       },
       {
         "coverType": "fanart",
         "remoteUrl": "https://image.tmdb.org/t/p/original/gNdLJU9TxrpGx4dkZidjys3fyy0.jpg",
-        "url": "/MediaCover/329/fanart.jpg?h=d6597a53a04564e4d049"
+        "url": "/MediaCover/329/fanart.jpg"
       }
     ],
     "imdbId": "tt1856101",
@@ -111,7 +111,7 @@
     "year": 2017,
     "youTubeTrailerId": "geFtxCSz8xI"
   },
-  "recordedAt": "2026-11-21T16:24:50Z",
+  "recordedAt": "2026-11-23T17:58:33Z",
   "request": {
     "body": "bodies/movie-add-bare.json",
     "method": "POST",

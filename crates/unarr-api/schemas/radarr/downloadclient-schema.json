@@ -2034,7 +2034,7 @@
    },
    {
     "advanced": false,
-    "helpText": "Adding a category specific to Radarr avoids conflicts with unrelated non-Radarr downloads. Using a category is optional, but strongly recommended. Creates a [category] subdirectory in the output directory.",
+    "helpText": "Adding a category specific to Radarr avoids conflicts with unrelated non-Radarr downloads. Using a category is optional, but strongly recommended. Transmission 4.0 and newer applies the category as a label; earlier versions create a [category] subdirectory in the output directory.",
     "isFloat": false,
     "label": "Category",
     "name": "movieCategory",
@@ -2424,7 +2424,7 @@
    },
    {
     "advanced": false,
-    "helpText": "Adding a category specific to Radarr avoids conflicts with unrelated non-Radarr downloads. Using a category is optional, but strongly recommended. Creates a [category] subdirectory in the output directory.",
+    "helpText": "Adding a category specific to Radarr avoids conflicts with unrelated non-Radarr downloads. Using a category is optional, but strongly recommended. Transmission 4.0 and newer applies the category as a label; earlier versions create a [category] subdirectory in the output directory.",
     "isFloat": false,
     "label": "Category",
     "name": "movieCategory",

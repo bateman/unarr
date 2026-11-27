@@ -46,12 +46,18 @@ pub async fn list(State(state): State<AppState>) -> ApiResult<Json<Vec<Value>>> 
     Ok(Json(backups(&state).await?.iter().map(resource).collect()))
 }
 
+/// A backup by id. None there: Sonarr throws `NotFoundException`
+/// (`{"message": "NotFound"}`), Radarr 7 answers `TypedResults.NotFound()`.
 async fn find(state: &AppState, id: i64) -> ApiResult<BackupFile> {
+    let missing = match state.personality() {
+        unarr_core::Personality::Radarr => ApiError::NotFound,
+        unarr_core::Personality::Sonarr | unarr_core::Personality::Lidarr => ApiError::NotFoundException,
+    };
     backups(state)
         .await?
         .into_iter()
         .find(|b| b.id == id)
-        .ok_or(ApiError::NotFoundException)
+        .ok_or(missing)
 }
 
 /// `DELETE /system/backup/{id}`.
@@ -91,11 +97,19 @@ pub async fn restore_upload(State(state): State<AppState>, mut form: Multipart) 
         .file_name()
         .is_some_and(|n| n.to_ascii_lowercase().ends_with(".zip"));
     if !is_zip {
-        return (
-            StatusCode::UNSUPPORTED_MEDIA_TYPE,
-            Json(json!({ "message": "Invalid extension, must be one of: .zip" })),
-        )
-            .into_response();
+        let error = "Invalid extension, must be one of: .zip";
+        // Sonarr throws `UnsupportedMediaTypeException`; Radarr 7 answers
+        // a `BackupRestoreErrorResource`.
+        return match state.personality() {
+            unarr_core::Personality::Radarr => {
+                (StatusCode::BAD_REQUEST, Json(json!({ "error": error }))).into_response()
+            }
+            unarr_core::Personality::Sonarr | unarr_core::Personality::Lidarr => (
+                StatusCode::UNSUPPORTED_MEDIA_TYPE,
+                Json(json!({ "message": error })),
+            )
+                .into_response(),
+        };
     }
 
     // The name is ours: nothing of the upload's reaches the file system.

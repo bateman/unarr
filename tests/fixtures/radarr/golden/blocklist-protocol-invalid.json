@@ -7,10 +7,10 @@
     },
     "status": 400,
     "title": "One or more validation errors occurred.",
-    "traceId": "00-d593d019ac31eecf01d9302f6654c1b3-9ca73ef0a5ced2c2-00",
+    "traceId": "00-8b3b8ee96262d223fee7b1cc26f7a879-8a3ca7e490d810a2-00",
     "type": "https://tools.ietf.org/html/rfc9110#section-15.5.1"
   },
-  "recordedAt": "2026-11-13T07:42:47Z",
+  "recordedAt": "2026-11-23T17:44:18Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/blocklist?page=1&pageSize=5&sortKey=date&sortDirection=descending&protocols=bogus"

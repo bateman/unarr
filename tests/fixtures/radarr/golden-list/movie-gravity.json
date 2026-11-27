@@ -1,7 +1,7 @@
 {
   "body": [
     {
-      "added": "2026-11-13T13:34:08Z",
+      "added": "2026-11-23T17:57:13Z",
       "alternateTitles": [
         {
           "id": 2804,
@@ -110,7 +110,7 @@
         "space station",
         "trapped in space"
       ],
-      "lastSearchTime": "2026-11-13T13:34:08Z",
+      "lastSearchTime": "2026-11-23T17:57:13Z",
       "minimumAvailability": "released",
       "monitored": true,
       "movieFileId": 0,
@@ -176,7 +176,7 @@
       "youTubeTrailerId": "OiTiKOy59o4"
     }
   ],
-  "recordedAt": "2026-11-13T13:34:40Z",
+  "recordedAt": "2026-11-23T17:57:44Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/movie?tmdbId=49047"

@@ -350,13 +350,8 @@ pub(crate) fn download_payload(settings: &Settings, m: &DownloadMessage<'_>, ctx
                         None,
                     )
                 });
-                let audio = media.and_then(|raw| {
-                    format::audio_codec(
-                        format::str(raw, "audioFormat"),
-                        format::str(raw, "audioCodecID").unwrap_or(""),
-                        format::str(raw, "audioProfile").unwrap_or(""),
-                    )
-                });
+                let audio =
+                    media.and_then(|raw| format::primary_audio(raw).codec_for(crate::Personality::Radarr));
                 let channels = media.map(format::audio_channels).unwrap_or(0.0);
                 embed.field(
                     "Codecs",
@@ -373,12 +368,12 @@ pub(crate) fn download_payload(settings: &Settings, m: &DownloadMessage<'_>, ctx
             import_field::SIZE => embed.field("Size", Some(bytes_to_string(m.file.size)), true),
             import_field::LANGUAGES => embed.field(
                 "Languages",
-                media.map(|raw| format::list(raw, "audioLanguages").join("/")),
+                media.map(|raw| format::audio_languages(raw).join("/")),
                 false,
             ),
             import_field::SUBTITLES => embed.field(
                 "Subtitles",
-                media.map(|raw| format::list(raw, "subtitles").join("/")),
+                media.map(|raw| format::subtitle_languages(raw).join("/")),
                 false,
             ),
             import_field::RELEASE => embed.field(
@@ -587,10 +582,17 @@ pub(crate) fn manual_interaction_payload(
             ),
             manual_field::RATING => embed.field("Rating", movie.map(rating), false),
             manual_field::GENRES => embed.field("Genres", movie.map(genres), false),
-            manual_field::QUALITY => embed.field("Quality", Some(quality_name(&m.quality).to_string()), true),
+            // `message.Quality?.Quality?.Name`: none without a release.
+            manual_field::QUALITY => embed.field(
+                "Quality",
+                m.quality.as_ref().map(|q| quality_name(q).to_string()),
+                true,
+            ),
             manual_field::GROUP => embed.field(
                 "Group",
-                m.remote.parsed.as_ref().and_then(|p| p.release_group.clone()),
+                m.remote
+                    .and_then(|r| r.parsed.as_ref())
+                    .and_then(|p| p.release_group.clone()),
                 false,
             ),
             manual_field::SIZE => embed.field("Size", Some(bytes_to_string(item.total_size)), true),

@@ -275,7 +275,7 @@
       ],
       "imdbId": "tt33764258",
       "inCinemas": "2026-07-15T00:00:00Z",
-      "isAvailable": false,
+      "isAvailable": true,
       "keywords": [
         "ancient",
         "ancient world",
@@ -493,9 +493,57 @@
           "audioCodec": "AAC",
           "audioLanguages": "ita/eng",
           "audioStreamCount": 2,
+          "audioStreams": [
+            {
+              "bitrate": 129164,
+              "channelPositions": "stereo",
+              "channels": 2,
+              "codec": "AAC",
+              "language": "ita",
+              "profile": "LC"
+            },
+            {
+              "bitrate": 0,
+              "channels": 0,
+              "codec": "",
+              "language": "eng"
+            }
+          ],
           "resolution": "1920x1036",
           "runTime": "1:52:26",
           "scanType": "Progressive",
+          "subtitleStreams": [
+            {
+              "language": "ger"
+            },
+            {
+              "language": "eng"
+            },
+            {
+              "language": "spa"
+            },
+            {
+              "language": "spa"
+            },
+            {
+              "language": "fre"
+            },
+            {
+              "language": "ita"
+            },
+            {
+              "language": "ita"
+            },
+            {
+              "language": "dut"
+            },
+            {
+              "language": "por"
+            },
+            {
+              "language": "tur"
+            }
+          ],
           "subtitles": "ger/eng/spa/spa/fre/ita/ita/dut/por/tur",
           "videoBitDepth": 10,
           "videoBitrate": 2106664,
@@ -689,9 +737,29 @@
           "audioCodec": "MP3",
           "audioLanguages": "ita/eng",
           "audioStreamCount": 2,
+          "audioStreams": [
+            {
+              "bitrate": 320000,
+              "channelPositions": "stereo",
+              "channels": 2,
+              "codec": "MP3",
+              "language": "ita"
+            },
+            {
+              "bitrate": 0,
+              "channels": 0,
+              "codec": "",
+              "language": "eng"
+            }
+          ],
           "resolution": "1920x960",
           "runTime": "1:35:03",
           "scanType": "Progressive",
+          "subtitleStreams": [
+            {
+              "language": "eng"
+            }
+          ],
           "subtitles": "eng",
           "videoBitDepth": 10,
           "videoBitrate": 2467456,
@@ -934,9 +1002,32 @@
           "audioCodec": "EAC3",
           "audioLanguages": "fre/eng",
           "audioStreamCount": 2,
+          "audioStreams": [
+            {
+              "bitrate": 640000,
+              "channelPositions": "7.1",
+              "channels": 7.1,
+              "codec": "EAC3",
+              "language": "fre"
+            },
+            {
+              "bitrate": 0,
+              "channels": 0,
+              "codec": "",
+              "language": "eng"
+            }
+          ],
           "resolution": "1920x798",
           "runTime": "1:58:20",
           "scanType": "Progressive",
+          "subtitleStreams": [
+            {
+              "language": "fre"
+            },
+            {
+              "language": "fre"
+            }
+          ],
           "subtitles": "fre/fre",
           "videoBitDepth": 8,
           "videoBitrate": 6624742,
@@ -1124,9 +1215,20 @@
           "audioCodec": "AAC",
           "audioLanguages": "und",
           "audioStreamCount": 1,
+          "audioStreams": [
+            {
+              "bitrate": 384000,
+              "channelPositions": "5.1",
+              "channels": 5.1,
+              "codec": "AAC",
+              "language": "und",
+              "profile": "LC"
+            }
+          ],
           "resolution": "1384x1040",
           "runTime": "1:35:50",
           "scanType": "Progressive",
+          "subtitleStreams": [],
           "subtitles": "",
           "videoBitDepth": 8,
           "videoBitrate": 2248655,
@@ -1356,9 +1458,38 @@
           "audioCodec": "AC3",
           "audioLanguages": "ita/eng",
           "audioStreamCount": 2,
+          "audioStreams": [
+            {
+              "bitrate": 448000,
+              "channelPositions": "5.1(side)",
+              "channels": 5.1,
+              "codec": "AC3",
+              "language": "ita"
+            },
+            {
+              "bitrate": 0,
+              "channels": 0,
+              "codec": "",
+              "language": "eng"
+            }
+          ],
           "resolution": "1920x800",
           "runTime": "1:44:59",
           "scanType": "Progressive",
+          "subtitleStreams": [
+            {
+              "language": "ita"
+            },
+            {
+              "language": "ita"
+            },
+            {
+              "language": "eng"
+            },
+            {
+              "language": "eng"
+            }
+          ],
           "subtitles": "ita/ita/eng/eng",
           "videoBitDepth": 8,
           "videoBitrate": 2859946,
@@ -2050,7 +2181,7 @@
       "youTubeTrailerId": "CL1EFACsWag"
     }
   ],
-  "recordedAt": "2026-11-12T14:19:13Z",
+  "recordedAt": "2026-11-23T17:44:18Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/calendar?start=2026-11-01T00:00:00Z&end=2026-12-31T00:00:00Z&unmonitored=true"

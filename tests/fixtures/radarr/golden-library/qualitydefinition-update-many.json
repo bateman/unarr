@@ -419,11 +419,11 @@
       "weight": 26
     }
   ],
-  "recordedAt": "2026-11-13T12:41:29Z",
+  "recordedAt": "2026-11-23T17:56:07Z",
   "request": {
     "body": "bodies/qualitydefinition-update-many.json",
     "method": "PUT",
     "path": "/api/v3/qualitydefinition/update"
   },
-  "status": 202
+  "status": 200
 }

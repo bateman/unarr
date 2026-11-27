@@ -41,8 +41,14 @@ pub struct LocalMovie {
     pub edition: Option<String>,
     pub scene_name: Option<String>,
     pub other_video_files: bool,
+    /// The formats of the file under the name the import will give it.
     pub custom_formats: Vec<CustomFormat>,
     pub custom_format_score: i64,
+    /// The formats of the file under the name it has now (Radarr 7).
+    pub original_file_name_custom_formats: Vec<CustomFormat>,
+    pub original_file_name_custom_format_score: i64,
+    /// The name `custom_formats` were worked out from.
+    pub file_name_used_for_custom_format_calculation: Option<String>,
     pub release: Option<GrabbedMovieRelease>,
     pub script_imported: bool,
     pub file_name_before_rename: Option<String>,
@@ -55,6 +61,63 @@ impl LocalMovie {
     pub fn movie_ref(&self) -> &Movie {
         self.movie.as_ref().expect("a local movie carries its movie")
     }
+
+    /// `ToMovieFile`: the movie file this local movie would become, its
+    /// size and its path in the library left to the import. The relative
+    /// path is set for a file already in the movie's folder.
+    pub fn to_movie_file(&self, now: chrono::DateTime<chrono::Utc>) -> MovieFile {
+        let movie = self.movie_ref();
+        MovieFile {
+            id: 0,
+            movie_id: movie.id,
+            relative_path: if crate::mediafiles::is_parent_path(&movie.path, &self.path) {
+                crate::mediafiles::relative_path(&movie.path, &self.path).to_string()
+            } else {
+                String::new()
+            },
+            original_file_path: Some(self.original_file_path()),
+            size: 0,
+            date_added: now,
+            scene_name: self.scene_name.clone(),
+            release_group: self.release_group.clone(),
+            edition: self.edition.clone(),
+            quality: self.quality,
+            languages: self.languages.clone(),
+            media_info: self.media_info.as_ref().map(|m| m.model.clone()),
+            indexer_flags: self.indexer_flags,
+        }
+    }
+
+    /// `GetOriginalFilePath` of `LocalMovie`: the file's path relative to
+    /// the folder its release is named after, or to its grandparent.
+    pub fn original_file_path(&self) -> String {
+        use crate::mediafiles::{file_name, parent_path, relative_path};
+        let path = self.path.as_str();
+        if let Some(folder_info) = &self.folder_movie_info {
+            if let Some(folder) = ancestor_path(path, &folder_info.original_title) {
+                if let Some(parent) = parent_path(folder) {
+                    return relative_path(parent, path).to_string();
+                }
+            }
+        }
+        if let Some(grandparent) = parent_path(path).and_then(parent_path) {
+            return relative_path(grandparent, path).to_string();
+        }
+        file_name(path).to_string()
+    }
+}
+
+/// `GetAncestorPath`: the nearest folder above `path` named `folder_name`.
+fn ancestor_path<'a>(path: &'a str, folder_name: &str) -> Option<&'a str> {
+    use crate::mediafiles::{file_name, parent_path};
+    let mut current = parent_path(path);
+    while let Some(folder) = current {
+        if file_name(folder).eq_ignore_ascii_case(folder_name) {
+            return Some(folder);
+        }
+        current = parent_path(folder);
+    }
+    None
 }
 
 /// `DeletedMovieFile`: a file an import replaced, and where the recycle
@@ -92,6 +155,7 @@ pub enum MovieRejectionReason {
     NotQualityUpgrade,
     NotRevisionUpgrade,
     NotCustomFormatUpgrade,
+    NotCustomFormatUpgradeAfterRename,
 }
 
 /// `ImportRejection`: every one the original raises is permanent.

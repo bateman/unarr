@@ -154,7 +154,7 @@
     "year": 2017,
     "youTubeTrailerId": "geFtxCSz8xI"
   },
-  "recordedAt": "2026-11-21T16:24:50Z",
+  "recordedAt": "2026-11-23T17:58:33Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/movie/lookup/tmdb?tmdbId=335984"

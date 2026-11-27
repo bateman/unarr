@@ -2,7 +2,7 @@
   "body": {
     "directories": [
       {
-        "lastModified": "2026-11-13T12:39:58Z",
+        "lastModified": "2026-11-23T17:54:36Z",
         "name": "Dune (2021) {tmdb-438631}",
         "path": "/movies/Dune (2021) {tmdb-438631}/",
         "size": 0,
@@ -12,7 +12,7 @@
     "files": [],
     "parent": "/"
   },
-  "recordedAt": "2026-11-13T12:40:30Z",
+  "recordedAt": "2026-11-23T17:55:09Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/filesystem?path=/movies/"

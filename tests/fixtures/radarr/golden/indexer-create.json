@@ -236,6 +236,12 @@
           },
           {
             "dividerAfter": false,
+            "name": "Irish",
+            "order": 0,
+            "value": 58
+          },
+          {
+            "dividerAfter": false,
             "name": "Italian",
             "order": 0,
             "value": 5
@@ -480,7 +486,7 @@
     "supportsSearch": true,
     "tags": []
   },
-  "recordedAt": "2026-11-12T14:19:14Z",
+  "recordedAt": "2026-11-23T17:44:19Z",
   "request": {
     "body": "bodies/indexer-create.json",
     "method": "POST",
